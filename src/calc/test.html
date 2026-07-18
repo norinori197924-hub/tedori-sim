@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>計算エンジン ブラウザ動作確認</title>
+<style>
+  body { font-family: sans-serif; margin: 24px; background: #f6f5f0; color: #1f2823; }
+  h1 { font-size: 18px; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 24px; background: #fff; }
+  th, td { border: 1px solid #d9d6cc; padding: 6px 10px; font-size: 13px; text-align: left; vertical-align: top; }
+  th { background: #eee; }
+  tr.pass td.result { color: #2e6e4e; font-weight: bold; }
+  tr.fail td.result { color: #b3402e; font-weight: bold; }
+  .summary { font-size: 15px; font-weight: bold; margin-bottom: 12px; }
+  .note { font-size: 12px; color: #5a625c; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<h1>計算エンジン ブラウザ動作確認(手取りのホント(仮))</h1>
+<p class="note">
+  Node.jsが使えないローカル環境用の簡易テストランナーです。<code>py -m http.server</code> 等で
+  このディレクトリを配信し、ブラウザで <code>http://localhost:&lt;port&gt;/src/calc/test.html</code> を
+  開いて実行してください(file://直接オープンだとESモジュールのfetchがCORSでブロックされます)。
+  CI(GitHub Actions)ではnode --testによる自動テストを別途使用します。
+</p>
+<div id="summary" class="summary">実行中...</div>
+<table id="result-table">
+  <thead>
+    <tr><th>#</th><th>種別</th><th>ケース</th><th>期待値</th><th>実際の値</th><th class="result">結果</th></tr>
+  </thead>
+  <tbody id="result-body"></tbody>
+</table>
+
+<script type="module">
+  import { lookupSalaryIncomeDeduction, calculateSalaryIncome } from './salary-income.js';
+  import { calculateIncomeAdjustmentDeduction } from './income-adjustment.js';
+  import { calculateTakeHome } from './engine.js';
+
+  const results = [];
+
+  function assertEqual(category, label, expected, actual, source) {
+    const pass = expected === actual;
+    results.push({ category, label, expected, actual, pass, source });
+  }
+
+  async function loadRates() {
+    const base = '../data/rates/2026/';
+    const [
+      incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
+      dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpoChiba
+    ] = await Promise.all([
+      fetch(base + 'income-tax-brackets.json').then(r => r.json()),
+      fetch(base + 'salary-income-deduction.json').then(r => r.json()),
+      fetch(base + 'basic-deduction.json').then(r => r.json()),
+      fetch(base + 'spousal-deduction.json').then(r => r.json()),
+      fetch(base + 'dependent-deduction.json').then(r => r.json()),
+      fetch(base + 'resident-tax-standard.json').then(r => r.json()),
+      fetch(base + 'employees-pension.json').then(r => r.json()),
+      fetch(base + 'employment-insurance.json').then(r => r.json()),
+      fetch(base + 'kyokai-kenpo/chiba.json').then(r => r.json())
+    ]);
+    return {
+      incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
+      dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance,
+      kyokaiKenpo: kyokaiKenpoChiba
+    };
+  }
+
+  async function run() {
+    const rates = await loadRates();
+
+    // --- 国税庁の公式計算例(令和7年分 年末調整のしかた 109.pdf) ---
+    // 例1: 給与所得控除後の給与等の金額の計算(37ページ)。660万円超帯は令和7年分・令和8年分で
+    // 速算式が共通のため、令和8年分データでも同じ結果になるはず。
+    {
+      const income = 7654321;
+      const deduction = lookupSalaryIncomeDeduction(income, rates.salaryIncomeDeduction);
+      const actual = Math.max(0, income - deduction);
+      assertEqual(
+        '国税庁公式計算例',
+        '給与所得控除後の給与等の金額(給与収入7,654,321円)',
+        5788888,
+        actual,
+        '令和7年分 年末調整のしかた p.36「給与所得控除後の給与等の金額の計算」例'
+      );
+    }
+
+    // 例2: 算出所得税額の計算(38ページ)。課税給与所得金額2,696,000円は10%区分(控除97,500円)。
+    {
+      const taxableIncome = 2696000;
+      const bracket = rates.incomeTaxBrackets.brackets.find(
+        b => b.max === null || taxableIncome <= b.max
+      );
+      const actual = Math.round(taxableIncome * bracket.rate - bracket.deduction);
+      assertEqual(
+        '国税庁公式計算例',
+        '算出所得税額(課税給与所得金額2,696,000円)',
+        172100,
+        actual,
+        '令和7年分 年末調整のしかた p.38「課税給与所得金額に対する算出所得税額の計算」例'
+      );
+    }
+
+    // 例3: 所得金額調整控除の計算(37ページ)。給与収入850万円超、23歳未満の扶養親族ありを想定。
+    {
+      const income = 8765432;
+      const actual = calculateIncomeAdjustmentDeduction(income, [10]); // 23歳未満の子を1人と仮定
+      assertEqual(
+        '国税庁公式計算例',
+        '所得金額調整控除額(給与収入8,765,432円、23歳未満の扶養親族あり)',
+        26544,
+        actual,
+        '令和7年分 年末調整のしかた p.37「所得金額調整控除額の計算」例'
+      );
+    }
+
+    // --- 内部整合性チェック(公式の網羅例ではないが、エンジン全体が例外なく動作することの確認) ---
+    {
+      const input = {
+        age: 38,
+        prefectureCode: '12',
+        municipalityCode: '12203',
+        numberOfChildren: 2,
+        childrenAges: [4, 7],
+        employmentType: 'employee',
+        annualIncome: 5000000,
+        spouse: { hasSpouse: true, spouseIncome: 1000000 }
+      };
+      let ok = true;
+      let detail = '';
+      try {
+        const r = calculateTakeHome(input, rates);
+        ok = r.takeHomeAnnual > 0 && r.takeHomeAnnual < input.annualIncome;
+        detail = `手取り年額=${r.takeHomeAnnual}円, 所得税=${r.incomeTax.total}円, 住民税=${r.residentTax.total}円, 社保=${r.socialInsurance.total}円`;
+      } catch (e) {
+        ok = false;
+        detail = 'エラー: ' + e.message;
+      }
+      results.push({
+        category: '内部整合性(参考)',
+        label: '千葉県市川市・会社員・年収500万円(モックアップ想定ケース)',
+        expected: '例外なく計算完了し、0<手取り<年収',
+        actual: detail,
+        pass: ok,
+        source: '公式計算例ではない。エンジン全体が動くことの確認用'
+      });
+    }
+
+    render();
+  }
+
+  function render() {
+    const tbody = document.getElementById('result-body');
+    let passCount = 0;
+    results.forEach((r, i) => {
+      const tr = document.createElement('tr');
+      tr.className = r.pass ? 'pass' : 'fail';
+      if (r.pass) passCount++;
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${r.category}</td>
+        <td>${r.label}<br><span style="color:#5a625c;font-size:11px">${r.source}</span></td>
+        <td>${r.expected}</td>
+        <td>${r.actual}</td>
+        <td class="result">${r.pass ? 'PASS' : 'FAIL'}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+    document.getElementById('summary').textContent = `${passCount} / ${results.length} 件成功`;
+  }
+
+  run().catch(e => {
+    document.getElementById('summary').textContent = '実行エラー: ' + e.message;
+    console.error(e);
+  });
+</script>
+</body>
+</html>
