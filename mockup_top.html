@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手取りのホント(仮) — 税・社保・手取り統合シミュレーター モックアップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F5F0; --card:#FFFFFF; --ink:#1F2823; --ink-soft:#5A625C;
+    --line:#D9D6CC; --green:#2E6E4E; --green-bg:#EAF2ED;
+    --red:#B3402E; --red-bg:#F7ECE9; --gold:#8A6D2F;
+    --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans JP',sans-serif; --serif:'Shippori Mincho',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;}
+  a{color:var(--green);}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px;}
+
+  header{border-bottom:2px solid var(--ink);background:var(--paper);}
+  .head-in{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0 14px;}
+  .brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:.04em;}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:12px;color:var(--ink-soft);margin-left:10px;letter-spacing:0;}
+  nav{font-size:13px;color:var(--ink-soft);}
+  nav span{margin-left:16px;}
+
+  .hero{padding:34px 0 6px;}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,3.6vw,34px);line-height:1.5;letter-spacing:.02em;}
+  .hero h1 em{font-style:normal;color:var(--green);}
+  .hero p{color:var(--ink-soft);margin-top:10px;max-width:640px;font-size:14px;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;font-size:12px;}
+  .badge{border:1px solid var(--line);background:var(--card);border-radius:3px;padding:3px 10px;color:var(--ink-soft);}
+  .badge b{color:var(--ink);font-family:var(--mono);font-weight:600;}
+
+  .grid{display:grid;grid-template-columns:400px 1fr;gap:26px;padding:26px 0 40px;align-items:start;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:4px;}
+  .panel-h{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .panel-h h2{font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:.04em;}
+  .panel-h .num{font-family:var(--mono);font-size:11px;color:var(--ink-soft);}
+  .panel-b{padding:18px;}
+
+  .field{margin-bottom:15px;}
+  .field label{display:block;font-size:12.5px;font-weight:500;margin-bottom:5px;}
+  .field label .opt{color:var(--ink-soft);font-weight:400;font-size:11px;margin-left:6px;border:1px solid var(--line);border-radius:2px;padding:0 5px;}
+  .field input,.field select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:3px;font-family:var(--sans);font-size:14px;background:var(--paper);color:var(--ink);}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .seg{display:flex;border:1px solid var(--ink);border-radius:3px;overflow:hidden;}
+  .seg button{flex:1;padding:9px 4px;border:none;background:var(--card);font-family:var(--sans);font-size:13.5px;cursor:pointer;color:var(--ink);}
+  .seg button.on{background:var(--ink);color:var(--paper);font-weight:500;}
+  .cta{width:100%;margin-top:6px;padding:13px;border:none;border-radius:3px;background:var(--green);color:#fff;font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.08em;cursor:pointer;}
+  .cta:hover{background:#255C41;}
+  .note{font-size:11px;color:var(--ink-soft);margin-top:10px;line-height:1.6;}
+
+  .flow-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;color:var(--ink-soft);}
+  .flow-label b{font-family:var(--mono);color:var(--ink);}
+  .bar{display:flex;height:34px;border-radius:3px;overflow:hidden;border:1px solid var(--ink);}
+  .bar div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-size:11.5px;font-weight:600;white-space:nowrap;}
+  .b-tax{background:var(--red);width:11%;}
+  .b-juu{background:#C96A4A;width:9%;}
+  .b-sha{background:#8A6D2F;width:15%;}
+  .b-net{background:var(--green);width:65%;}
+  .bar-cap{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);margin-top:5px;}
+
+  .takehome{display:flex;align-items:baseline;gap:12px;margin:20px 0 4px;flex-wrap:wrap;}
+  .takehome .l{font-family:var(--serif);font-size:15px;font-weight:700;}
+  .takehome .v{font-family:var(--mono);font-weight:600;font-size:clamp(30px,4.5vw,40px);color:var(--green);letter-spacing:-.01em;}
+  .takehome .m{font-size:13px;color:var(--ink-soft);}
+
+  table.ledger{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px;}
+  .ledger th{font-family:var(--serif);text-align:left;font-size:12px;font-weight:700;padding:7px 2px;border-bottom:1.5px solid var(--ink);letter-spacing:.06em;}
+  .ledger td{padding:7px 2px;border-bottom:1px dotted var(--line);vertical-align:baseline;}
+  .ledger td.v{text-align:right;font-family:var(--mono);font-weight:500;white-space:nowrap;}
+  .ledger td.v.minus{color:var(--red);}
+  .ledger .sub td{padding-left:16px;color:var(--ink-soft);font-size:12.5px;}
+  .ledger .src{font-size:10.5px;color:var(--ink-soft);}
+  .tag{display:inline-block;font-size:10.5px;border-radius:2px;padding:1px 6px;margin-left:6px;vertical-align:1px;}
+  .tag.city{background:var(--red-bg);color:var(--red);border:1px solid var(--red);}
+  .tag.nat{background:var(--paper);color:var(--ink-soft);border:1px solid var(--line);}
+
+  .derive{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:18px;}
+  .d-card{border:1px solid var(--line);border-radius:3px;padding:12px 14px;background:var(--paper);}
+  .d-card .t{font-size:12px;font-weight:500;color:var(--ink-soft);}
+  .d-card .v{font-family:var(--mono);font-weight:600;font-size:20px;margin-top:2px;}
+  .d-card .s{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .d-card.hl{background:var(--green-bg);border-color:var(--green);}
+  .d-card.hl .v{color:var(--green);}
+
+  .compare{margin-top:18px;border:1px solid var(--line);border-radius:3px;padding:14px 16px;background:var(--card);}
+  .compare h3{font-family:var(--serif);font-size:14.5px;font-weight:700;margin-bottom:8px;}
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;text-align:center;}
+  .vs .side .r{font-size:12px;color:var(--ink-soft);}
+  .vs .side .a{font-family:var(--mono);font-weight:600;font-size:22px;}
+  .vs .mid{font-family:var(--serif);color:var(--ink-soft);font-size:13px;}
+  .vs .diff{grid-column:1/-1;font-size:12.5px;background:var(--red-bg);border:1px dotted var(--red);border-radius:3px;padding:7px 10px;color:var(--ink);}
+  .vs .diff b{font-family:var(--mono);color:var(--red);}
+
+  .truth{margin:6px 0 40px;border-left:3px solid var(--gold);background:var(--card);border-top:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 20px;}
+  .truth h3{font-family:var(--serif);font-size:15px;font-weight:700;}
+  .truth p{font-size:13.5px;color:var(--ink-soft);margin-top:4px;}
+  .truth b{font-family:var(--mono);color:var(--ink);}
+
+  footer{border-top:2px solid var(--ink);padding:20px 0 34px;font-size:12px;color:var(--ink-soft);}
+  footer .cols{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-in">
+    <div class="brand">手取りのホント<small>（仮）— 税・社保・手取り 統合シミュレーター</small></div>
+    <nav><span>市区町村から探す</span><span>会社員⇔フリーランス比較</span><span>解説記事</span><span>このサイトについて</span></nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>その年収、<em>手取り</em>でいくらか。<br>あなたの市の数字で計算します。</h1>
+    <p>所得税・住民税・社会保険料(または国民健康保険料)を、全国1,741市区町村の実際の料率で概算。会社員とフリーランス、両方の答えが出ます。</p>
+    <div class="badges">
+      <span class="badge">国保料率カバレッジ <b>1,741 / 1,741</b> 市区町村</span>
+      <span class="badge">令和8年度 料率適用</span>
+      <span class="badge">最終データ更新 <b>2026-07-15</b></span>
+    </div>
+  </section>
+
+  <div class="grid">
+
+    <aside class="panel">
+      <div class="panel-h"><h2>入力</h2><span class="num">かんたん8項目・約1分</span></div>
+      <div style="display:flex;border-bottom:1px solid var(--line);">
+        <div style="flex:1;text-align:center;padding:9px 4px;font-size:13px;font-weight:700;border-bottom:2px solid var(--green);color:var(--green);">かんたん入力</div>
+        <div style="flex:1;text-align:center;padding:9px 4px;font-size:13px;color:var(--ink-soft);">詳細入力 <span style="font-size:10px;border:1px solid var(--line);border-radius:2px;padding:0 4px;">準備中</span></div>
+      </div>
+      <div class="panel-b">
+        <div class="field"><label>雇用形態</label>
+          <div class="seg"><button class="on">会社員</button><button>フリーランス・自営業</button></div>
+        </div>
+        <div class="field"><label>額面の年収（昨年）</label><input type="text" value="5,000,000 円"></div>
+        <div class="row2">
+          <div class="field"><label>年齢</label><input type="text" value="38"></div>
+          <div class="field"><label>子供の数</label><select><option>2人</option></select></div>
+        </div>
+        <div class="field"><label>子供の年齢</label><input type="text" value="4歳、7歳"></div>
+        <div class="row2">
+          <div class="field"><label>都道府県</label><select><option>千葉県</option></select></div>
+          <div class="field"><label>市区町村</label><select><option>市川市</option></select></div>
+        </div>
+        <div class="field"><label>配偶者<span class="opt">任意</span></label>
+          <div class="row2">
+            <select><option>あり</option><option>なし</option></select>
+            <input type="text" placeholder="配偶者の年収" value="1,000,000 円">
+          </div>
+        </div>
+        <button class="cta">手取りを計算する</button>
+        <div style="margin-top:14px;border:1px dashed var(--line);border-radius:3px;padding:11px 13px;background:var(--paper);">
+          <div style="font-size:12px;font-weight:700;color:var(--ink-soft);">詳細入力でできること（第2弾で公開予定）</div>
+          <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.7;">iDeCo掛金 ／ 生命保険料・地震保険料 ／ 医療費 ／ 住宅ローン控除 ／ 経費・青色申告（フリーランス）／ ボーナス比率（会社員）を反映して、より正確に計算できます。</div>
+        </div>
+        <p class="note">※ 計算結果は概算です。個別の税務相談ではありません。入力内容は送信・保存されません（計算はお使いの端末内で行われます）。</p>
+      </div>
+    </aside>
+
+    <main class="panel">
+      <div class="panel-h"><h2>計算結果 — 千葉県市川市・会社員・年収500万円の場合</h2><span class="num">概算・令和8年度</span></div>
+      <div class="panel-b">
+
+        <div class="flow-label"><span>あなたの年収の行き先</span><b>¥5,000,000</b></div>
+        <div class="bar">
+          <div class="b-tax">所得税</div><div class="b-juu">住民税</div><div class="b-sha">社会保険</div><div class="b-net">手取り 65%</div>
+        </div>
+        <div class="bar-cap"><span>■ 出ていくお金（税・社保）</span><span>■ 残るお金（手取り）</span></div>
+
+        <div class="takehome">
+          <span class="l">手取り額</span>
+          <span class="v">¥3,921,000</span>
+          <span class="m">／年（月あたり ¥326,750）</span>
+        </div>
+
+        <table class="ledger">
+          <tr><th>項目</th><th style="text-align:right">年額</th></tr>
+          <tr><td>所得税 <span class="tag nat">全国一律</span><br><span class="src">出典：国税庁 令和8年分税額表</span></td><td class="v minus">− ¥138,500</td></tr>
+          <tr><td>住民税（所得割＋均等割）<span class="tag nat">実質全国一律</span><br><span class="src">出典：総務省・市川市 令和8年度</span></td><td class="v minus">− ¥245,200</td></tr>
+          <tr><td>社会保険料 合計<br><span class="src">出典：協会けんぽ千葉支部・日本年金機構</span></td><td class="v minus">− ¥695,300</td></tr>
+          <tr class="sub"><td>健康保険（協会けんぽ・千葉県料率）<span class="tag nat">都道府県別</span></td><td class="v minus">− ¥249,000</td></tr>
+          <tr class="sub"><td>厚生年金</td><td class="v minus">− ¥457,500</td></tr>
+          <tr class="sub"><td>雇用保険</td><td class="v minus">− ¥27,500</td></tr>
+          <tr><td><b>手取り</b></td><td class="v" style="color:var(--green);font-weight:600">¥3,921,000</td></tr>
+        </table>
+
+        <div class="derive">
+          <div class="d-card hl"><div class="t">ふるさと納税 上限目安</div><div class="v">¥58,000</div><div class="s">この金額まで実質2,000円</div></div>
+          <div class="d-card"><div class="t">児童手当（子2人）</div><div class="v">¥240,000<span style="font-size:12px">／年</span></div><div class="s">所得制限なし・月2万円</div></div>
+          <div class="d-card"><div class="t">住民税非課税判定</div><div class="v" style="font-size:16px">該当しません</div><div class="s">基準額を上回っています</div></div>
+        </div>
+
+        <div class="compare">
+          <h3>もし、同じ年収でフリーランスだったら</h3>
+          <div class="vs">
+            <div class="side"><div class="r">会社員（いま）</div><div class="a" style="color:var(--green)">¥3,921,000</div></div>
+            <div class="mid">対</div>
+            <div class="side"><div class="r">フリーランス（簡易試算）</div><div class="a">¥3,614,000</div></div>
+            <div class="diff">手取りの差は <b>年 ¥307,000</b>。最大の要因は市川市の国民健康保険料（年 ¥512,000）と国民年金です。<a href="#">→ 詳しい比較を見る</a></div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <section class="truth">
+    <h3>ホントのところ：会社員なら、市区町村で税金はほぼ変わりません</h3>
+    <p>住民税の税率は実質全国一律。あなたの条件で隣の船橋市に引っ越しても、差は <b>年 ¥0</b> です。ただしフリーランスなら国民健康保険料が市区町村で決まるため、同じ引越しで <b>年 ¥41,000</b> 変わります。「〇〇市は住民税が高い」の真偽、データで解説しています。→ 記事を読む</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap cols">
+    <span>手取りのホント（仮）｜計算結果はすべて概算であり、個別の税務相談・助言ではありません。</span>
+    <span>免責事項 ／ プライバシーポリシー ／ 運営者情報 ／ 広告掲載について（PR表記）</span>
+  </div>
+</footer>
+
+</body>
+</html>
