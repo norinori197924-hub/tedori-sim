@@ -12,10 +12,12 @@
   "healthInsuranceRateWithCare": 0.1135,
   "careInsuranceApplicableAge": { "min": 40, "max": 64, "note": "介護保険第2号被保険者。40〜64歳に適用。" },
   "childcareSupportContribution": {
-    "note": "子ども・子育て支援金率。令和8年4月分(5月納付分)から新設。被保険者・事業主で折半。厚生年金保険料や従来の子ども・子育て拠出金(事業主のみ負担0.36%)とは別の新制度。SPEC.mdの出力項目には明記がなく、社会保険料内訳への計上要否は要ユーザー確認。",
+    "note": "子ども・子育て支援金率。令和8年4月分(5月納付分)から新設。被保険者・事業主で折半。厚生年金保険料や従来の子ども・子育て拠出金(事業主のみ負担0.36%)とは別の新制度。社会保険料内訳では健康保険料・介護保険料とは別行の独立項目として表示する(ユーザー承認済み)。",
     "rate": 0.0023,
     "appliedFrom": "令和8年4月分(5月納付分)",
-    "needsReview": true
+    "displayAsSeparateLineItem": true,
+    "uiBadge": "新設(令和8年4月分〜)",
+    "needsReview": false
   },
   "roundingRule": "被保険者負担分の円未満端数は給与天引きなら50銭以下切り捨て・超で切り上げ。",
   "grades": [
