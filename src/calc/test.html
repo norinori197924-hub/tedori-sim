@@ -35,6 +35,7 @@
   import { lookupSalaryIncomeDeduction, calculateSalaryIncome } from './salary-income.js';
   import { calculateIncomeAdjustmentDeduction } from './income-adjustment.js';
   import { calculateTakeHome } from './engine.js';
+  import { calculateResidentTax } from './resident-tax.js';
 
   const results = [];
 
@@ -112,6 +113,32 @@
         actual,
         '令和7年分 年末調整のしかた p.37「所得金額調整控除額の計算」例'
       );
+    }
+
+    // --- 住民税 手計算設例(公式計算例が見つからなかったため、確定済み料率で自前計算した検証値) ---
+    {
+      const input = {
+        age: 40, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'employee',
+        annualIncome: 4000000, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const r = calculateResidentTax(input, 500000, rates);
+      assertEqual('手計算設例(住民税)', '設例1: 単身・年収400万円・社保50万円 taxableIncome', 1830000, r.taxableIncome, 'test/calc/resident-tax.test.mjsと同じ設例');
+      assertEqual('手計算設例(住民税)', '設例1: incomeLevyBeforeCredit', 183000, r.incomeLevyBeforeCredit, '同上');
+      assertEqual('手計算設例(住民税)', '設例1: adjustmentCredit', 0, r.adjustmentCredit, '同上');
+      assertEqual('手計算設例(住民税)', '設例1: total', 188000, r.total, '同上');
+    }
+    {
+      const input = {
+        age: 42, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 1, childrenAges: [17], employmentType: 'employee',
+        annualIncome: 6000000, spouse: { hasSpouse: true, spouseIncome: 0 }
+      };
+      const r = calculateResidentTax(input, 800000, rates);
+      assertEqual('手計算設例(住民税)', '設例2: 配偶者・子1人・年収600万円・社保80万円 taxableIncome', 2470000, r.taxableIncome, 'test/calc/resident-tax.test.mjsと同じ設例');
+      assertEqual('手計算設例(住民税)', '設例2: incomeLevyBeforeCredit', 247000, r.incomeLevyBeforeCredit, '同上');
+      assertEqual('手計算設例(住民税)', '設例2: adjustmentCredit', 2500, r.adjustmentCredit, '同上');
+      assertEqual('手計算設例(住民税)', '設例2: total', 249500, r.total, '同上');
     }
 
     // --- 内部整合性チェック(公式の網羅例ではないが、エンジン全体が例外なく動作することの確認) ---
