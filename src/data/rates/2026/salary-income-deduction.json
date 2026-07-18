@@ -1,0 +1,17 @@
+{
+  "year": "令和8年分",
+  "description": "給与所得控除額の速算表。令和7年度税制改正により最低保障額が55万円→65万円に引き上げ。",
+  "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1410.htm",
+  "sourceTitle": "国税庁 No.1410 給与所得控除",
+  "fetchedAt": "2026-07-18",
+  "needsReview": true,
+  "reviewNote": "令和8年度税制改正(令和7年12月26日閣議決定の大綱に基づく物価上昇連動の上乗せ)により、給与所得控除の最低保障額がさらに引き上げられた可能性がある。本ファイルは令和7年度改正時点(最低保障65万円)の値。令和8年分の追加改正を反映した正式な金額を国税庁一次資料またはe-Gov法令検索で確認の上、確定させること。",
+  "minGuaranteed": 650000,
+  "brackets": [
+    { "min": 0, "max": 1900000, "formula": { "type": "fixed", "amount": 650000 } },
+    { "min": 1900001, "max": 3600000, "formula": { "type": "linear", "rate": 0.30, "addition": 80000 } },
+    { "min": 3600001, "max": 6600000, "formula": { "type": "linear", "rate": 0.20, "addition": 440000 } },
+    { "min": 6600001, "max": 8500000, "formula": { "type": "linear", "rate": 0.10, "addition": 1100000 } },
+    { "min": 8500001, "max": null, "formula": { "type": "fixed", "amount": 1950000 } }
+  ]
+}

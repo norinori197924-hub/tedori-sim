@@ -1,0 +1,75 @@
+{
+  "year": "令和8年分/令和8年度",
+  "description": "配偶者控除・配偶者特別控除。所得税と個人住民税で金額体系が異なる。配偶者の所得要件は令和7年度税制改正により48万円以下→58万円以下(給与収入123万円以下)に引き上げ。",
+  "needsReview": false,
+  "spouseIncomeRequirement": {
+    "note": "配偶者控除の対象となる配偶者の合計所得金額の上限。令和7年分より適用。",
+    "maxTotalIncome": 580000,
+    "maxSalaryIncome": 1230000,
+    "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1191.htm"
+  },
+  "incomeTax": {
+    "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1191.htm ; https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1195.htm",
+    "sourceTitle": "国税庁 No.1191 配偶者控除 / No.1195 配偶者特別控除",
+    "fetchedAt": "2026-07-18",
+    "spousalDeduction": {
+      "note": "納税者本人の合計所得金額の区分ごと。老人控除対象配偶者はその年12/31時点で70歳以上。",
+      "brackets": [
+        { "maxTaxpayerIncome": 9000000, "general": 380000, "elderly": 480000 },
+        { "maxTaxpayerIncome": 9500000, "general": 260000, "elderly": 320000 },
+        { "maxTaxpayerIncome": 10000000, "general": 130000, "elderly": 160000 },
+        { "maxTaxpayerIncome": null, "general": 0, "elderly": 0 }
+      ]
+    },
+    "spousalSpecialDeduction": {
+      "note": "配偶者の合計所得金額58万円超133万円以下の場合。納税者本人の合計所得金額区分(900万円以下/900万円超950万円以下/950万円超1000万円以下)ごとの控除額。",
+      "brackets": [
+        { "minSpouseIncome": 580001, "maxSpouseIncome": 950000, "amounts": [380000, 260000, 130000] },
+        { "minSpouseIncome": 950001, "maxSpouseIncome": 1000000, "amounts": [360000, 240000, 120000] },
+        { "minSpouseIncome": 1000001, "maxSpouseIncome": 1050000, "amounts": [310000, 210000, 110000] },
+        { "minSpouseIncome": 1050001, "maxSpouseIncome": 1100000, "amounts": [260000, 180000, 90000] },
+        { "minSpouseIncome": 1100001, "maxSpouseIncome": 1150000, "amounts": [210000, 140000, 70000] },
+        { "minSpouseIncome": 1150001, "maxSpouseIncome": 1200000, "amounts": [160000, 110000, 60000] },
+        { "minSpouseIncome": 1200001, "maxSpouseIncome": 1250000, "amounts": [110000, 80000, 40000] },
+        { "minSpouseIncome": 1250001, "maxSpouseIncome": 1300000, "amounts": [60000, 40000, 20000] },
+        { "minSpouseIncome": 1300001, "maxSpouseIncome": 1330000, "amounts": [30000, 20000, 10000] }
+      ],
+      "taxpayerIncomeBands": [
+        { "max": 9000000 },
+        { "max": 9500000 },
+        { "max": 10000000 }
+      ]
+    }
+  },
+  "residentTax": {
+    "source": "https://www.city.nagano.nagano.jp/n062000/contents/p005567.html ; https://www.city.utsunomiya.lg.jp/kurashi/zeikin/shinzei/1003621.html",
+    "sourceTitle": "長野市 / 宇都宮市 個人市民税・県民税控除一覧(令和8年度課税から適用)",
+    "fetchedAt": "2026-07-18",
+    "spousalDeduction": {
+      "note": "老人控除対象配偶者は一般区分より一律5万円加算。",
+      "brackets": [
+        { "maxTaxpayerIncome": 9000000, "general": 330000, "elderly": 380000 },
+        { "maxTaxpayerIncome": 9500000, "general": 220000, "elderly": 260000 },
+        { "maxTaxpayerIncome": 10000000, "general": 110000, "elderly": 130000 },
+        { "maxTaxpayerIncome": null, "general": 0, "elderly": 0 }
+      ]
+    },
+    "spousalSpecialDeduction": {
+      "brackets": [
+        { "minSpouseIncome": 580001, "maxSpouseIncome": 1000000, "amounts": [330000, 220000, 110000] },
+        { "minSpouseIncome": 1000001, "maxSpouseIncome": 1050000, "amounts": [310000, 210000, 110000] },
+        { "minSpouseIncome": 1050001, "maxSpouseIncome": 1100000, "amounts": [260000, 180000, 90000] },
+        { "minSpouseIncome": 1100001, "maxSpouseIncome": 1150000, "amounts": [210000, 140000, 70000] },
+        { "minSpouseIncome": 1150001, "maxSpouseIncome": 1200000, "amounts": [160000, 110000, 60000] },
+        { "minSpouseIncome": 1200001, "maxSpouseIncome": 1250000, "amounts": [110000, 80000, 40000] },
+        { "minSpouseIncome": 1250001, "maxSpouseIncome": 1300000, "amounts": [60000, 40000, 20000] },
+        { "minSpouseIncome": 1300001, "maxSpouseIncome": 1330000, "amounts": [30000, 20000, 10000] }
+      ],
+      "taxpayerIncomeBands": [
+        { "max": 9000000 },
+        { "max": 9500000 },
+        { "max": 10000000 }
+      ]
+    }
+  }
+}

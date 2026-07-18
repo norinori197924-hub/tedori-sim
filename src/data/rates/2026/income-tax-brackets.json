@@ -1,0 +1,22 @@
+{
+  "year": "令和8年分",
+  "description": "所得税の速算表(課税所得金額の区分ごとの税率・控除額)。税率構造自体は令和7年度税制改正の対象外で、平成27年分以降変更なし。",
+  "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm",
+  "sourceTitle": "国税庁 No.2260 所得税の税率",
+  "fetchedAt": "2026-07-18",
+  "needsReview": false,
+  "brackets": [
+    { "min": 0, "max": 1949000, "rate": 0.05, "deduction": 0 },
+    { "min": 1950000, "max": 3299000, "rate": 0.10, "deduction": 97500 },
+    { "min": 3300000, "max": 6949000, "rate": 0.20, "deduction": 427500 },
+    { "min": 6950000, "max": 8999000, "rate": 0.23, "deduction": 636000 },
+    { "min": 9000000, "max": 17999000, "rate": 0.33, "deduction": 1536000 },
+    { "min": 18000000, "max": 39999000, "rate": 0.40, "deduction": 2796000 },
+    { "min": 40000000, "max": null, "rate": 0.45, "deduction": 4796000 }
+  ],
+  "reconstructionSurtax": {
+    "description": "復興特別所得税。基準所得税額に対する割合。平成25年分〜令和19年分に適用。",
+    "rate": 0.021,
+    "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2260.htm"
+  }
+}

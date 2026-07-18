@@ -1,0 +1,16 @@
+{
+  "year": "令和8年度",
+  "description": "厚生年金保険料率および標準報酬月額等級表(厚生年金分)。標準報酬月額等級表は協会けんぽの健康保険等級表(1〜50等級)と号級を共有するが、厚生年金は第1〜32等級で頭打ちになるため上限キャップだけ別に持つ設計とする。",
+  "source": null,
+  "sourceTitle": null,
+  "fetchedAt": null,
+  "needsReview": true,
+  "reviewNote": "TODO: 日本年金機構の一次資料(厚生年金保険料額表)を確認して転記すること。保険料率(18.300%、労使折半)は平成29年9月以降改定されていない旨が広く知られているが、本セッションでは一次資料未確認のため未確定として扱う。等級表の上限キャップ(第32等級の標準報酬月額)、および1〜32等級それぞれの報酬月額範囲・標準報酬月額も未収集。",
+  "rate": null,
+  "employeeShareRate": null,
+  "pensionGradeCap": {
+    "grade": 32,
+    "standardMonthlyRemuneration": null
+  },
+  "grades": []
+}

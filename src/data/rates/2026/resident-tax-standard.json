@@ -1,0 +1,47 @@
+{
+  "year": "令和8年度",
+  "description": "個人住民税(所得割・均等割)および森林環境税の標準額。SPEC.mdの方針により、自治体独自の超過課税(名古屋市減税・一部超過課税等)は今回対象外とし、全国標準税率で統一する。",
+  "source": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju",
+  "sourceTitle": "東京都主税局 個人住民税(暮らしと税金)",
+  "fetchedAt": "2026-07-18",
+  "needsReview": true,
+  "reviewNote": "調整控除の人的控除差(基礎控除・配偶者控除・扶養控除等の所得税/住民税差額一覧)は今回未収集。下記adjustmentCreditのpersonalDeductionDifferencesは仮のプレースホルダであり、総務省一次資料で確認の上、確定値に置き換えること。特に所得税側の基礎控除が令和7年度改正で所得逓減式になったため、人的控除差調整額の算定方法自体に特例が設けられている可能性が高い(要確認)。",
+  "incomeLeviedRate": {
+    "municipal": 0.06,
+    "prefectural": 0.04,
+    "total": 0.10
+  },
+  "perCapitaLevy": {
+    "municipal": 3000,
+    "prefectural": 1000,
+    "total": 4000
+  },
+  "forestEnvironmentTax": {
+    "amount": 1000,
+    "note": "国税。令和6年度から個人住民税均等割と併せて市区町村が徴収。",
+    "source": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_18.html"
+  },
+  "adjustmentCredit": {
+    "description": "所得割の調整控除。人的控除(基礎控除・配偶者控除・扶養控除等)の所得税/住民税の差額に基づき税額から控除する。",
+    "needsReview": true,
+    "rule": {
+      "lowIncome": {
+        "condition": "課税所得金額が200万円以下",
+        "formula": "min(人的控除差の合計, 課税所得金額) × 5%(道府県2%・市町村3%)"
+      },
+      "highIncome": {
+        "condition": "課税所得金額が200万円超",
+        "formula": "{人的控除差の合計 − (課税所得金額 − 200万円)} × 5%(道府県2%・市町村3%)。ただし最低2,500円",
+        "source": "https://www.tax.metro.tokyo.lg.jp/kazei/life/kojin_ju"
+      }
+    },
+    "personalDeductionDifferences": {
+      "needsReview": true,
+      "note": "PLACEHOLDER。総務省の人的控除差一覧表で確認するまでの仮値。",
+      "basic": null,
+      "spousalGeneral": 50000,
+      "dependentGeneral": 50000,
+      "dependentSpecific": 180000
+    }
+  }
+}

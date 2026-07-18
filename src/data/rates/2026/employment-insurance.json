@@ -1,0 +1,12 @@
+{
+  "year": "令和8年度",
+  "description": "雇用保険料率(一般の事業・労働者負担分)。",
+  "source": null,
+  "sourceTitle": null,
+  "fetchedAt": null,
+  "needsReview": true,
+  "reviewNote": "TODO: 厚生労働省の一次資料(雇用保険料率表)を確認して転記すること。雇用保険料率は雇用情勢等に応じて年度ごとに見直されるため、過去の記憶値をそのまま使わないこと。",
+  "generalBusiness": {
+    "employeeRate": null
+  }
+}

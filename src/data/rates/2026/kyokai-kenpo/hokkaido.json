@@ -1,0 +1,14 @@
+{
+  "prefecture": "北海道",
+  "prefectureCode": "01",
+  "year": "令和8年度",
+  "description": "協会けんぽ 北海道 都道府県単位保険料率および標準報酬月額等級表。",
+  "source": null,
+  "sourceTitle": null,
+  "fetchedAt": null,
+  "needsReview": true,
+  "reviewNote": "TODO: 全国健康保険協会(協会けんぽ)北海道支部の都道府県単位保険料額表(令和8年度分)を確認して転記すること。",
+  "healthInsuranceRate": null,
+  "careInsuranceRate": null,
+  "grades": []
+}

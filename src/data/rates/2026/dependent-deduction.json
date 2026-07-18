@@ -1,0 +1,28 @@
+{
+  "year": "令和8年分/令和8年度",
+  "description": "扶養控除。所得税と個人住民税で金額体系が異なる。16歳未満の扶養親族(年少扶養)は控除対象外。",
+  "needsReview": true,
+  "reviewNote": "特定親族特別控除(令和7年度税制改正で新設、19〜22歳の親族本人に一定の所得がある場合の追加控除)は未実装。かんたん入力8項目には該当親族の所得情報が含まれないため、今回のスコープでは対象外として扱う想定。詳細入力モード(第2弾)で対応要否を検討すること。",
+  "ageRequirement": {
+    "note": "控除対象扶養親族は、その年12月31日現在の年齢が16歳以上であること。かんたん入力の「子供の年齢」から判定する。",
+    "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1180.htm"
+  },
+  "incomeTax": {
+    "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1180.htm",
+    "sourceTitle": "国税庁 No.1180 扶養控除",
+    "fetchedAt": "2026-07-18",
+    "general": 380000,
+    "specific": { "amount": 630000, "ageRange": [19, 22] },
+    "elderlyNotCoresident": { "amount": 480000, "minAge": 70 },
+    "elderlyCoresident": { "amount": 580000, "minAge": 70 }
+  },
+  "residentTax": {
+    "source": "https://www.city.nagano.nagano.jp/n062000/contents/p005567.html",
+    "sourceTitle": "長野市 個人市民税・県民税控除一覧(令和8年度課税から適用)",
+    "fetchedAt": "2026-07-18",
+    "general": 330000,
+    "specific": { "amount": 450000, "ageRange": [19, 23] },
+    "elderlyNotCoresident": { "amount": 380000, "minAge": 70 },
+    "elderlyCoresident": { "amount": 450000, "minAge": 70 }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "prefecture": "千葉県",
+  "prefectureCode": "12",
+  "year": "令和8年度",
+  "description": "協会けんぽ 千葉県 都道府県単位保険料率および標準報酬月額等級表。",
+  "source": null,
+  "sourceTitle": null,
+  "fetchedAt": null,
+  "needsReview": true,
+  "reviewNote": "TODO: 全国健康保険協会(協会けんぽ)千葉支部の都道府県単位保険料額表(令和8年度分)を確認して転記すること。健康保険料率(介護保険第2号被保険者に該当する/しないの2区分)、介護保険料率、標準報酬月額等級表(第1〜50等級、報酬月額の範囲と標準報酬月額)が未収集。",
+  "healthInsuranceRate": null,
+  "careInsuranceRate": null,
+  "grades": []
+}

@@ -1,0 +1,31 @@
+{
+  "description": "動作確認用の自治体データ(第1弾セッションでは3件のみ)。国民健康保険料率(nationalHealthInsurance)はフリーランス計算が今回のスコープ外のため、あえて null=未整備のまま持たせている。SPEC.md 5章の方針どおり、未整備は平均値等で代替しない。",
+  "needsReview": true,
+  "reviewNote": "TODO: municipalityCodeは総務省の全国地方公共団体コード一覧で正式に検証すること(本ファイルでは一般に知られている値を暫定使用)。",
+  "municipalities": [
+    {
+      "prefecture": "千葉県",
+      "prefectureCode": "12",
+      "municipality": "市川市",
+      "municipalityCode": "12203",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/chiba.json",
+      "nationalHealthInsurance": null
+    },
+    {
+      "prefecture": "東京都",
+      "prefectureCode": "13",
+      "municipality": "新宿区",
+      "municipalityCode": "13104",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tokyo.json",
+      "nationalHealthInsurance": null
+    },
+    {
+      "prefecture": "北海道",
+      "prefectureCode": "01",
+      "municipality": "札幌市",
+      "municipalityCode": "01100",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/hokkaido.json",
+      "nationalHealthInsurance": null
+    }
+  ]
+}
