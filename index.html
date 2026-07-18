@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手取りのホント(仮) — 税・社保・手取り統合シミュレーター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F5F0; --card:#FFFFFF; --ink:#1F2823; --ink-soft:#5A625C;
+    --line:#D9D6CC; --green:#2E6E4E; --green-bg:#EAF2ED;
+    --red:#B3402E; --red-bg:#F7ECE9; --gold:#8A6D2F;
+    --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans JP',sans-serif; --serif:'Shippori Mincho',serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;}
+  a{color:var(--green);}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px;}
+
+  header{border-bottom:2px solid var(--ink);background:var(--paper);}
+  .head-in{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0 14px;flex-wrap:wrap;gap:6px;}
+  .brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:.04em;}
+  .brand small{font-family:var(--sans);font-weight:400;font-size:12px;color:var(--ink-soft);margin-left:10px;letter-spacing:0;}
+
+  .hero{padding:28px 0 6px;}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.5;letter-spacing:.02em;}
+  .hero p{color:var(--ink-soft);margin-top:8px;max-width:640px;font-size:14px;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:12px;}
+  .badge{border:1px solid var(--line);background:var(--card);border-radius:3px;padding:3px 10px;color:var(--ink-soft);}
+  .badge b{color:var(--ink);font-family:var(--mono);font-weight:600;}
+
+  .grid{display:grid;grid-template-columns:400px 1fr;gap:26px;padding:24px 0 40px;align-items:start;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:4px;}
+  .panel-h{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .panel-h h2{font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:.04em;}
+  .panel-h .num{font-family:var(--mono);font-size:11px;color:var(--ink-soft);}
+  .panel-b{padding:18px;}
+
+  .field{margin-bottom:15px;}
+  .field label{display:block;font-size:12.5px;font-weight:500;margin-bottom:5px;}
+  .field label .opt{color:var(--ink-soft);font-weight:400;font-size:11px;margin-left:6px;border:1px solid var(--line);border-radius:2px;padding:0 5px;}
+  .field input,.field select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:3px;font-family:var(--sans);font-size:14px;background:var(--paper);color:var(--ink);}
+  .field input:disabled,.field select:disabled{color:var(--ink-soft);background:#eeece5;}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .seg{display:flex;border:1px solid var(--ink);border-radius:3px;overflow:hidden;}
+  .seg button{flex:1;padding:9px 4px;border:none;background:var(--card);font-family:var(--sans);font-size:13.5px;cursor:pointer;color:var(--ink);}
+  .seg button.on{background:var(--ink);color:var(--paper);font-weight:500;}
+  .seg button:disabled{cursor:not-allowed;color:var(--ink-soft);background:#eeece5;}
+  .cta{width:100%;margin-top:6px;padding:13px;border:none;border-radius:3px;background:var(--green);color:#fff;font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:.08em;cursor:pointer;}
+  .cta:hover{background:#255C41;}
+  .note{font-size:11px;color:var(--ink-soft);margin-top:10px;line-height:1.6;}
+
+  .tab-row{display:flex;border-bottom:1px solid var(--line);}
+  .tab{flex:1;text-align:center;padding:9px 4px;font-size:13px;}
+  .tab.on{font-weight:700;border-bottom:2px solid var(--green);color:var(--green);}
+  .tab.off{color:var(--ink-soft);}
+  .tab .soon{font-size:10px;border:1px solid var(--line);border-radius:2px;padding:0 4px;margin-left:4px;}
+
+  .flow-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;color:var(--ink-soft);}
+  .flow-label b{font-family:var(--mono);color:var(--ink);}
+  .bar{display:flex;height:34px;border-radius:3px;overflow:hidden;border:1px solid var(--ink);}
+  .bar div{display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-size:11.5px;font-weight:600;white-space:nowrap;overflow:hidden;}
+  .b-tax{background:var(--red);}
+  .b-juu{background:#C96A4A;}
+  .b-sha{background:#8A6D2F;}
+  .b-net{background:var(--green);}
+  .bar-cap{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-soft);margin-top:5px;}
+
+  .takehome{display:flex;align-items:baseline;gap:12px;margin:20px 0 4px;flex-wrap:wrap;}
+  .takehome .l{font-family:var(--serif);font-size:15px;font-weight:700;}
+  .takehome .v{font-family:var(--mono);font-weight:600;font-size:clamp(28px,4.2vw,38px);color:var(--green);letter-spacing:-.01em;}
+  .takehome .m{font-size:13px;color:var(--ink-soft);}
+
+  table.ledger{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px;}
+  .ledger th{font-family:var(--serif);text-align:left;font-size:12px;font-weight:700;padding:7px 2px;border-bottom:1.5px solid var(--ink);letter-spacing:.06em;}
+  .ledger td{padding:7px 2px;border-bottom:1px dotted var(--line);vertical-align:baseline;}
+  .ledger td.v{text-align:right;font-family:var(--mono);font-weight:500;white-space:nowrap;}
+  .ledger td.v.minus{color:var(--red);}
+  .ledger .sub td{padding-left:16px;color:var(--ink-soft);font-size:12.5px;}
+  .ledger .src{font-size:10.5px;color:var(--ink-soft);}
+  .tag{display:inline-block;font-size:10.5px;border-radius:2px;padding:1px 6px;margin-left:6px;vertical-align:1px;}
+  .tag.city{background:var(--red-bg);color:var(--red);border:1px solid var(--red);}
+  .tag.nat{background:var(--paper);color:var(--ink-soft);border:1px solid var(--line);}
+  .tag.new{background:var(--green-bg);color:var(--green);border:1px solid var(--green);}
+
+  .assumptions{margin-top:18px;border-left:3px solid var(--gold);background:var(--paper);padding:12px 14px;font-size:12px;color:var(--ink-soft);}
+  .assumptions h3{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .assumptions ul{padding-left:18px;}
+  .assumptions li{margin-bottom:3px;}
+
+  .placeholder{padding:40px 18px;text-align:center;color:var(--ink-soft);font-size:13px;}
+
+  footer{border-top:2px solid var(--ink);padding:20px 0 34px;font-size:12px;color:var(--ink-soft);margin-top:20px;}
+  footer .cols{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-in">
+    <div class="brand">手取りのホント<small>（仮）— 税・社保・手取り 統合シミュレーター</small></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>その年収、<em>手取り</em>でいくらか。あなたの条件で計算します。</h1>
+    <p>所得税・住民税・社会保険料を概算します。第1弾(かんたん入力)は会社員のみ、動作確認用の3市区町村のみ対応しています。</p>
+    <div class="badges">
+      <span class="badge">対応自治体 <b id="badge-coverage">3</b> 件(動作確認用)</span>
+      <span class="badge">令和8年度 料率適用</span>
+    </div>
+  </section>
+
+  <div class="grid">
+
+    <aside class="panel">
+      <div class="panel-h"><h2>入力</h2><span class="num">かんたん8項目</span></div>
+      <div class="tab-row">
+        <div class="tab on">かんたん入力</div>
+        <div class="tab off">詳細入力 <span class="soon">準備中</span></div>
+      </div>
+      <div class="panel-b">
+        <form id="calc-form">
+          <div class="field"><label>雇用形態</label>
+            <div class="seg">
+              <button type="button" class="on" data-employment="employee">会社員</button>
+              <button type="button" disabled title="第1弾では未対応です">フリーランス・自営業(準備中)</button>
+            </div>
+          </div>
+          <div class="field"><label for="annualIncome">額面の年収（昨年）</label>
+            <input type="number" id="annualIncome" min="0" step="10000" value="5000000" required> 円
+          </div>
+          <div class="row2">
+            <div class="field"><label for="age">年齢</label><input type="number" id="age" min="15" max="100" value="38" required></div>
+            <div class="field"><label for="numberOfChildren">子供の数</label>
+              <select id="numberOfChildren">
+                <option value="0">0人</option><option value="1">1人</option>
+                <option value="2" selected>2人</option><option value="3">3人</option>
+                <option value="4">4人</option><option value="5">5人</option>
+              </select>
+            </div>
+          </div>
+          <div class="field"><label for="childrenAges">子供の年齢<span class="opt">カンマ区切り</span></label>
+            <input type="text" id="childrenAges" placeholder="例: 4, 7" value="4, 7">
+          </div>
+          <div class="row2">
+            <div class="field"><label for="prefecture">都道府県</label><select id="prefecture"></select></div>
+            <div class="field"><label for="municipality">市区町村</label><select id="municipality"></select></div>
+          </div>
+          <div class="field"><label>配偶者<span class="opt">任意</span></label>
+            <div class="row2">
+              <select id="hasSpouse"><option value="yes" selected>あり</option><option value="no">なし</option></select>
+              <input type="number" id="spouseIncome" min="0" step="10000" placeholder="配偶者の年収" value="1000000">
+            </div>
+          </div>
+          <button type="submit" class="cta">手取りを計算する</button>
+          <div style="margin-top:14px;border:1px dashed var(--line);border-radius:3px;padding:11px 13px;background:var(--paper);">
+            <div style="font-size:12px;font-weight:700;color:var(--ink-soft);">詳細入力でできること（第2弾で公開予定）</div>
+            <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.7;">iDeCo掛金 ／ 生命保険料・地震保険料 ／ 医療費 ／ 住宅ローン控除 ／ 経費・青色申告（フリーランス）／ ボーナス比率（会社員）を反映して、より正確に計算できます。</div>
+          </div>
+          <p class="note">※ 計算結果は概算です。個別の税務相談ではありません。入力内容は送信・保存されません（計算はお使いの端末内で行われます）。</p>
+        </form>
+      </div>
+    </aside>
+
+    <main class="panel">
+      <div class="panel-h"><h2 id="result-title">計算結果</h2><span class="num" id="result-badge">概算・令和8年度</span></div>
+      <div class="panel-b" id="result-body">
+        <div class="placeholder">左の項目を入力して「手取りを計算する」を押してください。</div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap cols">
+    <span>手取りのホント（仮）｜計算結果はすべて概算であり、個別の税務相談・助言ではありません。</span>
+    <span>免責事項 ／ プライバシーポリシー ／ 運営者情報 ／ 広告掲載について（PR表記）</span>
+  </div>
+</footer>
+
+<script type="module" src="./src/ui/main.js"></script>
+</body>
+</html>
