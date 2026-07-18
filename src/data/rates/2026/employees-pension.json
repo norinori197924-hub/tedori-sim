@@ -1,16 +1,54 @@
 {
   "year": "令和8年度",
-  "description": "厚生年金保険料率および標準報酬月額等級表(厚生年金分)。標準報酬月額等級表は協会けんぽの健康保険等級表(1〜50等級)と号級を共有するが、厚生年金は第1〜32等級で頭打ちになるため上限キャップだけ別に持つ設計とする。",
-  "source": null,
-  "sourceTitle": null,
-  "fetchedAt": null,
-  "needsReview": true,
-  "reviewNote": "TODO: 日本年金機構の一次資料(厚生年金保険料額表)を確認して転記すること。保険料率(18.300%、労使折半)は平成29年9月以降改定されていない旨が広く知られているが、本セッションでは一次資料未確認のため未確定として扱う。等級表の上限キャップ(第32等級の標準報酬月額)、および1〜32等級それぞれの報酬月額範囲・標準報酬月額も未収集。",
-  "rate": null,
-  "employeeShareRate": null,
-  "pensionGradeCap": {
-    "grade": 32,
-    "standardMonthlyRemuneration": null
+  "description": "厚生年金保険料率および標準報酬月額等級表(厚生年金分、第1〜32等級)。健康保険の等級表(kyokai-kenpo/*.json、第1〜50等級)と号級を共有するが、厚生年金は第32等級(65万円)で頭打ちになる。",
+  "source": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08ryougaku.pdf",
+  "sourceTitle": "日本年金機構 厚生年金保険料額表(令和2年9月分〜、令和8年度版)",
+  "fetchedAt": "2026-07-18",
+  "needsReview": false,
+  "rate": 0.183,
+  "employeeShareRate": 0.0915,
+  "rateAppliedSince": "平成29年9月1日",
+  "roundingRule": {
+    "note": "被保険者負担分(折半額)に円未満の端数がある場合、給与天引きなら50銭以下切り捨て・50銭超切り上げ。現金納付なら50銭未満切り捨て・50銭以上切り上げ。事業主との特約があれば別処理可。",
+    "source": "https://www.nenkin.go.jp/service/kounen/hokenryo/ryogaku/ryogakuhyo/20200825.files/R08ryougaku.pdf"
   },
-  "grades": []
+  "childcareContributionRate": {
+    "note": "子ども・子育て拠出金率。事業主が全額負担するため、被保険者(従業員)の手取り計算には影響しない。",
+    "rate": 0.0036,
+    "appliedFrom": "令和8年4月1日"
+  },
+  "grades": [
+    { "grade": 1, "minRemuneration": null, "maxRemuneration": 93000, "standardMonthlyRemuneration": 88000, "premiumTotal": 16104.00, "premiumHalf": 8052.00 },
+    { "grade": 2, "minRemuneration": 93000, "maxRemuneration": 101000, "standardMonthlyRemuneration": 98000, "premiumTotal": 17934.00, "premiumHalf": 8967.00 },
+    { "grade": 3, "minRemuneration": 101000, "maxRemuneration": 107000, "standardMonthlyRemuneration": 104000, "premiumTotal": 19032.00, "premiumHalf": 9516.00 },
+    { "grade": 4, "minRemuneration": 107000, "maxRemuneration": 114000, "standardMonthlyRemuneration": 110000, "premiumTotal": 20130.00, "premiumHalf": 10065.00 },
+    { "grade": 5, "minRemuneration": 114000, "maxRemuneration": 122000, "standardMonthlyRemuneration": 118000, "premiumTotal": 21594.00, "premiumHalf": 10797.00 },
+    { "grade": 6, "minRemuneration": 122000, "maxRemuneration": 130000, "standardMonthlyRemuneration": 126000, "premiumTotal": 23058.00, "premiumHalf": 11529.00 },
+    { "grade": 7, "minRemuneration": 130000, "maxRemuneration": 138000, "standardMonthlyRemuneration": 134000, "premiumTotal": 24522.00, "premiumHalf": 12261.00 },
+    { "grade": 8, "minRemuneration": 138000, "maxRemuneration": 146000, "standardMonthlyRemuneration": 142000, "premiumTotal": 25986.00, "premiumHalf": 12993.00 },
+    { "grade": 9, "minRemuneration": 146000, "maxRemuneration": 155000, "standardMonthlyRemuneration": 150000, "premiumTotal": 27450.00, "premiumHalf": 13725.00 },
+    { "grade": 10, "minRemuneration": 155000, "maxRemuneration": 165000, "standardMonthlyRemuneration": 160000, "premiumTotal": 29280.00, "premiumHalf": 14640.00 },
+    { "grade": 11, "minRemuneration": 165000, "maxRemuneration": 175000, "standardMonthlyRemuneration": 170000, "premiumTotal": 31110.00, "premiumHalf": 15555.00 },
+    { "grade": 12, "minRemuneration": 175000, "maxRemuneration": 185000, "standardMonthlyRemuneration": 180000, "premiumTotal": 32940.00, "premiumHalf": 16470.00 },
+    { "grade": 13, "minRemuneration": 185000, "maxRemuneration": 195000, "standardMonthlyRemuneration": 190000, "premiumTotal": 34770.00, "premiumHalf": 17385.00 },
+    { "grade": 14, "minRemuneration": 195000, "maxRemuneration": 210000, "standardMonthlyRemuneration": 200000, "premiumTotal": 36600.00, "premiumHalf": 18300.00 },
+    { "grade": 15, "minRemuneration": 210000, "maxRemuneration": 230000, "standardMonthlyRemuneration": 220000, "premiumTotal": 40260.00, "premiumHalf": 20130.00 },
+    { "grade": 16, "minRemuneration": 230000, "maxRemuneration": 250000, "standardMonthlyRemuneration": 240000, "premiumTotal": 43920.00, "premiumHalf": 21960.00 },
+    { "grade": 17, "minRemuneration": 250000, "maxRemuneration": 270000, "standardMonthlyRemuneration": 260000, "premiumTotal": 47580.00, "premiumHalf": 23790.00 },
+    { "grade": 18, "minRemuneration": 270000, "maxRemuneration": 290000, "standardMonthlyRemuneration": 280000, "premiumTotal": 51240.00, "premiumHalf": 25620.00 },
+    { "grade": 19, "minRemuneration": 290000, "maxRemuneration": 310000, "standardMonthlyRemuneration": 300000, "premiumTotal": 54900.00, "premiumHalf": 27450.00 },
+    { "grade": 20, "minRemuneration": 310000, "maxRemuneration": 330000, "standardMonthlyRemuneration": 320000, "premiumTotal": 58560.00, "premiumHalf": 29280.00 },
+    { "grade": 21, "minRemuneration": 330000, "maxRemuneration": 350000, "standardMonthlyRemuneration": 340000, "premiumTotal": 62220.00, "premiumHalf": 31110.00 },
+    { "grade": 22, "minRemuneration": 350000, "maxRemuneration": 370000, "standardMonthlyRemuneration": 360000, "premiumTotal": 65880.00, "premiumHalf": 32940.00 },
+    { "grade": 23, "minRemuneration": 370000, "maxRemuneration": 395000, "standardMonthlyRemuneration": 380000, "premiumTotal": 69540.00, "premiumHalf": 34770.00 },
+    { "grade": 24, "minRemuneration": 395000, "maxRemuneration": 425000, "standardMonthlyRemuneration": 410000, "premiumTotal": 75030.00, "premiumHalf": 37515.00 },
+    { "grade": 25, "minRemuneration": 425000, "maxRemuneration": 455000, "standardMonthlyRemuneration": 440000, "premiumTotal": 80520.00, "premiumHalf": 40260.00 },
+    { "grade": 26, "minRemuneration": 455000, "maxRemuneration": 485000, "standardMonthlyRemuneration": 470000, "premiumTotal": 86010.00, "premiumHalf": 43005.00 },
+    { "grade": 27, "minRemuneration": 485000, "maxRemuneration": 515000, "standardMonthlyRemuneration": 500000, "premiumTotal": 91500.00, "premiumHalf": 45750.00 },
+    { "grade": 28, "minRemuneration": 515000, "maxRemuneration": 545000, "standardMonthlyRemuneration": 530000, "premiumTotal": 96990.00, "premiumHalf": 48495.00 },
+    { "grade": 29, "minRemuneration": 545000, "maxRemuneration": 575000, "standardMonthlyRemuneration": 560000, "premiumTotal": 102480.00, "premiumHalf": 51240.00 },
+    { "grade": 30, "minRemuneration": 575000, "maxRemuneration": 605000, "standardMonthlyRemuneration": 590000, "premiumTotal": 107970.00, "premiumHalf": 53985.00 },
+    { "grade": 31, "minRemuneration": 605000, "maxRemuneration": 635000, "standardMonthlyRemuneration": 620000, "premiumTotal": 113460.00, "premiumHalf": 56730.00 },
+    { "grade": 32, "minRemuneration": 635000, "maxRemuneration": null, "standardMonthlyRemuneration": 650000, "premiumTotal": 118950.00, "premiumHalf": 59475.00 }
+  ]
 }

@@ -1,12 +1,24 @@
 {
-  "year": "令和8年度",
-  "description": "雇用保険料率(一般の事業・労働者負担分)。",
-  "source": null,
-  "sourceTitle": null,
-  "fetchedAt": null,
-  "needsReview": true,
-  "reviewNote": "TODO: 厚生労働省の一次資料(雇用保険料率表)を確認して転記すること。雇用保険料率は雇用情勢等に応じて年度ごとに見直されるため、過去の記憶値をそのまま使わないこと。",
+  "year": "令和8年度(令和8年4月1日〜令和9年3月31日)",
+  "description": "雇用保険料率(労働者負担分は失業等給付・育児休業給付の保険料率のみ)。",
+  "source": "https://www.mhlw.go.jp/content/001692566.pdf",
+  "sourceTitle": "厚生労働省・ハローワーク 令和8(2026)年度 雇用保険料率のご案内",
+  "fetchedAt": "2026-07-18",
+  "needsReview": false,
   "generalBusiness": {
-    "employeeRate": null
-  }
+    "employeeRate": 0.005,
+    "employerRate": 0.0085,
+    "totalRate": 0.0135
+  },
+  "agricultureForestryFisherySakeBrewing": {
+    "employeeRate": 0.006,
+    "employerRate": 0.0095,
+    "totalRate": 0.0155
+  },
+  "construction": {
+    "employeeRate": 0.006,
+    "employerRate": 0.0105,
+    "totalRate": 0.0165
+  },
+  "note": "かんたん入力では雇用形態を『会社員』としてのみ扱うため、事業種別は一律『一般の事業』(generalBusiness)を適用する想定。"
 }
