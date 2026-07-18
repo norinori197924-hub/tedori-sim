@@ -1,12 +1,15 @@
 {
   "year": "令和8年分/令和8年度",
-  "description": "配偶者控除・配偶者特別控除。所得税と個人住民税で金額体系が異なる。配偶者の所得要件は令和7年度税制改正により48万円以下→58万円以下(給与収入123万円以下)に引き上げ。",
-  "needsReview": false,
+  "description": "配偶者控除・配偶者特別控除。所得税と個人住民税で金額体系が異なる。配偶者の所得要件は令和7年度税制改正で48万円以下→58万円以下に、さらに令和8年度税制改正で58万円以下→62万円以下(給与所得控除の最低保障額引き上げに伴う)に引き上げ。",
+  "needsReview": true,
+  "reviewNote": "国税庁「令和8年度税制改正Q&A」Q7-1により、同一生計配偶者(配偶者控除の対象)の所得要件が58万円→62万円に引き上げられたことを確認し、spouseIncomeRequirementは更新済み。ただし配偶者特別控除の詳細な所得区分表(incomeTax/residentTaxのspousalSpecialDeduction.brackets、現在58万円超〜133万円以下で区分)が同様にスライドしているかは未確認。給与所得控除の最低保障額(74万円)との連続性から133万円上限も141万円程度に変わっている可能性が高いが、区分ごとの正確な金額は国税庁一次資料で要確認。",
   "spouseIncomeRequirement": {
-    "note": "配偶者控除の対象となる配偶者の合計所得金額の上限。令和7年分より適用。",
-    "maxTotalIncome": 580000,
-    "maxSalaryIncome": 1230000,
-    "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1191.htm"
+    "note": "配偶者控除の対象となる配偶者(同一生計配偶者)の合計所得金額の上限。令和8年度税制改正により令和8年分から適用。",
+    "maxTotalIncome": 620000,
+    "maxSalaryIncome": 1360000,
+    "source": "https://www.nta.go.jp/users/gensen/2026kiso/pdf/0026005-024.pdf",
+    "sourceTitle": "国税庁 令和8年度税制改正Q&A(令和8年5月) Q7-1",
+    "fetchedAt": "2026-07-19"
   },
   "incomeTax": {
     "source": "https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1191.htm ; https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1195.htm",
