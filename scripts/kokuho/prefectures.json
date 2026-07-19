@@ -1,0 +1,23 @@
+{
+  "07": {
+    "name": "福島県",
+    "sourceUrl": "https://www.pref.fukushima.lg.jp/uploaded/attachment/731236.pdf",
+    "sourceFormat": "pdf",
+    "sourceTitle": "福島県 令和8年度国保事業費納付金及び標準保険料率",
+    "unifiedRate": false
+  },
+  "27": {
+    "name": "大阪府",
+    "sourceUrl": "https://www.pref.osaka.lg.jp/documents/125887/r8ryouritsu.pdf",
+    "sourceFormat": "pdf",
+    "sourceTitle": "大阪府 令和8年度市町村標準保険料率等の算定結果",
+    "unifiedRate": true
+  },
+  "04": {
+    "name": "宮城県",
+    "sourceUrl": "https://www.pref.miyagi.jp/documents/14989/r8.pdf",
+    "sourceFormat": "pdf",
+    "sourceTitle": "宮城県 令和8年度国民健康保険事業費納付金及び標準保険料率",
+    "unifiedRate": false
+  }
+}

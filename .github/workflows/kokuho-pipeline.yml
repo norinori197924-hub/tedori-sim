@@ -1,0 +1,48 @@
+name: Kokuho rate pipeline (pilot)
+
+on:
+  workflow_dispatch:
+    inputs:
+      prefectures:
+        description: "対象都道府県コード(スペース区切り、空欄なら全件)"
+        required: false
+        default: "07 27 04"
+
+permissions:
+  contents: write
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch prefecture rate tables
+        run: python scripts/kokuho/fetch.py ${{ inputs.prefectures }}
+
+      - name: Extract via Claude API
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/kokuho/extract.py ${{ inputs.prefectures }}
+
+      - name: Validate and write JSON
+        run: python scripts/kokuho/build.py ${{ inputs.prefectures }}
+
+      - name: Run calc engine tests
+        run: node --test test/calc/
+
+      - name: Commit and push generated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/rates/2026/national-health-insurance src/data/municipalities/index.json data/raw/kokuho
+          git diff --cached --quiet || git commit -m "chore: kokuho pipeline run (${{ inputs.prefectures }})"
+          git push

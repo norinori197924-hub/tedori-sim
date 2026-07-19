@@ -12,3 +12,7 @@ venv/
 # OS
 .DS_Store
 Thumbs.db
+
+# 国保パイプラインのダウンロード生データ(再取得可能なため追跡しない)
+data/raw/kokuho/*.pdf
+data/raw/kokuho/*.xlsx
