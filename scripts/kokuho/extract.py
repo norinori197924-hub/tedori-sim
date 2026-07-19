@@ -64,7 +64,53 @@ unifiedRateをtrueにしてください。
 }
 
 表から読み取れない・表に存在しない数値は0ではなくnullにしてください。推測で埋めないでください。
+
+出力に関する厳格なルール:
+- 出力は指定したJSON構造そのものだけにしてください。前置き・説明文・補足コメントを
+  一切含めないでください。
+- マークダウンのコードフェンス(```や```json)を付けないでください。
+- JSONの値の直後に補足の説明文字列を書き足さないこと(例: null (理由) のような
+  書き方は不正なJSONになるため禁止)。読み取れない場合は理由を書かず、単にnullに
+  してください。
+- JSON仕様にない記法(コメント、末尾カンマなど)は使わないでください。
 """
+
+
+def parse_json_response(text: str, debug_path: Path) -> dict:
+    """Claude APIの応答テキストをJSONとしてパースする。
+
+    マークダウンのコードフェンスや前後の説明文が付いていても、可能な範囲で
+    取り除いてから解析を試みる。それでも解析できない場合は、原因調査のために
+    生のレスポンステキストをそのままログに出力し、ファイルにも保存してから例外を
+    送出する(推測でごまかさず、GitHub Actionsのログから実際の応答内容を確認
+    できるようにするため)。
+    """
+    cleaned = text.strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.split("```", 2)[1]
+        if cleaned.startswith("json"):
+            cleaned = cleaned[4:]
+        cleaned = cleaned.strip()
+
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError as first_error:
+        start = cleaned.find("{")
+        end = cleaned.rfind("}")
+        if start != -1 and end > start:
+            try:
+                return json.loads(cleaned[start : end + 1])
+            except json.JSONDecodeError:
+                pass
+        debug_path.write_text(text, encoding="utf-8")
+        print("[extract] JSON解析失敗。Claude APIの生の応答テキスト(パース前):")
+        print("----- raw response start -----")
+        print(text)
+        print("----- raw response end -----")
+        raise ValueError(
+            f"Claude APIの応答をJSONとして解析できませんでした({first_error})。"
+            f"生の応答テキストは上のログと{debug_path}の両方で確認できます。"
+        ) from first_error
 
 
 def extract_prefecture(pref_code: str, entry: dict) -> dict:
@@ -85,7 +131,7 @@ def extract_prefecture(pref_code: str, entry: dict) -> dict:
 
     message = client.messages.create(
         model=MODEL,
-        max_tokens=8192,
+        max_tokens=16384,
         messages=[
             {
                 "role": "user",
@@ -95,11 +141,8 @@ def extract_prefecture(pref_code: str, entry: dict) -> dict:
     )
 
     text = "".join(block.text for block in message.content if block.type == "text").strip()
-    if text.startswith("```"):
-        text = text.split("```", 2)[1]
-        if text.startswith("json"):
-            text = text[4:]
-    result = json.loads(text)
+    debug_path = RAW_DIR / f"{pref_code}.extracted.raw.txt"
+    result = parse_json_response(text, debug_path)
 
     out_path = RAW_DIR / f"{pref_code}.extracted.json"
     out_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
