@@ -16,13 +16,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1745,
         "perCapitaAmountOver18": 96,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -40,13 +40,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1742,
         "perCapitaAmountOver18": 99,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -64,13 +64,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1725,
         "perCapitaAmountOver18": 116,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -88,13 +88,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1753,
         "perCapitaAmountOver18": 88,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -112,13 +112,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1766,
         "perCapitaAmountOver18": 75,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -136,13 +136,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1775,
         "perCapitaAmountOver18": 66,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -160,13 +160,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1744,
         "perCapitaAmountOver18": 97,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -184,13 +184,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1778,
         "perCapitaAmountOver18": 63,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -208,13 +208,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1724,
         "perCapitaAmountOver18": 117,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -232,13 +232,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1732,
         "perCapitaAmountOver18": 109,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -256,13 +256,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1763,
         "perCapitaAmountOver18": 78,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -280,13 +280,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1766,
         "perCapitaAmountOver18": 75,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -304,13 +304,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1735,
         "perCapitaAmountOver18": 106,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -328,13 +328,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1743,
         "perCapitaAmountOver18": 98,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -352,13 +352,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1746,
         "perCapitaAmountOver18": 95,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -376,13 +376,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1733,
-        "perCapitaAmountOver18": 108,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -400,13 +400,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1775,
-        "perCapitaAmountOver18": 66,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -424,13 +424,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1734,
-        "perCapitaAmountOver18": 107,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -448,13 +448,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1725,
-        "perCapitaAmountOver18": 116,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -472,13 +472,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1722,
-        "perCapitaAmountOver18": 119,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -496,13 +496,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1732,
-        "perCapitaAmountOver18": 109,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -520,13 +520,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1762,
-        "perCapitaAmountOver18": 79,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -544,13 +544,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1727,
-        "perCapitaAmountOver18": 114,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -568,13 +568,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1730,
-        "perCapitaAmountOver18": 111,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -592,13 +592,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1734,
-        "perCapitaAmountOver18": 107,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -616,13 +616,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1728,
-        "perCapitaAmountOver18": 113,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -640,13 +640,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1731,
-        "perCapitaAmountOver18": 110,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -664,13 +664,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1740,
-        "perCapitaAmountOver18": 101,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -688,13 +688,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1580,
-        "perCapitaAmountOver18": 261,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -712,13 +712,13 @@
       "care": {
         "incomeRate": 0.026,
         "perCapitaAmount": 18682,
-        "perHouseholdAmount": null
+        "perHouseholdAmount": 0
       },
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1730,
-        "perCapitaAmountOver18": 111,
-        "perHouseholdAmount": null
+        "perCapitaAmountOver18": 1841,
+        "perHouseholdAmount": 0
       }
     },
     {
@@ -741,7 +741,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1767,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 74,
         "perHouseholdAmount": 0
       }
     },
@@ -765,7 +765,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1784,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 57,
         "perHouseholdAmount": 0
       }
     },
@@ -789,7 +789,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1821,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 20,
         "perHouseholdAmount": 0
       }
     },
@@ -813,7 +813,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1734,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 107,
         "perHouseholdAmount": 0
       }
     },
@@ -837,7 +837,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1736,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 105,
         "perHouseholdAmount": 0
       }
     },
@@ -861,7 +861,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1731,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 110,
         "perHouseholdAmount": 0
       }
     },
@@ -885,7 +885,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1729,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 112,
         "perHouseholdAmount": 0
       }
     },
@@ -909,7 +909,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1758,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 83,
         "perHouseholdAmount": 0
       }
     },
@@ -933,7 +933,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1784,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 57,
         "perHouseholdAmount": 0
       }
     },
@@ -957,7 +957,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1743,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 98,
         "perHouseholdAmount": 0
       }
     },
@@ -981,7 +981,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1751,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 90,
         "perHouseholdAmount": 0
       }
     },
@@ -1005,7 +1005,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1786,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 55,
         "perHouseholdAmount": 0
       }
     },
@@ -1029,7 +1029,7 @@
       "childSupport": {
         "incomeRate": 0.0028,
         "perCapitaAmountUnder18": 1752,
-        "perCapitaAmountOver18": 1841,
+        "perCapitaAmountOver18": 89,
         "perHouseholdAmount": 0
       }
     }

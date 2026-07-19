@@ -125,6 +125,16 @@
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/04100.json"
+    },
+    {
+      "prefecture": "大阪府",
+      "prefectureCode": "27",
+      "municipality": "堺市",
+      "municipalityCode": "27140",
+      "kyokaiKenpoStatus": "pending",
+      "kyokaiKenpoRatesFile": null,
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/27140.json"
     }
   ]
 }

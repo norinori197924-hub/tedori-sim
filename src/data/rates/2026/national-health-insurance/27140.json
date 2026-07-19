@@ -1,0 +1,41 @@
+{
+  "prefecture": "大阪府",
+  "municipality": "堺市",
+  "municipalityCode": "27140",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.pref.osaka.lg.jp/documents/125887/r8ryouritsu.pdf",
+  "sourceTitle": "大阪府 令和8年度市町村標準保険料率等の算定結果",
+  "fetchedAt": "2026-07-19",
+  "needsReview": true,
+  "dataSource": "prefecture_standard_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。都道府県公表の「標準保険料率」であり、市町村が実際に条例で定める料率と異なる場合がある(都道府県資料内に同旨の注記あり)。賦課限度額(cap)は一覧表に含まれないため全国標準値を暫定使用しており、自治体独自の限度額(例: 金沢市の医療分66万円)とは異なる可能性がある。",
+  "levyMethod": "自動収集のため賦課方式は未確認(平等割額が0でない区分があるかで4方式/2方式を推定可能だが、今回は判定していない)",
+  "medical": {
+    "incomeRate": 0.095,
+    "perCapitaAmount": 34990,
+    "perHouseholdAmount": 33908,
+    "cap": 670000
+  },
+  "support": {
+    "incomeRate": 0.0306,
+    "perCapitaAmount": 11191,
+    "perHouseholdAmount": 10845,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.026,
+    "perCapitaAmount": 18682,
+    "perHouseholdAmount": 0,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0028,
+    "perCapitaAmountUnder18": 1742,
+    "perCapitaAmountOver18": 99,
+    "perHouseholdAmount": 0,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}
