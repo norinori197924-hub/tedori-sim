@@ -1,7 +1,5 @@
 // @ts-check
-import { calculateSalaryIncome, lookupSalaryIncomeDeduction } from './salary-income.js';
 import { lookupBasicDeduction, calculateSpousalDeduction, calculateDependentDeduction } from './deductions.js';
-import { calculateIncomeAdjustmentDeduction } from './income-adjustment.js';
 import { truncateTo1000, truncateTo100 } from './rounding.js';
 
 /** @typedef {import('./types.js').SimpleInput} SimpleInput */
@@ -20,22 +18,20 @@ function lookupIncomeTaxBracket(taxableIncome, brackets) {
 }
 
 /**
- * 所得税額(復興特別所得税を含む)を計算する。
+ * 所得税額(復興特別所得税を含む)を計算する。会社員・フリーランス共通。
+ * 所得の種類ごとの計算(給与所得控除・所得金額調整控除、または事業所得の簡易計算)は
+ * 呼び出し側(income-by-type.js)で済ませ、その結果である合計所得金額を受け取る。
+ * @param {number} totalIncome 合計所得金額(所得の種類ごとの計算を終えた後の値)
  * @param {SimpleInput} input
  * @param {number} socialInsuranceTotal 社会保険料の本人負担合計(年額)。全額が社会保険料控除の対象。
  * @param {RateBundle} rates
  * @returns {IncomeTaxResult}
  */
-export function calculateIncomeTax(input, socialInsuranceTotal, rates) {
-  const salaryIncomeDeduction = lookupSalaryIncomeDeduction(input.annualIncome, rates.salaryIncomeDeduction);
-  const salaryIncomeBeforeAdjustment = calculateSalaryIncome(input.annualIncome, rates.salaryIncomeDeduction);
-  const incomeAdjustmentDeduction = calculateIncomeAdjustmentDeduction(input.annualIncome, input.childrenAges);
-  const salaryIncome = Math.max(0, salaryIncomeBeforeAdjustment - incomeAdjustmentDeduction);
-
-  const basicDeduction = lookupBasicDeduction(salaryIncome, rates.basicDeduction.incomeTax);
+export function calculateIncomeTax(totalIncome, input, socialInsuranceTotal, rates) {
+  const basicDeduction = lookupBasicDeduction(totalIncome, rates.basicDeduction.incomeTax);
 
   const { deduction: spousalDeduction } = calculateSpousalDeduction(
-    salaryIncome,
+    totalIncome,
     input.spouse,
     rates.spousalDeduction.incomeTax,
     rates.spousalDeduction.spouseIncomeRequirement,
@@ -46,7 +42,7 @@ export function calculateIncomeTax(input, socialInsuranceTotal, rates) {
   const dependentDeduction = dependent.total;
 
   const totalDeductions = basicDeduction + socialInsuranceTotal + spousalDeduction + dependentDeduction;
-  const taxableIncome = truncateTo1000(salaryIncome - totalDeductions);
+  const taxableIncome = truncateTo1000(totalIncome - totalDeductions);
 
   const bracket = lookupIncomeTaxBracket(taxableIncome, rates.incomeTaxBrackets.brackets);
   const incomeTaxBeforeSurtax = Math.max(0, Math.round(taxableIncome * bracket.rate - bracket.deduction));
@@ -57,9 +53,6 @@ export function calculateIncomeTax(input, socialInsuranceTotal, rates) {
   const reconstructionSurtax = total - incomeTaxBeforeSurtax;
 
   return {
-    salaryIncomeDeduction,
-    incomeAdjustmentDeduction,
-    salaryIncome,
     basicDeduction,
     socialInsuranceDeduction: socialInsuranceTotal,
     spousalDeduction,

@@ -77,7 +77,9 @@
  * @property {Object} residentTaxStandard
  * @property {EmployeesPensionRateFile} employeesPension
  * @property {Object} employmentInsurance
- * @property {KyokaiKenpoRateFile} kyokaiKenpo 計算対象の都道府県1件分
+ * @property {KyokaiKenpoRateFile} kyokaiKenpo 計算対象の都道府県1件分(会社員のみ使用)
+ * @property {Object} nationalPension national-pension.json(フリーランスのみ使用)
+ * @property {Object} nationalHealthInsurance 計算対象の市区町村のnationalHealthInsurance1件分(フリーランスのみ使用)
  */
 
 /**
@@ -94,10 +96,7 @@
  */
 
 /**
- * @typedef {Object} IncomeTaxResult
- * @property {number} salaryIncomeDeduction
- * @property {number} incomeAdjustmentDeduction 所得金額調整控除(給与収入850万円超・23歳未満の扶養親族等がいる場合)
- * @property {number} salaryIncome
+ * @typedef {Object} IncomeTaxResult 会社員・フリーランス共通(所得の種類ごとの計算はincome-by-type.js側で完了済み)
  * @property {number} basicDeduction
  * @property {number} socialInsuranceDeduction
  * @property {number} spousalDeduction
@@ -109,9 +108,7 @@
  */
 
 /**
- * @typedef {Object} ResidentTaxResult
- * @property {number} incomeAdjustmentDeduction
- * @property {number} salaryIncome
+ * @typedef {Object} ResidentTaxResult 会社員・フリーランス共通
  * @property {number} basicDeduction
  * @property {number} socialInsuranceDeduction
  * @property {number} spousalDeduction
@@ -126,8 +123,46 @@
  */
 
 /**
+ * @typedef {Object} EmployeeIncomeResult income-by-type.js の calculateEmployeeIncome の返り値
+ * @property {number} totalIncome 合計所得金額(給与所得控除・所得金額調整控除後)
+ * @property {number} salaryIncomeDeduction
+ * @property {number} incomeAdjustmentDeduction 所得金額調整控除(給与収入850万円超・23歳未満の扶養親族等がいる場合)
+ */
+
+/**
+ * @typedef {Object} FreelanceIncomeResult income-by-type.js の calculateFreelanceIncome の返り値
+ * @property {number} totalIncome 事業所得(簡易モードでは年収そのまま)
+ * @property {number} businessExpense 経費(簡易モードでは常に0)
+ * @property {number} blueReturnDeduction 青色申告控除(簡易モードでは常に0)
+ */
+
+/**
+ * @typedef {Object} NationalHealthInsuranceResult 国民健康保険料の内訳(年額)
+ * @property {number} medical 医療分
+ * @property {number} support 後期高齢者支援金分
+ * @property {number} care 介護分(40〜64歳の場合のみ)
+ * @property {number} childSupport 子ども・子育て支援納付金分
+ * @property {number} total
+ */
+
+/**
+ * @typedef {Object} NationalPensionResult 国民年金保険料(年額)
+ * @property {number} selfAnnual 本人分
+ * @property {number} spouseAnnual 配偶者分(配偶者ありの場合のみ)
+ * @property {number} total
+ */
+
+/**
+ * @typedef {Object} FreelanceSocialInsuranceResult
+ * @property {NationalHealthInsuranceResult} nationalHealthInsurance
+ * @property {NationalPensionResult} nationalPension
+ * @property {number} total 国保+国民年金の合計(年額)
+ */
+
+/**
  * @typedef {Object} CalcResult
- * @property {SocialInsuranceResult} socialInsurance
+ * @property {EmployeeIncomeResult|FreelanceIncomeResult} income 所得の種類ごとの計算結果
+ * @property {SocialInsuranceResult|FreelanceSocialInsuranceResult} socialInsurance
  * @property {IncomeTaxResult} incomeTax
  * @property {ResidentTaxResult} residentTax
  * @property {number} takeHomeAnnual

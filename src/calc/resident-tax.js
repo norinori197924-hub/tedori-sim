@@ -1,7 +1,5 @@
 // @ts-check
-import { calculateSalaryIncome } from './salary-income.js';
 import { lookupBasicDeduction, calculateSpousalDeduction, calculateDependentDeduction } from './deductions.js';
-import { calculateIncomeAdjustmentDeduction } from './income-adjustment.js';
 import { truncateTo1000, truncateTo100 } from './rounding.js';
 
 /** @typedef {import('./types.js').SimpleInput} SimpleInput */
@@ -42,22 +40,21 @@ function calculateAdjustmentCredit(taxableIncome, context, residentTaxStandard) 
 }
 
 /**
- * 個人住民税(所得割+均等割+森林環境税)を計算する。
+ * 個人住民税(所得割+均等割+森林環境税)を計算する。会社員・フリーランス共通。
+ * 所得の種類ごとの計算(給与所得控除・所得金額調整控除、または事業所得の簡易計算)は
+ * 呼び出し側(income-by-type.js)で済ませ、その結果である合計所得金額を受け取る。
  * 前提: 入力年収が前年も同水準だったと仮定した概算(住民税は前年所得課税のため)。
+ * @param {number} totalIncome 合計所得金額(所得の種類ごとの計算を終えた後の値)
  * @param {SimpleInput} input
  * @param {number} socialInsuranceTotal
  * @param {RateBundle} rates
  * @returns {ResidentTaxResult & { adjustmentCreditNeedsReview: boolean }}
  */
-export function calculateResidentTax(input, socialInsuranceTotal, rates) {
-  const salaryIncomeBeforeAdjustment = calculateSalaryIncome(input.annualIncome, rates.salaryIncomeDeduction);
-  const incomeAdjustmentDeduction = calculateIncomeAdjustmentDeduction(input.annualIncome, input.childrenAges);
-  const salaryIncome = Math.max(0, salaryIncomeBeforeAdjustment - incomeAdjustmentDeduction);
-
-  const basicDeduction = lookupBasicDeduction(salaryIncome, rates.basicDeduction.residentTax);
+export function calculateResidentTax(totalIncome, input, socialInsuranceTotal, rates) {
+  const basicDeduction = lookupBasicDeduction(totalIncome, rates.basicDeduction.residentTax);
 
   const spousal = calculateSpousalDeduction(
-    salaryIncome,
+    totalIncome,
     input.spouse,
     rates.spousalDeduction.residentTax,
     rates.spousalDeduction.spouseIncomeRequirement,
@@ -69,7 +66,7 @@ export function calculateResidentTax(input, socialInsuranceTotal, rates) {
   const dependentDeduction = dependent.total;
 
   const totalDeductions = basicDeduction + socialInsuranceTotal + spousalDeduction + dependentDeduction;
-  const taxableIncome = truncateTo1000(salaryIncome - totalDeductions);
+  const taxableIncome = truncateTo1000(totalIncome - totalDeductions);
 
   const incomeLevyBeforeCredit = Math.round(taxableIncome * rates.residentTaxStandard.incomeLeviedRate.total);
 
@@ -89,8 +86,6 @@ export function calculateResidentTax(input, socialInsuranceTotal, rates) {
   const total = incomeLevy + perCapitaLevy + forestEnvironmentTax;
 
   return {
-    incomeAdjustmentDeduction,
-    salaryIncome,
     basicDeduction,
     socialInsuranceDeduction: socialInsuranceTotal,
     spousalDeduction,

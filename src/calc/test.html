@@ -34,8 +34,11 @@
 <script type="module">
   import { lookupSalaryIncomeDeduction, calculateSalaryIncome } from './salary-income.js';
   import { calculateIncomeAdjustmentDeduction } from './income-adjustment.js';
+  import { calculateEmployeeIncome, calculateFreelanceIncome } from './income-by-type.js';
   import { calculateTakeHome } from './engine.js';
   import { calculateResidentTax } from './resident-tax.js';
+  import { calculateNationalHealthInsurance } from './national-health-insurance.js';
+  import { calculateNationalPension } from './national-pension.js';
 
   const results = [];
 
@@ -44,11 +47,12 @@
     results.push({ category, label, expected, actual, pass, source });
   }
 
-  async function loadRates() {
+  async function loadRates(municipalityCode = '12203') {
     const base = '../data/rates/2026/';
     const [
       incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
-      dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpoChiba
+      dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpoChiba,
+      nationalPension, municipalities
     ] = await Promise.all([
       fetch(base + 'income-tax-brackets.json').then(r => r.json()),
       fetch(base + 'salary-income-deduction.json').then(r => r.json()),
@@ -58,12 +62,16 @@
       fetch(base + 'resident-tax-standard.json').then(r => r.json()),
       fetch(base + 'employees-pension.json').then(r => r.json()),
       fetch(base + 'employment-insurance.json').then(r => r.json()),
-      fetch(base + 'kyokai-kenpo/chiba.json').then(r => r.json())
+      fetch(base + 'kyokai-kenpo/chiba.json').then(r => r.json()),
+      fetch(base + 'national-pension.json').then(r => r.json()),
+      fetch('../data/municipalities/index.json').then(r => r.json())
     ]);
+    const municipality = municipalities.municipalities.find(m => m.municipalityCode === municipalityCode);
     return {
       incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
       dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance,
-      kyokaiKenpo: kyokaiKenpoChiba
+      kyokaiKenpo: kyokaiKenpoChiba, nationalPension,
+      nationalHealthInsurance: municipality.nationalHealthInsurance
     };
   }
 
@@ -122,7 +130,8 @@
         numberOfChildren: 0, childrenAges: [], employmentType: 'employee',
         annualIncome: 4000000, spouse: { hasSpouse: false, spouseIncome: null }
       };
-      const r = calculateResidentTax(input, 500000, rates);
+      const income = calculateEmployeeIncome(input, rates);
+      const r = calculateResidentTax(income.totalIncome, input, 500000, rates);
       assertEqual('手計算設例(住民税)', '設例1: 単身・年収400万円・社保50万円 taxableIncome', 1830000, r.taxableIncome, 'test/calc/resident-tax.test.mjsと同じ設例');
       assertEqual('手計算設例(住民税)', '設例1: incomeLevyBeforeCredit', 183000, r.incomeLevyBeforeCredit, '同上');
       assertEqual('手計算設例(住民税)', '設例1: adjustmentCredit', 0, r.adjustmentCredit, '同上');
@@ -134,11 +143,90 @@
         numberOfChildren: 1, childrenAges: [17], employmentType: 'employee',
         annualIncome: 6000000, spouse: { hasSpouse: true, spouseIncome: 0 }
       };
-      const r = calculateResidentTax(input, 800000, rates);
+      const income = calculateEmployeeIncome(input, rates);
+      const r = calculateResidentTax(income.totalIncome, input, 800000, rates);
       assertEqual('手計算設例(住民税)', '設例2: 配偶者・子1人・年収600万円・社保80万円 taxableIncome', 2470000, r.taxableIncome, 'test/calc/resident-tax.test.mjsと同じ設例');
       assertEqual('手計算設例(住民税)', '設例2: incomeLevyBeforeCredit', 247000, r.incomeLevyBeforeCredit, '同上');
       assertEqual('手計算設例(住民税)', '設例2: adjustmentCredit', 2500, r.adjustmentCredit, '同上');
       assertEqual('手計算設例(住民税)', '設例2: total', 249500, r.total, '同上');
+    }
+
+    // --- フリーランス: 国民健康保険料 手計算設例(市川市) ---
+    {
+      const input = {
+        age: 38, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 5000000, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const r = calculateNationalHealthInsurance(5000000, input, rates.nationalHealthInsurance);
+      assertEqual('手計算設例(国保・市川市)', '設例A: 単身38歳・年収500万円 medical', 375150, r.medical, 'assessableIncome=4,570,000で手計算');
+      assertEqual('手計算設例(国保・市川市)', '設例A: support', 95630, r.support, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例A: care(40歳未満のため0円)', 0, r.care, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例A: childSupport', 12511, r.childSupport, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例A: total', 483291, r.total, '同上');
+    }
+    {
+      const input = {
+        age: 45, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 2, childrenAges: [10, 20], employmentType: 'freelance',
+        annualIncome: 6000000, spouse: { hasSpouse: true, spouseIncome: 0 }
+      };
+      const r = calculateNationalHealthInsurance(6000000, input, rates.nationalHealthInsurance);
+      assertEqual('手計算設例(国保・市川市)', '設例B: 配偶者・子2人(10歳,20歳)・45歳・年収600万円 medical', 486150, r.medical, 'assessableIncome=5,570,000、世帯4人で手計算');
+      assertEqual('手計算設例(国保・市川市)', '設例B: support', 141030, r.support, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例B: care(45歳のため対象)', 127785, r.care, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例B: childSupport(20歳の子は大人扱い)', 18911, r.childSupport, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例B: total', 773876, r.total, '同上');
+    }
+
+    // --- フリーランス: 国民年金保険料 ---
+    {
+      const r1 = calculateNationalPension(
+        { age: 38, spouse: { hasSpouse: false, spouseIncome: null } },
+        rates.nationalPension
+      );
+      assertEqual('国民年金', '38歳・配偶者なし: 本人分', 215040, r1.selfAnnual, '17,920円×12');
+      assertEqual('国民年金', '38歳・配偶者なし: total', 215040, r1.total, '同上');
+
+      const r2 = calculateNationalPension(
+        { age: 45, spouse: { hasSpouse: true, spouseIncome: 0 } },
+        rates.nationalPension
+      );
+      assertEqual('国民年金', '45歳・配偶者あり: total(本人+配偶者)', 430080, r2.total, '17,920円×12×2');
+
+      const r3 = calculateNationalPension(
+        { age: 65, spouse: { hasSpouse: false, spouseIncome: null } },
+        rates.nationalPension
+      );
+      assertEqual('国民年金', '65歳(60歳以上のため対象外): 本人分', 0, r3.selfAnnual, '第1号被保険者は20〜59歳');
+    }
+
+    // --- フリーランス: エンジン全体の内部整合性チェック ---
+    {
+      const input = {
+        age: 38, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 5000000, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      let ok = true;
+      let detail = '';
+      try {
+        const r = calculateTakeHome(input, rates);
+        const sumsMatch = input.annualIncome - r.incomeTax.total - r.residentTax.total - r.socialInsurance.total === r.takeHomeAnnual;
+        ok = r.takeHomeAnnual > 0 && r.takeHomeAnnual < input.annualIncome && sumsMatch;
+        detail = `手取り年額=${r.takeHomeAnnual}円, 所得税=${r.incomeTax.total}円, 住民税=${r.residentTax.total}円, 国保+国民年金=${r.socialInsurance.total}円`;
+      } catch (e) {
+        ok = false;
+        detail = 'エラー: ' + e.message;
+      }
+      results.push({
+        category: '内部整合性(参考)',
+        label: '市川市・フリーランス・単身・年収500万円',
+        expected: '例外なく計算完了し、0<手取り<年収、内訳の合計が一致',
+        actual: detail,
+        pass: ok,
+        source: '公式計算例ではない。エンジン全体が動くことの確認用'
+      });
     }
 
     // --- 内部整合性チェック(公式の網羅例ではないが、エンジン全体が例外なく動作することの確認) ---
