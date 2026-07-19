@@ -92,6 +92,11 @@ function calculateFreelanceTakeHome(input, rates) {
     '国民年金保険料は、配偶者がいる場合は年齢不明のまま第1号被保険者(20〜59歳)と仮定して算入しています。20歳以上の子がいる場合も、国民年金保険料の計算には含めていません。',
     ...COMMON_ASSUMPTIONS
   ];
+  if (input.spouse.hasSpouse) {
+    assumptions.push(
+      '配偶者の年収は、所得税・住民税の配偶者控除・配偶者特別控除の判定には使用していますが、国民健康保険料の所得割には反映していません(所得割は本人の所得のみで計算)。'
+    );
+  }
   if (residentTax.adjustmentCreditNeedsReview) {
     assumptions.push('住民税の調整控除額は、基礎控除に係る人的控除差が未確定のため暫定値で計算しています(要確認)。');
   }

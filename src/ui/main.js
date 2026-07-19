@@ -11,9 +11,13 @@ const resultBody = document.getElementById('result-body');
 const resultTitle = document.getElementById('result-title');
 const resultBadge = document.getElementById('result-badge');
 const badgeCoverage = document.getElementById('badge-coverage');
+const employmentButtons = Array.from(document.querySelectorAll('[data-employment]'));
 
 /** @type {Array<any>} */
 let municipalities = [];
+
+/** @type {'employee'|'freelance'} */
+let selectedEmploymentType = 'employee';
 
 async function fetchJson(url) {
   const res = await fetch(url);
@@ -23,6 +27,15 @@ async function fetchJson(url) {
 
 function formatYen(n) {
   return '¥' + Math.round(n).toLocaleString('ja-JP');
+}
+
+function initEmploymentButtons() {
+  employmentButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      selectedEmploymentType = btn.dataset.employment;
+      employmentButtons.forEach((b) => b.classList.toggle('on', b === btn));
+    });
+  });
 }
 
 async function initMunicipalities() {
@@ -66,7 +79,10 @@ function parseChildrenAges(text, numberOfChildren) {
   return ages;
 }
 
-function readInput() {
+/**
+ * @param {'employee'|'freelance'} employmentType
+ */
+function readInput(employmentType) {
   const municipality = getSelectedMunicipality();
   const numberOfChildren = Number(document.getElementById('numberOfChildren').value);
   const childrenAges = parseChildrenAges(document.getElementById('childrenAges').value, numberOfChildren);
@@ -80,7 +96,7 @@ function readInput() {
     municipalityCode: municipality.municipalityCode,
     numberOfChildren,
     childrenAges,
-    employmentType: 'employee',
+    employmentType,
     annualIncome: Number(document.getElementById('annualIncome').value),
     spouse: {
       hasSpouse,
@@ -101,7 +117,8 @@ function readInput() {
 async function loadRates(municipality) {
   const [
     incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
-    dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo
+    dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo,
+    nationalPension
   ] = await Promise.all([
     fetchJson(RATES_BASE + 'income-tax-brackets.json'),
     fetchJson(RATES_BASE + 'salary-income-deduction.json'),
@@ -111,31 +128,81 @@ async function loadRates(municipality) {
     fetchJson(RATES_BASE + 'resident-tax-standard.json'),
     fetchJson(RATES_BASE + 'employees-pension.json'),
     fetchJson(RATES_BASE + 'employment-insurance.json'),
-    fetchJson('./' + municipality.kyokaiKenpoRatesFile.replace(/^rates\//, 'src/data/rates/'))
+    fetchJson('./' + municipality.kyokaiKenpoRatesFile.replace(/^rates\//, 'src/data/rates/')),
+    fetchJson(RATES_BASE + 'national-pension.json')
   ]);
   return {
     incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
-    dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo
+    dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo,
+    nationalPension, nationalHealthInsurance: municipality.nationalHealthInsurance
   };
 }
 
-function renderResult(input, municipality, result) {
+function employmentLabel(employmentType) {
+  return employmentType === 'employee' ? '会社員' : 'フリーランス・自営業';
+}
+
+function renderLedgerRows(employmentType, result, municipality) {
+  const si = result.socialInsurance;
+  if (employmentType === 'employee') {
+    const childcareBadge = '<span class="tag new">新設(令和8年4月分〜)</span>';
+    return `
+      <tr><td>社会保険料 合計<br><span class="src">出典：協会けんぽ・日本年金機構・厚生労働省</span></td><td class="v minus">− ${formatYen(si.total)}</td></tr>
+      <tr class="sub"><td>健康保険・介護保険（協会けんぽ・${municipality.prefecture}料率）<span class="tag city">都道府県別</span></td><td class="v minus">− ${formatYen(si.healthInsuranceAnnual)}</td></tr>
+      <tr class="sub"><td>厚生年金</td><td class="v minus">− ${formatYen(si.pensionAnnual)}</td></tr>
+      <tr class="sub"><td>雇用保険</td><td class="v minus">− ${formatYen(si.employmentInsuranceAnnual)}</td></tr>
+      <tr class="sub"><td>子ども・子育て支援金${childcareBadge}</td><td class="v minus">− ${formatYen(si.childcareSupportAnnual)}</td></tr>
+    `;
+  }
+  const nhi = si.nationalHealthInsurance;
+  const np = si.nationalPension;
+  return `
+    <tr><td>国民健康保険料＋国民年金 合計<br><span class="src">出典：${municipality.prefecture}${municipality.municipality}・日本年金機構</span></td><td class="v minus">− ${formatYen(si.total)}</td></tr>
+    <tr class="sub"><td>国保・医療分<span class="tag city">${municipality.municipality}料率</span></td><td class="v minus">− ${formatYen(nhi.medical)}</td></tr>
+    <tr class="sub"><td>国保・後期高齢者支援金分</td><td class="v minus">− ${formatYen(nhi.support)}</td></tr>
+    <tr class="sub"><td>国保・介護分（40〜64歳のみ）</td><td class="v minus">− ${formatYen(nhi.care)}</td></tr>
+    <tr class="sub"><td>国保・子ども子育て支援納付金分<span class="tag new">新設(令和8年度〜)</span></td><td class="v minus">− ${formatYen(nhi.childSupport)}</td></tr>
+    <tr class="sub"><td>国民年金保険料</td><td class="v minus">− ${formatYen(np.total)}</td></tr>
+  `;
+}
+
+function renderCompareCard(currentType, currentResult, otherType, otherResult) {
+  const diff = currentResult.takeHomeAnnual - otherResult.takeHomeAnnual;
+  const diffAbs = formatYen(Math.abs(diff));
+  const diffText = diff === 0
+    ? '手取りの差はありません。'
+    : diff > 0
+      ? `${employmentLabel(currentType)}の方が、手取りが年 <b>${diffAbs}</b> 多くなります。`
+      : `${employmentLabel(otherType)}の方が、手取りが年 <b>${diffAbs}</b> 多くなります。`;
+
+  return `
+    <div class="compare">
+      <h3>もし、同じ年収で${employmentLabel(otherType)}だったら</h3>
+      <div class="vs">
+        <div class="side"><div class="r">${employmentLabel(currentType)}（いま）</div><div class="a" style="color:var(--green)">${formatYen(currentResult.takeHomeAnnual)}</div></div>
+        <div class="mid">対</div>
+        <div class="side"><div class="r">${employmentLabel(otherType)}（比較）</div><div class="a">${formatYen(otherResult.takeHomeAnnual)}</div></div>
+        <div class="diff">${diffText}</div>
+      </div>
+      <p class="note">※ フリーランス側はかんたん入力の簡易計算（経費・青色申告控除なし）です。両方とも概算であり、正確な比較には詳細入力モード（第2弾）をご利用ください。</p>
+    </div>
+  `;
+}
+
+function renderResult(employmentType, input, municipality, result, otherResult) {
   const income = input.annualIncome;
   const pct = (n) => Math.max(0, Math.min(100, (n / income) * 100));
 
-  resultTitle.textContent = `計算結果 — ${municipality.prefecture}${municipality.municipality}・会社員・年収${(income / 10000).toLocaleString('ja-JP')}万円の場合`;
+  resultTitle.textContent = `計算結果 — ${municipality.prefecture}${municipality.municipality}・${employmentLabel(employmentType)}・年収${(income / 10000).toLocaleString('ja-JP')}万円の場合`;
 
-  const si = result.socialInsurance;
-  const childcareBadge = municipality.kyokaiKenpoRatesFile
-    ? '<span class="tag new">新設(令和8年4月分〜)</span>'
-    : '';
+  const otherType = employmentType === 'employee' ? 'freelance' : 'employee';
 
   resultBody.innerHTML = `
     <div class="flow-label"><span>あなたの年収の行き先</span><b>${formatYen(income)}</b></div>
     <div class="bar">
       <div class="b-tax" style="width:${pct(result.incomeTax.total)}%">${pct(result.incomeTax.total) > 6 ? '所得税' : ''}</div>
       <div class="b-juu" style="width:${pct(result.residentTax.total)}%">${pct(result.residentTax.total) > 6 ? '住民税' : ''}</div>
-      <div class="b-sha" style="width:${pct(si.total)}%">${pct(si.total) > 6 ? '社会保険' : ''}</div>
+      <div class="b-sha" style="width:${pct(result.socialInsurance.total)}%">${pct(result.socialInsurance.total) > 6 ? '社会保険' : ''}</div>
       <div class="b-net" style="width:${pct(result.takeHomeAnnual)}%">手取り ${Math.round(pct(result.takeHomeAnnual))}%</div>
     </div>
     <div class="bar-cap"><span>■ 出ていくお金（税・社保）</span><span>■ 残るお金（手取り）</span></div>
@@ -150,13 +217,11 @@ function renderResult(input, municipality, result) {
       <tr><th>項目</th><th style="text-align:right">年額</th></tr>
       <tr><td>所得税<br><span class="src">出典：国税庁 令和8年分速算表</span></td><td class="v minus">− ${formatYen(result.incomeTax.total)}</td></tr>
       <tr><td>住民税（所得割＋均等割＋森林環境税）<br><span class="src">出典：総務省・東京都主税局 等 標準税率</span></td><td class="v minus">− ${formatYen(result.residentTax.total)}</td></tr>
-      <tr><td>社会保険料 合計<br><span class="src">出典：協会けんぽ・日本年金機構・厚生労働省</span></td><td class="v minus">− ${formatYen(si.total)}</td></tr>
-      <tr class="sub"><td>健康保険・介護保険（協会けんぽ・${municipality.prefecture}料率）<span class="tag city">都道府県別</span></td><td class="v minus">− ${formatYen(si.healthInsuranceAnnual)}</td></tr>
-      <tr class="sub"><td>厚生年金</td><td class="v minus">− ${formatYen(si.pensionAnnual)}</td></tr>
-      <tr class="sub"><td>雇用保険</td><td class="v minus">− ${formatYen(si.employmentInsuranceAnnual)}</td></tr>
-      <tr class="sub"><td>子ども・子育て支援金${childcareBadge}</td><td class="v minus">− ${formatYen(si.childcareSupportAnnual)}</td></tr>
+      ${renderLedgerRows(employmentType, result, municipality)}
       <tr><td><b>手取り</b></td><td class="v" style="color:var(--green);font-weight:600">${formatYen(result.takeHomeAnnual)}</td></tr>
     </table>
+
+    ${renderCompareCard(employmentType, result, otherType, otherResult)}
 
     <div class="assumptions">
       <h3>この計算の前提・注記</h3>
@@ -169,10 +234,13 @@ async function handleSubmit(event) {
   event.preventDefault();
   resultBody.innerHTML = '<div class="placeholder">計算中…</div>';
   try {
-    const { input, municipality } = readInput();
+    const employmentType = selectedEmploymentType;
+    const otherType = employmentType === 'employee' ? 'freelance' : 'employee';
+    const { input, municipality } = readInput(employmentType);
     const rates = await loadRates(municipality);
     const result = calculateTakeHome(input, rates);
-    renderResult(input, municipality, result);
+    const otherResult = calculateTakeHome({ ...input, employmentType: otherType }, rates);
+    renderResult(employmentType, input, municipality, result, otherResult);
   } catch (err) {
     resultBody.innerHTML = `<div class="placeholder" style="color:var(--red)">エラー: ${err.message}</div>`;
     console.error(err);
@@ -180,6 +248,7 @@ async function handleSubmit(event) {
 }
 
 form.addEventListener('submit', handleSubmit);
+initEmploymentButtons();
 initMunicipalities().catch((err) => {
   resultBody.innerHTML = `<div class="placeholder" style="color:var(--red)">自治体データの読み込みに失敗しました: ${err.message}</div>`;
   console.error(err);
