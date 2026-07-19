@@ -1,0 +1,41 @@
+{
+  "prefecture": "宮城県",
+  "municipality": "仙台市",
+  "municipalityCode": "04100",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.pref.miyagi.jp/documents/14989/r8.pdf",
+  "sourceTitle": "宮城県 令和8年度国民健康保険事業費納付金及び標準保険料率",
+  "fetchedAt": "2026-07-19",
+  "needsReview": true,
+  "dataSource": "prefecture_standard_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。都道府県公表の「標準保険料率」であり、市町村が実際に条例で定める料率と異なる場合がある(都道府県資料内に同旨の注記あり)。賦課限度額(cap)は一覧表に含まれないため全国標準値を暫定使用しており、自治体独自の限度額(例: 金沢市の医療分66万円)とは異なる可能性がある。",
+  "levyMethod": "自動収集のため賦課方式は未確認(平等割額が0でない区分があるかで4方式/2方式を推定可能だが、今回は判定していない)",
+  "medical": {
+    "incomeRate": 0.0763,
+    "perCapitaAmount": 33849,
+    "perHouseholdAmount": 21807,
+    "cap": 670000
+  },
+  "support": {
+    "incomeRate": 0.0296,
+    "perCapitaAmount": 13069,
+    "perHouseholdAmount": 8420,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.0235,
+    "perCapitaAmount": 12229,
+    "perHouseholdAmount": 6028,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0027,
+    "perCapitaAmountUnder18": 1195,
+    "perCapitaAmountOver18": 84,
+    "perHouseholdAmount": 769,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}

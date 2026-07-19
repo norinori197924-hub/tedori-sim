@@ -1,0 +1,41 @@
+{
+  "prefecture": "福島県",
+  "municipality": "檜枝岐村",
+  "municipalityCode": "07541",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.pref.fukushima.lg.jp/uploaded/attachment/731236.pdf",
+  "sourceTitle": "福島県 令和8年度国保事業費納付金及び標準保険料率",
+  "fetchedAt": "2026-07-19",
+  "needsReview": true,
+  "dataSource": "prefecture_standard_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。都道府県公表の「標準保険料率」であり、市町村が実際に条例で定める料率と異なる場合がある(都道府県資料内に同旨の注記あり)。賦課限度額(cap)は一覧表に含まれないため全国標準値を暫定使用しており、自治体独自の限度額(例: 金沢市の医療分66万円)とは異なる可能性がある。",
+  "levyMethod": "自動収集のため賦課方式は未確認(平等割額が0でない区分があるかで4方式/2方式を推定可能だが、今回は判定していない)",
+  "medical": {
+    "incomeRate": 0.0507,
+    "perCapitaAmount": 22482,
+    "perHouseholdAmount": 14695,
+    "cap": 670000
+  },
+  "support": {
+    "incomeRate": 0.0289,
+    "perCapitaAmount": 12813,
+    "perHouseholdAmount": 8375,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.0237,
+    "perCapitaAmount": 12380,
+    "perHouseholdAmount": 6106,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0029,
+    "perCapitaAmountUnder18": 1252,
+    "perCapitaAmountOver18": 145,
+    "perHouseholdAmount": 853,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}

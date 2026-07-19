@@ -105,6 +105,26 @@
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07541.json"
+    },
+    {
+      "prefecture": "福島県",
+      "prefectureCode": "07",
+      "municipality": "福島市",
+      "municipalityCode": "07201",
+      "kyokaiKenpoStatus": "pending",
+      "kyokaiKenpoRatesFile": null,
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07201.json"
+    },
+    {
+      "prefecture": "宮城県",
+      "prefectureCode": "04",
+      "municipality": "仙台市",
+      "municipalityCode": "04100",
+      "kyokaiKenpoStatus": "pending",
+      "kyokaiKenpoRatesFile": null,
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/04100.json"
     }
   ]
 }
