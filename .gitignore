@@ -1,0 +1,14 @@
+# 環境変数(APIキー等の秘密情報)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
