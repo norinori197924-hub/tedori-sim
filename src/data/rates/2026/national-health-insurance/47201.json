@@ -1,0 +1,17 @@
+{
+  "prefecture": "沖縄県",
+  "municipality": "那覇市",
+  "municipalityCode": "47201",
+  "municipalityType": "中核市",
+  "year": "令和8年度",
+  "source": "https://www.city.naha.okinawa.jp/kurasitetuduki/nenkin/1001859/1001866.html",
+  "sourceTitle": "那覇市国民健康保険税の税額",
+  "fetchedAt": "2026-07-22",
+  "needsReview": true,
+  "reviewNote": "municipalityCode(47201)は一般に知られている値を暫定使用、要検証。那覇市は「国民健康保険税」(地方税法に基づく税方式)を採用しており、他の収集済み自治体(市川市・金沢市等も税方式、新宿区・札幌市は「国民健康保険料」の料方式)と法的性質が異なる場合がある点に留意。計算方法自体は同様(基準総所得金額×率+均等割+平等割、賦課限度額で頭打ち)。",
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)。「国民健康保険税」(税方式)。",
+  "medical": { "incomeRate": 0.0970, "perCapitaAmount": 18200, "perHouseholdAmount": 25400, "cap": 670000 },
+  "support": { "incomeRate": 0.0159, "perCapitaAmount": 3300, "perHouseholdAmount": 5300, "cap": 260000 },
+  "care": { "incomeRate": 0.0156, "perCapitaAmount": 7700, "perHouseholdAmount": 4600, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1372, "perHouseholdAmount": 819, "cap": 30000, "note": "令和8年度新設。18歳未満の被保険者均等割は全額軽減(0円)。" }
+}

@@ -17,13 +17,19 @@ function applyCap(amount, cap) {
 
 /**
  * 医療分・支援分のように、全加入者を対象とする区分の年額を計算する。
+ * 未就学児(6歳に達する日以後の最初の3月31日まで、簡易的に6歳未満で判定)の均等割は
+ * 全国一律の制度(令和4年度〜)により5割軽減する。介護分・子ども子育て支援納付金分は対象外。
  * @param {{incomeRate:number, perCapitaAmount:number, perHouseholdAmount:number, cap:number}} section
  * @param {number} assessableIncome
  * @param {number} householdCount
+ * @param {number} preschoolCount 未就学児(6歳未満)の人数
  */
-function calculateUniformSection(section, assessableIncome, householdCount) {
+function calculateUniformSection(section, assessableIncome, householdCount, preschoolCount) {
+  const fullRateCount = householdCount - preschoolCount;
+  const perCapitaLevy =
+    section.perCapitaAmount * fullRateCount + Math.floor(section.perCapitaAmount * 0.5) * preschoolCount;
   const incomeLevy = truncateYen(assessableIncome * section.incomeRate);
-  const amount = incomeLevy + section.perCapitaAmount * householdCount + section.perHouseholdAmount;
+  const amount = incomeLevy + perCapitaLevy + section.perHouseholdAmount;
   return applyCap(amount, section.cap);
 }
 
@@ -34,6 +40,9 @@ function calculateUniformSection(section, assessableIncome, householdCount) {
  * - 均等割・平等割の世帯人数には、本人・配偶者(いる場合)・子供全員を含める
  * - 介護分(40〜64歳)の対象者判定は本人の年齢のみで行い、配偶者は対象外とみなす
  * - 子ども・子育て支援納付金分の均等割は、本人・配偶者を18歳以上、子供は年齢で判定する
+ * - 未就学児(6歳未満)の医療分・支援分の均等割を5割軽減する(全国一律制度、令和4年度〜)。
+ *   介護分は年齢的に該当しないため対象外。子ども・子育て支援納付金分への適用有無は
+ *   自治体の公表資料から確認できなかったため、今回は適用していない(要確認)。
  * @param {number} totalIncome 本人の合計所得金額(事業所得。フリーランスの簡易モードでは年収そのまま)
  * @param {SimpleInput} input
  * @param {Object} nationalHealthInsuranceRate municipalities/index.jsonの該当自治体のnationalHealthInsurance
@@ -43,6 +52,7 @@ export function calculateNationalHealthInsurance(totalIncome, input, nationalHea
   const assessableIncome = Math.max(0, totalIncome - RESIDENT_TAX_BASIC_DEDUCTION);
   const householdCount = 1 + (input.spouse.hasSpouse ? 1 : 0) + input.numberOfChildren;
   const careEligibleCount = input.age >= 40 && input.age < 65 ? 1 : 0;
+  const preschoolCount = input.childrenAges.filter((age) => age < 6).length;
 
   const adultsOver18 = 1 + (input.spouse.hasSpouse ? 1 : 0);
   const childrenUnder18 = input.childrenAges.filter((age) => age < 18).length;
@@ -50,8 +60,8 @@ export function calculateNationalHealthInsurance(totalIncome, input, nationalHea
   const childSupportOver18Count = adultsOver18 + childrenOver18;
   const childSupportUnder18Count = childrenUnder18;
 
-  const medical = calculateUniformSection(nationalHealthInsuranceRate.medical, assessableIncome, householdCount);
-  const support = calculateUniformSection(nationalHealthInsuranceRate.support, assessableIncome, householdCount);
+  const medical = calculateUniformSection(nationalHealthInsuranceRate.medical, assessableIncome, householdCount, preschoolCount);
+  const support = calculateUniformSection(nationalHealthInsuranceRate.support, assessableIncome, householdCount, preschoolCount);
 
   let care = 0;
   if (careEligibleCount > 0) {

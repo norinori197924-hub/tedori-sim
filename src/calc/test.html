@@ -181,6 +181,18 @@
       assertEqual('手計算設例(国保・市川市)', '設例B: childSupport(20歳の子は大人扱い)', 18911, r.childSupport, '同上');
       assertEqual('手計算設例(国保・市川市)', '設例B: total', 773876, r.total, '同上');
     }
+    {
+      // 未就学児(5歳)の均等割5割軽減の検算。医療分・支援分のみ軽減、介護分・子ども分は対象外。
+      const input = {
+        age: 35, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 1, childrenAges: [5], employmentType: 'freelance',
+        annualIncome: 4000000, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const r = calculateNationalHealthInsurance(4000000, input, rates.nationalHealthInsurance);
+      assertEqual('手計算設例(国保・未就学児軽減)', '設例C: 単身35歳・子1人(5歳)・年収400万円 medical', 306150, r.medical, 'assessableIncome=3,570,000、均等割は本人12,000円+子(5割軽減)6,000円');
+      assertEqual('手計算設例(国保・未就学児軽減)', '設例C: support', 81030, r.support, '同上(均等割8,800円+4,400円)');
+      assertEqual('手計算設例(国保・未就学児軽減)', '設例C: total', 397491, r.total, '同上');
+    }
 
     // --- フリーランス: 国民年金保険料 ---
     {

@@ -1,0 +1,17 @@
+{
+  "prefecture": "福岡県",
+  "municipality": "福岡市",
+  "municipalityCode": "40130",
+  "municipalityType": "政令指定都市",
+  "year": "令和8年度",
+  "source": "https://www.city.fukuoka.lg.jp/hofuku/kokuho/hp/seido/06-02.html",
+  "sourceTitle": "福岡市 国民健康保険料の計算方法",
+  "fetchedAt": "2026-07-22",
+  "needsReview": true,
+  "reviewNote": "municipalityCode(40130)は暫定使用、要検証。子ども分の均等割(1,039円)には「18歳以上被保険者均等割額(1人あたり72円)を含む」との注記があり、年齢による内訳(18歳未満/以上での金額差)を正確に分離できなかったため、今回は年齢を問わず一律1,039円として扱っている。他の収集済み自治体(市川市・金沢市・那覇市等)は18歳未満が減免される構造だったため、福岡市も同様の可能性が高く、要再確認。",
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)",
+  "medical": { "incomeRate": 0.0558, "perCapitaAmount": 19807, "perHouseholdAmount": 18664, "cap": 670000 },
+  "support": { "incomeRate": 0.0314, "perCapitaAmount": 10441, "perHouseholdAmount": 9838, "cap": 260000 },
+  "care": { "incomeRate": 0.0261, "perCapitaAmount": 10160, "perHouseholdAmount": 7751, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 1039, "perCapitaAmountOver18": 1039, "perHouseholdAmount": 911, "cap": 30000, "note": "令和8年度新設。年齢別の内訳が不明瞭なため暫定的に一律1,039円として計算(要再確認、上記reviewNote参照)。" }
+}

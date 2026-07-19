@@ -1,0 +1,17 @@
+{
+  "prefecture": "石川県",
+  "municipality": "金沢市",
+  "municipalityCode": "17201",
+  "municipalityType": "中核市",
+  "year": "令和8年度",
+  "source": "https://www4.city.kanazawa.lg.jp/soshikikarasagasu/iryohokenka/gyomuannai/1/2/7154.html",
+  "sourceTitle": "金沢市 国民健康保険料について",
+  "fetchedAt": "2026-07-22",
+  "needsReview": true,
+  "reviewNote": "municipalityCode(17201)は一般に知られている値を暫定使用。総務省の地方公共団体コード一覧での正式検証は未実施。",
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)",
+  "medical": { "incomeRate": 0.0908, "perCapitaAmount": 24000, "perHouseholdAmount": 25200, "cap": 660000 },
+  "support": { "incomeRate": 0.0274, "perCapitaAmount": 11280, "perHouseholdAmount": 7440, "cap": 260000 },
+  "care": { "incomeRate": 0.0242, "perCapitaAmount": 12360, "perHouseholdAmount": 6000, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0029, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1320, "perHouseholdAmount": 720, "cap": 30000, "note": "令和8年度新設。18歳になる年度末までの被保険者は均等割の対象外。" }
+}

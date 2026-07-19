@@ -1,0 +1,17 @@
+{
+  "prefecture": "埼玉県",
+  "municipality": "川口市",
+  "municipalityCode": "11203",
+  "municipalityType": "一般市(施行時特例市)",
+  "year": "令和8年度",
+  "source": "https://www.city.kawaguchi.lg.jp/soshiki/01090/030/kokuminkenkouhokenzei/3336.html",
+  "sourceTitle": "川口市 国民健康保険税の計算方法について",
+  "fetchedAt": "2026-07-22",
+  "needsReview": true,
+  "reviewNote": "municipalityCode(11203)は暫定使用、要検証。",
+  "levyMethod": "2方式(所得割+均等割のみ、平等割・資産割なし)。特別区以外で2方式を採用する実例。",
+  "medical": { "incomeRate": 0.0745, "perCapitaAmount": 44000, "perHouseholdAmount": 0, "cap": 660000 },
+  "support": { "incomeRate": 0.0278, "perCapitaAmount": 16000, "perHouseholdAmount": 0, "cap": 260000 },
+  "care": { "incomeRate": 0.0236, "perCapitaAmount": 17000, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0027, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1500, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。18歳到達後最初の3月31日以前(高校生以下相当)は均等割0円。" }
+}

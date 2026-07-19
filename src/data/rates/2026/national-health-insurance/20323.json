@@ -1,0 +1,17 @@
+{
+  "prefecture": "長野県",
+  "municipality": "軽井沢町",
+  "municipalityCode": "20323",
+  "municipalityType": "町",
+  "year": "令和8年度",
+  "source": "https://www.town.karuizawa.lg.jp/page/1895.html",
+  "sourceTitle": "軽井沢町 国民健康保険税",
+  "fetchedAt": "2026-07-22",
+  "needsReview": true,
+  "reviewNote": "municipalityCode(20323)は暫定使用、要検証。収集中に発見した『未就学児に係る均等割額の軽減措置』(全国共通制度、令和4年度〜、医療分・支援分の均等割を5割軽減)は、計算エンジン(national-health-insurance.js)に未実装。この自治体に限らず既存の全収集済み自治体の計算に影響するため、CLAUDE.mdに引き継ぎ事項として記録し、ユーザーに報告済み。",
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)",
+  "medical": { "incomeRate": 0.075, "perCapitaAmount": 18500, "perHouseholdAmount": 21000, "cap": 670000 },
+  "support": { "incomeRate": 0.026, "perCapitaAmount": 6500, "perHouseholdAmount": 6600, "cap": 260000 },
+  "care": { "incomeRate": 0.027, "perCapitaAmount": 8300, "perHouseholdAmount": 5000, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0031, "perCapitaAmountUnder18": 1200, "perCapitaAmountOver18": 1200, "perHouseholdAmount": 1200, "cap": 30000, "note": "令和8年度新設。年齢別の内訳(18歳未満減免の有無)は本ページから確認できず、暫定的に一律1,200円としている(要再確認)。" }
+}

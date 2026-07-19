@@ -119,7 +119,7 @@ function readInput(employmentType) {
 async function loadRates(municipality) {
   const [
     incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
-    dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo,
+    dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance,
     nationalPension
   ] = await Promise.all([
     fetchJson(RATES_BASE + 'income-tax-brackets.json'),
@@ -130,9 +130,13 @@ async function loadRates(municipality) {
     fetchJson(RATES_BASE + 'resident-tax-standard.json'),
     fetchJson(RATES_BASE + 'employees-pension.json'),
     fetchJson(RATES_BASE + 'employment-insurance.json'),
-    fetchJson('./' + municipality.kyokaiKenpoRatesFile.replace(/^rates\//, 'src/data/rates/')),
     fetchJson(RATES_BASE + 'national-pension.json')
   ]);
+
+  let kyokaiKenpo = null;
+  if (municipality.kyokaiKenpoStatus === 'confirmed') {
+    kyokaiKenpo = await fetchJson('./' + municipality.kyokaiKenpoRatesFile.replace(/^rates\//, 'src/data/rates/'));
+  }
 
   let nationalHealthInsurance = null;
   if (municipality.nationalHealthInsuranceStatus === 'confirmed') {
@@ -248,6 +252,19 @@ function renderResult(employmentType, input, municipality, result, otherResult) 
   `;
 }
 
+function isEmploymentTypeAvailable(employmentType, municipality) {
+  return employmentType === 'employee'
+    ? municipality.kyokaiKenpoStatus === 'confirmed'
+    : municipality.nationalHealthInsuranceStatus === 'confirmed';
+}
+
+function unavailableMessage(employmentType, municipality) {
+  const dataName = employmentType === 'employee' ? '協会けんぽ料率' : '国民健康保険料';
+  return `${municipality.prefecture}${municipality.municipality}の${dataName}はまだ整備できていません（データ未整備）。${employmentLabel(
+    employmentType === 'employee' ? 'freelance' : 'employee'
+  )}としての計算のみご利用いただけます。`;
+}
+
 async function handleSubmit(event) {
   event.preventDefault();
   resultBody.innerHTML = '<div class="placeholder">計算中…</div>';
@@ -255,16 +272,16 @@ async function handleSubmit(event) {
     const employmentType = selectedEmploymentType;
     const otherType = employmentType === 'employee' ? 'freelance' : 'employee';
     const { input, municipality } = readInput(employmentType);
-    const nhiConfirmed = municipality.nationalHealthInsuranceStatus === 'confirmed';
 
-    if (employmentType === 'freelance' && !nhiConfirmed) {
-      resultBody.innerHTML = `<div class="placeholder">${municipality.prefecture}${municipality.municipality}の国民健康保険料はまだ整備できていません（データ未整備）。会社員としての計算のみご利用いただけます。</div>`;
+    if (!isEmploymentTypeAvailable(employmentType, municipality)) {
+      resultBody.innerHTML = `<div class="placeholder">${unavailableMessage(employmentType, municipality)}</div>`;
       return;
     }
 
     const rates = await loadRates(municipality);
     const result = calculateTakeHome(input, rates);
-    const otherResult = nhiConfirmed ? calculateTakeHome({ ...input, employmentType: otherType }, rates) : null;
+    const otherAvailable = isEmploymentTypeAvailable(otherType, municipality);
+    const otherResult = otherAvailable ? calculateTakeHome({ ...input, employmentType: otherType }, rates) : null;
     renderResult(employmentType, input, municipality, result, otherResult);
   } catch (err) {
     resultBody.innerHTML = `<div class="placeholder" style="color:var(--red)">エラー: ${err.message}</div>`;

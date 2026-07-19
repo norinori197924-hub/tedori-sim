@@ -1,0 +1,17 @@
+{
+  "prefecture": "大阪府",
+  "municipality": "大阪市",
+  "municipalityCode": "27100",
+  "municipalityType": "政令指定都市",
+  "year": "令和8年度",
+  "source": "https://www.city.osaka.lg.jp/fukushi/page/0000624098.html",
+  "sourceTitle": "大阪市 保険料の決め方",
+  "fetchedAt": "2026-07-22",
+  "needsReview": true,
+  "reviewNote": "municipalityCode(27100)は暫定使用、要検証。料率の具体的数値は公式ページ本文が画像化されており本文からは抽出できなかったため、WebSearchのスニペット由来の数値を採用している(公式PDF等での再確認が望ましい)。介護分・子ども分の平等割(1世帯あたり)は情報が見つからなかったため暫定的に0円としている。大阪府は「府内市町村統一保険料」を採用しており、大阪府内であれば大阪市に限らずどの市町村でも同一の所得・世帯構成なら同一保険料になる(府県単位で統一料率を採用するパターンの実例として貴重。段階3の自動収集パイプライン設計時に考慮すること)。",
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)。大阪府内市町村統一保険料率。",
+  "medical": { "incomeRate": 0.0950, "perCapitaAmount": 34990, "perHouseholdAmount": 33908, "cap": 660000 },
+  "support": { "incomeRate": 0.0306, "perCapitaAmount": 11191, "perHouseholdAmount": 10845, "cap": 260000 },
+  "care": { "incomeRate": 0.0260, "perCapitaAmount": 18682, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象。平等割の有無は未確認。" },
+  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 1841, "perCapitaAmountOver18": 1841, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。年齢別の内訳情報は見つからず、暫定的に一律1,841円としている(要再確認)。" }
+}
