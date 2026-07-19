@@ -1,0 +1,10 @@
+{
+  "year": "令和8年度",
+  "description": "国民年金保険料(第1号被保険者)。全国一律・定額。",
+  "source": "https://www.nenkin.go.jp/service/kokunen/hokenryo/hokenryo.html",
+  "sourceTitle": "日本年金機構 国民年金保険料",
+  "fetchedAt": "2026-07-20",
+  "needsReview": false,
+  "monthlyAmount": 17920,
+  "note": "付加保険料(月額400円、任意加入)は今回のかんたん入力スコープでは考慮しない。20歳以上60歳未満の第1号被保険者が対象。かんたん入力では、本人およびフリーランスの配偶者(いる場合)がそれぞれ第1号被保険者であると仮定する。20歳未満・60歳以上は加入対象外として保険料を計算しない。"
+}
