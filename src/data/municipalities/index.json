@@ -1,8 +1,9 @@
 {
-  "description": "動作確認用の自治体データ(第1弾セッションでは3件のみ)。国民健康保険料率(nationalHealthInsurance)は各自治体の公式ページから収集済み。SPEC.md 5章の方針どおり、未整備は平均値等で代替しない(本ファイルは3件のみ整備、他の1,738市区町村は未着手)。",
+  "description": "全国1,741市区町村のうち、料率確定済みの自治体を順次「対応済み」として追加していく(SPEC.md 5章の段階公開方針)。国民健康保険料率の実データはsrc/data/rates/2026/national-health-insurance/{municipalityCode}.jsonに分離して持つ(kyokai-kenpoと同じ参照ファイル方式)。未整備の自治体は「データ未整備」として明示し、平均値等で代替しない。",
   "needsReview": true,
   "reviewNote": "TODO: municipalityCodeは総務省の全国地方公共団体コード一覧で正式に検証すること(本ファイルでは一般に知られている値を暫定使用)。",
-  "nationalHealthInsuranceCalculationNote": "所得割の課税標準(基準総所得金額) = 前年の総所得金額等(事業所得等) − 基礎控除43万円。この基礎控除43万円ルールは地方税法上全国共通(札幌市公式ページで明示的に確認済み、市川市・新宿区も同一ルールと推定)。均等割・平等割・所得割の合計が「賦課限度額」を超える場合はその区分の限度額で頭打ちにする。",
+  "totalMunicipalityCount": 1741,
+  "nationalHealthInsuranceCalculationNote": "所得割の課税標準(基準総所得金額) = 前年の総所得金額等(事業所得等) − 基礎控除43万円。この基礎控除43万円ルールは地方税法上全国共通(札幌市公式ページで明示的に確認済み、他自治体も同一ルールと推定)。均等割・平等割・所得割の合計が「賦課限度額」を超える場合はその区分の限度額で頭打ちにする。",
   "municipalities": [
     {
       "prefecture": "千葉県",
@@ -10,18 +11,8 @@
       "municipality": "市川市",
       "municipalityCode": "12203",
       "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/chiba.json",
-      "nationalHealthInsurance": {
-        "year": "令和8年度",
-        "source": "https://www.city.ichikawa.lg.jp/pub04/1111000007.html",
-        "sourceTitle": "市川市 国民健康保険税について(国保年金課)",
-        "fetchedAt": "2026-07-20",
-        "needsReview": true,
-        "reviewNote": "子ども・子育て支援納付金分の均等割(2,000円/100円)について、どちらが18歳未満向け・18歳以上向けかの記載がやや不明瞭だったため、政策趣旨(子育て世帯優遇)に基づき18歳未満=100円(優遇)、18歳以上=2,000円と推定した。要一次資料での再確認。",
-        "medical": { "incomeRate": 0.0750, "perCapitaAmount": 12000, "perHouseholdAmount": 20400, "cap": 670000 },
-        "support": { "incomeRate": 0.0190, "perCapitaAmount": 8800, "perHouseholdAmount": 0, "cap": 260000 },
-        "care": { "incomeRate": 0.0205, "perCapitaAmount": 13600, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象" },
-        "childSupport": { "incomeRate": 0.0023, "perCapitaAmountUnder18": 100, "perCapitaAmountOver18": 2000, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。年齢はその年12/31時点(18歳の学年区分は自治体の定めによる)。" }
-      }
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/12203.json"
     },
     {
       "prefecture": "東京都",
@@ -29,18 +20,8 @@
       "municipality": "新宿区",
       "municipalityCode": "13104",
       "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tokyo.json",
-      "nationalHealthInsurance": {
-        "year": "令和8年度",
-        "source": "https://www.city.shinjuku.lg.jp/hoken/hoken01_001028.html",
-        "sourceTitle": "新宿区 保険料の計算方法について",
-        "fetchedAt": "2026-07-20",
-        "needsReview": false,
-        "note": "東京都特別区は2方式(所得割+均等割のみ)のため平等割は無し。特別区は原則として23区共通の保険料率(統一保険料方式)。",
-        "medical": { "incomeRate": 0.0751, "perCapitaAmount": 47600, "perHouseholdAmount": 0, "cap": 670000 },
-        "support": { "incomeRate": 0.0280, "perCapitaAmount": 17600, "perHouseholdAmount": 0, "cap": 260000 },
-        "care": { "incomeRate": 0.0243, "perCapitaAmount": 17800, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象" },
-        "childSupport": { "incomeRate": 0.0027, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1873, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。18歳以上のみ均等割の対象。" }
-      }
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/13104.json"
     },
     {
       "prefecture": "北海道",
@@ -48,17 +29,8 @@
       "municipality": "札幌市",
       "municipalityCode": "01100",
       "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/hokkaido.json",
-      "nationalHealthInsurance": {
-        "year": "令和8年度",
-        "source": "https://www.city.sapporo.jp/hoken-iryo/kokuho/fuka.html",
-        "sourceTitle": "札幌市 保険料の計算",
-        "fetchedAt": "2026-07-20",
-        "needsReview": false,
-        "medical": { "incomeRate": 0.0861, "perCapitaAmount": 20550, "perHouseholdAmount": 32540, "cap": 670000 },
-        "support": { "incomeRate": 0.0256, "perCapitaAmount": 6330, "perHouseholdAmount": 10010, "cap": 260000 },
-        "care": { "incomeRate": 0.0233, "perCapitaAmount": 6020, "perHouseholdAmount": 7550, "cap": 170000, "note": "40歳以上65歳未満が対象" },
-        "childSupport": { "incomeRate": 0.0029, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1100, "perHouseholdAmount": 1000, "cap": 30000, "note": "令和8年度新設。18歳以上のみ均等割の対象。" }
-      }
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/01100.json"
     }
   ]
 }

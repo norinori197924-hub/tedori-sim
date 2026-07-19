@@ -38,6 +38,9 @@ export function loadRates(municipalityCodeOrPrefecture = '12203') {
     employmentInsurance: loadJson('employment-insurance.json'),
     kyokaiKenpo: loadJson(`kyokai-kenpo/${prefecture}.json`),
     nationalPension: loadJson('national-pension.json'),
-    nationalHealthInsurance: municipality.nationalHealthInsurance
+    nationalHealthInsurance:
+      municipality.nationalHealthInsuranceStatus === 'confirmed'
+        ? JSON.parse(readFileSync(path.join(DATA_DIR, municipality.nationalHealthInsuranceFile), 'utf-8'))
+        : null
   };
 }

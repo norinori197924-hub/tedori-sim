@@ -1,0 +1,17 @@
+{
+  "prefecture": "東京都",
+  "municipality": "新宿区",
+  "municipalityCode": "13104",
+  "municipalityType": "特別区",
+  "year": "令和8年度",
+  "source": "https://www.city.shinjuku.lg.jp/hoken/hoken01_001028.html",
+  "sourceTitle": "新宿区 保険料の計算方法について",
+  "fetchedAt": "2026-07-20",
+  "needsReview": false,
+  "levyMethod": "2方式(所得割+均等割のみ、平等割・資産割なし)",
+  "note": "東京都特別区は2方式のため平等割は無し。特別区は原則として23区共通の保険料率(統一保険料方式)。",
+  "medical": { "incomeRate": 0.0751, "perCapitaAmount": 47600, "perHouseholdAmount": 0, "cap": 670000 },
+  "support": { "incomeRate": 0.0280, "perCapitaAmount": 17600, "perHouseholdAmount": 0, "cap": 260000 },
+  "care": { "incomeRate": 0.0243, "perCapitaAmount": 17800, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0027, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1873, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。18歳以上のみ均等割の対象。" }
+}

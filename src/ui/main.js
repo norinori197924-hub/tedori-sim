@@ -15,6 +15,7 @@ const employmentButtons = Array.from(document.querySelectorAll('[data-employment
 
 /** @type {Array<any>} */
 let municipalities = [];
+let totalMunicipalityCount = 1741;
 
 /** @type {'employee'|'freelance'} */
 let selectedEmploymentType = 'employee';
@@ -41,7 +42,8 @@ function initEmploymentButtons() {
 async function initMunicipalities() {
   const data = await fetchJson(MUNICIPALITIES_URL);
   municipalities = data.municipalities;
-  badgeCoverage.textContent = String(municipalities.length);
+  totalMunicipalityCount = data.totalMunicipalityCount ?? 1741;
+  badgeCoverage.textContent = `${municipalities.length} / ${totalMunicipalityCount.toLocaleString('ja-JP')}`;
 
   const prefectures = [...new Set(municipalities.map((m) => m.prefecture))];
   prefectureSelect.innerHTML = prefectures.map((p) => `<option value="${p}">${p}</option>`).join('');
@@ -131,10 +133,18 @@ async function loadRates(municipality) {
     fetchJson('./' + municipality.kyokaiKenpoRatesFile.replace(/^rates\//, 'src/data/rates/')),
     fetchJson(RATES_BASE + 'national-pension.json')
   ]);
+
+  let nationalHealthInsurance = null;
+  if (municipality.nationalHealthInsuranceStatus === 'confirmed') {
+    nationalHealthInsurance = await fetchJson(
+      './' + municipality.nationalHealthInsuranceFile.replace(/^rates\//, 'src/data/rates/')
+    );
+  }
+
   return {
     incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
     dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo,
-    nationalPension, nationalHealthInsurance: municipality.nationalHealthInsurance
+    nationalPension, nationalHealthInsurance
   };
 }
 
@@ -167,6 +177,14 @@ function renderLedgerRows(employmentType, result, municipality) {
 }
 
 function renderCompareCard(currentType, currentResult, otherType, otherResult) {
+  if (!otherResult) {
+    return `
+      <div class="compare">
+        <h3>もし、同じ年収で${employmentLabel(otherType)}だったら</h3>
+        <p class="note">この自治体の国民健康保険料が未整備のため、比較を表示できません。</p>
+      </div>
+    `;
+  }
   const diff = currentResult.takeHomeAnnual - otherResult.takeHomeAnnual;
   const diffAbs = formatYen(Math.abs(diff));
   const diffText = diff === 0
@@ -237,9 +255,16 @@ async function handleSubmit(event) {
     const employmentType = selectedEmploymentType;
     const otherType = employmentType === 'employee' ? 'freelance' : 'employee';
     const { input, municipality } = readInput(employmentType);
+    const nhiConfirmed = municipality.nationalHealthInsuranceStatus === 'confirmed';
+
+    if (employmentType === 'freelance' && !nhiConfirmed) {
+      resultBody.innerHTML = `<div class="placeholder">${municipality.prefecture}${municipality.municipality}の国民健康保険料はまだ整備できていません（データ未整備）。会社員としての計算のみご利用いただけます。</div>`;
+      return;
+    }
+
     const rates = await loadRates(municipality);
     const result = calculateTakeHome(input, rates);
-    const otherResult = calculateTakeHome({ ...input, employmentType: otherType }, rates);
+    const otherResult = nhiConfirmed ? calculateTakeHome({ ...input, employmentType: otherType }, rates) : null;
     renderResult(employmentType, input, municipality, result, otherResult);
   } catch (err) {
     resultBody.innerHTML = `<div class="placeholder" style="color:var(--red)">エラー: ${err.message}</div>`;

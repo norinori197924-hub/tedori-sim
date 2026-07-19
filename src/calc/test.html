@@ -67,11 +67,14 @@
       fetch('../data/municipalities/index.json').then(r => r.json())
     ]);
     const municipality = municipalities.municipalities.find(m => m.municipalityCode === municipalityCode);
+    const nationalHealthInsurance = municipality.nationalHealthInsuranceStatus === 'confirmed'
+      ? await fetch('../data/' + municipality.nationalHealthInsuranceFile).then(r => r.json())
+      : null;
     return {
       incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
       dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance,
       kyokaiKenpo: kyokaiKenpoChiba, nationalPension,
-      nationalHealthInsurance: municipality.nationalHealthInsurance
+      nationalHealthInsurance
     };
   }
 

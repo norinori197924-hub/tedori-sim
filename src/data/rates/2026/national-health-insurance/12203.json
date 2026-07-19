@@ -1,0 +1,17 @@
+{
+  "prefecture": "千葉県",
+  "municipality": "市川市",
+  "municipalityCode": "12203",
+  "municipalityType": "一般市",
+  "year": "令和8年度",
+  "source": "https://www.city.ichikawa.lg.jp/pub04/1111000007.html",
+  "sourceTitle": "市川市 国民健康保険税について(国保年金課)",
+  "fetchedAt": "2026-07-20",
+  "needsReview": true,
+  "reviewNote": "子ども・子育て支援納付金分の均等割(2,000円/100円)について、どちらが18歳未満向け・18歳以上向けかの記載がやや不明瞭だったため、政策趣旨(子育て世帯優遇)に基づき18歳未満=100円(優遇)、18歳以上=2,000円と推定した。要一次資料での再確認。",
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)",
+  "medical": { "incomeRate": 0.0750, "perCapitaAmount": 12000, "perHouseholdAmount": 20400, "cap": 670000 },
+  "support": { "incomeRate": 0.0190, "perCapitaAmount": 8800, "perHouseholdAmount": 0, "cap": 260000 },
+  "care": { "incomeRate": 0.0205, "perCapitaAmount": 13600, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0023, "perCapitaAmountUnder18": 100, "perCapitaAmountOver18": 2000, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。年齢はその年12/31時点(18歳の学年区分は自治体の定めによる)。" }
+}

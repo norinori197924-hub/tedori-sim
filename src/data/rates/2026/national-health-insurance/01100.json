@@ -1,0 +1,16 @@
+{
+  "prefecture": "北海道",
+  "municipality": "札幌市",
+  "municipalityCode": "01100",
+  "municipalityType": "政令指定都市",
+  "year": "令和8年度",
+  "source": "https://www.city.sapporo.jp/hoken-iryo/kokuho/fuka.html",
+  "sourceTitle": "札幌市 保険料の計算",
+  "fetchedAt": "2026-07-20",
+  "needsReview": false,
+  "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)",
+  "medical": { "incomeRate": 0.0861, "perCapitaAmount": 20550, "perHouseholdAmount": 32540, "cap": 670000 },
+  "support": { "incomeRate": 0.0256, "perCapitaAmount": 6330, "perHouseholdAmount": 10010, "cap": 260000 },
+  "care": { "incomeRate": 0.0233, "perCapitaAmount": 6020, "perHouseholdAmount": 7550, "cap": 170000, "note": "40歳以上65歳未満が対象" },
+  "childSupport": { "incomeRate": 0.0029, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1100, "perHouseholdAmount": 1000, "cap": 30000, "note": "令和8年度新設。18歳以上のみ均等割の対象。" }
+}
