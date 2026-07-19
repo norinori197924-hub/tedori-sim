@@ -129,18 +129,36 @@ def extract_prefecture(pref_code: str, entry: dict) -> dict:
         "source": {"type": "base64", "media_type": "application/pdf", "data": data_b64},
     }
 
-    message = client.messages.create(
-        model=MODEL,
-        max_tokens=16384,
-        messages=[
-            {
-                "role": "user",
-                "content": [content_block, {"type": "text", "text": EXTRACTION_PROMPT}],
-            }
-        ],
+    try:
+        message = client.messages.create(
+            model=MODEL,
+            max_tokens=16384,
+            messages=[
+                {
+                    "role": "user",
+                    "content": [content_block, {"type": "text", "text": EXTRACTION_PROMPT}],
+                }
+            ],
+        )
+    except Exception as api_error:
+        print(f"[extract] {entry['name']}: Claude API呼び出し自体が例外を送出しました: {api_error!r}")
+        raise
+
+    block_types = [block.type for block in message.content]
+    print(
+        f"[extract] {entry['name']}: stop_reason={message.stop_reason} "
+        f"content_block_types={block_types}"
     )
 
     text = "".join(block.text for block in message.content if block.type == "text").strip()
+    if not text:
+        raise ValueError(
+            f"{entry['name']}: Claude APIのレスポンスにtextブロックが含まれていませんでした"
+            f"(stop_reason={message.stop_reason}, content_block_types={block_types})。"
+            "APIエラーは発生していない(例外は送出されていない)ため、レート制限や認証エラー"
+            "ではなく、応答の中身自体が空だった可能性が高い。"
+        )
+
     debug_path = RAW_DIR / f"{pref_code}.extracted.raw.txt"
     result = parse_json_response(text, debug_path)
 
