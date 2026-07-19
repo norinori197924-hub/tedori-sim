@@ -37,7 +37,7 @@ jobs:
         run: python scripts/kokuho/build.py ${{ inputs.prefectures }}
 
       - name: Run calc engine tests
-        run: node --test test/calc/
+        run: node --test
 
       - name: Commit and push generated data
         run: |
