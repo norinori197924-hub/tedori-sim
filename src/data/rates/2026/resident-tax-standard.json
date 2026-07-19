@@ -5,7 +5,7 @@
   "sourceTitle": "東京都主税局 個人住民税(暮らしと税金)",
   "fetchedAt": "2026-07-18",
   "needsReview": true,
-  "reviewNote": "調整控除の人的控除差(基礎控除・配偶者控除・扶養控除等の所得税/住民税差額一覧)は今回未収集。下記adjustmentCreditのpersonalDeductionDifferencesは仮のプレースホルダであり、総務省一次資料で確認の上、確定値に置き換えること。特に所得税側の基礎控除が令和7年度改正で所得逓減式になったため、人的控除差調整額の算定方法自体に特例が設けられている可能性が高い(要確認)。",
+  "reviewNote": "調整控除の人的控除差のうち、配偶者控除・扶養控除等は総務省一次資料(下記adjustmentCredit.personalDeductionDifferences参照)で確定済み。基礎控除分の人的控除差のみ、所得税側が令和7・8年度改正で所得金額に応じた変動額になったため未確定(0円扱いのまま)。詳細はadjustmentCredit.reviewNote参照。",
   "incomeLeviedRate": {
     "municipal": 0.06,
     "prefectural": 0.04,
@@ -22,8 +22,9 @@
     "source": "https://www.soumu.go.jp/main_sosiki/jichi_zeisei/czaisei/czaisei_seido/150790_18.html"
   },
   "adjustmentCredit": {
-    "description": "所得割の調整控除。人的控除(基礎控除・配偶者控除・扶養控除等)の所得税/住民税の差額に基づき税額から控除する。",
+    "description": "所得割の調整控除。人的控除(基礎控除・配偶者控除・扶養控除等)の所得税/住民税の差額に基づき税額から控除する。地方税法第37条(道府県民税)・第314条の6(市町村民税)に規定。",
     "needsReview": true,
+    "reviewNote": "基礎控除以外の人的控除差は総務省一次資料で確定済み(下記参照)。基礎控除の人的控除差のみ、令和7・8年度改正で所得税側が所得金額に応じた変動額になったため一律の差額が定義できず、未確定のまま(0円扱い)。e-Gov法令検索で地方税法第314条の6の実際の条文を確認しようとしたが、ページがJavaScriptで描画される作りのため、ブラウザ操作ができない環境ではWebFetchで本文を取得できなかった(2026-07-20時点)。次回はブラウザ操作(Claude in Chrome等)が使える状態で同条文を確認するか、市販の地方税コンメンタールを参照すること。",
     "rule": {
       "lowIncome": {
         "condition": "課税所得金額が200万円以下",
@@ -37,11 +38,18 @@
     },
     "personalDeductionDifferences": {
       "needsReview": true,
-      "note": "PLACEHOLDER。総務省の人的控除差一覧表で確認するまでの仮値。",
+      "note": "配偶者控除・扶養控除等の差額は、総務省 税制調査会説明資料(令和7年5月15日)の「人的控除の種類及び概要(令和8年度〜)」一覧表(個人住民税控除額と所得税[令和7年分]控除額の対比表)で確認済み(needsReviewはfalseとして扱ってよい)。基礎控除分(basic)のみ未確定。",
+      "source": "https://www.cao.go.jp/zei-cho/content/7zen5kai2.pdf",
+      "sourceTitle": "総務省 説明資料〔個人住民税について〕(令和7年5月15日、内閣府税制調査会提出資料) p.8",
+      "fetchedAt": "2026-07-20",
       "basic": null,
+      "basicNote": "未確定。所得税側の基礎控除が令和7・8年度改正で合計所得金額に応じた変動額(104万/67万/62万等)になったため、住民税の43万円との単純な差額が一律に定義できない。現状は0円として扱っている(調整控除の計算上、基礎控除分の差は考慮されない)。",
       "spousalGeneral": 50000,
+      "spousalElderly": 100000,
       "dependentGeneral": 50000,
-      "dependentSpecific": 180000
+      "dependentSpecific": 180000,
+      "dependentElderly": 100000,
+      "dependentElderlyCoresident": 30000
     }
   }
 }
