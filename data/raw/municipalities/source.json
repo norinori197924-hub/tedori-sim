@@ -1,0 +1,10 @@
+{
+  "description": "総務省「全国地方公共団体コード」のうち、都道府県コード及び市区町村コードの一覧(令和6年1月1日時点)。フェーズ1(市町村コードマスタ整備)の一次ソース。scripts/municipalities/build_master.pyの入力ファイル。",
+  "file": "000925835.xlsx",
+  "sourceUrl": "https://www.soumu.go.jp/main_content/000925835.xlsx",
+  "sourcePage": "https://www.soumu.go.jp/denshijiti/code.html",
+  "sourceTitle": "都道府県コード及び市区町村コード",
+  "asOf": "令和6年1月1日",
+  "fetchedAt": "2026-07-20",
+  "note": "総務省サイト上で公開されている最新版(2026-07-20時点)。市区町村コードは合併等がない限り変更されないため、基準日がやや古くても実務上の問題は小さいと想定するが、次回以降の展開作業時に更新有無を確認すること。"
+}

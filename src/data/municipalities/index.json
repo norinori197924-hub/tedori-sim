@@ -1,8 +1,9 @@
 {
-  "description": "全国1,741市区町村のうち、料率確定済みの自治体を順次「対応済み」として追加していく(SPEC.md 5章の段階公開方針)。国民健康保険料率・協会けんぽ料率の実データはそれぞれsrc/data/rates/2026/national-health-insurance/{municipalityCode}.json、src/data/rates/2026/kyokai-kenpo/{prefecture}.jsonに分離して持つ。未整備の自治体・データは「データ未整備」として明示し、平均値等で代替しない。",
-  "needsReview": true,
-  "reviewNote": "TODO: municipalityCodeは総務省の全国地方公共団体コード一覧で正式に検証すること(本ファイルでは一般に知られている値を暫定使用)。",
-  "totalMunicipalityCount": 1741,
+  "description": "全国1,747市区町村のうち、料率確定済みの自治体を順次「対応済み」として追加していく(SPEC.md 5章の段階公開方針)。国民健康保険料率・協会けんぽ料率の実データはそれぞれsrc/data/rates/2026/national-health-insurance/{municipalityCode}.json、src/data/rates/2026/kyokai-kenpo/{prefecture}.jsonに分離して持つ。未整備の自治体・データは「データ未整備」として明示し、平均値等で代替しない。municipalityCodeはsrc/data/municipalities/master.json(総務省「全国地方公共団体コード」由来)を正データとし、全件突合済み(2026-07-20)。",
+  "needsReview": false,
+  "reviewNote": "2026-07-20: フェーズ1(市町村コードマスタ整備)でmaster.jsonと全13件を突合し、municipalityCodeの誤り2件(軽井沢町20323→20321、檜枝岐村07541→07364。いずれも他の実在自治体のコードと衝突していた)を修正済み。",
+  "totalMunicipalityCount": 1747,
+  "verificationStatusNote": "verified: 一次資料で人間が目視確認して手動収集したデータ。auto_unverified: scripts/kokuho/の自動収集パイプラインによる生成データで、目視での再確認は未実施(docs/国保料データ全国展開_設計方針_2026-07-19.md フェーズ3参照)。",
   "nationalHealthInsuranceCalculationNote": "所得割の課税標準(基準総所得金額) = 前年の総所得金額等(事業所得等) − 基礎控除43万円。この基礎控除43万円ルールは地方税法上全国共通(札幌市公式ページで明示的に確認済み、他自治体も同一ルールと推定)。均等割・平等割・所得割の合計が「賦課限度額」を超える場合はその区分の限度額で頭打ちにする。",
   "coverageNote": "国民健康保険料と協会けんぽ料率は別々に整備を進めている。国保データがconfirmedでも協会けんぽ料率がpendingの自治体では、フリーランス側は計算できるが会社員側・比較カードは『データ未整備』として扱う(UIでガード済み)。",
   "municipalities": [
@@ -14,7 +15,8 @@
       "kyokaiKenpoStatus": "confirmed",
       "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/chiba.json",
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/12203.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/12203.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "東京都",
@@ -24,7 +26,8 @@
       "kyokaiKenpoStatus": "confirmed",
       "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tokyo.json",
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/13104.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/13104.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "北海道",
@@ -34,7 +37,8 @@
       "kyokaiKenpoStatus": "confirmed",
       "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/hokkaido.json",
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/01100.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/01100.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "石川県",
@@ -44,7 +48,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/17201.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/17201.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "沖縄県",
@@ -54,7 +59,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/47201.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/47201.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "福岡県",
@@ -64,7 +70,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/40130.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/40130.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "大阪府",
@@ -74,7 +81,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/27100.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/27100.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "埼玉県",
@@ -84,27 +92,30 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/11203.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/11203.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "長野県",
       "prefectureCode": "20",
       "municipality": "軽井沢町",
-      "municipalityCode": "20323",
+      "municipalityCode": "20321",
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/20323.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/20321.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "福島県",
       "prefectureCode": "07",
       "municipality": "檜枝岐村",
-      "municipalityCode": "07541",
+      "municipalityCode": "07364",
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07541.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07364.json",
+      "verificationStatus": "verified"
     },
     {
       "prefecture": "福島県",
@@ -114,7 +125,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07201.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07201.json",
+      "verificationStatus": "auto_unverified"
     },
     {
       "prefecture": "宮城県",
@@ -124,7 +136,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/04100.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/04100.json",
+      "verificationStatus": "auto_unverified"
     },
     {
       "prefecture": "大阪府",
@@ -134,7 +147,8 @@
       "kyokaiKenpoStatus": "pending",
       "kyokaiKenpoRatesFile": null,
       "nationalHealthInsuranceStatus": "confirmed",
-      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/27140.json"
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/27140.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }

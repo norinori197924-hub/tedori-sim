@@ -1,0 +1,1374 @@
+{
+  "description": "政令指定都市の区の一覧(総務省公表データより)。国保料は市単位で算定されるため、master.jsonの1,747件には含めない。parentCodeで親市のcodeを参照する。",
+  "count": 171,
+  "wards": [
+    {
+      "code": "01101",
+      "prefecture": "北海道",
+      "municipality": "札幌市中央区",
+      "municipalityKana": "サッポロシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01102",
+      "prefecture": "北海道",
+      "municipality": "札幌市北区",
+      "municipalityKana": "サッポロシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01103",
+      "prefecture": "北海道",
+      "municipality": "札幌市東区",
+      "municipalityKana": "サッポロシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01104",
+      "prefecture": "北海道",
+      "municipality": "札幌市白石区",
+      "municipalityKana": "サッポロシシロイシク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01105",
+      "prefecture": "北海道",
+      "municipality": "札幌市豊平区",
+      "municipalityKana": "サッポロシトヨヒラク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01106",
+      "prefecture": "北海道",
+      "municipality": "札幌市南区",
+      "municipalityKana": "サッポロシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01107",
+      "prefecture": "北海道",
+      "municipality": "札幌市西区",
+      "municipalityKana": "サッポロシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01108",
+      "prefecture": "北海道",
+      "municipality": "札幌市厚別区",
+      "municipalityKana": "サッポロシアツベツク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01109",
+      "prefecture": "北海道",
+      "municipality": "札幌市手稲区",
+      "municipalityKana": "サッポロシテイネク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "01110",
+      "prefecture": "北海道",
+      "municipality": "札幌市清田区",
+      "municipalityKana": "サッポロシキヨタク",
+      "type": "政令指定都市の区",
+      "parentCode": "01100"
+    },
+    {
+      "code": "04101",
+      "prefecture": "宮城県",
+      "municipality": "仙台市青葉区",
+      "municipalityKana": "センダイシアオバク",
+      "type": "政令指定都市の区",
+      "parentCode": "04100"
+    },
+    {
+      "code": "04102",
+      "prefecture": "宮城県",
+      "municipality": "仙台市宮城野区",
+      "municipalityKana": "センダイシミヤギノク",
+      "type": "政令指定都市の区",
+      "parentCode": "04100"
+    },
+    {
+      "code": "04103",
+      "prefecture": "宮城県",
+      "municipality": "仙台市若林区",
+      "municipalityKana": "センダイシワカバヤシク",
+      "type": "政令指定都市の区",
+      "parentCode": "04100"
+    },
+    {
+      "code": "04104",
+      "prefecture": "宮城県",
+      "municipality": "仙台市太白区",
+      "municipalityKana": "センダイシタイハクク",
+      "type": "政令指定都市の区",
+      "parentCode": "04100"
+    },
+    {
+      "code": "04105",
+      "prefecture": "宮城県",
+      "municipality": "仙台市泉区",
+      "municipalityKana": "センダイシイズミク",
+      "type": "政令指定都市の区",
+      "parentCode": "04100"
+    },
+    {
+      "code": "11101",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市西区",
+      "municipalityKana": "サイタマシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11102",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市北区",
+      "municipalityKana": "サイタマシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11103",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市大宮区",
+      "municipalityKana": "サイタマシオオミヤク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11104",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市見沼区",
+      "municipalityKana": "サイタマシミヌマク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11105",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市中央区",
+      "municipalityKana": "サイタマシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11106",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市桜区",
+      "municipalityKana": "サイタマシサクラク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11107",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市浦和区",
+      "municipalityKana": "サイタマシウラワク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11108",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市南区",
+      "municipalityKana": "サイタマシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11109",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市緑区",
+      "municipalityKana": "サイタマシミドリク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "11110",
+      "prefecture": "埼玉県",
+      "municipality": "さいたま市岩槻区",
+      "municipalityKana": "サイタマシイワツキク",
+      "type": "政令指定都市の区",
+      "parentCode": "11100"
+    },
+    {
+      "code": "12101",
+      "prefecture": "千葉県",
+      "municipality": "千葉市中央区",
+      "municipalityKana": "チバシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "12100"
+    },
+    {
+      "code": "12102",
+      "prefecture": "千葉県",
+      "municipality": "千葉市花見川区",
+      "municipalityKana": "チバシハナミガワク",
+      "type": "政令指定都市の区",
+      "parentCode": "12100"
+    },
+    {
+      "code": "12103",
+      "prefecture": "千葉県",
+      "municipality": "千葉市稲毛区",
+      "municipalityKana": "チバシイナゲク",
+      "type": "政令指定都市の区",
+      "parentCode": "12100"
+    },
+    {
+      "code": "12104",
+      "prefecture": "千葉県",
+      "municipality": "千葉市若葉区",
+      "municipalityKana": "チバシワカバク",
+      "type": "政令指定都市の区",
+      "parentCode": "12100"
+    },
+    {
+      "code": "12105",
+      "prefecture": "千葉県",
+      "municipality": "千葉市緑区",
+      "municipalityKana": "チバシミドリク",
+      "type": "政令指定都市の区",
+      "parentCode": "12100"
+    },
+    {
+      "code": "12106",
+      "prefecture": "千葉県",
+      "municipality": "千葉市美浜区",
+      "municipalityKana": "チバシミハマク",
+      "type": "政令指定都市の区",
+      "parentCode": "12100"
+    },
+    {
+      "code": "14101",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市鶴見区",
+      "municipalityKana": "ヨコハマシツルミク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14102",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市神奈川区",
+      "municipalityKana": "ヨコハマシカナガワク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14103",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市西区",
+      "municipalityKana": "ヨコハマシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14104",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市中区",
+      "municipalityKana": "ヨコハマシナカク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14105",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市南区",
+      "municipalityKana": "ヨコハマシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14106",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市保土ケ谷区",
+      "municipalityKana": "ヨコハマシホドガヤク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14107",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市磯子区",
+      "municipalityKana": "ヨコハマシイソゴク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14108",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市金沢区",
+      "municipalityKana": "ヨコハマシカナザワク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14109",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市港北区",
+      "municipalityKana": "ヨコハマシコウホクク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14110",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市戸塚区",
+      "municipalityKana": "ヨコハマシトツカク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14111",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市港南区",
+      "municipalityKana": "ヨコハマシコウナンク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14112",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市旭区",
+      "municipalityKana": "ヨコハマシアサヒク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14113",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市緑区",
+      "municipalityKana": "ヨコハマシミドリク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14114",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市瀬谷区",
+      "municipalityKana": "ヨコハマシセヤク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14115",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市栄区",
+      "municipalityKana": "ヨコハマシサカエク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14116",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市泉区",
+      "municipalityKana": "ヨコハマシイズミク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14117",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市青葉区",
+      "municipalityKana": "ヨコハマシアオバク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14118",
+      "prefecture": "神奈川県",
+      "municipality": "横浜市都筑区",
+      "municipalityKana": "ヨコハマシツヅキク",
+      "type": "政令指定都市の区",
+      "parentCode": "14100"
+    },
+    {
+      "code": "14131",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市川崎区",
+      "municipalityKana": "カワサキシカワサキク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14132",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市幸区",
+      "municipalityKana": "カワサキシサイワイク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14133",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市中原区",
+      "municipalityKana": "カワサキシナカハラク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14134",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市高津区",
+      "municipalityKana": "カワサキシタカツク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14135",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市多摩区",
+      "municipalityKana": "カワサキシタマク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14136",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市宮前区",
+      "municipalityKana": "カワサキシミヤマエク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14137",
+      "prefecture": "神奈川県",
+      "municipality": "川崎市麻生区",
+      "municipalityKana": "カワサキシアサオク",
+      "type": "政令指定都市の区",
+      "parentCode": "14130"
+    },
+    {
+      "code": "14151",
+      "prefecture": "神奈川県",
+      "municipality": "相模原市緑区",
+      "municipalityKana": "サガミハラシミドリク",
+      "type": "政令指定都市の区",
+      "parentCode": "14150"
+    },
+    {
+      "code": "14152",
+      "prefecture": "神奈川県",
+      "municipality": "相模原市中央区",
+      "municipalityKana": "サガミハラシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "14150"
+    },
+    {
+      "code": "14153",
+      "prefecture": "神奈川県",
+      "municipality": "相模原市南区",
+      "municipalityKana": "サガミハラシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "14150"
+    },
+    {
+      "code": "15101",
+      "prefecture": "新潟県",
+      "municipality": "新潟市北区",
+      "municipalityKana": "ニイガタシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15102",
+      "prefecture": "新潟県",
+      "municipality": "新潟市東区",
+      "municipalityKana": "ニイガタシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15103",
+      "prefecture": "新潟県",
+      "municipality": "新潟市中央区",
+      "municipalityKana": "ニイガタシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15104",
+      "prefecture": "新潟県",
+      "municipality": "新潟市江南区",
+      "municipalityKana": "ニイガタシコウナンク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15105",
+      "prefecture": "新潟県",
+      "municipality": "新潟市秋葉区",
+      "municipalityKana": "ニイガタシアキハク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15106",
+      "prefecture": "新潟県",
+      "municipality": "新潟市南区",
+      "municipalityKana": "ニイガタシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15107",
+      "prefecture": "新潟県",
+      "municipality": "新潟市西区",
+      "municipalityKana": "ニイガタシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "15108",
+      "prefecture": "新潟県",
+      "municipality": "新潟市西蒲区",
+      "municipalityKana": "ニイガタシニシカンク",
+      "type": "政令指定都市の区",
+      "parentCode": "15100"
+    },
+    {
+      "code": "22101",
+      "prefecture": "静岡県",
+      "municipality": "静岡市葵区",
+      "municipalityKana": "シズオカシアオイク",
+      "type": "政令指定都市の区",
+      "parentCode": "22100"
+    },
+    {
+      "code": "22102",
+      "prefecture": "静岡県",
+      "municipality": "静岡市駿河区",
+      "municipalityKana": "シズオカシスルガク",
+      "type": "政令指定都市の区",
+      "parentCode": "22100"
+    },
+    {
+      "code": "22103",
+      "prefecture": "静岡県",
+      "municipality": "静岡市清水区",
+      "municipalityKana": "シズオカシシミズク",
+      "type": "政令指定都市の区",
+      "parentCode": "22100"
+    },
+    {
+      "code": "22138",
+      "prefecture": "静岡県",
+      "municipality": "浜松市中央区",
+      "municipalityKana": "ハママツシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "22130"
+    },
+    {
+      "code": "22139",
+      "prefecture": "静岡県",
+      "municipality": "浜松市浜名区",
+      "municipalityKana": "ハママツシハマナク",
+      "type": "政令指定都市の区",
+      "parentCode": "22130"
+    },
+    {
+      "code": "22140",
+      "prefecture": "静岡県",
+      "municipality": "浜松市天竜区",
+      "municipalityKana": "ハママツシテンリュウク",
+      "type": "政令指定都市の区",
+      "parentCode": "22130"
+    },
+    {
+      "code": "23101",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市千種区",
+      "municipalityKana": "ナゴヤシチクサク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23102",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市東区",
+      "municipalityKana": "ナゴヤシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23103",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市北区",
+      "municipalityKana": "ナゴヤシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23104",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市西区",
+      "municipalityKana": "ナゴヤシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23105",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市中村区",
+      "municipalityKana": "ナゴヤシナカムラク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23106",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市中区",
+      "municipalityKana": "ナゴヤシナカク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23107",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市昭和区",
+      "municipalityKana": "ナゴヤシショウワク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23108",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市瑞穂区",
+      "municipalityKana": "ナゴヤシミズホク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23109",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市熱田区",
+      "municipalityKana": "ナゴヤシアツタク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23110",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市中川区",
+      "municipalityKana": "ナゴヤシナカガワク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23111",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市港区",
+      "municipalityKana": "ナゴヤシミナトク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23112",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市南区",
+      "municipalityKana": "ナゴヤシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23113",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市守山区",
+      "municipalityKana": "ナゴヤシモリヤマク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23114",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市緑区",
+      "municipalityKana": "ナゴヤシミドリク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23115",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市名東区",
+      "municipalityKana": "ナゴヤシメイトウク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "23116",
+      "prefecture": "愛知県",
+      "municipality": "名古屋市天白区",
+      "municipalityKana": "ナゴヤシテンパクク",
+      "type": "政令指定都市の区",
+      "parentCode": "23100"
+    },
+    {
+      "code": "26101",
+      "prefecture": "京都府",
+      "municipality": "京都市北区",
+      "municipalityKana": "キョウトシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26102",
+      "prefecture": "京都府",
+      "municipality": "京都市上京区",
+      "municipalityKana": "キョウトシカミギョウク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26103",
+      "prefecture": "京都府",
+      "municipality": "京都市左京区",
+      "municipalityKana": "キョウトシサキョウク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26104",
+      "prefecture": "京都府",
+      "municipality": "京都市中京区",
+      "municipalityKana": "キョウトシナカギョウク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26105",
+      "prefecture": "京都府",
+      "municipality": "京都市東山区",
+      "municipalityKana": "キョウトシヒガシヤマク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26106",
+      "prefecture": "京都府",
+      "municipality": "京都市下京区",
+      "municipalityKana": "キョウトシシモギョウク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26107",
+      "prefecture": "京都府",
+      "municipality": "京都市南区",
+      "municipalityKana": "キョウトシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26108",
+      "prefecture": "京都府",
+      "municipality": "京都市右京区",
+      "municipalityKana": "キョウトシウキョウク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26109",
+      "prefecture": "京都府",
+      "municipality": "京都市伏見区",
+      "municipalityKana": "キョウトシフシミク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26110",
+      "prefecture": "京都府",
+      "municipality": "京都市山科区",
+      "municipalityKana": "キョウトシヤマシナク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "26111",
+      "prefecture": "京都府",
+      "municipality": "京都市西京区",
+      "municipalityKana": "キョウトシニシキョウク",
+      "type": "政令指定都市の区",
+      "parentCode": "26100"
+    },
+    {
+      "code": "27102",
+      "prefecture": "大阪府",
+      "municipality": "大阪市都島区",
+      "municipalityKana": "オオサカシミヤコジマク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27103",
+      "prefecture": "大阪府",
+      "municipality": "大阪市福島区",
+      "municipalityKana": "オオサカシフクシマク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27104",
+      "prefecture": "大阪府",
+      "municipality": "大阪市此花区",
+      "municipalityKana": "オオサカシコノハナク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27106",
+      "prefecture": "大阪府",
+      "municipality": "大阪市西区",
+      "municipalityKana": "オオサカシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27107",
+      "prefecture": "大阪府",
+      "municipality": "大阪市港区",
+      "municipalityKana": "オオサカシミナトク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27108",
+      "prefecture": "大阪府",
+      "municipality": "大阪市大正区",
+      "municipalityKana": "オオサカシタイショウク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27109",
+      "prefecture": "大阪府",
+      "municipality": "大阪市天王寺区",
+      "municipalityKana": "オオサカシテンノウジク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27111",
+      "prefecture": "大阪府",
+      "municipality": "大阪市浪速区",
+      "municipalityKana": "オオサカシナニワク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27113",
+      "prefecture": "大阪府",
+      "municipality": "大阪市西淀川区",
+      "municipalityKana": "オオサカシニシヨドガワク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27114",
+      "prefecture": "大阪府",
+      "municipality": "大阪市東淀川区",
+      "municipalityKana": "オオサカシヒガシヨドガワク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27115",
+      "prefecture": "大阪府",
+      "municipality": "大阪市東成区",
+      "municipalityKana": "オオサカシヒガシナリク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27116",
+      "prefecture": "大阪府",
+      "municipality": "大阪市生野区",
+      "municipalityKana": "オオサカシイクノク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27117",
+      "prefecture": "大阪府",
+      "municipality": "大阪市旭区",
+      "municipalityKana": "オオサカシアサヒク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27118",
+      "prefecture": "大阪府",
+      "municipality": "大阪市城東区",
+      "municipalityKana": "オオサカシジョウトウク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27119",
+      "prefecture": "大阪府",
+      "municipality": "大阪市阿倍野区",
+      "municipalityKana": "オオサカシアベノク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27120",
+      "prefecture": "大阪府",
+      "municipality": "大阪市住吉区",
+      "municipalityKana": "オオサカシスミヨシク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27121",
+      "prefecture": "大阪府",
+      "municipality": "大阪市東住吉区",
+      "municipalityKana": "オオサカシヒガシスミヨシク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27122",
+      "prefecture": "大阪府",
+      "municipality": "大阪市西成区",
+      "municipalityKana": "オオサカシニシナリク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27123",
+      "prefecture": "大阪府",
+      "municipality": "大阪市淀川区",
+      "municipalityKana": "オオサカシヨドガワク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27124",
+      "prefecture": "大阪府",
+      "municipality": "大阪市鶴見区",
+      "municipalityKana": "オオサカシツルミク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27125",
+      "prefecture": "大阪府",
+      "municipality": "大阪市住之江区",
+      "municipalityKana": "オオサカシスミノエク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27126",
+      "prefecture": "大阪府",
+      "municipality": "大阪市平野区",
+      "municipalityKana": "オオサカシヒラノク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27127",
+      "prefecture": "大阪府",
+      "municipality": "大阪市北区",
+      "municipalityKana": "オオサカシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27128",
+      "prefecture": "大阪府",
+      "municipality": "大阪市中央区",
+      "municipalityKana": "オオサカシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "27100"
+    },
+    {
+      "code": "27141",
+      "prefecture": "大阪府",
+      "municipality": "堺市堺区",
+      "municipalityKana": "サカイシサカイク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "27142",
+      "prefecture": "大阪府",
+      "municipality": "堺市中区",
+      "municipalityKana": "サカイシナカク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "27143",
+      "prefecture": "大阪府",
+      "municipality": "堺市東区",
+      "municipalityKana": "サカイシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "27144",
+      "prefecture": "大阪府",
+      "municipality": "堺市西区",
+      "municipalityKana": "サカイシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "27145",
+      "prefecture": "大阪府",
+      "municipality": "堺市南区",
+      "municipalityKana": "サカイシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "27146",
+      "prefecture": "大阪府",
+      "municipality": "堺市北区",
+      "municipalityKana": "サカイシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "27147",
+      "prefecture": "大阪府",
+      "municipality": "堺市美原区",
+      "municipalityKana": "サカイシミハラク",
+      "type": "政令指定都市の区",
+      "parentCode": "27140"
+    },
+    {
+      "code": "28101",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市東灘区",
+      "municipalityKana": "コウベシヒガシナダク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28102",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市灘区",
+      "municipalityKana": "コウベシナダク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28105",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市兵庫区",
+      "municipalityKana": "コウベシヒョウゴク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28106",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市長田区",
+      "municipalityKana": "コウベシナガタク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28107",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市須磨区",
+      "municipalityKana": "コウベシスマク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28108",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市垂水区",
+      "municipalityKana": "コウベシタルミク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28109",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市北区",
+      "municipalityKana": "コウベシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28110",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市中央区",
+      "municipalityKana": "コウベシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "28111",
+      "prefecture": "兵庫県",
+      "municipality": "神戸市西区",
+      "municipalityKana": "コウベシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "28100"
+    },
+    {
+      "code": "33101",
+      "prefecture": "岡山県",
+      "municipality": "岡山市北区",
+      "municipalityKana": "オカヤマシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "33100"
+    },
+    {
+      "code": "33102",
+      "prefecture": "岡山県",
+      "municipality": "岡山市中区",
+      "municipalityKana": "オカヤマシナカク",
+      "type": "政令指定都市の区",
+      "parentCode": "33100"
+    },
+    {
+      "code": "33103",
+      "prefecture": "岡山県",
+      "municipality": "岡山市東区",
+      "municipalityKana": "オカヤマシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "33100"
+    },
+    {
+      "code": "33104",
+      "prefecture": "岡山県",
+      "municipality": "岡山市南区",
+      "municipalityKana": "オカヤマシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "33100"
+    },
+    {
+      "code": "34101",
+      "prefecture": "広島県",
+      "municipality": "広島市中区",
+      "municipalityKana": "ヒロシマシナカク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34102",
+      "prefecture": "広島県",
+      "municipality": "広島市東区",
+      "municipalityKana": "ヒロシマシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34103",
+      "prefecture": "広島県",
+      "municipality": "広島市南区",
+      "municipalityKana": "ヒロシマシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34104",
+      "prefecture": "広島県",
+      "municipality": "広島市西区",
+      "municipalityKana": "ヒロシマシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34105",
+      "prefecture": "広島県",
+      "municipality": "広島市安佐南区",
+      "municipalityKana": "ヒロシマシアサミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34106",
+      "prefecture": "広島県",
+      "municipality": "広島市安佐北区",
+      "municipalityKana": "ヒロシマシアサキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34107",
+      "prefecture": "広島県",
+      "municipality": "広島市安芸区",
+      "municipalityKana": "ヒロシマシアキク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "34108",
+      "prefecture": "広島県",
+      "municipality": "広島市佐伯区",
+      "municipalityKana": "ヒロシマシサエキク",
+      "type": "政令指定都市の区",
+      "parentCode": "34100"
+    },
+    {
+      "code": "40101",
+      "prefecture": "福岡県",
+      "municipality": "北九州市門司区",
+      "municipalityKana": "キタキュウシュウシモジク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40103",
+      "prefecture": "福岡県",
+      "municipality": "北九州市若松区",
+      "municipalityKana": "キタキュウシュウシワカマツク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40105",
+      "prefecture": "福岡県",
+      "municipality": "北九州市戸畑区",
+      "municipalityKana": "キタキュウシュウシトバタク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40106",
+      "prefecture": "福岡県",
+      "municipality": "北九州市小倉北区",
+      "municipalityKana": "キタキュウシュウシコクラキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40107",
+      "prefecture": "福岡県",
+      "municipality": "北九州市小倉南区",
+      "municipalityKana": "キタキュウシュウシコクラミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40108",
+      "prefecture": "福岡県",
+      "municipality": "北九州市八幡東区",
+      "municipalityKana": "キタキュウシュウシヤハタヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40109",
+      "prefecture": "福岡県",
+      "municipality": "北九州市八幡西区",
+      "municipalityKana": "キタキュウシュウシヤハタニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "40100"
+    },
+    {
+      "code": "40131",
+      "prefecture": "福岡県",
+      "municipality": "福岡市東区",
+      "municipalityKana": "フクオカシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "40132",
+      "prefecture": "福岡県",
+      "municipality": "福岡市博多区",
+      "municipalityKana": "フクオカシハカタク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "40133",
+      "prefecture": "福岡県",
+      "municipality": "福岡市中央区",
+      "municipalityKana": "フクオカシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "40134",
+      "prefecture": "福岡県",
+      "municipality": "福岡市南区",
+      "municipalityKana": "フクオカシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "40135",
+      "prefecture": "福岡県",
+      "municipality": "福岡市西区",
+      "municipalityKana": "フクオカシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "40136",
+      "prefecture": "福岡県",
+      "municipality": "福岡市城南区",
+      "municipalityKana": "フクオカシジョウナンク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "40137",
+      "prefecture": "福岡県",
+      "municipality": "福岡市早良区",
+      "municipalityKana": "フクオカシサワラク",
+      "type": "政令指定都市の区",
+      "parentCode": "40130"
+    },
+    {
+      "code": "43101",
+      "prefecture": "熊本県",
+      "municipality": "熊本市中央区",
+      "municipalityKana": "クマモトシチュウオウク",
+      "type": "政令指定都市の区",
+      "parentCode": "43100"
+    },
+    {
+      "code": "43102",
+      "prefecture": "熊本県",
+      "municipality": "熊本市東区",
+      "municipalityKana": "クマモトシヒガシク",
+      "type": "政令指定都市の区",
+      "parentCode": "43100"
+    },
+    {
+      "code": "43103",
+      "prefecture": "熊本県",
+      "municipality": "熊本市西区",
+      "municipalityKana": "クマモトシニシク",
+      "type": "政令指定都市の区",
+      "parentCode": "43100"
+    },
+    {
+      "code": "43104",
+      "prefecture": "熊本県",
+      "municipality": "熊本市南区",
+      "municipalityKana": "クマモトシミナミク",
+      "type": "政令指定都市の区",
+      "parentCode": "43100"
+    },
+    {
+      "code": "43105",
+      "prefecture": "熊本県",
+      "municipality": "熊本市北区",
+      "municipalityKana": "クマモトシキタク",
+      "type": "政令指定都市の区",
+      "parentCode": "43100"
+    }
+  ]
+}
