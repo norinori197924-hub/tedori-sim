@@ -1,0 +1,11 @@
+{
+  "description": "総務省「住民基本台帳に基づく人口、人口動態及び世帯数」(令和7年1月1日現在)のうち、都道府県別総人口データ。docs/国保料データ全国展開_設計方針_フェーズ2追記_2026-07-24.md フェーズ2の一次ソース。scripts/population/build_prefecture_ranking.pyの入力ファイル。",
+  "file": "001023712.xlsx",
+  "sourceUrl": "https://www.soumu.go.jp/main_content/001023712.xlsx",
+  "sourcePage": "https://www.soumu.go.jp/menu_news/s-news/01gyosei02_02000389.html",
+  "sourceTitle": "【総計】令和7年住民基本台帳人口・世帯数、令和6年人口動態(都道府県別)",
+  "asOf": "令和7年1月1日",
+  "publishedAt": "令和7年8月6日",
+  "fetchedAt": "2026-07-23",
+  "note": "「総計」(日本人住民+外国人住民)のシートを採用。シート内の列E(計)を都道府県別総人口として使用する。"
+}

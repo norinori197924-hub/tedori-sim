@@ -1,0 +1,335 @@
+{
+  "description": "人口降順の都道府県展開順序。docs/国保料データ全国展開_設計方針_2026-07-19.md フェーズ2に基づく。",
+  "source": "data/raw/population/source.json",
+  "order": [
+    {
+      "rank": 1,
+      "prefectureCode": "13",
+      "prefecture": "東京都",
+      "population": 14002534,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 2,
+      "prefectureCode": "14",
+      "prefecture": "神奈川県",
+      "population": 9202559,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 3,
+      "prefectureCode": "27",
+      "prefecture": "大阪府",
+      "population": 8771961,
+      "pipelineStatus": "verified_pilot"
+    },
+    {
+      "rank": 4,
+      "prefectureCode": "23",
+      "prefecture": "愛知県",
+      "population": 7483755,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 5,
+      "prefectureCode": "11",
+      "prefecture": "埼玉県",
+      "population": 7374294,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 6,
+      "prefectureCode": "12",
+      "prefecture": "千葉県",
+      "population": 6311579,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 7,
+      "prefectureCode": "28",
+      "prefecture": "兵庫県",
+      "population": 5393607,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 8,
+      "prefectureCode": "40",
+      "prefecture": "福岡県",
+      "population": 5086957,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 9,
+      "prefectureCode": "01",
+      "prefecture": "北海道",
+      "population": 5044825,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 10,
+      "prefectureCode": "22",
+      "prefecture": "静岡県",
+      "population": 3575704,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 11,
+      "prefectureCode": "08",
+      "prefecture": "茨城県",
+      "population": 2848597,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 12,
+      "prefectureCode": "34",
+      "prefecture": "広島県",
+      "population": 2728771,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 13,
+      "prefectureCode": "26",
+      "prefecture": "京都府",
+      "population": 2472013,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 14,
+      "prefectureCode": "04",
+      "prefecture": "宮城県",
+      "population": 2224980,
+      "pipelineStatus": "verified_pilot"
+    },
+    {
+      "rank": 15,
+      "prefectureCode": "15",
+      "prefecture": "新潟県",
+      "population": 2110754,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 16,
+      "prefectureCode": "20",
+      "prefecture": "長野県",
+      "population": 2012399,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 17,
+      "prefectureCode": "21",
+      "prefecture": "岐阜県",
+      "population": 1951292,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 18,
+      "prefectureCode": "10",
+      "prefecture": "群馬県",
+      "population": 1907976,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 19,
+      "prefectureCode": "09",
+      "prefecture": "栃木県",
+      "population": 1904173,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 20,
+      "prefectureCode": "33",
+      "prefecture": "岡山県",
+      "population": 1835478,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 21,
+      "prefectureCode": "07",
+      "prefecture": "福島県",
+      "population": 1771314,
+      "pipelineStatus": "verified_pilot"
+    },
+    {
+      "rank": 22,
+      "prefectureCode": "24",
+      "prefecture": "三重県",
+      "population": 1741266,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 23,
+      "prefectureCode": "43",
+      "prefecture": "熊本県",
+      "population": 1716360,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 24,
+      "prefectureCode": "46",
+      "prefecture": "鹿児島県",
+      "population": 1558920,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 25,
+      "prefectureCode": "47",
+      "prefecture": "沖縄県",
+      "population": 1484081,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 26,
+      "prefectureCode": "25",
+      "prefecture": "滋賀県",
+      "population": 1405246,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 27,
+      "prefectureCode": "29",
+      "prefecture": "奈良県",
+      "population": 1303867,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 28,
+      "prefectureCode": "38",
+      "prefecture": "愛媛県",
+      "population": 1296359,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 29,
+      "prefectureCode": "35",
+      "prefecture": "山口県",
+      "population": 1292956,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 30,
+      "prefectureCode": "42",
+      "prefecture": "長崎県",
+      "population": 1274371,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 31,
+      "prefectureCode": "02",
+      "prefecture": "青森県",
+      "population": 1185767,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 32,
+      "prefectureCode": "03",
+      "prefecture": "岩手県",
+      "population": 1153900,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 33,
+      "prefectureCode": "44",
+      "prefecture": "大分県",
+      "population": 1102102,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 34,
+      "prefectureCode": "17",
+      "prefecture": "石川県",
+      "population": 1098121,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 35,
+      "prefectureCode": "45",
+      "prefecture": "宮崎県",
+      "population": 1048347,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 36,
+      "prefectureCode": "06",
+      "prefecture": "山形県",
+      "population": 1012355,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 37,
+      "prefectureCode": "16",
+      "prefecture": "富山県",
+      "population": 1008536,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 38,
+      "prefectureCode": "37",
+      "prefecture": "香川県",
+      "population": 939965,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 39,
+      "prefectureCode": "05",
+      "prefecture": "秋田県",
+      "population": 907593,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 40,
+      "prefectureCode": "30",
+      "prefecture": "和歌山県",
+      "population": 901193,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 41,
+      "prefectureCode": "19",
+      "prefecture": "山梨県",
+      "population": 801056,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 42,
+      "prefectureCode": "41",
+      "prefecture": "佐賀県",
+      "population": 794252,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 43,
+      "prefectureCode": "18",
+      "prefecture": "福井県",
+      "population": 746690,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 44,
+      "prefectureCode": "36",
+      "prefecture": "徳島県",
+      "population": 700409,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 45,
+      "prefectureCode": "39",
+      "prefecture": "高知県",
+      "population": 664863,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 46,
+      "prefectureCode": "32",
+      "prefecture": "島根県",
+      "population": 642590,
+      "pipelineStatus": "not_started"
+    },
+    {
+      "rank": 47,
+      "prefectureCode": "31",
+      "prefecture": "鳥取県",
+      "population": 534003,
+      "pipelineStatus": "not_started"
+    }
+  ]
+}
