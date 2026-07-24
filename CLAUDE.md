@@ -111,7 +111,14 @@ SPEC.md 7章の完了条件のうち、今回のセッション(計算エンジ�
 9. GitHub Pagesへの公開設定(現状はCIのみでPages公開は未設定。SPEC.md 7章 条件9の後半)
 10. (余裕があれば)基礎控除の人的控除差をe-Gov法令検索等で確定、配偶者特別控除の所得区分表の令和8年度改正追随確認、市川市の子ども・子育て支援納付金分の年齢区分(18歳未満/以上どちらが2,000円か)の再確認
 11. ~~国保データ全国展開 フェーズ1: 市町村コードマスタ整備~~ → **2026-07-24 完了**(`docs/国保料データ全国展開_設計方針_2026-07-19.md`参照。総務省「全国地方公共団体コード」(`data/raw/municipalities/000925835.xlsx`)から`scripts/municipalities/build_master.py`で`src/data/municipalities/master.json`(基礎自治体1,747件)・`designated-city-wards.json`(政令指定都市の区、parentCodeで親市参照)を生成)
-12. ~~国保データ全国展開 フェーズ2: 人口順の都道府県展開リスト作成~~ → **2026-07-24 完了**(`docs/国保料データ全国展開_設計方針_フェーズ2追記_2026-07-24.md`参照。総務省「住民基本台帳に基づく人口、人口動態及び世帯数」(令和7年1月1日現在、`data/raw/population/001023712.xlsx`)から`scripts/population/build_prefecture_ranking.py`で`scripts/kokuho/prefecture_rollout_order.json`(47都道府県、人口降順rank付き)を生成。既存パイプライン実証済みの福島県・大阪府・宮城県は`pipelineStatus: "verified_pilot"`、残り44県は`not_started`。次はフェーズ3(自動収集パイプラインのスケール展開、`verification_status`のパイプライン組み込み)へ)
+12. ~~国保データ全国展開 フェーズ2: 人口順の都道府県展開リスト作成~~ → **2026-07-24 完了**(`docs/国保料データ全国展開_設計方針_フェーズ2追記_2026-07-24.md`参照。総務省「住民基本台帳に基づく人口、人口動態及び世帯数」(令和7年1月1日現在、`data/raw/population/001023712.xlsx`)から`scripts/population/build_prefecture_ranking.py`で`scripts/kokuho/prefecture_rollout_order.json`(47都道府県、人口降順rank付き)を生成。既存パイプライン実証済みの福島県・大阪府・宮城県は`pipelineStatus: "verified_pilot"`、残り44県は`not_started`)
+13. 国保データ全国展開 フェーズ3: 自動収集パイプラインのスケール展開。**2026-07-24〜25、東京都(rank1)・神奈川県(rank2)が完了**。東京都62市区町村中59件confirmed(3件not_available)、神奈川県33市町村中33件confirmed。次は大阪府(rank3、既存パイロットは大阪市・堺市の2件のみで全市町村展開は未完了)以降。
+    - **東京都対応で判明した重要な知見(2026-07-24)**:
+      - 一部都道府県の標準保険料率PDFは「①都道府県標準(単一値)・②市町村標準(2方式仮定の理論値)・③市町村標準(各市町村の実際の算定方式)」という3階層構造を持つ(東京都・神奈川県で確認。福島県・宮城県は単一階層、大阪府は真の統一料率のため該当なし)。**必ず③の列を対象にするよう`prefectures.json`の`extractionNote`で明示すること**。指定を忘れると②(仮定値)が混入する
+      - 一部の市町村(東京都の島嶼部の一部)は資産割(固定資産評価額に応じた賦課)を含む4方式。`scripts/kokuho/`のスキーマに`assetRate`フィールドを追加済み(2026-07-24)。0=該当区分なし、null=読み取り不能、の2値運用
+      - 極小人口自治体では標準保険料率の理論値がマイナスになることがある(東京都: 利島村・御蔵島村・青ヶ島村)。`build.py`の`RATE_RANGE`検証で自動的に弾かれ、`src/data/municipalities/index.json`に`nationalHealthInsuranceStatus: "not_available"`として理由付きで明示される(`update_municipalities_index_not_available()`、2026-07-24追加、都道府県固有ではない汎用機能)
+      - **事故の教訓**: 1つの都道府県が複数の一次資料ソースを持つ場合(例: 東京都の特別区=実際の適用値 と それ以外=標準保険料率)、同じ市町村コードが両方のソースの一覧表に登場しうる。dataSourceの種類を区別しない上書き保護だと、信頼度の高いデータが低いデータで上書きされる事故が起きる(実際に千代田区等22区で発生し、復旧した)。`build.py`に`DATA_SOURCE_PRIORITY`による優先度付き上書き制御(`should_write()`)を導入済み。新しい都道府県を追加する際、一次資料に想定外の市町村(隣接カテゴリの行)が紛れ込んでいないか要確認
+      - Claude Sonnet 5モデルは応答にthinkingブロックを含み、複雑な表(市町村数が多い・階層が複雑)ではthinkingだけでmax_tokensを消費し尽くすことがある(福島県の「応答途中切れ」問題とは別の失敗モード)。`extract.py`は`MAX_TOKENS=32000`・`BATCH_SIZE=10`・`messages.stream()`(create()だと10分超過時にSDKがエラーを返すため)に対応済み
 
 ## 11.5 CI(GitHub Actions)に関する教訓(2026-07-19)
 
