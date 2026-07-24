@@ -7,14 +7,14 @@
       "prefectureCode": "13",
       "prefecture": "東京都",
       "population": 14002534,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "done"
     },
     {
       "rank": 2,
       "prefectureCode": "14",
       "prefecture": "神奈川県",
       "population": 9202559,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "done"
     },
     {
       "rank": 3,
