@@ -19,5 +19,32 @@
     "sourceFormat": "pdf",
     "sourceTitle": "宮城県 令和8年度国民健康保険事業費納付金及び標準保険料率",
     "unifiedRate": false
+  },
+  "13": {
+    "name": "東京都",
+    "note": "東京都は特別区(23区)が『特別区国民健康保険料一覧表』という実際に適用される統一保険料率(の資料)を持ち、それ以外の39市町村(多摩地域26市+西多摩4町村(3町1村)+伊豆諸島・小笠原9町村(2町7村)、master.jsonのtype別集計で確認済み)は他都道府県と同様の『標準保険料率』(参考値)しか無いという2系統構造のため、単一のsourceUrlではなくsourcesのリストで表現する。2026-07-24調査で確認: 23区中20区は完全同一の値だが、目黒区(介護分所得割のみ)・中野区・江戸川区は一部区分で独自の値を持つため、23区分を機械的にコピーせず個別に読み取る設計にしている。",
+    "sources": [
+      {
+        "id": "special_wards",
+        "scope": "special_wards",
+        "sourceUrl": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/tokubetuku202605-pdf",
+        "sourceFormat": "pdf",
+        "sourceTitle": "令和8年度 特別区国民健康保険料一覧表(東京都保健医療局)",
+        "dataSource": "tokyo_special_ward_actual_rate",
+        "needsReview": false,
+        "hasCapsInSource": true
+      },
+      {
+        "id": "other_municipalities",
+        "scope": "other_municipalities",
+        "sourceUrl": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/r8hyouzyunhokenryouritsu",
+        "sourceFormat": "pdf",
+        "sourceTitle": "令和8年度確定係数に基づく標準保険料率(区市町村ごとの算定基準にもとづく標準的な保険料率、東京都保健医療局)",
+        "dataSource": "prefecture_standard_rate",
+        "needsReview": true,
+        "hasCapsInSource": false,
+        "extractionNote": "この表には市町村ごとに(1)都道府県標準保険料率、(2)区市町村標準保険料率(2方式)、(3)区市町村ごとの算定基準にもとづく標準的な保険料率、という3種類の数値が横に並んで記載されています。(1)は都内共通の単一値、(2)は全市町村を2方式(所得割+均等割のみ)に統一した場合の仮定値であり、実際の賦課方式を反映していません。必ず(3)『区市町村ごとの算定基準にもとづく標準的な保険料率』の列のみを対象にしてください。(3)は医療分・後期支援金分・介護納付金分それぞれ所得割(%)・資産割(%)・均等割(円)・平等割(円)の4列、子ども・子育て支援納付金分は所得割(%)・資産割(%)・均等割(円)・18歳以上均等割(円)・平等割(円)の5列で構成されています。(1)(2)の列は無視してください。また、この表には冒頭に特別区(23区、千代田区〜江戸川区)の行も含まれていますが、特別区は別の一次資料(実際に適用される統一保険料率の一覧表)を正式なデータソースとして使うため、市町村名の一覧および値の抽出のどちらにおいても特別区23区の行は対象から除外し、それ以外の市町村(多摩地域の市・西多摩の町村・伊豆諸島等の町村、合計39件)のみを列挙・抽出してください。"
+      }
+    ]
   }
 }

@@ -1,0 +1,45 @@
+{
+  "prefecture": "東京都",
+  "municipality": "渋谷区",
+  "municipalityCode": "13113",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/tokubetuku202605-pdf",
+  "sourceTitle": "令和8年度 特別区国民健康保険料一覧表(東京都保健医療局)",
+  "fetchedAt": "2026-07-24",
+  "needsReview": false,
+  "dataSource": "tokyo_special_ward_actual_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。東京都保健医療局が公表する『特別区国民健康保険料一覧表』(実際に適用される保険料率の一覧、標準保険料率とは別の資料)を一次資料とする。特別区は原則として23区共通の保険料率(統一保険料方式)だが、一部区は独自の値を持つ(2026-07-24調査で確認: 目黒区は介護分の所得割のみ他区と異なる、中野区・江戸川区は複数区分で独自の値)。このため23区分をそれぞれ個別に一次資料から読み取っており、1件の値を全区にコピーする処理は行っていない。賦課限度額も一次資料に実際の記載があるためその値を使用している(全国標準値による代替ではない)。",
+  "levyMethod": "2方式(所得割+均等割のみ、平等割・資産割なし)",
+  "medical": {
+    "incomeRate": 0.0751,
+    "perCapitaAmount": 47600,
+    "perHouseholdAmount": 0,
+    "assetRate": 0,
+    "cap": 670000
+  },
+  "support": {
+    "incomeRate": 0.028,
+    "perCapitaAmount": 17600,
+    "perHouseholdAmount": 0,
+    "assetRate": 0,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.0243,
+    "perCapitaAmount": 17800,
+    "perHouseholdAmount": 0,
+    "assetRate": 0,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0027,
+    "perCapitaAmountUnder18": 1800,
+    "perCapitaAmountOver18": 73,
+    "perHouseholdAmount": 0,
+    "assetRate": 0,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}
