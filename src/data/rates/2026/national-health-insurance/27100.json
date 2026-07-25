@@ -13,5 +13,5 @@
   "medical": { "incomeRate": 0.0950, "perCapitaAmount": 34990, "perHouseholdAmount": 33908, "cap": 660000 },
   "support": { "incomeRate": 0.0306, "perCapitaAmount": 11191, "perHouseholdAmount": 10845, "cap": 260000 },
   "care": { "incomeRate": 0.0260, "perCapitaAmount": 18682, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象。平等割の有無は未確認。" },
-  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 1745, "perCapitaAmountOver18": 1841, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。均等割(基礎額)1,745円+18歳以上均等割(加算額)96円=18歳以上の合計負担額1,841円。perCapitaAmountUnder18は基礎額のみ、perCapitaAmountOver18は合計額(基礎額+加算額)。2026-07-25、大阪府公表の一次資料(令和8年度市町村標準保険料率算定結果、別紙)で確認済み。" }
+  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 0, "perCapitaAmountOver18": 1841, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。均等割(基礎額)1,745円+18歳以上均等割(加算額)96円=18歳以上の合計負担額1,841円。perCapitaAmountOver18は合計額(基礎額+加算額)。2026-07-25、大阪府公表の一次資料(令和8年度市町村標準保険料率算定結果、別紙)で確認済み。【2026-07-25再修正】perCapitaAmountUnder18は当初、均等割の基礎額1,745円をそのまま入れていたが、福島市・仙台市・大阪市の公式ページおよびこども家庭庁「子ども・子育て支援金制度について」(令和7年3月)で、子ども・子育て支援納付金分の均等割は18歳未満が全国一律で全額軽減(0円)される法定制度であり、『均等割額』列は実際には18歳以上専用の基礎額だったと判明したため、0円に修正した。" }
 }

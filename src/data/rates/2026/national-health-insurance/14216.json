@@ -35,11 +35,11 @@
   },
   "childSupport": {
     "incomeRate": 0.003,
-    "perCapitaAmountUnder18": 1849,
+    "perCapitaAmountUnder18": 0,
     "perCapitaAmountOver18": 1964,
     "perHouseholdAmount": 0,
     "assetRate": 0,
     "cap": 30000,
-    "note": "令和8年度新設 【2026-07-25修正】perCapitaAmountOver18は旧extract.pyのプロンプトが曖昧だったため、当初は『18歳以上均等割(加算額のみ)』の値(115円)が誤って保存されていた。src/calc/national-health-insurance.jsの計算式はperCapitaAmountOver18を18歳以上1人あたりの合計負担額として直接使うため、基礎額(perCapitaAmountUnder18=1849円)+加算額(115円)=1964円に修正した。"
+    "note": "令和8年度新設 【2026-07-25修正】perCapitaAmountOver18は旧extract.pyのプロンプトが曖昧だったため、当初は『18歳以上均等割(加算額のみ)』の値(115円)が誤って保存されていた。src/calc/national-health-insurance.jsの計算式はperCapitaAmountOver18を18歳以上1人あたりの合計負担額として直接使うため、基礎額(perCapitaAmountUnder18=1849円)+加算額(115円)=1964円に修正した。 【2026-07-25再修正】perCapitaAmountUnder18は当初、都道府県公表資料の『均等割額』列の値(1849円)をそのまま保存していたが、福島市・仙台市・大阪市の公式ページおよびこども家庭庁「子ども・子育て支援金制度について」(令和7年3月)を確認した結果、子ども・子育て支援納付金分の均等割は18歳未満(年齢を問わず、未就学児に限らない)が全国一律で全額軽減(0円)される法定制度であり、資料の『均等割額』列は実際には18歳以上の被保険者にのみ課される基礎額(perCapitaAmountOver18に含まれる基礎額分)だったと判明した。perCapitaAmountUnder18を0円に修正した。"
   }
 }
