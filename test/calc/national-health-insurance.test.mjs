@@ -9,6 +9,10 @@ const nhi = rates.nationalHealthInsurance;
 /**
  * 以下は市川市の公式料率(令和8年度)を用いて手計算した検証用設例。
  * ブラウザ版(src/calc/test.html)で同じ設例を実行し、27/27件成功を確認済み。
+ *
+ * 2026-07-25、childSupport(子ども・子育て支援納付金分)のperCapitaAmountUnder18/Over18を
+ * 市川市公式ページの再確認に基づき修正した(under18: 100円→0円、over18: 2,000円→2,100円。
+ * 詳細はCLAUDE.md 11.7章)。これに伴いchildSupport・totalの期待値を再計算した。
  */
 
 test('手計算設例A: 単身38歳・年収500万円', () => {
@@ -23,12 +27,13 @@ test('手計算設例A: 単身38歳・年収500万円', () => {
     spouse: { hasSpouse: false, spouseIncome: null }
   };
   // assessableIncome = 5,000,000 - 430,000 = 4,570,000
+  // childSupport = truncateYen(4,570,000 × 0.0023) + 2,100円(18歳以上1人) = 10,511 + 2,100 = 12,611
   const result = calculateNationalHealthInsurance(5000000, input, nhi);
   assert.equal(result.medical, 375150);
   assert.equal(result.support, 95630);
   assert.equal(result.care, 0);
-  assert.equal(result.childSupport, 12511);
-  assert.equal(result.total, 483291);
+  assert.equal(result.childSupport, 12611);
+  assert.equal(result.total, 483391);
 });
 
 test('手計算設例B: 配偶者あり・子供2人(10歳,20歳)・45歳・年収600万円', () => {
@@ -43,12 +48,14 @@ test('手計算設例B: 配偶者あり・子供2人(10歳,20歳)・45歳・年�
     spouse: { hasSpouse: true, spouseIncome: 0 }
   };
   // assessableIncome = 6,000,000 - 430,000 = 5,570,000、世帯4人、介護分・子ども支援分の年齢区分あり
+  // childSupport = truncateYen(5,570,000 × 0.0023) + 2,100円×3人(本人・配偶者・20歳の子=18歳以上)
+  //              + 0円×1人(10歳の子=18歳未満) = 12,811 + 6,300 + 0 = 19,111
   const result = calculateNationalHealthInsurance(6000000, input, nhi);
   assert.equal(result.medical, 486150);
   assert.equal(result.support, 141030);
   assert.equal(result.care, 127785);
-  assert.equal(result.childSupport, 18911);
-  assert.equal(result.total, 773876);
+  assert.equal(result.childSupport, 19111);
+  assert.equal(result.total, 774076);
 });
 
 test('40歳未満は介護分が0円になる', () => {
