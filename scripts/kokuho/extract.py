@@ -208,9 +208,15 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
     情報(例外内容、stop_reason、content_block_types、生レスポンス)をログに
     残してから送出する。
     """
+    # 同一都道府県内で複数バッチ呼び出しを行う際、PDF部分をプロンプトキャッシュの
+    # 対象にする(2026-07-25追加)。市町村名一覧取得(1回)+バッチ抽出(数回)は
+    # すべて同じPDFをbase64で丸ごと送っており、プレフィックス(PDF文書ブロックが
+    # content配列の先頭)が完全に一致するため、2回目以降はキャッシュ読み込み
+    # (通常の約0.1倍のコスト)になる想定。
     content_block = {
         "type": "document",
         "source": {"type": "base64", "media_type": "application/pdf", "data": data_b64},
+        "cache_control": {"type": "ephemeral"},
     }
 
     try:
@@ -233,7 +239,14 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
         raise
 
     block_types = [block.type for block in message.content]
+    usage = message.usage
     print(f"[extract] {label}: stop_reason={message.stop_reason} content_block_types={block_types}")
+    print(
+        f"[extract] {label}: usage input_tokens={usage.input_tokens} "
+        f"cache_creation_input_tokens={usage.cache_creation_input_tokens} "
+        f"cache_read_input_tokens={usage.cache_read_input_tokens} "
+        f"output_tokens={usage.output_tokens}"
+    )
 
     text = "".join(block.text for block in message.content if block.type == "text").strip()
     if not text:

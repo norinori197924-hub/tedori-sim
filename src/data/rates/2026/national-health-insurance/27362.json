@@ -1,7 +1,7 @@
 {
   "prefecture": "大阪府",
-  "municipality": "大阪市",
-  "municipalityCode": "27100",
+  "municipality": "田尻町",
+  "municipalityCode": "27362",
   "municipalityType": null,
   "year": "令和8年度",
   "source": "https://www.pref.osaka.lg.jp/documents/125887/r8ryouritsu.pdf",
@@ -35,7 +35,7 @@
   },
   "childSupport": {
     "incomeRate": 0.0028,
-    "perCapitaAmountUnder18": 1745,
+    "perCapitaAmountUnder18": 1729,
     "perCapitaAmountOver18": 1841,
     "perHouseholdAmount": 0,
     "assetRate": 0,

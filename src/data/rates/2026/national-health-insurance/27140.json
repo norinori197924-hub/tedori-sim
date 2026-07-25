@@ -6,27 +6,30 @@
   "year": "令和8年度",
   "source": "https://www.pref.osaka.lg.jp/documents/125887/r8ryouritsu.pdf",
   "sourceTitle": "大阪府 令和8年度市町村標準保険料率等の算定結果",
-  "fetchedAt": "2026-07-19",
+  "fetchedAt": "2026-07-25",
   "needsReview": true,
   "dataSource": "prefecture_standard_rate",
   "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。都道府県公表の「標準保険料率」であり、市町村が実際に条例で定める料率と異なる場合がある(都道府県資料内に同旨の注記あり)。賦課限度額(cap)は一覧表に含まれないため全国標準値を暫定使用しており、自治体独自の限度額(例: 金沢市の医療分66万円)とは異なる可能性がある。",
-  "levyMethod": "自動収集のため賦課方式は未確認(平等割額が0でない区分があるかで4方式/2方式を推定可能だが、今回は判定していない)",
+  "levyMethod": "自動収集のため賦課方式は未確認(平等割額・資産割率が0でない区分があるかで方式を推定可能だが、今回は判定していない)",
   "medical": {
     "incomeRate": 0.095,
     "perCapitaAmount": 34990,
     "perHouseholdAmount": 33908,
+    "assetRate": 0,
     "cap": 670000
   },
   "support": {
     "incomeRate": 0.0306,
     "perCapitaAmount": 11191,
     "perHouseholdAmount": 10845,
+    "assetRate": 0,
     "cap": 260000
   },
   "care": {
     "incomeRate": 0.026,
     "perCapitaAmount": 18682,
     "perHouseholdAmount": 0,
+    "assetRate": 0,
     "cap": 170000,
     "note": "40歳以上65歳未満が対象"
   },
@@ -35,7 +38,8 @@
     "perCapitaAmountUnder18": 1742,
     "perCapitaAmountOver18": 1841,
     "perHouseholdAmount": 0,
+    "assetRate": 0,
     "cap": 30000,
-    "note": "令和8年度新設 【2026-07-25修正】perCapitaAmountOver18は旧extract.pyのプロンプトが曖昧だったため、当初は『18歳以上均等割(加算額のみ)』の値(99円)が誤って保存されていた。src/calc/national-health-insurance.jsの計算式はperCapitaAmountOver18を18歳以上1人あたりの合計負担額として直接使うため、基礎額(perCapitaAmountUnder18=1742円)+加算額(99円)=1841円に修正した。"
+    "note": "令和8年度新設"
   }
 }

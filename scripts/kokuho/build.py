@@ -70,6 +70,17 @@ def extracted_path_for(pref_code: str, source_id: str) -> Path:
     return RAW_DIR / f"{pref_code}_{source_id}.extracted.json"
 
 
+def comparison_path_for(muni_code: str, source_id: str) -> Path:
+    """比較用ファイルのパスを、raw_path_for/extracted_path_forと同じ命名規則
+    (単一ソースはsource_id接尾辞なし、複数ソースのみ付与)に揃える。
+    2026-07-25、大阪府(単一ソース)で`{muni_code}_default.json`という別名の
+    ファイルが作られ、既存の`{muni_code}.json`(古い値のまま)が更新されない
+    事故が発生したため追加。"""
+    if source_id == "default":
+        return COMPARISON_DIR / f"{muni_code}.json"
+    return COMPARISON_DIR / f"{muni_code}_{source_id}.json"
+
+
 def is_valid_section(section: dict, under_over: bool = False) -> bool:
     if section is None:
         return False
@@ -291,7 +302,7 @@ def build_source(pref_code: str, pref_entry: dict, source_id: str, source: dict,
             record = build_record(pref_entry, pref_code, muni_code, muni_name, muni, source)
             if not should_write(muni_code, record["dataSource"]):
                 COMPARISON_DIR.mkdir(parents=True, exist_ok=True)
-                comp_path = COMPARISON_DIR / f"{muni_code}_{source_id}.json"
+                comp_path = comparison_path_for(muni_code, source_id)
                 comp_path.write_text(json.dumps(record, ensure_ascii=False, indent=2), encoding="utf-8")
                 compared.append((muni_name, muni_code))
                 continue

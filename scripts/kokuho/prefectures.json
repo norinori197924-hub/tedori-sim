@@ -11,7 +11,8 @@
     "sourceUrl": "https://www.pref.osaka.lg.jp/documents/125887/r8ryouritsu.pdf",
     "sourceFormat": "pdf",
     "sourceTitle": "大阪府 令和8年度市町村標準保険料率等の算定結果",
-    "unifiedRate": true
+    "note": "このunifiedRateフィールドはextract.py/build.pyでは実際には参照されない(unifiedRateの実際の判定はClaude APIがPDFを読んで抽出結果=data/raw/kokuho/27.extracted.jsonに書き込む値による)。2026-07-19のパイロット時点でtrueと誤記されていたが、実際の抽出結果はfalse(医療分・支援分・介護分は全市町村共通だが、子ども・子育て支援納付金分の均等割内訳(均等割/18歳以上均等割の按分)に市町村差があるため)。2026-07-25、実態に合わせて修正。",
+    "unifiedRate": false
   },
   "04": {
     "name": "宮城県",
