@@ -8,10 +8,10 @@
   "sourceTitle": "大阪市 保険料の決め方",
   "fetchedAt": "2026-07-22",
   "needsReview": true,
-  "reviewNote": "municipalityCode(27100)は暫定使用、要検証。料率の具体的数値は公式ページ本文が画像化されており本文からは抽出できなかったため、WebSearchのスニペット由来の数値を採用している(公式PDF等での再確認が望ましい)。介護分・子ども分の平等割(1世帯あたり)は情報が見つからなかったため暫定的に0円としている。大阪府は「府内市町村統一保険料」を採用しており、大阪府内であれば大阪市に限らずどの市町村でも同一の所得・世帯構成なら同一保険料になる(府県単位で統一料率を採用するパターンの実例として貴重。段階3の自動収集パイプライン設計時に考慮すること)。",
+  "reviewNote": "municipalityCode(27100)は暫定使用、要検証。料率の具体的数値は公式ページ本文が画像化されており本文からは抽出できなかったため、WebSearchのスニペット由来の数値を採用している(公式PDF等での再確認が望ましい)。介護分・子ども分の平等割(1世帯あたり)は情報が見つからなかったため暫定的に0円としている。大阪府は「府内市町村統一保険料」を採用しており、大阪府内であれば大阪市に限らずどの市町村でも同一の所得・世帯構成なら同一保険料になる(府県単位で統一料率を採用するパターンの実例として貴重。段階3の自動収集パイプライン設計時に考慮すること)。2026-07-25追記: 子ども分の均等割内訳(under18/over18)は当初「年齢別の内訳情報は見つからず、暫定的に一律1,841円」としていたが、大阪府公表の一次資料(令和8年度市町村標準保険料率算定結果、別紙)で大阪市の内訳(均等割1,745円・18歳以上均等割96円、合計1,841円)を確認した。src/calc/national-health-insurance.jsの計算式はperCapitaAmountOver18を『18歳以上の被保険者1人あたりの合計負担額』として直接カウントに掛けるため(基礎額と加算額を別々に足し合わせる処理は無い)、perCapitaAmountUnder18=1,745(基礎額のみ)・perCapitaAmountOver18=1,841(基礎額+加算額の合計)が正しい。",
   "levyMethod": "4方式(所得割+均等割+平等割、資産割なし)。大阪府内市町村統一保険料率。",
   "medical": { "incomeRate": 0.0950, "perCapitaAmount": 34990, "perHouseholdAmount": 33908, "cap": 660000 },
   "support": { "incomeRate": 0.0306, "perCapitaAmount": 11191, "perHouseholdAmount": 10845, "cap": 260000 },
   "care": { "incomeRate": 0.0260, "perCapitaAmount": 18682, "perHouseholdAmount": 0, "cap": 170000, "note": "40歳以上65歳未満が対象。平等割の有無は未確認。" },
-  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 1841, "perCapitaAmountOver18": 1841, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。年齢別の内訳情報は見つからず、暫定的に一律1,841円としている(要再確認)。" }
+  "childSupport": { "incomeRate": 0.0028, "perCapitaAmountUnder18": 1745, "perCapitaAmountOver18": 1841, "perHouseholdAmount": 0, "cap": 30000, "note": "令和8年度新設。均等割(基礎額)1,745円+18歳以上均等割(加算額)96円=18歳以上の合計負担額1,841円。perCapitaAmountUnder18は基礎額のみ、perCapitaAmountOver18は合計額(基礎額+加算額)。2026-07-25、大阪府公表の一次資料(令和8年度市町村標準保険料率算定結果、別紙)で確認済み。" }
 }

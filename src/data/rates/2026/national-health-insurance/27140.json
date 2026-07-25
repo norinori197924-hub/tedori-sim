@@ -33,9 +33,9 @@
   "childSupport": {
     "incomeRate": 0.0028,
     "perCapitaAmountUnder18": 1742,
-    "perCapitaAmountOver18": 99,
+    "perCapitaAmountOver18": 1841,
     "perHouseholdAmount": 0,
     "cap": 30000,
-    "note": "令和8年度新設"
+    "note": "令和8年度新設 【2026-07-25修正】perCapitaAmountOver18は旧extract.pyのプロンプトが曖昧だったため、当初は『18歳以上均等割(加算額のみ)』の値(99円)が誤って保存されていた。src/calc/national-health-insurance.jsの計算式はperCapitaAmountOver18を18歳以上1人あたりの合計負担額として直接使うため、基礎額(perCapitaAmountUnder18=1742円)+加算額(99円)=1841円に修正した。"
   }
 }
