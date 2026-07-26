@@ -24,6 +24,17 @@ header{border-bottom:2px solid var(--ink);background:var(--paper);}
 .badge{border:1px solid var(--line);background:var(--card);border-radius:3px;padding:3px 10px;color:var(--ink-soft);}
 .badge b{color:var(--ink);font-family:var(--mono);font-weight:600;}
 
+.pref-rate{margin:18px 0;border:1px solid var(--line);border-radius:4px;background:var(--card);padding:16px 18px;}
+.pref-rate-h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+.pref-rate-h h2{font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:.02em;}
+.pref-rate-h .num{font-family:var(--mono);font-size:11px;color:var(--ink-soft);}
+.pref-rate p{font-size:13px;color:var(--ink-soft);margin-bottom:12px;}
+.pref-rate-table{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+.pref-rate-row{display:flex;align-items:baseline;gap:8px;border:1px solid var(--line);border-radius:3px;padding:6px 12px;background:var(--paper);}
+.pref-rate-name{font-size:12.5px;color:var(--ink);}
+.pref-rate-value{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--ink);}
+.pref-rate .note{margin-top:0;}
+
 .grid{display:grid;grid-template-columns:400px 1fr;gap:26px;padding:24px 0 40px;align-items:start;}
 @media(max-width:860px){.grid{grid-template-columns:1fr;}}
 

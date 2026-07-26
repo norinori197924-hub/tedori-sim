@@ -4,6 +4,9 @@ import { calculateTakeHome } from '../calc/engine.js';
 const RATES_BASE = './src/data/rates/2026/';
 const MUNICIPALITIES_URL = './src/data/municipalities/index.json';
 
+const prefRateSection = document.getElementById('pref-rate-section');
+const prefRateTable = document.getElementById('pref-rate-table');
+
 const prefectureSelect = document.getElementById('prefecture');
 const municipalitySelect = document.getElementById('municipality');
 const form = document.getElementById('calc-form');
@@ -49,6 +52,37 @@ async function initMunicipalities() {
   prefectureSelect.innerHTML = prefectures.map((p) => `<option value="${p}">${p}</option>`).join('');
   updateMunicipalityOptions();
   prefectureSelect.addEventListener('change', updateMunicipalityOptions);
+  await renderPrefectureRateSection();
+}
+
+async function renderPrefectureRateSection() {
+  const confirmedPrefectures = [];
+  const seen = new Set();
+  for (const m of municipalities) {
+    if (m.kyokaiKenpoStatus === 'confirmed' && !seen.has(m.prefecture)) {
+      seen.add(m.prefecture);
+      confirmedPrefectures.push(m);
+    }
+  }
+  if (confirmedPrefectures.length === 0) return;
+
+  const withRates = await Promise.all(
+    confirmedPrefectures.map(async (m) => {
+      const rates = await fetchJson('./' + m.kyokaiKenpoRatesFile.replace(/^rates\//, 'src/data/rates/'));
+      return { prefecture: m.prefecture, rates };
+    })
+  );
+  withRates.sort((a, b) => b.rates.healthInsuranceRate - a.rates.healthInsuranceRate);
+
+  prefRateTable.innerHTML = withRates
+    .map(({ prefecture, rates }) => `
+      <div class="pref-rate-row">
+        <span class="pref-rate-name">${prefecture}</span>
+        <span class="pref-rate-value">${(rates.healthInsuranceRate * 100).toFixed(2)}%</span>
+      </div>
+    `)
+    .join('');
+  prefRateSection.hidden = false;
 }
 
 function updateMunicipalityOptions() {
