@@ -1,0 +1,45 @@
+{
+  "prefecture": "愛知県",
+  "municipality": "扶桑町",
+  "municipalityCode": "23362",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.pref.aichi.jp/uploaded/attachment/604948.pdf",
+  "sourceTitle": "愛知県 令和8年度 各市町村の算定基準に基づいて算定した標準保険料率",
+  "fetchedAt": "2026-08-05",
+  "needsReview": true,
+  "dataSource": "prefecture_standard_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。都道府県公表の「標準保険料率」であり、市町村が実際に条例で定める料率と異なる場合がある(都道府県資料内に同旨の注記あり)。賦課限度額(cap)は一覧表に含まれないため全国標準値を暫定使用しており、自治体独自の限度額(例: 金沢市の医療分66万円)とは異なる可能性がある。",
+  "levyMethod": "自動収集のため賦課方式は未確認(平等割額・資産割率が0でない区分があるかで方式を推定可能だが、今回は判定していない)",
+  "medical": {
+    "incomeRate": 0.087,
+    "perCapitaAmount": 34410,
+    "perHouseholdAmount": 22089,
+    "assetRate": 0,
+    "cap": 670000
+  },
+  "support": {
+    "incomeRate": 0.0278,
+    "perCapitaAmount": 10387,
+    "perHouseholdAmount": 6952,
+    "assetRate": 0,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.0251,
+    "perCapitaAmount": 10738,
+    "perHouseholdAmount": 5213,
+    "assetRate": 0,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0029,
+    "perCapitaAmountUnder18": 0,
+    "perCapitaAmountOver18": 1129,
+    "perHouseholdAmount": 713,
+    "assetRate": 0,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}
