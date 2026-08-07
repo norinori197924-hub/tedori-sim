@@ -137,12 +137,24 @@
  */
 
 /**
+ * @typedef {Object} LowIncomeReductionResult 国保料の低所得世帯向け軽減(7割・5割・2割)の判定結果
+ * @property {'70'|'50'|'20'|'none'} level 軽減区分('none'は非該当)
+ * @property {number} judgmentIncome 軽減判定所得(世帯の総所得金額等の合計、43万円控除前)
+ * @property {number} householdCount 被保険者数(特定同一世帯所属者は含めない、当面常に0人扱い)
+ * @property {number} salaryEarnerCount 給与所得者等の数
+ * @property {number} threshold70 7割軽減の基準額
+ * @property {number} threshold50 5割軽減の基準額
+ * @property {number} threshold20 2割軽減の基準額
+ */
+
+/**
  * @typedef {Object} NationalHealthInsuranceResult 国民健康保険料の内訳(年額)
- * @property {number} medical 医療分
- * @property {number} support 後期高齢者支援金分
- * @property {number} care 介護分(40〜64歳の場合のみ)
- * @property {number} childSupport 子ども・子育て支援納付金分
+ * @property {number} medical 医療分(低所得軽減・未就学児軽減適用後)
+ * @property {number} support 後期高齢者支援金分(低所得軽減・未就学児軽減適用後)
+ * @property {number} care 介護分(40〜64歳の場合のみ。低所得軽減適用後)
+ * @property {number} childSupport 子ども・子育て支援納付金分(低所得軽減適用後)
  * @property {number} total
+ * @property {LowIncomeReductionResult} lowIncomeReduction
  */
 
 /**
