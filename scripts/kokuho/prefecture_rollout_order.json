@@ -35,21 +35,21 @@
       "prefectureCode": "11",
       "prefecture": "埼玉県",
       "population": 7374294,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "done"
     },
     {
       "rank": 6,
       "prefectureCode": "12",
       "prefecture": "千葉県",
       "population": 6311579,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "done"
     },
     {
       "rank": 7,
       "prefectureCode": "28",
       "prefecture": "兵庫県",
       "population": 5393607,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "done"
     },
     {
       "rank": 8,
