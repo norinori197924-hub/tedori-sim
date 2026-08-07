@@ -161,12 +161,12 @@
         numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
         annualIncome: 5000000, spouse: { hasSpouse: false, spouseIncome: null }
       };
-      const r = calculateNationalHealthInsurance(5000000, input, rates.nationalHealthInsurance);
+      const r = calculateNationalHealthInsurance(5000000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
       assertEqual('手計算設例(国保・市川市)', '設例A: 単身38歳・年収500万円 medical', 375150, r.medical, 'assessableIncome=4,570,000で手計算');
       assertEqual('手計算設例(国保・市川市)', '設例A: support', 95630, r.support, '同上');
       assertEqual('手計算設例(国保・市川市)', '設例A: care(40歳未満のため0円)', 0, r.care, '同上');
-      assertEqual('手計算設例(国保・市川市)', '設例A: childSupport', 12511, r.childSupport, '同上');
-      assertEqual('手計算設例(国保・市川市)', '設例A: total', 483291, r.total, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例A: childSupport', 12611, r.childSupport, '同上(2026-07-25のデータ修正〔CLAUDE.md 11.7章〕反映)');
+      assertEqual('手計算設例(国保・市川市)', '設例A: total', 483391, r.total, '同上');
     }
     {
       const input = {
@@ -174,12 +174,12 @@
         numberOfChildren: 2, childrenAges: [10, 20], employmentType: 'freelance',
         annualIncome: 6000000, spouse: { hasSpouse: true, spouseIncome: 0 }
       };
-      const r = calculateNationalHealthInsurance(6000000, input, rates.nationalHealthInsurance);
+      const r = calculateNationalHealthInsurance(6000000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
       assertEqual('手計算設例(国保・市川市)', '設例B: 配偶者・子2人(10歳,20歳)・45歳・年収600万円 medical', 486150, r.medical, 'assessableIncome=5,570,000、世帯4人で手計算');
       assertEqual('手計算設例(国保・市川市)', '設例B: support', 141030, r.support, '同上');
       assertEqual('手計算設例(国保・市川市)', '設例B: care(45歳のため対象)', 127785, r.care, '同上');
-      assertEqual('手計算設例(国保・市川市)', '設例B: childSupport(20歳の子は大人扱い)', 18911, r.childSupport, '同上');
-      assertEqual('手計算設例(国保・市川市)', '設例B: total', 773876, r.total, '同上');
+      assertEqual('手計算設例(国保・市川市)', '設例B: childSupport(20歳の子は大人扱い)', 19111, r.childSupport, '同上(2026-07-25のデータ修正〔CLAUDE.md 11.7章〕反映)');
+      assertEqual('手計算設例(国保・市川市)', '設例B: total', 774076, r.total, '同上');
     }
     {
       // 未就学児(5歳)の均等割5割軽減の検算。医療分・支援分のみ軽減、介護分・子ども分は対象外。
@@ -188,10 +188,164 @@
         numberOfChildren: 1, childrenAges: [5], employmentType: 'freelance',
         annualIncome: 4000000, spouse: { hasSpouse: false, spouseIncome: null }
       };
-      const r = calculateNationalHealthInsurance(4000000, input, rates.nationalHealthInsurance);
+      const r = calculateNationalHealthInsurance(4000000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
       assertEqual('手計算設例(国保・未就学児軽減)', '設例C: 単身35歳・子1人(5歳)・年収400万円 medical', 306150, r.medical, 'assessableIncome=3,570,000、均等割は本人12,000円+子(5割軽減)6,000円');
       assertEqual('手計算設例(国保・未就学児軽減)', '設例C: support', 81030, r.support, '同上(均等割8,800円+4,400円)');
       assertEqual('手計算設例(国保・未就学児軽減)', '設例C: total', 397491, r.total, '同上');
+    }
+
+    // --- フリーランス: 国民健康保険料 低所得世帯向け軽減(7割・5割・2割)手計算設例 ---
+    {
+      function nhiInput(overrides = {}) {
+        return {
+          age: 38, prefectureCode: '12', municipalityCode: '12203',
+          numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+          annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null },
+          ...overrides
+        };
+      }
+      const cat = '手計算設例(国保・低所得軽減)';
+
+      // 1: 7割・未就学児なし(単身38歳・年収40万円)
+      {
+        const input = nhiInput({ annualIncome: 400000 });
+        const r = calculateNationalHealthInsurance(400000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#1 7割・未就学児なし: level', '70', r.lowIncomeReduction.level, '判定所得40万円<=基準額43万円');
+        assertEqual(cat, '#1 7割・未就学児なし: medical', 9720, r.medical, '12,000×0.3+20,400×0.3=3,600+6,120');
+        assertEqual(cat, '#1 7割・未就学児なし: support', 2640, r.support, '8,800×0.3');
+        assertEqual(cat, '#1 7割・未就学児なし: childSupport', 630, r.childSupport, '2,100×0.3');
+        assertEqual(cat, '#1 7割・未就学児なし: total', 12990, r.total, '9,720+2,640+0+630');
+      }
+
+      // 2: 7割・未就学児あり(本人+子1人5歳・年収40万円)
+      {
+        const input = nhiInput({ annualIncome: 400000, numberOfChildren: 1, childrenAges: [5] });
+        const r = calculateNationalHealthInsurance(400000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#2 7割・未就学児あり: level', '70', r.lowIncomeReduction.level, '被保険者2人でも7割基準額は世帯人数に依存しない');
+        assertEqual(cat, '#2 7割・未就学児あり: medical', 11520, r.medical, '3,600×1+floor(3,600×0.5)×1+6,120');
+        assertEqual(cat, '#2 7割・未就学児あり: support', 3960, r.support, '2,640×1+floor(2,640×0.5)×1');
+        assertEqual(cat, '#2 7割・未就学児あり: childSupport', 630, r.childSupport, '子は18歳未満のため対象外、本人分のみ2,100×0.3');
+        assertEqual(cat, '#2 7割・未就学児あり: total', 16110, r.total, '11,520+3,960+0+630');
+      }
+
+      // 3: 5割・未就学児なし(単身38歳・年収70万円)
+      {
+        const input = nhiInput({ annualIncome: 700000 });
+        const r = calculateNationalHealthInsurance(700000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#3 5割・未就学児なし: level', '50', r.lowIncomeReduction.level, '43万円<70万円<=74万円(基準額43万円+31万円×1)');
+        assertEqual(cat, '#3 5割・未就学児なし: medical', 36450, r.medical, 'assessableIncome=27万円、20,250+6,000+10,200');
+        assertEqual(cat, '#3 5割・未就学児なし: support', 9530, r.support, '5,130+4,400');
+        assertEqual(cat, '#3 5割・未就学児なし: childSupport', 1671, r.childSupport, '621+1,050');
+        assertEqual(cat, '#3 5割・未就学児なし: total', 47651, r.total, '36,450+9,530+0+1,671');
+      }
+
+      // 4: 5割・未就学児あり(本人+子1人5歳・年収100万円)
+      {
+        const input = nhiInput({ annualIncome: 1000000, numberOfChildren: 1, childrenAges: [5] });
+        const r = calculateNationalHealthInsurance(1000000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#4 5割・未就学児あり: level', '50', r.lowIncomeReduction.level, '基準額43万円+31万円×2=105万円以下');
+        assertEqual(cat, '#4 5割・未就学児あり: medical', 61950, r.medical, 'assessableIncome=57万円、42,750+9,000+10,200');
+        assertEqual(cat, '#4 5割・未就学児あり: support', 17430, r.support, '10,830+6,600');
+        assertEqual(cat, '#4 5割・未就学児あり: childSupport', 2361, r.childSupport, '1,311+1,050(子は18歳未満のため対象外)');
+        assertEqual(cat, '#4 5割・未就学児あり: total', 81741, r.total, '61,950+17,430+0+2,361');
+      }
+
+      // 5: 2割・未就学児なし(単身38歳・年収90万円)
+      {
+        const input = nhiInput({ annualIncome: 900000 });
+        const r = calculateNationalHealthInsurance(900000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#5 2割・未就学児なし: level', '20', r.lowIncomeReduction.level, '74万円<90万円<=基準額100万円(43万円+57万円×1)');
+        assertEqual(cat, '#5 2割・未就学児なし: medical', 61170, r.medical, 'assessableIncome=47万円、35,250+9,600+16,320');
+        assertEqual(cat, '#5 2割・未就学児なし: support', 15970, r.support, '8,930+7,040');
+        assertEqual(cat, '#5 2割・未就学児なし: childSupport', 2761, r.childSupport, '1,081+1,680');
+        assertEqual(cat, '#5 2割・未就学児なし: total', 79901, r.total, '61,170+15,970+0+2,761');
+      }
+
+      // 6: 2割・未就学児あり(本人+子1人5歳・年収150万円)
+      {
+        const input = nhiInput({ annualIncome: 1500000, numberOfChildren: 1, childrenAges: [5] });
+        const r = calculateNationalHealthInsurance(1500000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#6 2割・未就学児あり: level', '20', r.lowIncomeReduction.level, '105万円<150万円<=基準額157万円(43万円+57万円×2)');
+        assertEqual(cat, '#6 2割・未就学児あり: medical', 110970, r.medical, 'assessableIncome=107万円、80,250+14,400+16,320');
+        assertEqual(cat, '#6 2割・未就学児あり: support', 30890, r.support, '20,330+10,560');
+        assertEqual(cat, '#6 2割・未就学児あり: childSupport', 4141, r.childSupport, '2,461+1,680(子は18歳未満のため対象外)');
+        assertEqual(cat, '#6 2割・未就学児あり: total', 146001, r.total, '110,970+30,890+0+4,141');
+      }
+
+      // 7: 配偶者の所得を判定所得に合算することの確認(本人年収20万円だが配偶者200万円で2割止まり)
+      {
+        const input = nhiInput({ annualIncome: 200000, spouse: { hasSpouse: true, spouseIncome: 2000000 } });
+        const r = calculateNationalHealthInsurance(200000, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#7 配偶者所得の反映: judgmentIncome', 1460000, r.lowIncomeReduction.judgmentIncome, '本人20万円+配偶者所得126万円(200万円の給与所得控除後)');
+        assertEqual(cat, '#7 配偶者所得の反映: level', '20', r.lowIncomeReduction.level, '本人単独なら7割相当の低所得だが、配偶者所得合算で2割まで後退');
+        assertEqual(cat, '#7 配偶者所得の反映: medical', 35520, r.medical, '19,200+16,320(世帯2人、未就学児なし)');
+        assertEqual(cat, '#7 配偶者所得の反映: support', 14080, r.support, '7,040×2');
+        assertEqual(cat, '#7 配偶者所得の反映: childSupport', 3360, r.childSupport, '1,680×2(本人・配偶者とも18歳以上)');
+        assertEqual(cat, '#7 配偶者所得の反映: total', 52960, r.total, '35,520+14,080+0+3,360');
+      }
+
+      // 8〜13: 境界値テスト(単身38歳、市川市。基準額は7割43万円/5割74万円/2割100万円)
+      {
+        const boundaries = [
+          { label: '#8 境界値: 判定所得430,000円', income: 430000, level: '70', medical: 9720, support: 2640, childSupport: 630, total: 12990 },
+          { label: '#9 境界値: 判定所得430,001円', income: 430001, level: '50', medical: 16200, support: 4400, childSupport: 1050, total: 21650 },
+          { label: '#10 境界値: 判定所得740,000円', income: 740000, level: '50', medical: 39450, support: 10290, childSupport: 1763, total: 51503 },
+          { label: '#11 境界値: 判定所得740,001円', income: 740001, level: '20', medical: 49170, support: 12930, childSupport: 2393, total: 64493 },
+          { label: '#12 境界値: 判定所得1,000,000円', income: 1000000, level: '20', medical: 68670, support: 17870, childSupport: 2991, total: 89531 },
+          { label: '#13 境界値: 判定所得1,000,001円', income: 1000001, level: 'none', medical: 75150, support: 19630, childSupport: 3411, total: 98191 }
+        ];
+        for (const b of boundaries) {
+          const input = nhiInput({ annualIncome: b.income });
+          const r = calculateNationalHealthInsurance(b.income, input, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+          assertEqual(cat, b.label + ': level', b.level, r.lowIncomeReduction.level, '境界値確認');
+          assertEqual(cat, b.label + ': medical', b.medical, r.medical, '境界値確認');
+          assertEqual(cat, b.label + ': support', b.support, r.support, '境界値確認');
+          assertEqual(cat, b.label + ': childSupport', b.childSupport, r.childSupport, '境界値確認');
+          assertEqual(cat, b.label + ': total', b.total, r.total, '境界値確認');
+        }
+      }
+
+      // 14〜15: 被保険者数が基準額に反映されることの確認(同一判定所得1,000,001円、単身 vs 本人+子1人)
+      {
+        const input14 = nhiInput({ annualIncome: 1000001 });
+        const r14 = calculateNationalHealthInsurance(1000001, input14, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#14 世帯人数の影響(単身): level', 'none', r14.lowIncomeReduction.level, '単身の2割基準額100万円を判定所得が上回るため軽減なし(#13と同一設定)');
+        assertEqual(cat, '#14 世帯人数の影響(単身): total', 98191, r14.total, '#13と同一');
+
+        const input15 = nhiInput({ annualIncome: 1000001, numberOfChildren: 1, childrenAges: [10] });
+        const r15 = calculateNationalHealthInsurance(1000001, input15, rates.nationalHealthInsurance, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#15 世帯人数の影響(本人+子1人・10歳)', '50', r15.lowIncomeReduction.level, '同じ判定所得でも世帯2人の5割基準額105万円以下のため5割該当');
+        assertEqual(cat, '#15 世帯人数の影響(本人+子1人・10歳): medical', 64950, r15.medical, '42,750+12,000+10,200');
+        assertEqual(cat, '#15 世帯人数の影響(本人+子1人・10歳): support', 19630, r15.support, '10,830+8,800');
+        assertEqual(cat, '#15 世帯人数の影響(本人+子1人・10歳): childSupport', 2361, r15.childSupport, '1,311+1,050(10歳の子は18歳未満のため対象外)');
+        assertEqual(cat, '#15 世帯人数の影響(本人+子1人・10歳): total', 86941, r15.total, '64,950+19,630+0+2,361');
+      }
+
+      // 16: 端数処理順序の検証(合成レート。truncateYenとfloorの二重適用を明示的に確認)
+      {
+        const customRate = {
+          medical: { incomeRate: 0, perCapitaAmount: 10019, perHouseholdAmount: 0, cap: 999999999 },
+          support: { incomeRate: 0, perCapitaAmount: 0, perHouseholdAmount: 0, cap: 999999999 },
+          care: { incomeRate: 0, perCapitaAmount: 0, perHouseholdAmount: 0, cap: 999999999 },
+          childSupport: { incomeRate: 0, perCapitaAmountUnder18: 0, perCapitaAmountOver18: 0, perHouseholdAmount: 0, cap: 999999999 }
+        };
+        const input = nhiInput({ annualIncome: 400000, numberOfChildren: 1, childrenAges: [5] });
+        const r = calculateNationalHealthInsurance(400000, input, customRate, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#16 端数処理順序: medical', 4507, r.medical, '10,019×0.3=3,005.7→truncateYen→3,005。3,005×0.5=1,502.5→floor→1,502。3,005+1,502=4,507(四捨五入なら3,006+1,503=4,509になるはず)');
+      }
+
+      // 17: 平等割・介護分にも軽減乗数が適用されることの確認(札幌市。全区分で平等割が非ゼロ)
+      {
+        const sapporoRate = await fetch('../data/rates/2026/national-health-insurance/01100.json').then(r => r.json());
+        const input = nhiInput({ age: 45, annualIncome: 400000 });
+        const r = calculateNationalHealthInsurance(400000, input, sapporoRate, rates.salaryIncomeDeduction);
+        assertEqual(cat, '#17 平等割・介護分への適用(札幌市): level', '70', r.lowIncomeReduction.level, '判定所得40万円<=基準額43万円');
+        assertEqual(cat, '#17 平等割・介護分への適用(札幌市): medical', 15927, r.medical, '6,165+9,762');
+        assertEqual(cat, '#17 平等割・介護分への適用(札幌市): support', 4902, r.support, '1,899+3,003');
+        assertEqual(cat, '#17 平等割・介護分への適用(札幌市): care(45歳のため対象)', 4071, r.care, '1,806+2,265');
+        assertEqual(cat, '#17 平等割・介護分への適用(札幌市): childSupport', 630, r.childSupport, '330+300');
+        assertEqual(cat, '#17 平等割・介護分への適用(札幌市): total', 25530, r.total, '15,927+4,902+4,071+630');
+      }
     }
 
     // --- フリーランス: 国民年金保険料 ---

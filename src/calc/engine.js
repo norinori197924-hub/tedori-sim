@@ -71,7 +71,12 @@ function calculateEmployeeTakeHome(input, rates) {
 function calculateFreelanceTakeHome(input, rates) {
   const income = calculateFreelanceIncome(input);
 
-  const nationalHealthInsurance = calculateNationalHealthInsurance(income.totalIncome, input, rates.nationalHealthInsurance);
+  const nationalHealthInsurance = calculateNationalHealthInsurance(
+    income.totalIncome,
+    input,
+    rates.nationalHealthInsurance,
+    rates.salaryIncomeDeduction
+  );
   const nationalPension = calculateNationalPension(input, rates.nationalPension);
   const socialInsurance = {
     nationalHealthInsurance,
@@ -90,12 +95,17 @@ function calculateFreelanceTakeHome(input, rates) {
     '国民健康保険料の所得割は本人の所得のみで計算しており、配偶者の所得は反映していません(簡易計算)。均等割・平等割の世帯人数には配偶者・子供を含めています。',
     '介護分(40〜64歳)の対象判定は本人の年齢のみで行っており、配偶者は年齢が不明なため対象外として計算しています。',
     '国民年金保険料は、配偶者がいる場合は年齢不明のまま第1号被保険者(20〜59歳)と仮定して算入しています。20歳以上の子がいる場合も、国民年金保険料の計算には含めていません。',
+    '国民健康保険料の低所得世帯向け軽減(7割・5割・2割、均等割・平等割が対象)を判定しています。特定同一世帯所属者は当面0人として計算し、「給与所得者等」の判定は本人(フリーランス)を常に対象外、配偶者は入力年収が55万円を超える場合のみ該当、子供は常に非該当として簡易化しています。',
     ...COMMON_ASSUMPTIONS
   ];
   if (input.spouse.hasSpouse) {
     assumptions.push(
-      '配偶者の年収は、所得税・住民税の配偶者控除・配偶者特別控除の判定には使用していますが、国民健康保険料の所得割には反映していません(所得割は本人の所得のみで計算)。'
+      '配偶者の年収は、所得税・住民税の配偶者控除・配偶者特別控除の判定には使用していますが、国民健康保険料の所得割には反映していません(所得割は本人の所得のみで計算)。国民健康保険料の低所得軽減の判定所得には、配偶者の年収に給与所得控除を適用した金額を合算しています。'
     );
+  }
+  if (nationalHealthInsurance.lowIncomeReduction.level !== 'none') {
+    const levelLabel = { '70': '7割', '50': '5割', '20': '2割' }[nationalHealthInsurance.lowIncomeReduction.level];
+    assumptions.push(`国民健康保険料に低所得世帯向け軽減(${levelLabel}軽減)が適用されています。`);
   }
   if (residentTax.adjustmentCreditNeedsReview) {
     assumptions.push('住民税の調整控除額は、基礎控除に係る人的控除差が未確定のため暫定値で計算しています(要確認)。');
