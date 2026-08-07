@@ -10,12 +10,19 @@ a{color:var(--green);}
 .wrap{max-width:1060px;margin:0 auto;padding:0 20px;}
 
 header{border-bottom:2px solid var(--ink);background:var(--paper);}
-.head-in{display:flex;justify-content:space-between;align-items:baseline;padding:18px 0 14px;flex-wrap:wrap;gap:6px;}
+.head-in{display:flex;justify-content:space-between;align-items:baseline;padding-top:18px;padding-bottom:14px;flex-wrap:wrap;gap:6px;}
 .brand{font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:.04em;}
 .brand small{font-family:var(--sans);font-weight:400;font-size:12px;color:var(--ink-soft);margin-left:10px;letter-spacing:0;}
 .brand a{color:inherit;text-decoration:none;}
 .head-nav{font-size:12.5px;color:var(--ink-soft);display:flex;gap:14px;flex-wrap:wrap;}
 .head-nav a{color:var(--ink-soft);}
+
+@media(max-width:480px){
+  .head-in{flex-wrap:nowrap;}
+  .brand{white-space:nowrap;}
+  .brand small{display:none;}
+  .head-nav{flex-shrink:0;}
+}
 
 .hero{padding:28px 0 6px;}
 .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.5;letter-spacing:.02em;}
