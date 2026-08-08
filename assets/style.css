@@ -61,6 +61,8 @@ header{border-bottom:2px solid var(--ink);background:var(--paper);}
 .field.has-error label{color:var(--red);}
 .form-error-summary{background:var(--red-bg);border:1px solid var(--red);color:var(--red);border-radius:3px;padding:10px 12px;font-size:12.5px;margin-bottom:14px;line-height:1.6;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.children-ages-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.children-ages-grid .field{margin-bottom:0;}
 .seg{display:flex;border:1px solid var(--ink);border-radius:3px;overflow:hidden;}
 .seg button{flex:1;padding:9px 4px;border:none;background:var(--card);font-family:var(--sans);font-size:13.5px;cursor:pointer;color:var(--ink);}
 .seg button.on{background:var(--ink);color:var(--paper);font-weight:500;}

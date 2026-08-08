@@ -21,7 +21,7 @@ const annualIncomeInput = document.getElementById('annualIncome');
 const ageInput = document.getElementById('age');
 const numberOfChildrenSelect = document.getElementById('numberOfChildren');
 const childrenAgesField = document.getElementById('childrenAgesField');
-const childrenAgesInput = document.getElementById('childrenAges');
+const childrenAgesContainer = document.getElementById('childrenAgesContainer');
 const hasSpouseSelect = document.getElementById('hasSpouse');
 const spouseIncomeInput = document.getElementById('spouseIncome');
 
@@ -108,13 +108,48 @@ function updateMunicipalityOptions() {
     options.map((m) => `<option value="${m.municipalityCode}">${m.municipality}</option>`).join('');
 }
 
-function updateChildrenAgesVisibility() {
+function getChildAgeInputs() {
+  return Array.from(childrenAgesContainer.querySelectorAll('.child-age-input'));
+}
+
+/**
+ * 子供の数に応じて年齢入力欄を1人ずつ生成し直す。
+ * 人数を減らした場合は末尾の余分な欄を削除し、増やした場合は既存の入力値を保持したまま
+ * 空欄を追加する(人数が同じ場合は何もしない)。
+ */
+function updateChildrenAgesFields() {
   const numberOfChildren = Number(numberOfChildrenSelect.value);
+
   if (numberOfChildren === 0) {
-    childrenAgesInput.value = '';
+    childrenAgesContainer.innerHTML = '';
     childrenAgesField.hidden = true;
-  } else {
-    childrenAgesField.hidden = false;
+    return;
+  }
+  childrenAgesField.hidden = false;
+
+  const existingValues = getChildAgeInputs().map((el) => el.value);
+
+  childrenAgesContainer.innerHTML = '';
+  for (let i = 0; i < numberOfChildren; i++) {
+    const wrap = document.createElement('div');
+    wrap.className = 'field';
+
+    const label = document.createElement('label');
+    label.setAttribute('for', `childAge-${i}`);
+    label.textContent = `${i + 1}人目の年齢`;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'numeric';
+    input.id = `childAge-${i}`;
+    input.className = 'child-age-input';
+    input.placeholder = '例: 7';
+    input.value = existingValues[i] ?? '';
+    input.addEventListener('input', () => setFieldError(input, false));
+
+    wrap.appendChild(label);
+    wrap.appendChild(input);
+    childrenAgesContainer.appendChild(wrap);
   }
 }
 
@@ -129,21 +164,6 @@ function getSelectedMunicipality() {
   const found = municipalities.find((m) => m.municipalityCode === code);
   if (!found) throw new Error('市区町村が選択されていません。');
   return found;
-}
-
-function parseChildrenAges(text, numberOfChildren) {
-  const ages = text
-    .split(/[,、]/)
-    .map((s) => s.trim())
-    .filter((s) => s.length > 0)
-    .map((s) => Number(s));
-  if (ages.some((a) => Number.isNaN(a) || a < 0 || a > 30)) {
-    throw new Error('子供の年齢は0〜30の数値をカンマ区切りで入力してください。');
-  }
-  if (ages.length !== numberOfChildren) {
-    throw new Error(`子供の数(${numberOfChildren}人)と、入力された年齢の数(${ages.length}件)が一致しません。`);
-  }
-  return ages;
 }
 
 /**
@@ -174,7 +194,7 @@ function setFieldError(el, hasError) {
 }
 
 function clearAllFieldErrors() {
-  [annualIncomeInput, ageInput, spouseIncomeInput, prefectureSelect, municipalitySelect, childrenAgesInput].forEach(
+  [annualIncomeInput, ageInput, spouseIncomeInput, prefectureSelect, municipalitySelect, ...getChildAgeInputs()].forEach(
     (el) => setFieldError(el, false)
   );
   formErrors.hidden = true;
@@ -232,21 +252,19 @@ function validateForm() {
     errors.push({ el: municipalitySelect, label: '市区町村' });
   }
 
-  const numberOfChildren = Number(numberOfChildrenSelect.value);
-  if (numberOfChildren > 0) {
-    const ageTokens = normalizeDigits(childrenAgesInput.value)
-      .split(/[,、]/)
-      .map((s) => s.trim())
-      .filter((s) => s.length > 0);
-    const ageNumbers = ageTokens.map((s) => (/^\d+$/.test(s) ? Number(s) : NaN));
-    if (ageNumbers.some((a) => Number.isNaN(a) || a < 0 || a > 30)) {
-      errors.push({ el: childrenAgesInput, label: '子供の年齢（0〜30の半角数字をカンマ区切りで入力してください）' });
-    } else if (ageNumbers.length !== numberOfChildren) {
-      errors.push({ el: childrenAgesInput, label: `子供の年齢（${numberOfChildren}人分をカンマ区切りで入力してください）` });
-    } else {
-      childrenAgesInput.value = ageNumbers.join(', ');
+  getChildAgeInputs().forEach((el, i) => {
+    const label = `${i + 1}人目の年齢`;
+    if (el.value.trim() === '') {
+      errors.push({ el, label });
+      return;
     }
-  }
+    const v = parseStrictInteger(el.value);
+    if (v === null || v < 0 || v > 30) {
+      errors.push({ el, label: `${label}（0〜30の半角数字で入力してください）` });
+    } else {
+      el.value = String(v);
+    }
+  });
 
   return errors;
 }
@@ -257,7 +275,7 @@ function validateForm() {
 function readInput(employmentType) {
   const municipality = getSelectedMunicipality();
   const numberOfChildren = Number(document.getElementById('numberOfChildren').value);
-  const childrenAges = parseChildrenAges(document.getElementById('childrenAges').value, numberOfChildren);
+  const childrenAges = getChildAgeInputs().map((el) => Number(el.value));
   const hasSpouse = document.getElementById('hasSpouse').value === 'yes';
   const spouseIncomeRaw = document.getElementById('spouseIncome').value;
 
@@ -472,13 +490,13 @@ async function handleSubmit(event) {
 form.addEventListener('submit', handleSubmit);
 initEmploymentButtons();
 
-numberOfChildrenSelect.addEventListener('change', updateChildrenAgesVisibility);
-updateChildrenAgesVisibility();
+numberOfChildrenSelect.addEventListener('change', updateChildrenAgesFields);
+updateChildrenAgesFields();
 
 hasSpouseSelect.addEventListener('change', updateSpouseIncomeAvailability);
 updateSpouseIncomeAvailability();
 
-[annualIncomeInput, ageInput, childrenAgesInput].forEach((el) => {
+[annualIncomeInput, ageInput].forEach((el) => {
   el.addEventListener('input', () => setFieldError(el, false));
 });
 [prefectureSelect, municipalitySelect].forEach((el) => {
