@@ -3,6 +3,7 @@ import { calculateTakeHome } from '../calc/engine.js';
 
 const RATES_BASE = './src/data/rates/2026/';
 const MUNICIPALITIES_URL = './src/data/municipalities/index.json';
+const DEFAULT_RESULT_TITLE = '計算結果';
 
 const prefRateSection = document.getElementById('pref-rate-section');
 const prefRateTable = document.getElementById('pref-rate-table');
@@ -456,6 +457,7 @@ function unavailableMessage(employmentType, municipality) {
 async function handleSubmit(event) {
   event.preventDefault();
   clearAllFieldErrors();
+  resultTitle.textContent = DEFAULT_RESULT_TITLE;
 
   const errors = validateForm();
   if (errors.length > 0) {
