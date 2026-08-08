@@ -46,7 +46,8 @@
         <div class="tab off">詳細入力 <span class="soon">準備中</span></div>
       </div>
       <div class="panel-b">
-        <form id="calc-form">
+        <form id="calc-form" novalidate>
+          <div id="form-errors" class="form-error-summary" hidden></div>
           <div class="field"><label>雇用形態</label>
             <div class="seg">
               <button type="button" class="on" data-employment="employee">会社員</button>
@@ -54,29 +55,29 @@
             </div>
           </div>
           <div class="field"><label for="annualIncome">額面の年収（昨年）</label>
-            <input type="number" id="annualIncome" min="0" step="10000" value="5000000" required> 円
+            <input type="text" inputmode="numeric" id="annualIncome" placeholder="例: 5000000" required> 円
           </div>
           <div class="row2">
-            <div class="field"><label for="age">年齢</label><input type="number" id="age" min="15" max="100" value="38" required></div>
+            <div class="field"><label for="age">年齢</label><input type="text" inputmode="numeric" id="age" placeholder="例: 38" required></div>
             <div class="field"><label for="numberOfChildren">子供の数</label>
               <select id="numberOfChildren">
-                <option value="0">0人</option><option value="1">1人</option>
-                <option value="2" selected>2人</option><option value="3">3人</option>
+                <option value="0" selected>0人</option><option value="1">1人</option>
+                <option value="2">2人</option><option value="3">3人</option>
                 <option value="4">4人</option><option value="5">5人</option>
               </select>
             </div>
           </div>
-          <div class="field"><label for="childrenAges">子供の年齢<span class="opt">カンマ区切り</span></label>
-            <input type="text" id="childrenAges" placeholder="例: 4, 7" value="4, 7">
+          <div class="field" id="childrenAgesField" hidden><label for="childrenAges">子供の年齢<span class="opt">カンマ区切り</span></label>
+            <input type="text" id="childrenAges" placeholder="例: 4, 7">
           </div>
           <div class="row2">
-            <div class="field"><label for="prefecture">都道府県</label><select id="prefecture"></select></div>
-            <div class="field"><label for="municipality">市区町村</label><select id="municipality"></select></div>
+            <div class="field"><label for="prefecture">都道府県</label><select id="prefecture" required></select></div>
+            <div class="field"><label for="municipality">市区町村</label><select id="municipality" required></select></div>
           </div>
           <div class="field"><label>配偶者<span class="opt">任意</span></label>
             <div class="row2">
-              <select id="hasSpouse"><option value="yes" selected>あり</option><option value="no">なし</option></select>
-              <input type="number" id="spouseIncome" min="0" step="10000" placeholder="配偶者の年収" value="1000000">
+              <select id="hasSpouse"><option value="yes">あり</option><option value="no" selected>なし</option></select>
+              <input type="text" inputmode="numeric" id="spouseIncome" placeholder="例: 3000000" disabled>
             </div>
           </div>
           <button type="submit" class="cta">手取りを計算する</button>

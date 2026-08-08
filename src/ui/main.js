@@ -10,11 +10,20 @@ const prefRateTable = document.getElementById('pref-rate-table');
 const prefectureSelect = document.getElementById('prefecture');
 const municipalitySelect = document.getElementById('municipality');
 const form = document.getElementById('calc-form');
+const formErrors = document.getElementById('form-errors');
 const resultBody = document.getElementById('result-body');
 const resultTitle = document.getElementById('result-title');
 const resultBadge = document.getElementById('result-badge');
 const badgeCoverage = document.getElementById('badge-coverage');
 const employmentButtons = Array.from(document.querySelectorAll('[data-employment]'));
+
+const annualIncomeInput = document.getElementById('annualIncome');
+const ageInput = document.getElementById('age');
+const numberOfChildrenSelect = document.getElementById('numberOfChildren');
+const childrenAgesField = document.getElementById('childrenAgesField');
+const childrenAgesInput = document.getElementById('childrenAges');
+const hasSpouseSelect = document.getElementById('hasSpouse');
+const spouseIncomeInput = document.getElementById('spouseIncome');
 
 /** @type {Array<any>} */
 let municipalities = [];
@@ -49,7 +58,9 @@ async function initMunicipalities() {
   badgeCoverage.textContent = `${municipalities.length} / ${totalMunicipalityCount.toLocaleString('ja-JP')}`;
 
   const prefectures = [...new Set(municipalities.map((m) => m.prefecture))];
-  prefectureSelect.innerHTML = prefectures.map((p) => `<option value="${p}">${p}</option>`).join('');
+  prefectureSelect.innerHTML =
+    '<option value="" selected disabled hidden>選択してください</option>' +
+    prefectures.map((p) => `<option value="${p}">${p}</option>`).join('');
   updateMunicipalityOptions();
   prefectureSelect.addEventListener('change', updateMunicipalityOptions);
   await renderPrefectureRateSection();
@@ -87,10 +98,30 @@ async function renderPrefectureRateSection() {
 
 function updateMunicipalityOptions() {
   const selectedPrefecture = prefectureSelect.value;
+  if (!selectedPrefecture) {
+    municipalitySelect.innerHTML = '<option value="" selected disabled hidden>先に都道府県を選択してください</option>';
+    return;
+  }
   const options = municipalities.filter((m) => m.prefecture === selectedPrefecture);
-  municipalitySelect.innerHTML = options
-    .map((m) => `<option value="${m.municipalityCode}">${m.municipality}</option>`)
-    .join('');
+  municipalitySelect.innerHTML =
+    '<option value="" selected disabled hidden>選択してください</option>' +
+    options.map((m) => `<option value="${m.municipalityCode}">${m.municipality}</option>`).join('');
+}
+
+function updateChildrenAgesVisibility() {
+  const numberOfChildren = Number(numberOfChildrenSelect.value);
+  if (numberOfChildren === 0) {
+    childrenAgesInput.value = '';
+    childrenAgesField.hidden = true;
+  } else {
+    childrenAgesField.hidden = false;
+  }
+}
+
+function updateSpouseIncomeAvailability() {
+  const hasSpouse = hasSpouseSelect.value === 'yes';
+  spouseIncomeInput.disabled = !hasSpouse;
+  if (!hasSpouse) spouseIncomeInput.value = '';
 }
 
 function getSelectedMunicipality() {
@@ -113,6 +144,111 @@ function parseChildrenAges(text, numberOfChildren) {
     throw new Error(`子供の数(${numberOfChildren}人)と、入力された年齢の数(${ages.length}件)が一致しません。`);
   }
   return ages;
+}
+
+/**
+ * 全角数字(０-９)を半角に変換する。
+ * @param {string} raw
+ * @returns {string}
+ */
+function normalizeDigits(raw) {
+  return raw.replace(/[０-９]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xfee0));
+}
+
+/**
+ * 「500万」のように数字以外の文字が混じった入力を、末尾の不正な文字が黙って
+ * 切り捨てられた小さな数値として誤って受理しないよう、全角→半角変換後に
+ * 数字のみで構成されているかを厳密にチェックする(0以上の整数のみを許可)。
+ * @param {string} raw
+ * @returns {number|null} 不正な場合はnull
+ */
+function parseStrictInteger(raw) {
+  const normalized = normalizeDigits(raw.trim());
+  if (!/^\d+$/.test(normalized)) return null;
+  return Number(normalized);
+}
+
+function setFieldError(el, hasError) {
+  const wrap = el.closest('.field');
+  if (wrap) wrap.classList.toggle('has-error', hasError);
+}
+
+function clearAllFieldErrors() {
+  [annualIncomeInput, ageInput, spouseIncomeInput, prefectureSelect, municipalitySelect, childrenAgesInput].forEach(
+    (el) => setFieldError(el, false)
+  );
+  formErrors.hidden = true;
+  formErrors.innerHTML = '';
+}
+
+function showFormErrors(labels) {
+  formErrors.innerHTML = `次の項目を確認してください：${labels.join('、')}`;
+  formErrors.hidden = false;
+}
+
+/**
+ * 送信前の入力チェック。問題があった項目を { el, label } の配列で返す(空配列なら問題なし)。
+ * @returns {{el: HTMLElement, label: string}[]}
+ */
+function validateForm() {
+  const errors = [];
+
+  if (annualIncomeInput.value.trim() === '') {
+    errors.push({ el: annualIncomeInput, label: '額面の年収' });
+  } else {
+    const v = parseStrictInteger(annualIncomeInput.value);
+    if (v === null) {
+      errors.push({ el: annualIncomeInput, label: '額面の年収（半角数字のみで入力してください。例: 5000000）' });
+    } else {
+      annualIncomeInput.value = String(v);
+    }
+  }
+
+  if (ageInput.value.trim() === '') {
+    errors.push({ el: ageInput, label: '年齢' });
+  } else {
+    const v = parseStrictInteger(ageInput.value);
+    if (v === null) {
+      errors.push({ el: ageInput, label: '年齢（半角数字のみで入力してください。例: 38）' });
+    } else if (v < 15 || v > 100) {
+      errors.push({ el: ageInput, label: '年齢（15〜100の範囲で入力してください）' });
+    } else {
+      ageInput.value = String(v);
+    }
+  }
+
+  if (!spouseIncomeInput.disabled && spouseIncomeInput.value.trim() !== '') {
+    const v = parseStrictInteger(spouseIncomeInput.value);
+    if (v === null) {
+      errors.push({ el: spouseIncomeInput, label: '配偶者の年収（半角数字のみで入力してください。例: 3000000）' });
+    } else {
+      spouseIncomeInput.value = String(v);
+    }
+  }
+
+  if (prefectureSelect.value === '') {
+    errors.push({ el: prefectureSelect, label: '都道府県' });
+  } else if (municipalitySelect.value === '') {
+    errors.push({ el: municipalitySelect, label: '市区町村' });
+  }
+
+  const numberOfChildren = Number(numberOfChildrenSelect.value);
+  if (numberOfChildren > 0) {
+    const ageTokens = normalizeDigits(childrenAgesInput.value)
+      .split(/[,、]/)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+    const ageNumbers = ageTokens.map((s) => (/^\d+$/.test(s) ? Number(s) : NaN));
+    if (ageNumbers.some((a) => Number.isNaN(a) || a < 0 || a > 30)) {
+      errors.push({ el: childrenAgesInput, label: '子供の年齢（0〜30の半角数字をカンマ区切りで入力してください）' });
+    } else if (ageNumbers.length !== numberOfChildren) {
+      errors.push({ el: childrenAgesInput, label: `子供の年齢（${numberOfChildren}人分をカンマ区切りで入力してください）` });
+    } else {
+      childrenAgesInput.value = ageNumbers.join(', ');
+    }
+  }
+
+  return errors;
 }
 
 /**
@@ -301,6 +437,16 @@ function unavailableMessage(employmentType, municipality) {
 
 async function handleSubmit(event) {
   event.preventDefault();
+  clearAllFieldErrors();
+
+  const errors = validateForm();
+  if (errors.length > 0) {
+    errors.forEach(({ el }) => setFieldError(el, true));
+    showFormErrors(errors.map(({ label }) => label));
+    errors[0].el.focus();
+    return;
+  }
+
   resultBody.innerHTML = '<div class="placeholder">計算中…</div>';
   try {
     const employmentType = selectedEmploymentType;
@@ -325,6 +471,20 @@ async function handleSubmit(event) {
 
 form.addEventListener('submit', handleSubmit);
 initEmploymentButtons();
+
+numberOfChildrenSelect.addEventListener('change', updateChildrenAgesVisibility);
+updateChildrenAgesVisibility();
+
+hasSpouseSelect.addEventListener('change', updateSpouseIncomeAvailability);
+updateSpouseIncomeAvailability();
+
+[annualIncomeInput, ageInput, childrenAgesInput].forEach((el) => {
+  el.addEventListener('input', () => setFieldError(el, false));
+});
+[prefectureSelect, municipalitySelect].forEach((el) => {
+  el.addEventListener('change', () => setFieldError(el, false));
+});
+
 initMunicipalities().catch((err) => {
   resultBody.innerHTML = `<div class="placeholder" style="color:var(--red)">自治体データの読み込みに失敗しました: ${err.message}</div>`;
   console.error(err);

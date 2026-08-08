@@ -56,6 +56,10 @@ header{border-bottom:2px solid var(--ink);background:var(--paper);}
 .field label .opt{color:var(--ink-soft);font-weight:400;font-size:11px;margin-left:6px;border:1px solid var(--line);border-radius:2px;padding:0 5px;}
 .field input,.field select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:3px;font-family:var(--sans);font-size:14px;background:var(--paper);color:var(--ink);}
 .field input:disabled,.field select:disabled{color:var(--ink-soft);background:#eeece5;}
+.field select:invalid{color:var(--ink-soft);}
+.field.has-error input,.field.has-error select{border-color:var(--red);background:var(--red-bg);}
+.field.has-error label{color:var(--red);}
+.form-error-summary{background:var(--red-bg);border:1px solid var(--red);color:var(--red);border-radius:3px;padding:10px 12px;font-size:12.5px;margin-bottom:14px;line-height:1.6;}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .seg{display:flex;border:1px solid var(--ink);border-radius:3px;overflow:hidden;}
 .seg button{flex:1;padding:9px 4px;border:none;background:var(--card);font-family:var(--sans);font-size:13.5px;cursor:pointer;color:var(--ink);}
