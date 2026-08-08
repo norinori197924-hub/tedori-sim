@@ -32,12 +32,14 @@ SPEC.md 5章の方針(データ未整備を平均値等で代替しない)を技
 import json
 import sys
 from datetime import datetime, timezone
+from functools import lru_cache
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PREFECTURES_FILE = Path(__file__).resolve().parent / "prefectures.json"
 MUNICIPALITY_CODES_FILE = Path(__file__).resolve().parent / "municipality_codes.json"
 RAW_DIR = ROOT / "data" / "raw" / "kokuho"
+KYOKAI_KENPO_DIR = ROOT / "src" / "data" / "rates" / "2026" / "kyokai-kenpo"
 COMPARISON_DIR = RAW_DIR / "comparisons"
 NHI_DIR = ROOT / "src" / "data" / "rates" / "2026" / "national-health-insurance"
 MUNICIPALITIES_INDEX = ROOT / "src" / "data" / "municipalities" / "index.json"
@@ -208,6 +210,29 @@ def should_write(muni_code: str, new_data_source: str) -> bool:
     return new_priority >= DATA_SOURCE_PRIORITY[existing_source]
 
 
+@lru_cache(maxsize=1)
+def load_kyokai_kenpo_files_by_prefecture() -> dict:
+    """kyokai-kenpo/*.jsonを走査し、prefectureCode -> 相対パス(index.json基準)の対応表を作る。
+
+    2026-08-08、新規に市町村をindex.jsonへ追加する際、kyokaiKenpoStatusを無条件で
+    "pending"固定していたため、scripts/kyokai-kenpo/build.py(協会けんぽ整備)が既に
+    実行済みの都道府県でも、その後kokuhoパイプラインで新規追加された市町村だけが
+    pendingのまま取り残される問題が発生した(埼玉・千葉・愛知・兵庫・福岡で発覚)。
+    scripts/kyokai-kenpo/build.pyのファイル命名スラッグに依存せず、実際に生成済みの
+    ファイルをprefectureCodeで突き合わせることで、どちらのパイプラインを先に実行しても
+    整合するようにする。1回のbuild.py実行内で結果をキャッシュする(lru_cache)。
+    """
+    mapping = {}
+    if not KYOKAI_KENPO_DIR.exists():
+        return mapping
+    for path in sorted(KYOKAI_KENPO_DIR.glob("*.json")):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        pref_code = data.get("prefectureCode")
+        if pref_code:
+            mapping[pref_code] = f"rates/2026/kyokai-kenpo/{path.stem}.json"
+    return mapping
+
+
 def update_municipalities_index(pref_entry: dict, pref_code: str, muni_code: str, muni_name: str):
     index = json.loads(MUNICIPALITIES_INDEX.read_text(encoding="utf-8"))
     for m in index["municipalities"]:
@@ -218,14 +243,15 @@ def update_municipalities_index(pref_entry: dict, pref_code: str, muni_code: str
             m.pop("nationalHealthInsuranceNotAvailableReason", None)
             break
     else:
+        kyokai_kenpo_file = load_kyokai_kenpo_files_by_prefecture().get(pref_code)
         index["municipalities"].append(
             {
                 "prefecture": pref_entry["name"],
                 "prefectureCode": pref_code,
                 "municipality": muni_name,
                 "municipalityCode": muni_code,
-                "kyokaiKenpoStatus": "pending",
-                "kyokaiKenpoRatesFile": None,
+                "kyokaiKenpoStatus": "confirmed" if kyokai_kenpo_file else "pending",
+                "kyokaiKenpoRatesFile": kyokai_kenpo_file,
                 "nationalHealthInsuranceStatus": "confirmed",
                 "nationalHealthInsuranceFile": f"rates/2026/national-health-insurance/{muni_code}.json",
                 "verificationStatus": "auto_unverified",
