@@ -180,13 +180,58 @@ function normalizeDigits(raw) {
  * 「500万」のように数字以外の文字が混じった入力を、末尾の不正な文字が黙って
  * 切り捨てられた小さな数値として誤って受理しないよう、全角→半角変換後に
  * 数字のみで構成されているかを厳密にチェックする(0以上の整数のみを許可)。
+ * 桁区切りのカンマ(半角・全角とも)は3桁ごとの位置を問わず除去してから判定する
+ * (このアプリ自身が自動挿入するカンマは常に正しい位置に入るため、位置の妥当性
+ * チェックまでは行わない)。
  * @param {string} raw
  * @returns {number|null} 不正な場合はnull
  */
 function parseStrictInteger(raw) {
-  const normalized = normalizeDigits(raw.trim());
+  const normalized = normalizeDigits(raw.trim()).replace(/[,、]/g, '');
   if (!/^\d+$/.test(normalized)) return null;
   return Number(normalized);
+}
+
+/**
+ * 半角数字のみの文字列に、3桁ごとの桁区切りカンマを挿入する。
+ * @param {string} digitsOnly
+ * @returns {string}
+ */
+function formatWithCommas(digitsOnly) {
+  if (digitsOnly === '') return '';
+  return digitsOnly.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/**
+ * 年収系の入力欄に、カーソル位置を保ったまま桁区切りカンマをリアルタイムで反映する。
+ * 単純な文字数の差分でカーソルを補正するとカンマの増減でズレるため、
+ * 「カーソルより前に数字が何個あったか」を基準に新しいカーソル位置を求める。
+ * @param {HTMLInputElement} el
+ */
+function formatIncomeInputWithCommas(el) {
+  const prevValue = el.value;
+  const cursor = el.selectionStart ?? prevValue.length;
+  const normalized = normalizeDigits(prevValue);
+
+  // カンマ(全角の「、」含む)・数字以外の文字が混じっている場合、それを黙って除去して
+  // 整形してしまうと「500万」のような不正な入力が気づかれないまま受理されてしまう
+  // (type="number"の末尾切り捨てバグと同種の問題)。整形せず入力をそのまま残し、
+  // 送信時のparseStrictInteger()による明示的なエラー表示に委ねる。
+  if (/[^\d,、]/.test(normalized)) return;
+
+  const digitsBeforeCursor = normalized.slice(0, cursor).replace(/\D/g, '').length;
+  const allDigits = normalized.replace(/\D/g, '');
+  const newValue = formatWithCommas(allDigits);
+
+  let newCursor = 0;
+  let digitsSeen = 0;
+  while (newCursor < newValue.length && digitsSeen < digitsBeforeCursor) {
+    if (/\d/.test(newValue[newCursor])) digitsSeen++;
+    newCursor++;
+  }
+
+  el.value = newValue;
+  el.setSelectionRange(newCursor, newCursor);
 }
 
 function setFieldError(el, hasError) {
@@ -221,7 +266,7 @@ function validateForm() {
     if (v === null) {
       errors.push({ el: annualIncomeInput, label: '額面の年収（半角数字のみで入力してください。例: 5000000）' });
     } else {
-      annualIncomeInput.value = String(v);
+      annualIncomeInput.value = formatWithCommas(String(v));
     }
   }
 
@@ -243,7 +288,7 @@ function validateForm() {
     if (v === null) {
       errors.push({ el: spouseIncomeInput, label: '配偶者の年収（半角数字のみで入力してください。例: 3000000）' });
     } else {
-      spouseIncomeInput.value = String(v);
+      spouseIncomeInput.value = formatWithCommas(String(v));
     }
   }
 
@@ -278,7 +323,7 @@ function readInput(employmentType) {
   const numberOfChildren = Number(document.getElementById('numberOfChildren').value);
   const childrenAges = getChildAgeInputs().map((el) => Number(el.value));
   const hasSpouse = document.getElementById('hasSpouse').value === 'yes';
-  const spouseIncomeRaw = document.getElementById('spouseIncome').value;
+  const spouseIncomeRaw = document.getElementById('spouseIncome').value.replace(/,/g, '');
 
   /** @type {import('../calc/types.js').SimpleInput} */
   const input = {
@@ -288,7 +333,7 @@ function readInput(employmentType) {
     numberOfChildren,
     childrenAges,
     employmentType,
-    annualIncome: Number(document.getElementById('annualIncome').value),
+    annualIncome: Number(document.getElementById('annualIncome').value.replace(/,/g, '')),
     spouse: {
       hasSpouse,
       spouseIncome: hasSpouse && spouseIncomeRaw !== '' ? Number(spouseIncomeRaw) : null
@@ -498,9 +543,13 @@ updateChildrenAgesFields();
 hasSpouseSelect.addEventListener('change', updateSpouseIncomeAvailability);
 updateSpouseIncomeAvailability();
 
-[annualIncomeInput, ageInput].forEach((el) => {
-  el.addEventListener('input', () => setFieldError(el, false));
+[annualIncomeInput, spouseIncomeInput].forEach((el) => {
+  el.addEventListener('input', () => {
+    formatIncomeInputWithCommas(el);
+    setFieldError(el, false);
+  });
 });
+ageInput.addEventListener('input', () => setFieldError(ageInput, false));
 [prefectureSelect, municipalitySelect].forEach((el) => {
   el.addEventListener('change', () => setFieldError(el, false));
 });

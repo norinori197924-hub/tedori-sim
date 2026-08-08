@@ -54,6 +54,7 @@ header{border-bottom:2px solid var(--ink);background:var(--paper);}
 .field{margin-bottom:15px;}
 .field label{display:block;font-size:12.5px;font-weight:500;margin-bottom:5px;}
 .field label .opt{color:var(--ink-soft);font-weight:400;font-size:11px;margin-left:6px;border:1px solid var(--line);border-radius:2px;padding:0 5px;}
+.field-hint{font-size:11px;color:var(--ink-soft);margin:-2px 0 6px;line-height:1.5;}
 .field input,.field select{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:3px;font-family:var(--sans);font-size:14px;background:var(--paper);color:var(--ink);}
 .field input:disabled,.field select:disabled{color:var(--ink-soft);background:#eeece5;}
 .field select:invalid{color:var(--ink-soft);}
