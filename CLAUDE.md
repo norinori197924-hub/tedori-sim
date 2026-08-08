@@ -245,6 +245,13 @@ SPEC.md 7章条件9(GitHub Pages公開)に着手した際、robots.txt・sitemap
   (`/sitemap.xml`、`/`・`/about/`・`/privacy/`・`/disclaimer/`の4件)は作成済みだが、
   検索エンジンに登録するには**Google Search Console等で手動送信が必要**。公開後の作業として
   残る(このセッションでは未実施)。
+- **Google Search Console 所有権確認ファイル(2026-08-08追加)**: リポジトリルートに
+  `google29e95ef41fb28712.html`(内容は`google-site-verification: google29e95ef41fb28712.html`の
+  1行のみ)を設置済み。`https://norinori197924-hub.github.io/tedori-sim/google29e95ef41fb28712.html`
+  でSearch Consoleが所有権を確認するためのファイルであり、**削除すると所有権の確認が外れる
+  ため、削除・リネームしないこと**。sitemap.xmlの手動送信(上記)はこのファイルによる
+  所有権確認が前提になるため、まだ完了していない場合は先にSearch Console側での確認作業を
+  済ませること。
 - **独自ドメイン等でrobots.txtが将来有効になった場合のための正しいパスのメモ**:
   リポジトリには紛らわしい2つの「data」ディレクトリがある。
   - `data/raw/`(リポジトリ直下): 国保料収集パイプラインの生データ・中間ファイル
