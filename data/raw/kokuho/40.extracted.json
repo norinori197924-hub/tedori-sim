@@ -1,0 +1,1685 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "北九州市",
+      "medical": {
+        "incomeRate": 0.0731,
+        "perCapitaAmount": 28182,
+        "perHouseholdAmount": 27856,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0292,
+        "perCapitaAmount": 11187,
+        "perHouseholdAmount": 11057,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 10974,
+        "perHouseholdAmount": 8482,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1137,
+        "perHouseholdAmount": 1073,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "福岡市",
+      "medical": {
+        "incomeRate": 0.0752,
+        "perCapitaAmount": 28989,
+        "perHouseholdAmount": 28653,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0289,
+        "perCapitaAmount": 11072,
+        "perHouseholdAmount": 10944,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0237,
+        "perCapitaAmount": 10915,
+        "perHouseholdAmount": 8436,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1118,
+        "perHouseholdAmount": 1054,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大牟田市",
+      "medical": {
+        "incomeRate": 0.0648,
+        "perCapitaAmount": 24981,
+        "perHouseholdAmount": 24692,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 10942,
+        "perHouseholdAmount": 10815,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0224,
+        "perCapitaAmount": 10290,
+        "perHouseholdAmount": 7953,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1129,
+        "perHouseholdAmount": 1042,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "久留米市",
+      "medical": {
+        "incomeRate": 0.0674,
+        "perCapitaAmount": 25973,
+        "perHouseholdAmount": 25673,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0292,
+        "perCapitaAmount": 11175,
+        "perHouseholdAmount": 11045,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0237,
+        "perCapitaAmount": 10887,
+        "perHouseholdAmount": 8415,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1129,
+        "perHouseholdAmount": 1051,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "直方市",
+      "medical": {
+        "incomeRate": 0.0717,
+        "perCapitaAmount": 27616,
+        "perHouseholdAmount": 27296,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0279,
+        "perCapitaAmount": 10681,
+        "perHouseholdAmount": 10557,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0222,
+        "perCapitaAmount": 10202,
+        "perHouseholdAmount": 7885,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1078,
+        "perHouseholdAmount": 1023,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "飯塚市",
+      "medical": {
+        "incomeRate": 0.073,
+        "perCapitaAmount": 28111,
+        "perHouseholdAmount": 27786,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10783,
+        "perHouseholdAmount": 10658,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 10510,
+        "perHouseholdAmount": 8123,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1082,
+        "perHouseholdAmount": 1019,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "田川市",
+      "medical": {
+        "incomeRate": 0.0724,
+        "perCapitaAmount": 27908,
+        "perHouseholdAmount": 27585,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0275,
+        "perCapitaAmount": 10544,
+        "perHouseholdAmount": 10422,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0225,
+        "perCapitaAmount": 10335,
+        "perHouseholdAmount": 7988,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1046,
+        "perHouseholdAmount": 1017,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "柳川市",
+      "medical": {
+        "incomeRate": 0.0735,
+        "perCapitaAmount": 28324,
+        "perHouseholdAmount": 27996,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10999,
+        "perHouseholdAmount": 10871,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0233,
+        "perCapitaAmount": 10725,
+        "perHouseholdAmount": 8289,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1093,
+        "perHouseholdAmount": 1028,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "嘉麻市",
+      "medical": {
+        "incomeRate": 0.0728,
+        "perCapitaAmount": 28048,
+        "perHouseholdAmount": 27723,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10972,
+        "perHouseholdAmount": 10845,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0244,
+        "perCapitaAmount": 11231,
+        "perHouseholdAmount": 8681,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1144,
+        "perHouseholdAmount": 1069,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "朝倉市",
+      "medical": {
+        "incomeRate": 0.0776,
+        "perCapitaAmount": 29912,
+        "perHouseholdAmount": 29566,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0283,
+        "perCapitaAmount": 10815,
+        "perHouseholdAmount": 10689,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0221,
+        "perCapitaAmount": 10160,
+        "perHouseholdAmount": 7853,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1105,
+        "perHouseholdAmount": 1028,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "八女市",
+      "medical": {
+        "incomeRate": 0.0744,
+        "perCapitaAmount": 28658,
+        "perHouseholdAmount": 28326,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10977,
+        "perHouseholdAmount": 10850,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0235,
+        "perCapitaAmount": 10782,
+        "perHouseholdAmount": 8333,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1102,
+        "perHouseholdAmount": 1033,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "筑後市",
+      "medical": {
+        "incomeRate": 0.0808,
+        "perCapitaAmount": 31114,
+        "perHouseholdAmount": 30754,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0288,
+        "perCapitaAmount": 11029,
+        "perHouseholdAmount": 10901,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10581,
+        "perHouseholdAmount": 8178,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1122,
+        "perHouseholdAmount": 1047,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大川市",
+      "medical": {
+        "incomeRate": 0.0778,
+        "perCapitaAmount": 29968,
+        "perHouseholdAmount": 29621,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 11005,
+        "perHouseholdAmount": 10878,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0232,
+        "perCapitaAmount": 10662,
+        "perHouseholdAmount": 8241,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1106,
+        "perHouseholdAmount": 1034,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "行橋市",
+      "medical": {
+        "incomeRate": 0.0747,
+        "perCapitaAmount": 28767,
+        "perHouseholdAmount": 28434,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.028,
+        "perCapitaAmount": 10710,
+        "perHouseholdAmount": 10585,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0224,
+        "perCapitaAmount": 10314,
+        "perHouseholdAmount": 7971,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1103,
+        "perHouseholdAmount": 1034,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "豊前市",
+      "medical": {
+        "incomeRate": 0.0723,
+        "perCapitaAmount": 27876,
+        "perHouseholdAmount": 27553,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0283,
+        "perCapitaAmount": 10819,
+        "perHouseholdAmount": 10694,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10591,
+        "perHouseholdAmount": 8186,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1114,
+        "perHouseholdAmount": 1032,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "中間市",
+      "medical": {
+        "incomeRate": 0.0726,
+        "perCapitaAmount": 27974,
+        "perHouseholdAmount": 27650,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 10769,
+        "perHouseholdAmount": 10644,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0235,
+        "perCapitaAmount": 10788,
+        "perHouseholdAmount": 8338,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1144,
+        "perHouseholdAmount": 1077,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "小郡市",
+      "medical": {
+        "incomeRate": 0.0766,
+        "perCapitaAmount": 29523,
+        "perHouseholdAmount": 29181,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 11110,
+        "perHouseholdAmount": 10981,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0233,
+        "perCapitaAmount": 10707,
+        "perHouseholdAmount": 8275,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1132,
+        "perHouseholdAmount": 1043,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "筑紫野市",
+      "medical": {
+        "incomeRate": 0.0766,
+        "perCapitaAmount": 29501,
+        "perHouseholdAmount": 29159,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 10749,
+        "perHouseholdAmount": 10624,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0226,
+        "perCapitaAmount": 10378,
+        "perHouseholdAmount": 8021,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1094,
+        "perHouseholdAmount": 1024,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "春日市",
+      "medical": {
+        "incomeRate": 0.0727,
+        "perCapitaAmount": 28015,
+        "perHouseholdAmount": 27690,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.028,
+        "perCapitaAmount": 10724,
+        "perHouseholdAmount": 10600,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 10507,
+        "perHouseholdAmount": 8121,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1073,
+        "perHouseholdAmount": 1016,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大野城市",
+      "medical": {
+        "incomeRate": 0.0768,
+        "perCapitaAmount": 29604,
+        "perHouseholdAmount": 29261,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0283,
+        "perCapitaAmount": 10838,
+        "perHouseholdAmount": 10713,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0231,
+        "perCapitaAmount": 10617,
+        "perHouseholdAmount": 8206,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1079,
+        "perHouseholdAmount": 1019,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "太宰府市",
+      "medical": {
+        "incomeRate": 0.0732,
+        "perCapitaAmount": 28222,
+        "perHouseholdAmount": 27895,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10807,
+        "perHouseholdAmount": 10682,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0227,
+        "perCapitaAmount": 10435,
+        "perHouseholdAmount": 8065,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1110,
+        "perHouseholdAmount": 1035,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "那珂川市",
+      "medical": {
+        "incomeRate": 0.0776,
+        "perCapitaAmount": 29909,
+        "perHouseholdAmount": 29562,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10809,
+        "perHouseholdAmount": 10683,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0232,
+        "perCapitaAmount": 10645,
+        "perHouseholdAmount": 8227,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1067,
+        "perHouseholdAmount": 1033,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "宇美町",
+      "medical": {
+        "incomeRate": 0.0777,
+        "perCapitaAmount": 29933,
+        "perHouseholdAmount": 29586,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0279,
+        "perCapitaAmount": 10682,
+        "perHouseholdAmount": 10558,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0223,
+        "perCapitaAmount": 10260,
+        "perHouseholdAmount": 7930,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1090,
+        "perHouseholdAmount": 1021,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "篠栗町",
+      "medical": {
+        "incomeRate": 0.0795,
+        "perCapitaAmount": 30613,
+        "perHouseholdAmount": 30258,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10992,
+        "perHouseholdAmount": 10865,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0232,
+        "perCapitaAmount": 10663,
+        "perHouseholdAmount": 8242,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1102,
+        "perHouseholdAmount": 1035,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "志免町",
+      "medical": {
+        "incomeRate": 0.0776,
+        "perCapitaAmount": 29898,
+        "perHouseholdAmount": 29552,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 10767,
+        "perHouseholdAmount": 10642,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 10526,
+        "perHouseholdAmount": 8136,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1082,
+        "perHouseholdAmount": 1036,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "須恵町",
+      "medical": {
+        "incomeRate": 0.0808,
+        "perCapitaAmount": 31123,
+        "perHouseholdAmount": 30763,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 10955,
+        "perHouseholdAmount": 10828,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0233,
+        "perCapitaAmount": 10697,
+        "perHouseholdAmount": 8268,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1103,
+        "perHouseholdAmount": 1044,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "新宮町",
+      "medical": {
+        "incomeRate": 0.0757,
+        "perCapitaAmount": 29159,
+        "perHouseholdAmount": 28821,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10968,
+        "perHouseholdAmount": 10841,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0232,
+        "perCapitaAmount": 10667,
+        "perHouseholdAmount": 8245,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1097,
+        "perHouseholdAmount": 1028,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "古賀市",
+      "medical": {
+        "incomeRate": 0.0763,
+        "perCapitaAmount": 29392,
+        "perHouseholdAmount": 29052,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10793,
+        "perHouseholdAmount": 10668,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10571,
+        "perHouseholdAmount": 8171,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1090,
+        "perHouseholdAmount": 1018,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "久山町",
+      "medical": {
+        "incomeRate": 0.0789,
+        "perCapitaAmount": 30396,
+        "perHouseholdAmount": 30044,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0298,
+        "perCapitaAmount": 11422,
+        "perHouseholdAmount": 11289,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 11246,
+        "perHouseholdAmount": 8692,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1121,
+        "perHouseholdAmount": 1049,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "粕屋町",
+      "medical": {
+        "incomeRate": 0.0777,
+        "perCapitaAmount": 29926,
+        "perHouseholdAmount": 29579,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0279,
+        "perCapitaAmount": 10666,
+        "perHouseholdAmount": 10543,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 10540,
+        "perHouseholdAmount": 8146,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1048,
+        "perHouseholdAmount": 1002,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "宗像市",
+      "medical": {
+        "incomeRate": 0.0788,
+        "perCapitaAmount": 30378,
+        "perHouseholdAmount": 30026,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10974,
+        "perHouseholdAmount": 10847,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0231,
+        "perCapitaAmount": 10612,
+        "perHouseholdAmount": 8202,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1105,
+        "perHouseholdAmount": 1024,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "福津市",
+      "medical": {
+        "incomeRate": 0.0761,
+        "perCapitaAmount": 29307,
+        "perHouseholdAmount": 28967,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10982,
+        "perHouseholdAmount": 10855,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0234,
+        "perCapitaAmount": 10777,
+        "perHouseholdAmount": 8329,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1103,
+        "perHouseholdAmount": 1030,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "芦屋町",
+      "medical": {
+        "incomeRate": 0.0835,
+        "perCapitaAmount": 32154,
+        "perHouseholdAmount": 31781,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 10945,
+        "perHouseholdAmount": 10818,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0236,
+        "perCapitaAmount": 10832,
+        "perHouseholdAmount": 8372,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1102,
+        "perHouseholdAmount": 1027,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "水巻町",
+      "medical": {
+        "incomeRate": 0.078,
+        "perCapitaAmount": 30061,
+        "perHouseholdAmount": 29713,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10783,
+        "perHouseholdAmount": 10658,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0192,
+        "perCapitaAmount": 8827,
+        "perHouseholdAmount": 6823,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1088,
+        "perHouseholdAmount": 1028,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "岡垣町",
+      "medical": {
+        "incomeRate": 0.0729,
+        "perCapitaAmount": 28088,
+        "perHouseholdAmount": 27762,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10812,
+        "perHouseholdAmount": 10686,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 10513,
+        "perHouseholdAmount": 8126,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1100,
+        "perHouseholdAmount": 1023,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "遠賀町",
+      "medical": {
+        "incomeRate": 0.0721,
+        "perCapitaAmount": 27763,
+        "perHouseholdAmount": 27441,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0279,
+        "perCapitaAmount": 10666,
+        "perHouseholdAmount": 10542,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0226,
+        "perCapitaAmount": 10394,
+        "perHouseholdAmount": 8033,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1074,
+        "perHouseholdAmount": 1005,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "小竹町",
+      "medical": {
+        "incomeRate": 0.0853,
+        "perCapitaAmount": 32866,
+        "perHouseholdAmount": 32485,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10793,
+        "perHouseholdAmount": 10668,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10565,
+        "perHouseholdAmount": 8165,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1125,
+        "perHouseholdAmount": 1037,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "鞍手町",
+      "medical": {
+        "incomeRate": 0.071,
+        "perCapitaAmount": 27340,
+        "perHouseholdAmount": 27023,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 10748,
+        "perHouseholdAmount": 10624,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10574,
+        "perHouseholdAmount": 8173,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1104,
+        "perHouseholdAmount": 1021,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "宮若市",
+      "medical": {
+        "incomeRate": 0.0761,
+        "perCapitaAmount": 29338,
+        "perHouseholdAmount": 28998,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10786,
+        "perHouseholdAmount": 10661,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0226,
+        "perCapitaAmount": 10365,
+        "perHouseholdAmount": 8012,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1087,
+        "perHouseholdAmount": 1012,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "桂川町",
+      "medical": {
+        "incomeRate": 0.0656,
+        "perCapitaAmount": 25285,
+        "perHouseholdAmount": 24992,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0275,
+        "perCapitaAmount": 10514,
+        "perHouseholdAmount": 10392,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0237,
+        "perCapitaAmount": 10903,
+        "perHouseholdAmount": 8427,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1083,
+        "perHouseholdAmount": 1002,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "筑前町",
+      "medical": {
+        "incomeRate": 0.0802,
+        "perCapitaAmount": 30899,
+        "perHouseholdAmount": 30541,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 10942,
+        "perHouseholdAmount": 10815,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0235,
+        "perCapitaAmount": 10816,
+        "perHouseholdAmount": 8360,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1102,
+        "perHouseholdAmount": 1026,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "東峰村",
+      "medical": {
+        "incomeRate": 0.0731,
+        "perCapitaAmount": 28168,
+        "perHouseholdAmount": 27841,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0293,
+        "perCapitaAmount": 11228,
+        "perHouseholdAmount": 11098,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 11022,
+        "perHouseholdAmount": 8519,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1119,
+        "perHouseholdAmount": 1045,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "糸島市",
+      "medical": {
+        "incomeRate": 0.0773,
+        "perCapitaAmount": 29784,
+        "perHouseholdAmount": 29439,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0293,
+        "perCapitaAmount": 11224,
+        "perHouseholdAmount": 11094,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 10997,
+        "perHouseholdAmount": 8500,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1111,
+        "perHouseholdAmount": 1037,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "うきは市",
+      "medical": {
+        "incomeRate": 0.0821,
+        "perCapitaAmount": 31620,
+        "perHouseholdAmount": 31253,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0289,
+        "perCapitaAmount": 11053,
+        "perHouseholdAmount": 10925,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0236,
+        "perCapitaAmount": 10849,
+        "perHouseholdAmount": 8385,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1113,
+        "perHouseholdAmount": 1031,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大刀洗町",
+      "medical": {
+        "incomeRate": 0.0826,
+        "perCapitaAmount": 31832,
+        "perHouseholdAmount": 31463,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0294,
+        "perCapitaAmount": 11240,
+        "perHouseholdAmount": 11110,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 10978,
+        "perHouseholdAmount": 8485,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1133,
+        "perHouseholdAmount": 1048,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大木町",
+      "medical": {
+        "incomeRate": 0.0919,
+        "perCapitaAmount": 35403,
+        "perHouseholdAmount": 34993,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0288,
+        "perCapitaAmount": 11027,
+        "perHouseholdAmount": 10899,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0236,
+        "perCapitaAmount": 10857,
+        "perHouseholdAmount": 8392,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1099,
+        "perHouseholdAmount": 1028,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "広川町",
+      "medical": {
+        "incomeRate": 0.0808,
+        "perCapitaAmount": 31119,
+        "perHouseholdAmount": 30759,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 11083,
+        "perHouseholdAmount": 10954,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0238,
+        "perCapitaAmount": 10922,
+        "perHouseholdAmount": 8442,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1115,
+        "perHouseholdAmount": 1045,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "みやま市",
+      "medical": {
+        "incomeRate": 0.0765,
+        "perCapitaAmount": 29475,
+        "perHouseholdAmount": 29133,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0283,
+        "perCapitaAmount": 10842,
+        "perHouseholdAmount": 10717,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0232,
+        "perCapitaAmount": 10640,
+        "perHouseholdAmount": 8224,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1093,
+        "perHouseholdAmount": 1019,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "香春町",
+      "medical": {
+        "incomeRate": 0.0761,
+        "perCapitaAmount": 29336,
+        "perHouseholdAmount": 28996,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0279,
+        "perCapitaAmount": 10693,
+        "perHouseholdAmount": 10569,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10554,
+        "perHouseholdAmount": 8157,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1050,
+        "perHouseholdAmount": 1006,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "添田町",
+      "medical": {
+        "incomeRate": 0.0718,
+        "perCapitaAmount": 27674,
+        "perHouseholdAmount": 27354,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0278,
+        "perCapitaAmount": 10652,
+        "perHouseholdAmount": 10529,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0223,
+        "perCapitaAmount": 10263,
+        "perHouseholdAmount": 7933,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1079,
+        "perHouseholdAmount": 1017,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "福智町",
+      "medical": {
+        "incomeRate": 0.0673,
+        "perCapitaAmount": 25945,
+        "perHouseholdAmount": 25644,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0291,
+        "perCapitaAmount": 11132,
+        "perHouseholdAmount": 11003,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0236,
+        "perCapitaAmount": 10850,
+        "perHouseholdAmount": 8386,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1126,
+        "perHouseholdAmount": 1084,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "糸田町",
+      "medical": {
+        "incomeRate": 0.0743,
+        "perCapitaAmount": 28616,
+        "perHouseholdAmount": 28284,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 11090,
+        "perHouseholdAmount": 10962,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0233,
+        "perCapitaAmount": 10705,
+        "perHouseholdAmount": 8274,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0032,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1273,
+        "perHouseholdAmount": 1224,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "川崎町",
+      "medical": {
+        "incomeRate": 0.0681,
+        "perCapitaAmount": 26252,
+        "perHouseholdAmount": 25948,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 11109,
+        "perHouseholdAmount": 10980,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0246,
+        "perCapitaAmount": 11286,
+        "perHouseholdAmount": 8723,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1089,
+        "perHouseholdAmount": 1054,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大任町",
+      "medical": {
+        "incomeRate": 0.0758,
+        "perCapitaAmount": 29216,
+        "perHouseholdAmount": 28877,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 11003,
+        "perHouseholdAmount": 10876,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0234,
+        "perCapitaAmount": 10740,
+        "perHouseholdAmount": 8301,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1076,
+        "perHouseholdAmount": 1055,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "赤村",
+      "medical": {
+        "incomeRate": 0.0635,
+        "perCapitaAmount": 24477,
+        "perHouseholdAmount": 24194,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0277,
+        "perCapitaAmount": 10610,
+        "perHouseholdAmount": 10487,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0224,
+        "perCapitaAmount": 10293,
+        "perHouseholdAmount": 7956,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1079,
+        "perHouseholdAmount": 995,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "苅田町",
+      "medical": {
+        "incomeRate": 0.0815,
+        "perCapitaAmount": 31400,
+        "perHouseholdAmount": 31036,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10980,
+        "perHouseholdAmount": 10853,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 10538,
+        "perHouseholdAmount": 8145,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1121,
+        "perHouseholdAmount": 1055,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "みやこ町",
+      "medical": {
+        "incomeRate": 0.0734,
+        "perCapitaAmount": 28266,
+        "perHouseholdAmount": 27939,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 10930,
+        "perHouseholdAmount": 10804,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.023,
+        "perCapitaAmount": 10550,
+        "perHouseholdAmount": 8154,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1116,
+        "perHouseholdAmount": 1037,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "築上町",
+      "medical": {
+        "incomeRate": 0.0692,
+        "perCapitaAmount": 26671,
+        "perHouseholdAmount": 26362,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0283,
+        "perCapitaAmount": 10849,
+        "perHouseholdAmount": 10723,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.022,
+        "perCapitaAmount": 10101,
+        "perHouseholdAmount": 7807,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1143,
+        "perHouseholdAmount": 1050,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "吉富町",
+      "medical": {
+        "incomeRate": 0.0911,
+        "perCapitaAmount": 35093,
+        "perHouseholdAmount": 34686,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0278,
+        "perCapitaAmount": 10651,
+        "perHouseholdAmount": 10527,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0226,
+        "perCapitaAmount": 10398,
+        "perHouseholdAmount": 8037,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1081,
+        "perHouseholdAmount": 1004,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "上毛町",
+      "medical": {
+        "incomeRate": 0.0657,
+        "perCapitaAmount": 25327,
+        "perHouseholdAmount": 25034,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 10918,
+        "perHouseholdAmount": 10791,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0232,
+        "perCapitaAmount": 10673,
+        "perHouseholdAmount": 8249,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1125,
+        "perHouseholdAmount": 1032,
+        "assetRate": 0
+      }
+    }
+  ]
+}
