@@ -37,6 +37,27 @@ const COMMON_ASSUMPTIONS = [
 ];
 
 /**
+ * 住民税の非課税限度額(所得割・均等割)に関する注記を組み立てる。
+ * 所得割・均等割は独立した制度で、一方が非課税でももう一方は別途判定が必要なため、
+ * それぞれの判定結果に応じて個別に注記する。
+ * @param {import('./types.js').ResidentTaxResult} residentTax
+ * @returns {string[]}
+ */
+function buildResidentTaxExemptionAssumptions(residentTax) {
+  const notes = [];
+  if (residentTax.incomeLevyExempt) {
+    notes.push('総所得金額等が非課税限度額以下のため、住民税の所得割は非課税(0円)です。均等割・森林環境税は所得割とは別制度のため、この判定だけでは均等割の課否は決まりません(別途判定しています)。');
+  }
+  if (residentTax.perCapitaLevyExempt) {
+    notes.push('総所得金額等が均等割の非課税限度額以下のため、住民税の均等割・森林環境税も非課税(0円)です。均等割の非課税限度額は法律で一律に定まった額ではなく、地域の級地区分を「参酌して」市区町村が条例で定めるため、実際の金額は市区町村により異なる場合があります。');
+  }
+  if (residentTax.perCapitaLevyGradeAmbiguous) {
+    notes.push('お住まいの市区町村の級地区分(1〜3級地)のデータが未整備のため、最も非課税になりにくい3級地の基準で暫定的に判定しています。実際の級地によっては、均等割が非課税になる可能性があります。');
+  }
+  return notes;
+}
+
+/**
  * 会社員の手取りを計算する。
  * @param {SimpleInput} input
  * @param {RateBundle} rates
@@ -58,9 +79,7 @@ function calculateEmployeeTakeHome(input, rates) {
   if (residentTax.adjustmentCreditNeedsReview) {
     assumptions.push('住民税の調整控除額は、基礎控除に係る人的控除差が未確定のため暫定値で計算しています(要確認)。');
   }
-  if (residentTax.incomeLevyExempt) {
-    assumptions.push('総所得金額等が非課税限度額以下のため、住民税の所得割は非課税(0円)です。均等割・森林環境税は所得割とは別制度のため、この判定に関わらず課税されます。');
-  }
+  assumptions.push(...buildResidentTaxExemptionAssumptions(residentTax));
 
   return { income, socialInsurance, incomeTax, residentTax, takeHomeAnnual, takeHomeMonthly, assumptions };
 }
@@ -113,9 +132,7 @@ function calculateFreelanceTakeHome(input, rates) {
   if (residentTax.adjustmentCreditNeedsReview) {
     assumptions.push('住民税の調整控除額は、基礎控除に係る人的控除差が未確定のため暫定値で計算しています(要確認)。');
   }
-  if (residentTax.incomeLevyExempt) {
-    assumptions.push('総所得金額等が非課税限度額以下のため、住民税の所得割は非課税(0円)です。均等割・森林環境税は所得割とは別制度のため、この判定に関わらず課税されます。');
-  }
+  assumptions.push(...buildResidentTaxExemptionAssumptions(residentTax));
 
   return { income, socialInsurance, incomeTax, residentTax, takeHomeAnnual, takeHomeMonthly, assumptions };
 }

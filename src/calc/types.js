@@ -80,6 +80,7 @@
  * @property {KyokaiKenpoRateFile} kyokaiKenpo 計算対象の都道府県1件分(会社員のみ使用)
  * @property {Object} nationalPension national-pension.json(フリーランスのみ使用)
  * @property {Object} nationalHealthInsurance 計算対象の市区町村のnationalHealthInsurance1件分(フリーランスのみ使用)
+ * @property {Object} gradeArea grade-area.json(均等割の非課税限度額の判定に使う級地区分マスタ)
  */
 
 /**
@@ -119,8 +120,12 @@
  * @property {number} incomeLevy
  * @property {boolean} incomeLevyExempt 所得割の非課税判定(地方税法附則第3条の3)。均等割・森林環境税とは別制度
  * @property {number} perCapitaLevy
+ * @property {boolean} perCapitaLevyExempt 均等割の非課税判定(地方税法第295条3項→施行令47条の3→施行規則9条の3)。該当時は森林環境税も同時に非課税になる
  * @property {number} forestEnvironmentTax
  * @property {number} total
+ * @property {1|2|3} grade 判定に使用した級地区分(1〜3級地)
+ * @property {'registered'|'unregistered'} gradeAreaStatus 級地区分がgrade-area.jsonに登録済みか(未登録はdefaultGrade=3級地にフォールバックした暫定値であることを示す)
+ * @property {boolean} perCapitaLevyGradeAmbiguous 級地が未登録かつ、実際の級地が1級地であれば均等割が非課税になりうるケース(=3級地基準では課税と判定したが確定情報ではない)であることを示す
  */
 
 /**

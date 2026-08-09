@@ -62,5 +62,15 @@
     "baseAmountPerPerson": 350000,
     "addition": 100000,
     "dependentOrSpouseAddition": 320000
+  },
+  "perCapitaLevyExemption": {
+    "description": "均等割の非課税限度額。所得割の非課税限度額(地方税法附則第3条の3、全国一律の法定額)とは異なり、地方税法第295条3項→同法施行令47条の3→同法施行規則9条の3の構造で、基本額35万円・加算額21万円に生活保護法の級地区分に応じた率(1級地1.0/2級地0.9/3級地0.8)を乗じた額を『参酌して』各市町村が条例で定める基準。10万円の定額加算は級地率を乗じない(判定式に別項として定義)。基準額(byGrade[grade]を使用) = baseAmountPerPerson×(本人+同一生計配偶者+扶養親族の数) + addition(定額10万円) + (同一生計配偶者又は扶養親族がいる場合のみ dependentOrSpouseAddition を加算)。gradeはsrc/calc/grade-area.jsのresolveGradeArea()で解決する。",
+    "status": "provisional",
+    "statusNote": "2026-08-09、ユーザー提供の根拠(地方税法295条3項→施行令47条の3→施行規則9条の3)に基づく参酌基準値。所得割の非課税限度額(incomeLevyExemption)とは異なり、均等割の非課税限度額は法定額ではなく『参酌して』各市町村が条例で定める構造のため、実際の非課税限度額は市町村の条例により本ファイルの値と異なりうる。国保低所得軽減の加算単価31万円・57万円(national-health-insurance.js、CLAUDE.md 11.8章)と同種の暫定値として扱うこと。条文原文(地方税法施行規則第9条の3)への直接照会、および各市町村の条例による実際の差異の確認は未実施。",
+    "byGrade": {
+      "1": { "baseAmountPerPerson": 350000, "addition": 100000, "dependentOrSpouseAddition": 210000 },
+      "2": { "baseAmountPerPerson": 315000, "addition": 100000, "dependentOrSpouseAddition": 189000 },
+      "3": { "baseAmountPerPerson": 280000, "addition": 100000, "dependentOrSpouseAddition": 168000 }
+    }
   }
 }

@@ -214,3 +214,102 @@ test('所得割非課税: (対比)配偶者の所得が0円なら同一生計配
   const result = residentTaxRaw(700000, input);
   assert.equal(result.incomeLevyExempt, true);
 });
+
+/**
+ * 以下は均等割の非課税限度額(地方税法第295条3項→施行令47条の3→施行規則9条の3)の境界テスト。
+ * 基準額 = baseAmountPerPerson×人数 + addition(定額10万円) + dependentOrSpouseAddition(配偶者・扶養親族がいる場合)。
+ * 係数は級地(1〜3級地)ごとに異なり、参酌基準(条例による差異がありうる暫定値)。
+ * 該当時は均等割(perCapitaLevy)・森林環境税(forestEnvironmentTax)の両方が非課税になる。
+ */
+
+function ratesWithGrade(gradeCode, prefectureCode = '12', municipalityCode = '12203') {
+  return {
+    ...rates,
+    gradeArea: {
+      defaultGrade: 3,
+      prefectures: { [prefectureCode]: { exceptions: { [municipalityCode]: gradeCode } } }
+    }
+  };
+}
+
+test('均等割非課税: 3級地(未登録・デフォルト)・単身・総所得380,000円ちょうど → 非課税(森林環境税も同時に非課税)', () => {
+  const result = calculateResidentTax(380000, baseInput(), 0, rates);
+  assert.equal(result.gradeAreaStatus, 'unregistered');
+  assert.equal(result.grade, 3);
+  assert.equal(result.perCapitaLevyExempt, true);
+  assert.equal(result.perCapitaLevy, 0);
+  assert.equal(result.forestEnvironmentTax, 0);
+});
+
+test('均等割非課税: 3級地・単身・総所得380,001円 → 課税(境界+1円、均等割4,000円+森林環境税1,000円)', () => {
+  const result = calculateResidentTax(380001, baseInput(), 0, rates);
+  assert.equal(result.perCapitaLevyExempt, false);
+  assert.equal(result.perCapitaLevy, 4000);
+  assert.equal(result.forestEnvironmentTax, 1000);
+});
+
+test('均等割非課税: 1級地(登録済み)・単身・総所得450,000円ちょうど → 非課税', () => {
+  const result = calculateResidentTax(450000, baseInput(), 0, ratesWithGrade('1-1'));
+  assert.equal(result.gradeAreaStatus, 'registered');
+  assert.equal(result.grade, 1);
+  assert.equal(result.perCapitaLevyExempt, true);
+});
+
+test('均等割非課税: 1級地・単身・総所得450,001円 → 課税(境界+1円)', () => {
+  const result = calculateResidentTax(450001, baseInput(), 0, ratesWithGrade('1-2'));
+  assert.equal(result.grade, 1);
+  assert.equal(result.perCapitaLevyExempt, false);
+});
+
+test('均等割非課税: 2級地(登録済み)・単身・総所得415,000円ちょうど → 非課税', () => {
+  const result = calculateResidentTax(415000, baseInput(), 0, ratesWithGrade('2-1'));
+  assert.equal(result.grade, 2);
+  assert.equal(result.perCapitaLevyExempt, true);
+});
+
+test('均等割非課税: 2級地・単身・総所得415,001円 → 課税(境界+1円)', () => {
+  const result = calculateResidentTax(415001, baseInput(), 0, ratesWithGrade('2-2'));
+  assert.equal(result.grade, 2);
+  assert.equal(result.perCapitaLevyExempt, false);
+});
+
+test('均等割非課税: 3級地・扶養1人・総所得828,000円ちょうど → 非課税', () => {
+  const input = baseInput({ numberOfChildren: 1, childrenAges: [10] });
+  const result = calculateResidentTax(828000, input, 0, rates);
+  assert.equal(result.perCapitaLevyExempt, true);
+});
+
+test('均等割非課税: 3級地・扶養1人・総所得828,001円 → 課税(境界+1円)', () => {
+  const input = baseInput({ numberOfChildren: 1, childrenAges: [10] });
+  const result = calculateResidentTax(828001, input, 0, rates);
+  assert.equal(result.perCapitaLevyExempt, false);
+});
+
+test('均等割非課税: 級地未登録かつ3級地基準では課税だが1級地基準なら非課税 → perCapitaLevyGradeAmbiguous=true', () => {
+  // 3級地基準(380,000円)は超過するが、1級地基準(450,000円)以下のため、
+  // 実際の級地が1級地・2級地であれば非課税になりうる。
+  const result = calculateResidentTax(400000, baseInput(), 0, rates);
+  assert.equal(result.gradeAreaStatus, 'unregistered');
+  assert.equal(result.perCapitaLevyExempt, false);
+  assert.equal(result.perCapitaLevyGradeAmbiguous, true);
+});
+
+test('均等割非課税: 級地未登録でも、1級地基準でも明らかに課税な高所得ならperCapitaLevyGradeAmbiguous=false(ノイズ防止)', () => {
+  const result = calculateResidentTax(5000000, baseInput(), 0, rates);
+  assert.equal(result.gradeAreaStatus, 'unregistered');
+  assert.equal(result.perCapitaLevyExempt, false);
+  assert.equal(result.perCapitaLevyGradeAmbiguous, false);
+});
+
+test('均等割非課税: 級地未登録でも、3級地基準で既に非課税ならperCapitaLevyGradeAmbiguous=false(既に非課税なので級地確定を待つ必要がない)', () => {
+  const result = calculateResidentTax(380000, baseInput(), 0, rates);
+  assert.equal(result.perCapitaLevyExempt, true);
+  assert.equal(result.perCapitaLevyGradeAmbiguous, false);
+});
+
+test('均等割非課税: 高所得(年収400万円相当)では級地に関わらず課税、均等割・森林環境税とも通常どおり', () => {
+  const result = calculateResidentTax(2760000, baseInput({ annualIncome: 4000000 }), 500000, rates);
+  assert.equal(result.perCapitaLevyExempt, false);
+  assert.equal(result.perCapitaLevy, 4000);
+  assert.equal(result.forestEnvironmentTax, 1000);
+});

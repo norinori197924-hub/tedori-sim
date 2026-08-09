@@ -3,6 +3,7 @@ import { calculateTakeHome } from '../calc/engine.js';
 
 const RATES_BASE = './src/data/rates/2026/';
 const MUNICIPALITIES_URL = './src/data/municipalities/index.json';
+const GRADE_AREA_URL = './src/data/municipalities/grade-area.json';
 const DEFAULT_RESULT_TITLE = '計算結果';
 /**
  * 会社員モードの年収下限(円)。給与所得控除額(55万円)を下回る年収で
@@ -366,7 +367,7 @@ async function loadRates(municipality) {
   const [
     incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
     dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance,
-    nationalPension
+    nationalPension, gradeArea
   ] = await Promise.all([
     fetchJson(RATES_BASE + 'income-tax-brackets.json'),
     fetchJson(RATES_BASE + 'salary-income-deduction.json'),
@@ -376,7 +377,8 @@ async function loadRates(municipality) {
     fetchJson(RATES_BASE + 'resident-tax-standard.json'),
     fetchJson(RATES_BASE + 'employees-pension.json'),
     fetchJson(RATES_BASE + 'employment-insurance.json'),
-    fetchJson(RATES_BASE + 'national-pension.json')
+    fetchJson(RATES_BASE + 'national-pension.json'),
+    fetchJson(GRADE_AREA_URL)
   ]);
 
   let kyokaiKenpo = null;
@@ -394,7 +396,7 @@ async function loadRates(municipality) {
   return {
     incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
     dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpo,
-    nationalPension, nationalHealthInsurance
+    nationalPension, nationalHealthInsurance, gradeArea
   };
 }
 

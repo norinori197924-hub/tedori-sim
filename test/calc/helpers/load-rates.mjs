@@ -38,6 +38,7 @@ export function loadRates(municipalityCodeOrPrefecture = '12203') {
     employmentInsurance: loadJson('employment-insurance.json'),
     kyokaiKenpo: loadJson(`kyokai-kenpo/${prefecture}.json`),
     nationalPension: loadJson('national-pension.json'),
+    gradeArea: JSON.parse(readFileSync(path.join(DATA_DIR, 'municipalities/grade-area.json'), 'utf-8')),
     nationalHealthInsurance:
       municipality.nationalHealthInsuranceStatus === 'confirmed'
         ? JSON.parse(readFileSync(path.join(DATA_DIR, municipality.nationalHealthInsuranceFile), 'utf-8'))

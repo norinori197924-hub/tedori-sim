@@ -53,7 +53,7 @@
     const [
       incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
       dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance, kyokaiKenpoChiba,
-      nationalPension, municipalities
+      nationalPension, municipalities, gradeArea
     ] = await Promise.all([
       fetch(base + 'income-tax-brackets.json').then(r => r.json()),
       fetch(base + 'salary-income-deduction.json').then(r => r.json()),
@@ -65,7 +65,8 @@
       fetch(base + 'employment-insurance.json').then(r => r.json()),
       fetch(base + 'kyokai-kenpo/chiba.json').then(r => r.json()),
       fetch(base + 'national-pension.json').then(r => r.json()),
-      fetch('../data/municipalities/index.json').then(r => r.json())
+      fetch('../data/municipalities/index.json').then(r => r.json()),
+      fetch('../data/municipalities/grade-area.json').then(r => r.json())
     ]);
     const municipality = municipalities.municipalities.find(m => m.municipalityCode === municipalityCode);
     const nationalHealthInsurance = municipality.nationalHealthInsuranceStatus === 'confirmed'
@@ -75,7 +76,7 @@
       incomeTaxBrackets, salaryIncomeDeduction, basicDeduction, spousalDeduction,
       dependentDeduction, residentTaxStandard, employeesPension, employmentInsurance,
       kyokaiKenpo: kyokaiKenpoChiba, nationalPension,
-      nationalHealthInsurance
+      nationalHealthInsurance, gradeArea
     };
   }
 
@@ -179,6 +180,33 @@
       assertEqual('所得割非課税限度額', '扶養1人(10歳)・総所得1,120,000円ちょうど incomeLevyExempt', true, exempt.incomeLevyExempt, '16歳未満も扶養親族の人数に算入する(扶養控除の対象人数とは別カウント)');
       const taxable = calculateResidentTax(1120001, input, 0, rates);
       assertEqual('所得割非課税限度額', '扶養1人(10歳)・総所得1,120,001円 incomeLevyExempt', false, taxable.incomeLevyExempt, '同上');
+    }
+
+    // --- 住民税 均等割の非課税限度額(地方税法295条3項→施行令47条の3→施行規則9条の3)境界テスト ---
+    // 3級地(未登録・デフォルト): 基準額=28万円×人数+10万円(+16.8万円)。test/calc/resident-tax.test.mjsと同じ設例。
+    {
+      const input = {
+        age: 30, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const exempt = calculateResidentTax(380000, input, 0, rates);
+      assertEqual('均等割非課税限度額', '3級地(未登録)・単身・総所得380,000円ちょうど perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, 'test/calc/resident-tax.test.mjsと同じ設例');
+      assertEqual('均等割非課税限度額', '同上・forestEnvironmentTax(森林環境税も連動して非課税)', 0, exempt.forestEnvironmentTax, '均等割非課税者には森林環境税も課されない');
+      const taxable = calculateResidentTax(380001, input, 0, rates);
+      assertEqual('均等割非課税限度額', '3級地・単身・総所得380,001円 perCapitaLevyExempt', false, taxable.perCapitaLevyExempt, '同上');
+      assertEqual('均等割非課税限度額', '同上・perCapitaLevy', 4000, taxable.perCapitaLevy, '同上');
+    }
+    {
+      const input = {
+        age: 30, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const ratesGrade1 = { ...rates, gradeArea: { defaultGrade: 3, prefectures: { '12': { exceptions: { '12203': '1-1' } } } } };
+      const exempt = calculateResidentTax(450000, input, 0, ratesGrade1);
+      assertEqual('均等割非課税限度額', '1級地(登録済み)・単身・総所得450,000円ちょうど perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, '1級地基準=35万円×人数+10万円');
+      assertEqual('均等割非課税限度額', '同上・gradeAreaStatus', 'registered', exempt.gradeAreaStatus, '同上');
     }
 
     // --- フリーランス: 国民健康保険料 手計算設例(市川市) ---
