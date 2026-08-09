@@ -58,6 +58,9 @@ function calculateEmployeeTakeHome(input, rates) {
   if (residentTax.adjustmentCreditNeedsReview) {
     assumptions.push('住民税の調整控除額は、基礎控除に係る人的控除差が未確定のため暫定値で計算しています(要確認)。');
   }
+  if (residentTax.incomeLevyExempt) {
+    assumptions.push('総所得金額等が非課税限度額以下のため、住民税の所得割は非課税(0円)です。均等割・森林環境税は所得割とは別制度のため、この判定に関わらず課税されます。');
+  }
 
   return { income, socialInsurance, incomeTax, residentTax, takeHomeAnnual, takeHomeMonthly, assumptions };
 }
@@ -109,6 +112,9 @@ function calculateFreelanceTakeHome(input, rates) {
   }
   if (residentTax.adjustmentCreditNeedsReview) {
     assumptions.push('住民税の調整控除額は、基礎控除に係る人的控除差が未確定のため暫定値で計算しています(要確認)。');
+  }
+  if (residentTax.incomeLevyExempt) {
+    assumptions.push('総所得金額等が非課税限度額以下のため、住民税の所得割は非課税(0円)です。均等割・森林環境税は所得割とは別制度のため、この判定に関わらず課税されます。');
   }
 
   return { income, socialInsurance, incomeTax, residentTax, takeHomeAnnual, takeHomeMonthly, assumptions };

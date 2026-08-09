@@ -155,6 +155,32 @@
       assertEqual('手計算設例(住民税)', '設例2: total', 249500, r.total, '同上');
     }
 
+    // --- 住民税 所得割の非課税限度額(地方税法附則第3条の3)境界テスト ---
+    // 基準額 = 35万円×人数+10万円+32万円(配偶者・扶養親族がいる場合)。test/calc/resident-tax.test.mjsと同じ設例。
+    {
+      const input = {
+        age: 30, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const exempt = calculateResidentTax(450000, input, 0, rates);
+      assertEqual('所得割非課税限度額', '単身・総所得450,000円ちょうど incomeLevyExempt', true, exempt.incomeLevyExempt, 'test/calc/resident-tax.test.mjsと同じ設例');
+      const taxable = calculateResidentTax(450001, input, 0, rates);
+      assertEqual('所得割非課税限度額', '単身・総所得450,001円 incomeLevyExempt', false, taxable.incomeLevyExempt, '同上');
+      assertEqual('所得割非課税限度額', '単身・総所得450,001円 incomeLevy', 2000, taxable.incomeLevy, '同上');
+    }
+    {
+      const input = {
+        age: 30, prefectureCode: '12', municipalityCode: '12203',
+        numberOfChildren: 1, childrenAges: [10], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const exempt = calculateResidentTax(1120000, input, 0, rates);
+      assertEqual('所得割非課税限度額', '扶養1人(10歳)・総所得1,120,000円ちょうど incomeLevyExempt', true, exempt.incomeLevyExempt, '16歳未満も扶養親族の人数に算入する(扶養控除の対象人数とは別カウント)');
+      const taxable = calculateResidentTax(1120001, input, 0, rates);
+      assertEqual('所得割非課税限度額', '扶養1人(10歳)・総所得1,120,001円 incomeLevyExempt', false, taxable.incomeLevyExempt, '同上');
+    }
+
     // --- フリーランス: 国民健康保険料 手計算設例(市川市) ---
     {
       const input = {

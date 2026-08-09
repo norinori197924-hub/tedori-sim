@@ -117,6 +117,7 @@
  * @property {number} incomeLevyBeforeCredit
  * @property {number} adjustmentCredit
  * @property {number} incomeLevy
+ * @property {boolean} incomeLevyExempt 所得割の非課税判定(地方税法附則第3条の3)。均等割・森林環境税とは別制度
  * @property {number} perCapitaLevy
  * @property {number} forestEnvironmentTax
  * @property {number} total

@@ -51,5 +51,16 @@
       "dependentElderly": 100000,
       "dependentElderlyCoresident": 30000
     }
+  },
+  "incomeLevyExemption": {
+    "description": "所得割の非課税限度額(地方税法附則第3条の3)。総所得金額等がこの基準以下の場合、所得割を課さない。均等割の非課税限度額とは別制度で、係数(35万円)は級地区分に依存せず全国一律。基準額 = baseAmountPerPerson×(本人+同一生計配偶者+扶養親族の数) + addition + (同一生計配偶者又は扶養親族がいる場合のみ dependentOrSpouseAddition を加算)",
+    "status": "provisional",
+    "statusNote": "令和8年度税制改正でこの係数(35万円・10万円・32万円)が改定されたという記載は、財務省「令和8年度税制改正の大綱」(下記source)の個人住民税に関する記載2点(給与所得控除最低保障額の5万円上乗せ〔令和9・10年度分〕、同一生計配偶者・扶養親族の所得要件62万円への引き上げ)のいずれにも見当たらない。また令和7年度改正(給与所得控除の最低保障額55万円→65万円引き上げ)の際も、非課税限度額45万円(35万円+10万円)は据え置かれ、給与収入ベースの非課税ラインだけが100万円→110万円に連動した前例がある。以上から令和8年度も据え置きと判断したが、これは「大綱に改定の記載がない」という消極的証拠に基づく暫定判断であり、地方税法附則第3条の3の条文原文への直接照会は未実施。国保低所得軽減の加算単価31万円・57万円(national-health-insurance.js)と同様、未確認事項として扱う。",
+    "source": "https://www.mof.go.jp/tax_policy/tax_reform/outline/fy2026/20251226taikou.pdf",
+    "sourceTitle": "財務省 令和8年度税制改正の大綱(令和7年12月26日閣議決定)",
+    "fetchedAt": "2026-08-09",
+    "baseAmountPerPerson": 350000,
+    "addition": 100000,
+    "dependentOrSpouseAddition": 320000
   }
 }
