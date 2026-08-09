@@ -4,6 +4,12 @@ import { calculateTakeHome } from '../calc/engine.js';
 const RATES_BASE = './src/data/rates/2026/';
 const MUNICIPALITIES_URL = './src/data/municipalities/index.json';
 const DEFAULT_RESULT_TITLE = '計算結果';
+/**
+ * 会社員モードの年収下限(円)。給与所得控除額(55万円)を下回る年収で
+ * 社会保険に加入する正社員は現実には存在しないため、この額未満はエラーとする。
+ * 扶養内パート等(103万・106万・130万円前後)の入力はこの下限より十分大きいため影響しない。
+ */
+const EMPLOYEE_MIN_ANNUAL_INCOME = 500000;
 
 const prefRateSection = document.getElementById('pref-rate-section');
 const prefRateTable = document.getElementById('pref-rate-table');
@@ -254,9 +260,10 @@ function showFormErrors(labels) {
 
 /**
  * 送信前の入力チェック。問題があった項目を { el, label } の配列で返す(空配列なら問題なし)。
+ * @param {'employee'|'freelance'} employmentType
  * @returns {{el: HTMLElement, label: string}[]}
  */
-function validateForm() {
+function validateForm(employmentType) {
   const errors = [];
 
   if (annualIncomeInput.value.trim() === '') {
@@ -265,6 +272,11 @@ function validateForm() {
     const v = parseStrictInteger(annualIncomeInput.value);
     if (v === null) {
       errors.push({ el: annualIncomeInput, label: '額面の年収（半角数字のみで入力してください。例: 5000000）' });
+    } else if (employmentType === 'employee' && v < EMPLOYEE_MIN_ANNUAL_INCOME) {
+      errors.push({
+        el: annualIncomeInput,
+        label: `額面の年収（会社員の場合、給与所得控除額(55万円)を下回る年収50万円未満は入力できません。実際にはありえない年収のためです。扶養内パート等の年収はそのまま入力してください）`
+      });
     } else {
       annualIncomeInput.value = formatWithCommas(String(v));
     }
@@ -453,7 +465,12 @@ function renderResult(employmentType, input, municipality, result, otherResult) 
 
   const otherType = employmentType === 'employee' ? 'freelance' : 'employee';
 
+  const negativeTakeHomeWarning = result.takeHomeAnnual < 0
+    ? `<div class="result-warning">⚠ 手取り額がマイナスになっています。入力した年収に対して税・社会保険料の合計が上回っており、通常は起こらない入力の組み合わせです。年収・年齢・配偶者の年収などの入力内容をご確認ください。</div>`
+    : '';
+
   resultBody.innerHTML = `
+    ${negativeTakeHomeWarning}
     <div class="flow-label"><span>あなたの年収の行き先</span><b>${formatYen(income)}</b></div>
     <div class="bar">
       <div class="b-tax" style="width:${pct(result.incomeTax.total)}%">${pct(result.incomeTax.total) > 6 ? '所得税' : ''}</div>
@@ -504,7 +521,8 @@ async function handleSubmit(event) {
   clearAllFieldErrors();
   resultTitle.textContent = DEFAULT_RESULT_TITLE;
 
-  const errors = validateForm();
+  const employmentType = selectedEmploymentType;
+  const errors = validateForm(employmentType);
   if (errors.length > 0) {
     errors.forEach(({ el }) => setFieldError(el, true));
     showFormErrors(errors.map(({ label }) => label));
@@ -514,7 +532,6 @@ async function handleSubmit(event) {
 
   resultBody.innerHTML = '<div class="placeholder">計算中…</div>';
   try {
-    const employmentType = selectedEmploymentType;
     const otherType = employmentType === 'employee' ? 'freelance' : 'employee';
     const { input, municipality } = readInput(employmentType);
 
