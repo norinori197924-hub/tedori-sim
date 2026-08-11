@@ -69,12 +69,28 @@ test('resolveGradeArea: 未登録の都道府県を問い合わせてもエラ�
   assert.deepEqual(result, { grade: 3, gradeAreaStatus: 'unregistered' });
 });
 
-test('実データ(grade-area.json)を読み込んでも例外が発生しない(現状はexceptions未収集のため全件unregistered)', async () => {
+/**
+ * 2026-08-11、全47都道府県のexceptionsを投入済み(CLAUDE.md 11.14章)。
+ * 千代田区(13101)は「区の存する地域」から展開登録された1級地-1として
+ * registered/grade=1になる。以前はexceptions未収集につき全件unregisteredだった
+ * 前提のテストだったため、実データ投入後の正しい期待値に更新した。
+ */
+test('実データ(grade-area.json)を読み込んでも例外が発生しない: 千代田区(登録済み)はregistered・grade=1', async () => {
   const fs = await import('node:fs');
   const gradeAreaData = JSON.parse(
     fs.readFileSync(new URL('../../src/data/municipalities/grade-area.json', import.meta.url))
   );
   const result = resolveGradeArea('13', '13101', gradeAreaData);
+  assert.equal(result.gradeAreaStatus, 'registered');
+  assert.equal(result.grade, 1);
+});
+
+test('実データ(grade-area.json): 日の出町(13305、東京都、3級地デフォルト)はunregistered・grade=3', async () => {
+  const fs = await import('node:fs');
+  const gradeAreaData = JSON.parse(
+    fs.readFileSync(new URL('../../src/data/municipalities/grade-area.json', import.meta.url))
+  );
+  const result = resolveGradeArea('13', '13305', gradeAreaData);
   assert.equal(result.gradeAreaStatus, 'unregistered');
   assert.equal(result.grade, 3);
 });

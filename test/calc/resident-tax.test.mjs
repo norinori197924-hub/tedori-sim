@@ -232,8 +232,22 @@ function ratesWithGrade(gradeCode, prefectureCode = '12', municipalityCode = '12
   };
 }
 
+/**
+ * grade-area.jsonの実データ(全47都道府県投入済み、CLAUDE.md 11.14章)から独立した、
+ * 「必ず級地未登録(3級地デフォルト)」を保証するフィクスチャ。デフォルトの`rates`
+ * (loadRates()の既定市区町村=12203市川市)は、実データ投入前は級地未登録だったが、
+ * 投入後は実際に1級地-2として登録されているため、以下の境界テストで単純に`rates`を
+ * 使うと実データの内容次第で結果が変わってしまう(2026-08-11、全国データ投入時に
+ * 12203が登録済みへ変わったことでこのテストが壊れて発覚)。実データの正しさを問う
+ * テストではなく「級地が未登録の場合の計算ロジック」を問うテストなので、実データの
+ * 変動に影響されない合成フィクスチャを使う。
+ */
+function ratesUnregistered() {
+  return { ...rates, gradeArea: { defaultGrade: 3, prefectures: {} } };
+}
+
 test('均等割非課税: 3級地(未登録・デフォルト)・単身・総所得380,000円ちょうど → 非課税(森林環境税も同時に非課税)', () => {
-  const result = calculateResidentTax(380000, baseInput(), 0, rates);
+  const result = calculateResidentTax(380000, baseInput(), 0, ratesUnregistered());
   assert.equal(result.gradeAreaStatus, 'unregistered');
   assert.equal(result.grade, 3);
   assert.equal(result.perCapitaLevyExempt, true);
@@ -242,7 +256,7 @@ test('均等割非課税: 3級地(未登録・デフォルト)・単身・総所
 });
 
 test('均等割非課税: 3級地・単身・総所得380,001円 → 課税(境界+1円、均等割4,000円+森林環境税1,000円)', () => {
-  const result = calculateResidentTax(380001, baseInput(), 0, rates);
+  const result = calculateResidentTax(380001, baseInput(), 0, ratesUnregistered());
   assert.equal(result.perCapitaLevyExempt, false);
   assert.equal(result.perCapitaLevy, 4000);
   assert.equal(result.forestEnvironmentTax, 1000);
@@ -275,34 +289,34 @@ test('均等割非課税: 2級地・単身・総所得415,001円 → 課税(境�
 
 test('均等割非課税: 3級地・扶養1人・総所得828,000円ちょうど → 非課税', () => {
   const input = baseInput({ numberOfChildren: 1, childrenAges: [10] });
-  const result = calculateResidentTax(828000, input, 0, rates);
+  const result = calculateResidentTax(828000, input, 0, ratesUnregistered());
   assert.equal(result.perCapitaLevyExempt, true);
 });
 
 test('均等割非課税: 3級地・扶養1人・総所得828,001円 → 課税(境界+1円)', () => {
   const input = baseInput({ numberOfChildren: 1, childrenAges: [10] });
-  const result = calculateResidentTax(828001, input, 0, rates);
+  const result = calculateResidentTax(828001, input, 0, ratesUnregistered());
   assert.equal(result.perCapitaLevyExempt, false);
 });
 
 test('均等割非課税: 級地未登録かつ3級地基準では課税だが1級地基準なら非課税 → perCapitaLevyGradeAmbiguous=true', () => {
   // 3級地基準(380,000円)は超過するが、1級地基準(450,000円)以下のため、
   // 実際の級地が1級地・2級地であれば非課税になりうる。
-  const result = calculateResidentTax(400000, baseInput(), 0, rates);
+  const result = calculateResidentTax(400000, baseInput(), 0, ratesUnregistered());
   assert.equal(result.gradeAreaStatus, 'unregistered');
   assert.equal(result.perCapitaLevyExempt, false);
   assert.equal(result.perCapitaLevyGradeAmbiguous, true);
 });
 
 test('均等割非課税: 級地未登録でも、1級地基準でも明らかに課税な高所得ならperCapitaLevyGradeAmbiguous=false(ノイズ防止)', () => {
-  const result = calculateResidentTax(5000000, baseInput(), 0, rates);
+  const result = calculateResidentTax(5000000, baseInput(), 0, ratesUnregistered());
   assert.equal(result.gradeAreaStatus, 'unregistered');
   assert.equal(result.perCapitaLevyExempt, false);
   assert.equal(result.perCapitaLevyGradeAmbiguous, false);
 });
 
 test('均等割非課税: 級地未登録でも、3級地基準で既に非課税ならperCapitaLevyGradeAmbiguous=false(既に非課税なので級地確定を待つ必要がない)', () => {
-  const result = calculateResidentTax(380000, baseInput(), 0, rates);
+  const result = calculateResidentTax(380000, baseInput(), 0, ratesUnregistered());
   assert.equal(result.perCapitaLevyExempt, true);
   assert.equal(result.perCapitaLevyGradeAmbiguous, false);
 });
@@ -312,4 +326,44 @@ test('均等割非課税: 高所得(年収400万円相当)では級地に関わ�
   assert.equal(result.perCapitaLevyExempt, false);
   assert.equal(result.perCapitaLevy, 4000);
   assert.equal(result.forestEnvironmentTax, 1000);
+});
+
+/**
+ * 級地区分の実データ(src/data/municipalities/grade-area.json、東京都分)を使った
+ * 統合テスト。上記のratesWithGrade()は都度合成した架空のgradeAreaフィクスチャを
+ * 使っているのに対し、以下はloadRates()経由で本番の実データファイルをそのまま
+ * 読み込み、resolveGradeArea()の実データ解決とcalculateResidentTax()の統合を
+ * 検証する(CLAUDE.md 11.14章、東京都投入時の検証)。
+ */
+const tokyoRates = loadRates('13104'); // 新宿区(1級地-1、区の存する地域として展開済み)
+
+test('級地実データ: 新宿区(東京都特別区、grade-area.jsonでは「区の存する地域」から展開登録)は1級地としてregistered', () => {
+  const input = baseInput({ prefectureCode: '13', municipalityCode: '13104' });
+  const result = calculateResidentTax(450000, input, 0, tokyoRates);
+  assert.equal(result.gradeAreaStatus, 'registered');
+  assert.equal(result.grade, 1);
+  assert.equal(result.perCapitaLevyExempt, true);
+});
+
+test('級地実データ: 新宿区・単身・総所得450,001円 → 課税(1級地の実データ境界+1円)', () => {
+  const input = baseInput({ prefectureCode: '13', municipalityCode: '13104' });
+  const result = calculateResidentTax(450001, input, 0, tokyoRates);
+  assert.equal(result.grade, 1);
+  assert.equal(result.perCapitaLevyExempt, false);
+});
+
+test('級地実データ: 瑞穂町(東京都、grade-area.jsonでは2級地-1として個別登録)は2級地としてregistered', () => {
+  const input = baseInput({ prefectureCode: '13', municipalityCode: '13303' });
+  const result = calculateResidentTax(415000, input, 0, tokyoRates);
+  assert.equal(result.gradeAreaStatus, 'registered');
+  assert.equal(result.grade, 2);
+  assert.equal(result.perCapitaLevyExempt, true);
+});
+
+test('級地実データ: 日の出町(東京都、grade-area.jsonに未登録=3級地デフォルト)はunregisteredでgrade=3', () => {
+  const input = baseInput({ prefectureCode: '13', municipalityCode: '13305' });
+  const result = calculateResidentTax(380000, input, 0, tokyoRates);
+  assert.equal(result.gradeAreaStatus, 'unregistered');
+  assert.equal(result.grade, 3);
+  assert.equal(result.perCapitaLevyExempt, true);
 });

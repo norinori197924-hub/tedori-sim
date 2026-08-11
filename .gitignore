@@ -16,3 +16,7 @@ Thumbs.db
 # 国保パイプラインのダウンロード生データ(再取得可能なため追跡しない)
 data/raw/kokuho/*.pdf
 data/raw/kokuho/*.xlsx
+
+# 級地区分パイプラインの一時作業ディレクトリ(PDF本体・中間生成物。
+# 再現用スクリプトはscripts/grade-area/に整理済み、再取得可能なため追跡しない)
+data/raw/grade-area/

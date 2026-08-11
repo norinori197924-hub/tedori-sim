@@ -184,16 +184,20 @@
 
     // --- 住民税 均等割の非課税限度額(地方税法295条3項→施行令47条の3→施行規則9条の3)境界テスト ---
     // 3級地(未登録・デフォルト): 基準額=28万円×人数+10万円(+16.8万円)。test/calc/resident-tax.test.mjsと同じ設例。
+    // rates(既定の市区町村=12203市川市)は、2026-08-11の全国データ投入で実際に
+    // 1級地-2として登録済みになったため、ここでは実データから独立した「必ず級地未登録」
+    // フィクスチャ(ratesUnregistered)を使う(test/calc/resident-tax.test.mjsと同じ対応)。
     {
+      const ratesUnregistered = { ...rates, gradeArea: { defaultGrade: 3, prefectures: {} } };
       const input = {
         age: 30, prefectureCode: '12', municipalityCode: '12203',
         numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
         annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
       };
-      const exempt = calculateResidentTax(380000, input, 0, rates);
+      const exempt = calculateResidentTax(380000, input, 0, ratesUnregistered);
       assertEqual('均等割非課税限度額', '3級地(未登録)・単身・総所得380,000円ちょうど perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, 'test/calc/resident-tax.test.mjsと同じ設例');
       assertEqual('均等割非課税限度額', '同上・forestEnvironmentTax(森林環境税も連動して非課税)', 0, exempt.forestEnvironmentTax, '均等割非課税者には森林環境税も課されない');
-      const taxable = calculateResidentTax(380001, input, 0, rates);
+      const taxable = calculateResidentTax(380001, input, 0, ratesUnregistered);
       assertEqual('均等割非課税限度額', '3級地・単身・総所得380,001円 perCapitaLevyExempt', false, taxable.perCapitaLevyExempt, '同上');
       assertEqual('均等割非課税限度額', '同上・perCapitaLevy', 4000, taxable.perCapitaLevy, '同上');
     }
@@ -207,6 +211,50 @@
       const exempt = calculateResidentTax(450000, input, 0, ratesGrade1);
       assertEqual('均等割非課税限度額', '1級地(登録済み)・単身・総所得450,000円ちょうど perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, '1級地基準=35万円×人数+10万円');
       assertEqual('均等割非課税限度額', '同上・gradeAreaStatus', 'registered', exempt.gradeAreaStatus, '同上');
+    }
+
+    // --- 級地区分の実データ(grade-area.json、東京都分)を使った統合テスト ---
+    // 上記2ブロックは合成したgradeAreaフィクスチャを使うのに対し、以下は本番の
+    // grade-area.jsonをそのままfetchで読み込み、resolveGradeArea()の実データ解決を
+    // 検証する(CLAUDE.md 11.14章「全国データ投入」、test/calc/resident-tax.test.mjsと
+    // 同じ3市区町村・同じ境界値)。
+    {
+      const ratesTokyo = await loadRates('13104');
+      const input = {
+        age: 30, prefectureCode: '13', municipalityCode: '13104',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const exempt = calculateResidentTax(450000, input, 0, ratesTokyo);
+      assertEqual('級地実データ(東京都)', '新宿区(1級地-1、「区の存する地域」展開分)・総所得450,000円 gradeAreaStatus', 'registered', exempt.gradeAreaStatus, 'test/calc/resident-tax.test.mjsと同じ設例');
+      assertEqual('級地実データ(東京都)', '同上・grade', 1, exempt.grade, '同上');
+      assertEqual('級地実データ(東京都)', '同上・perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, '同上');
+      const taxable = calculateResidentTax(450001, input, 0, ratesTokyo);
+      assertEqual('級地実データ(東京都)', '新宿区・総所得450,001円 perCapitaLevyExempt', false, taxable.perCapitaLevyExempt, '境界+1円');
+    }
+    {
+      const ratesTokyo = await loadRates('13104');
+      const input = {
+        age: 30, prefectureCode: '13', municipalityCode: '13303',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const exempt = calculateResidentTax(415000, input, 0, ratesTokyo);
+      assertEqual('級地実データ(東京都)', '瑞穂町(2級地-1、個別登録)・総所得415,000円 gradeAreaStatus', 'registered', exempt.gradeAreaStatus, '同上');
+      assertEqual('級地実データ(東京都)', '同上・grade', 2, exempt.grade, '同上');
+      assertEqual('級地実データ(東京都)', '同上・perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, '同上');
+    }
+    {
+      const ratesTokyo = await loadRates('13104');
+      const input = {
+        age: 30, prefectureCode: '13', municipalityCode: '13305',
+        numberOfChildren: 0, childrenAges: [], employmentType: 'freelance',
+        annualIncome: 0, spouse: { hasSpouse: false, spouseIncome: null }
+      };
+      const exempt = calculateResidentTax(380000, input, 0, ratesTokyo);
+      assertEqual('級地実データ(東京都)', '日の出町(grade-area.jsonに未登録=3級地デフォルト)・総所得380,000円 gradeAreaStatus', 'unregistered', exempt.gradeAreaStatus, '同上');
+      assertEqual('級地実データ(東京都)', '同上・grade', 3, exempt.grade, '同上');
+      assertEqual('級地実データ(東京都)', '同上・perCapitaLevyExempt', true, exempt.perCapitaLevyExempt, '同上');
     }
 
     // --- フリーランス: 国民健康保険料 手計算設例(市川市) ---
