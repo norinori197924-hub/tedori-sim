@@ -23,6 +23,8 @@ const resultBody = document.getElementById('result-body');
 const resultTitle = document.getElementById('result-title');
 const resultBadge = document.getElementById('result-badge');
 const badgeCoverage = document.getElementById('badge-coverage');
+const coverageMeterFill = document.getElementById('coverage-meter-fill');
+const coverageChips = document.getElementById('coverage-chips');
 const employmentButtons = Array.from(document.querySelectorAll('[data-employment]'));
 
 const annualIncomeInput = document.getElementById('annualIncome');
@@ -64,6 +66,7 @@ async function initMunicipalities() {
   municipalities = data.municipalities;
   totalMunicipalityCount = data.totalMunicipalityCount ?? 1741;
   badgeCoverage.textContent = `${municipalities.length} / ${totalMunicipalityCount.toLocaleString('ja-JP')}`;
+  renderCoverage();
 
   const prefectures = [...new Set(municipalities.map((m) => m.prefecture))];
   prefectureSelect.innerHTML =
@@ -71,7 +74,31 @@ async function initMunicipalities() {
     prefectures.map((p) => `<option value="${p}">${p}</option>`).join('');
   updateMunicipalityOptions();
   prefectureSelect.addEventListener('change', updateMunicipalityOptions);
-  await renderPrefectureRateSection();
+  await renderPrefectureRateSection().catch((err) => {
+    // 料率ファイルが未整備でも初期化全体を止めない
+    console.error(err);
+  });
+}
+
+/**
+ * 対応済みの都道府県を、対応市区町村数の多い順にチップで表示する。
+ * 表示内容は自治体データそのものから生成する（手書きの一覧を持たない）。
+ */
+function renderCoverage() {
+  if (coverageMeterFill) {
+    const ratio = (municipalities.length / totalMunicipalityCount) * 100;
+    coverageMeterFill.style.width = `${Math.min(100, ratio).toFixed(1)}%`;
+  }
+  if (!coverageChips) return;
+
+  const counts = new Map();
+  for (const m of municipalities) {
+    counts.set(m.prefecture, (counts.get(m.prefecture) ?? 0) + 1);
+  }
+  const sorted = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  coverageChips.innerHTML = sorted
+    .map(([prefecture, count]) => `<span class="pref-chip">${prefecture}<em>（${count}）</em></span>`)
+    .join('');
 }
 
 async function renderPrefectureRateSection() {
@@ -471,21 +498,45 @@ function renderResult(employmentType, input, municipality, result, otherResult) 
     ? `<div class="result-warning">⚠ 手取り額がマイナスになっています。入力した年収に対して税・社会保険料の合計が上回っており、通常は起こらない入力の組み合わせです。年収・年齢・配偶者の年収などの入力内容をご確認ください。</div>`
     : '';
 
+  const netPct = pct(result.takeHomeAnnual);
+  const shaPct = pct(result.socialInsurance.total);
+  const juuPct = pct(result.residentTax.total);
+  const s1 = netPct;
+  const s2 = s1 + shaPct;
+  const s3 = s2 + juuPct;
+  const donutGradient = `conic-gradient(var(--c-net) 0 ${s1}%,var(--c-sha) ${s1}% ${s2}%,var(--c-juu) ${s2}% ${s3}%,var(--c-tax) ${s3}% 100%)`;
+  const deductionTotal = result.incomeTax.total + result.residentTax.total + result.socialInsurance.total;
+
   resultBody.innerHTML = `
     ${negativeTakeHomeWarning}
-    <div class="flow-label"><span>あなたの年収の行き先</span><b>${formatYen(income)}</b></div>
-    <div class="bar">
-      <div class="b-tax" style="width:${pct(result.incomeTax.total)}%">${pct(result.incomeTax.total) > 6 ? '所得税' : ''}</div>
-      <div class="b-juu" style="width:${pct(result.residentTax.total)}%">${pct(result.residentTax.total) > 6 ? '住民税' : ''}</div>
-      <div class="b-sha" style="width:${pct(result.socialInsurance.total)}%">${pct(result.socialInsurance.total) > 6 ? '社会保険' : ''}</div>
-      <div class="b-net" style="width:${pct(result.takeHomeAnnual)}%">手取り ${Math.round(pct(result.takeHomeAnnual))}%</div>
+    <div class="result-hero">
+      <div class="cap">
+        <span>毎月の手取り（12等分）</span>
+        <span class="cond">${municipality.prefecture}${municipality.municipality}・${employmentLabel(employmentType)}・${input.age}歳</span>
+      </div>
+      <div class="takehome">
+        <span class="v">${Math.round(result.takeHomeMonthly).toLocaleString('ja-JP')}</span><span class="u">円</span>
+      </div>
+      <div class="takehome-sub">
+        <span>年間の手取り <b>${Math.round(result.takeHomeAnnual).toLocaleString('ja-JP')}</b> 円</span>
+        <span>額面に対して <b>${netPct.toFixed(1)}</b> %</span>
+      </div>
     </div>
-    <div class="bar-cap"><span>■ 出ていくお金（税・社保）</span><span>■ 残るお金（手取り）</span></div>
 
-    <div class="takehome">
-      <span class="l">手取り額</span>
-      <span class="v">${formatYen(result.takeHomeAnnual)}</span>
-      <span class="m">／年（月あたり ${formatYen(result.takeHomeMonthly)}）</span>
+    <div class="flow-label"><span>額面 ${formatYen(income)} の内訳</span><span>引かれた合計 <b>${formatYen(deductionTotal)}</b></span></div>
+    <div class="flow">
+      <div class="donut" style="background:${donutGradient}">
+        <div class="donut-hole">
+          <span class="p">${netPct.toFixed(1)}<i>%</i></span>
+          <span class="t">が手取り</span>
+        </div>
+      </div>
+      <div class="flow-legend">
+        <div><i class="sw-net"></i><span>手取り</span><b>${formatYen(result.takeHomeAnnual)}</b></div>
+        <div><i class="sw-sha"></i><span>社会保険料</span><b>${formatYen(result.socialInsurance.total)}</b></div>
+        <div><i class="sw-juu"></i><span>住民税</span><b>${formatYen(result.residentTax.total)}</b></div>
+        <div><i class="sw-tax"></i><span>所得税</span><b>${formatYen(result.incomeTax.total)}</b></div>
+      </div>
     </div>
 
     <table class="ledger">
