@@ -13,34 +13,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>手取りのホント(仮) — 税・社保・手取り統合シミュレーター</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
 
 <header>
-  <div class="wrap head-in">
-    <div class="brand">手取りのホント<small>（仮）— 税・社保・手取り 統合シミュレーター</small></div>
-    <nav class="head-nav"><a href="./about/">サイトについて</a></nav>
+  <div class="head-in">
+    <div class="brand">手取りのホント<small>（仮）</small></div>
+    <nav class="head-nav">
+      <a href="./articles/">解説記事</a>
+      <a href="./about/">サイトについて</a>
+      <a href="#calc-form" class="cta-nav">計算する</a>
+    </nav>
   </div>
 </header>
 
 <div class="wrap">
   <section class="hero">
-    <h1>その年収、<em>手取り</em>でいくらか。あなたの条件で計算します。</h1>
-    <p>所得税・住民税・社会保険料を概算します。会社員・フリーランスどちらにも対応。東京都・神奈川県・大阪府・愛知県・埼玉県・千葉県・兵庫県はほぼ全域、その他一部市区町村を含む計358市区町村(全国1,747市区町村中)で計算できます。対応地域は今後順次拡大予定です。</p>
+    <p class="kicker">令和8年度の料率で計算します</p>
+    <h1>その年収、<em>手取り</em>でいくらか。<br>あなたの条件で計算します。</h1>
+    <p>所得税・住民税・社会保険料を概算します。会社員・フリーランスどちらにも対応。対応地域は今後順次拡大予定です。</p>
     <div class="badges">
-      <span class="badge">対応自治体 <b id="badge-coverage">…</b></span>
-      <span class="badge">令和8年度 料率適用</span>
+      <span class="badge">入力は<b>8</b>項目・約1分</span>
+      <span class="badge">端末内で計算・送信なし</span>
     </div>
-  </section>
 
-  <section class="articles-cta">
-    <div class="articles-cta-text">
-      <h2>税金・保険の仕組みを解説</h2>
-      <p>なぜ住む場所で住民税が変わるのか、国民健康保険料はどう決まるのか。制度の裏側を解説する記事を公開しています。</p>
-    </div>
-    <a href="./articles/" class="articles-cta-link">解説記事を読む →</a>
+    <section class="coverage">
+      <div class="coverage-h">
+        <h2>計算できる地域</h2>
+        <span class="count"><b id="badge-coverage">…</b> 市区町村</span>
+      </div>
+      <div class="coverage-meter"><span id="coverage-meter-fill" style="width:0%"></span></div>
+      <div class="coverage-label">対応している都道府県（かっこ内は対応市区町村数）</div>
+      <div class="pref-chips" id="coverage-chips"></div>
+      <p class="note">お住まいの市区町村が未対応の場合は、入力欄の選択肢に表示されません。対応地域は順次追加しています。</p>
+    </section>
   </section>
 
   <section class="pref-rate" id="pref-rate-section" hidden>
@@ -55,66 +63,86 @@
 
   <div class="grid">
 
-    <aside class="panel">
-      <div class="panel-h"><h2>入力</h2><span class="num">かんたん8項目</span></div>
-      <div class="tab-row">
-        <div class="tab on">かんたん入力</div>
-        <div class="tab off">詳細入力 <span class="soon">準備中</span></div>
-      </div>
-      <div class="panel-b">
-        <form id="calc-form" novalidate>
-          <div id="form-errors" class="form-error-summary" hidden></div>
-          <div class="field"><label>雇用形態</label>
-            <div class="seg">
-              <button type="button" class="on" data-employment="employee">会社員</button>
-              <button type="button" data-employment="freelance">フリーランス・自営業</button>
+    <aside>
+      <div class="panel">
+        <div class="panel-h"><h2>あなたの条件</h2><span class="num">かんたん8項目</span></div>
+        <div class="tab-row">
+          <div class="tab on">かんたん入力</div>
+          <div class="tab off">詳細入力 <span class="soon">準備中</span></div>
+        </div>
+        <div class="panel-b">
+          <form id="calc-form" novalidate>
+            <div id="form-errors" class="form-error-summary" hidden></div>
+
+            <div class="field"><label>働き方</label>
+              <div class="seg">
+                <button type="button" class="on" data-employment="employee">会社員</button>
+                <button type="button" data-employment="freelance">フリーランス・自営業</button>
+              </div>
             </div>
-          </div>
-          <div class="field"><label for="annualIncome">額面の年収（昨年）</label>
-            <div class="field-hint">源泉徴収票の「支払金額」欄の金額（賞与を含む額面）</div>
-            <input type="text" inputmode="numeric" id="annualIncome" placeholder="例: 5000000" required> 円
-          </div>
-          <div class="row2">
-            <div class="field"><label for="age">年齢<span class="opt">12/31時点</span></label><input type="text" inputmode="numeric" id="age" placeholder="例: 38" required></div>
-            <div class="field"><label for="numberOfChildren">子供の数</label>
-              <select id="numberOfChildren">
-                <option value="0" selected>0人</option><option value="1">1人</option>
-                <option value="2">2人</option><option value="3">3人</option>
-                <option value="4">4人</option><option value="5">5人</option>
-              </select>
+
+            <div class="field"><label for="annualIncome">額面の年収（昨年）</label>
+              <div class="field-hint">源泉徴収票の「支払金額」欄の金額（賞与を含む額面）</div>
+              <input type="text" inputmode="numeric" id="annualIncome" placeholder="5,000,000" required> 円
             </div>
-          </div>
-          <div class="field" id="childrenAgesField" hidden>
-            <label>子供の年齢</label>
-            <div class="field-hint">12月31日時点の年齢（扶養控除・未就学児軽減の判定に使用）</div>
-            <div id="childrenAgesContainer" class="children-ages-grid"></div>
-          </div>
-          <div class="row2">
-            <div class="field"><label for="prefecture">都道府県</label><select id="prefecture" required></select></div>
-            <div class="field"><label for="municipality">市区町村</label><select id="municipality" required></select></div>
-          </div>
-          <div class="field"><label>配偶者<span class="opt">任意</span></label>
-            <div class="field-hint">「あり」の場合は配偶者の年収（額面、パート収入を含む）を入力</div>
+
             <div class="row2">
-              <select id="hasSpouse"><option value="yes">あり</option><option value="no" selected>なし</option></select>
-              <input type="text" inputmode="numeric" id="spouseIncome" placeholder="例: 3000000" disabled>
+              <div class="field"><label for="age">年齢<span class="opt">12/31時点</span></label><input type="text" inputmode="numeric" id="age" placeholder="38" required></div>
+              <div class="field"><label for="numberOfChildren">子供の数</label>
+                <select id="numberOfChildren">
+                  <option value="0" selected>0人</option><option value="1">1人</option>
+                  <option value="2">2人</option><option value="3">3人</option>
+                  <option value="4">4人</option><option value="5">5人</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <button type="submit" class="cta">手取りを計算する</button>
-          <div style="margin-top:14px;border:1px dashed var(--line);border-radius:3px;padding:11px 13px;background:var(--paper);">
-            <div style="font-size:12px;font-weight:700;color:var(--ink-soft);">詳細入力でできること（第2弾で公開予定）</div>
-            <div style="font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.7;">iDeCo掛金 ／ 生命保険料・地震保険料 ／ 医療費 ／ 住宅ローン控除 ／ 経費・青色申告（フリーランス）／ ボーナス比率（会社員）を反映して、より正確に計算できます。</div>
-          </div>
-          <p class="note">※ 計算結果は概算です。個別の税務相談ではありません。入力内容は送信・保存されません（計算はお使いの端末内で行われます）。</p>
-        </form>
+
+            <div class="field" id="childrenAgesField" hidden>
+              <label>子供の年齢</label>
+              <div class="field-hint">12月31日時点の年齢（扶養控除・未就学児軽減の判定に使用）</div>
+              <div id="childrenAgesContainer" class="children-ages-grid"></div>
+            </div>
+
+            <div class="row2">
+              <div class="field"><label for="prefecture">都道府県</label><select id="prefecture" required></select></div>
+              <div class="field"><label for="municipality">市区町村</label><select id="municipality" required></select></div>
+            </div>
+
+            <div class="field"><label>配偶者<span class="opt">任意</span></label>
+              <div class="field-hint">「あり」の場合は配偶者の年収（額面、パート収入を含む）を入力</div>
+              <div class="row2">
+                <select id="hasSpouse"><option value="yes">あり</option><option value="no" selected>なし</option></select>
+                <input type="text" inputmode="numeric" id="spouseIncome" placeholder="配偶者の年収" disabled>
+              </div>
+            </div>
+
+            <button type="submit" class="cta">手取りを計算する</button>
+
+            <div class="soon-box">
+              <b>くわしい入力は準備中です</b>
+              <p>iDeCo掛金 ／ 生命保険料・地震保険料 ／ 医療費 ／ 住宅ローン控除 ／ 経費・青色申告（フリーランス）／ ボーナス比率（会社員）を反映して、より正確に計算できます。</p>
+            </div>
+            <p class="note">※ 計算結果は概算です。個別の税務相談ではありません。入力内容は送信・保存されません（計算はお使いの端末内で行われます）。</p>
+          </form>
+        </div>
       </div>
     </aside>
 
-    <main class="panel">
-      <div class="panel-h"><h2 id="result-title">計算結果</h2><span class="num" id="result-badge">概算・令和8年度</span></div>
-      <div class="panel-b" id="result-body">
-        <div class="placeholder">左の項目を入力して「手取りを計算する」を押してください。</div>
+    <main>
+      <div class="panel">
+        <div class="panel-h"><h2 id="result-title">計算結果</h2><span class="num" id="result-badge">概算・令和8年度</span></div>
+        <div class="panel-b" id="result-body">
+          <div class="placeholder">左の項目を入力して「手取りを計算する」を押してください。</div>
+        </div>
       </div>
+
+      <div class="ad-slot"><span>広告枠 / レスポンシブ</span></div>
+
+      <section class="articles-cta">
+        <h2>税金・保険の仕組みを解説</h2>
+        <p>なぜ住む場所で住民税が変わるのか、国民健康保険料はどう決まるのか。制度の裏側を解説する記事を公開しています。</p>
+        <a href="./articles/" class="articles-cta-link">解説記事を読む →</a>
+      </section>
     </main>
   </div>
 </div>
