@@ -31,6 +31,12 @@ header{border-bottom:2px solid var(--ink);background:var(--paper);}
 .badge{border:1px solid var(--line);background:var(--card);border-radius:3px;padding:3px 10px;color:var(--ink-soft);}
 .badge b{color:var(--ink);font-family:var(--mono);font-weight:600;}
 
+.articles-cta{margin:18px 0;border:1px solid var(--line);border-radius:4px;background:var(--card);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.articles-cta-text h2{font-family:var(--serif);font-size:14.5px;font-weight:700;letter-spacing:.02em;margin-bottom:3px;}
+.articles-cta-text p{font-size:12.5px;color:var(--ink-soft);}
+.articles-cta-link{flex-shrink:0;font-size:12.5px;font-weight:700;color:var(--green);border:1px solid var(--green);border-radius:3px;padding:7px 14px;white-space:nowrap;}
+.articles-cta-link:hover{background:var(--green-bg);}
+
 .pref-rate{margin:18px 0;border:1px solid var(--line);border-radius:4px;background:var(--card);padding:16px 18px;}
 .pref-rate-h{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
 .pref-rate-h h2{font-family:var(--serif);font-size:16px;font-weight:700;letter-spacing:.02em;}
