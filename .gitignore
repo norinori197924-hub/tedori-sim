@@ -17,6 +17,12 @@ Thumbs.db
 data/raw/kokuho/*.pdf
 data/raw/kokuho/*.xlsx
 
+# 国保パイプラインのデバッグ生成物(JSON解析失敗時の生レスポンス)・
+# usageログ(コスト監視用、2026-09-05追加)。再現に必要な本体は*.extracted.json
+# 側にあるため、これらは追跡しない。
+data/raw/kokuho/*.raw.txt
+data/raw/kokuho/*.log
+
 # 級地区分パイプラインの一時作業ディレクトリ(PDF本体・中間生成物。
 # 再現用スクリプトはscripts/grade-area/に整理済み、再取得可能なため追跡しない)
 data/raw/grade-area/

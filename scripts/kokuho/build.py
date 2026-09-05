@@ -303,6 +303,15 @@ def build_source(pref_code: str, pref_entry: dict, source_id: str, source: dict,
         return
 
     extracted = json.loads(extracted_path.read_text(encoding="utf-8"))
+    if extracted.get("inProgress"):
+        # 2026-08-30、北海道対応で追加: extract.pyがバッチ途中の状態を
+        # 中間保存するようになったため(ハング・クラッシュ時に既完了分を
+        # 失わないための対策)、全バッチ完了前の中間ファイルを誤って本番
+        # データとして書き出さないためのガード。extract.pyが正常完了すると
+        # このキー自体を含まない最終結果で上書きされる。
+        print(f"[build] skip {label}: extract.pyが未完了(inProgress)の中間ファイルのため書き出しません")
+        return
+
     written, skipped, compared = [], [], []
 
     for muni in extracted.get("municipalities", []):

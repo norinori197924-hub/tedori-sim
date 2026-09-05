@@ -35,9 +35,13 @@
     python scripts/kokuho/extract.py 07 27 04    # 指定した都道府県コードのみ
 """
 import base64
+import copy
 import json
 import os
+import queue
 import sys
+import threading
+from datetime import datetime, timezone
 from pathlib import Path
 
 from anthropic import Anthropic
@@ -50,8 +54,73 @@ PREFECTURES_FILE = Path(__file__).resolve().parent / "prefectures.json"
 RAW_DIR = ROOT / "data" / "raw" / "kokuho"
 
 MODEL = "claude-sonnet-5"
-MAX_TOKENS = 32000
+MAX_TOKENS = 40000
+# 2026-08-30、北海道対応で調査: thinkingがMAX_TOKENSを丸ごと使い切り
+# textブロックが0件になる非決定的な失敗(紋別市を含むバッチで顕著)への対応として
+# output_config.effortをmedium/highに制限する案を試したが、いずれも同じ紋別市を
+# PDFの実画像(PyMuPDFでレンダリングし目視照合)と突き合わせたところ、既定
+# (effort未指定)では一致した値(perCapitaAmount=30090, perHouseholdAmount=29622)が、
+# medium/highでは不一致(29622/28936、29600/29622)になり、精度が明確に劣化した。
+# 際限ない思考に迷い込む頻度を下げる代わりに読み取り精度を犠牲にするトレードオフは
+# CLAUDE.md 5章(推測で値を埋めない)の方針に反するため不採用とし、effort指定は
+# 行わない(=デフォルトのthinking挙動のまま)。信頼性の確保はMAX_CALL_RETRIES・
+# CALL_TIMEOUT_SECONDS(下記)・バッチ単位の中間保存の側で行う。
 BATCH_SIZE = 10
+
+# 2026-09-05、北海道の紋別市バッチでの異常出力(1件あたり約2,400出力トークン、通常の
+# 10倍前後)の原因調査により、thinkingが非決定的にmax_tokensへ迫るまで肥大化する
+# ケースが実際にあることが判明した。効果測定用の1バッチ検証がしやすいよう、環境変数
+# KOKUHO_MAX_NEW_BATCHESで「新規にAPI呼び出しを行うバッチ数」の上限を設定できるように
+# した(未設定の場合は無制限。中間ファイル(inProgress)から再開可能な既存バッチは
+# カウントしない)。恒久的な挙動変更ではなく、慎重な段階投入のための一時的な制御弁。
+MAX_NEW_BATCHES_PER_RUN = (
+    int(os.environ["KOKUHO_MAX_NEW_BATCHES"]) if os.environ.get("KOKUHO_MAX_NEW_BATCHES") else None
+)
+
+# 2026-09-05追加: usageログとコスト上限による自動中断。
+# 単価はclaude-sonnet-5の公式レート(2026-06-24時点): input $2.00/MTok、
+# output $10.00/MTok、prompt cache書き込み(5分TTL、本スクリプトのcache_controlは
+# ttl未指定のため既定の5分) $2.50/MTok(=入力の1.25倍)、cache読み込み $0.20/MTok
+# (=入力の0.1倍)。extract.pyはcache_controlのttlを指定していないため、
+# cache_creation_input_tokensはすべて5分TTL料金として扱ってよい。
+PRICE_PER_MTOK_USD = {
+    "input": 2.00,
+    "cache_write_5m": 2.50,
+    "cache_read": 0.20,
+    "output": 10.00,
+}
+MAX_TOTAL_COST_USD = 2.0
+USAGE_LOG_PATH = RAW_DIR / "extract_usage.log"
+
+_cumulative_cost_usd = 0.0
+
+
+class CostLimitExceeded(RuntimeError):
+    """累積の概算コストがMAX_TOTAL_COST_USDを超えたため処理を中断する。"""
+
+
+def log_line(text: str) -> None:
+    """標準出力に加えてUSAGE_LOG_PATHにも追記する。
+
+    前回(北海道の異常出力調査)、print()の内容がどこにも保存されておらず、
+    実行後にusage(input_tokens/output_tokens等)の実測値を確認できなかった
+    反省を踏まえ、コンソール出力とファイルへの永続化を1箇所に集約する。
+    """
+    print(text)
+    timestamp = datetime.now(timezone.utc).isoformat()
+    RAW_DIR.mkdir(parents=True, exist_ok=True)
+    with USAGE_LOG_PATH.open("a", encoding="utf-8") as f:
+        f.write(f"{timestamp} {text}\n")
+
+
+def estimate_cost_usd(usage) -> float:
+    return (
+        usage.input_tokens * PRICE_PER_MTOK_USD["input"]
+        + usage.cache_creation_input_tokens * PRICE_PER_MTOK_USD["cache_write_5m"]
+        + usage.cache_read_input_tokens * PRICE_PER_MTOK_USD["cache_read"]
+        + usage.output_tokens * PRICE_PER_MTOK_USD["output"]
+    ) / 1_000_000
+
 
 OUTPUT_RULES = """\
 出力に関する厳格なルール:
@@ -206,13 +275,59 @@ def parse_json_response(text: str, debug_path: Path) -> dict:
         ) from first_error
 
 
+MAX_CALL_RETRIES = 6
+CALL_TIMEOUT_SECONDS = 480
+
+# 2026-08-30、北海道(紋別市)対応で発見: thinkingがmax_tokensを使い切り
+# textブロックが0件になる失敗(下記except節)は、バッチサイズやMAX_TOKENSの
+# 大小に関わらず発生しうる非決定的な現象と判明した。同一の1市(紋別市)を
+# 単独で何度も呼び出したところ、MAX_TOKENS=32000/48000では複数回とも
+# 確実に失敗した一方、MAX_TOKENS=64000でも成功時の実際の出力はわずか
+# 1334トークンで、必要な予算が単純に足りなかったわけではなかった
+# (=毎回決まって長い思考に迷い込むわけではなく、確率的に迷い込む回と
+# すぐ収束する回がある)。そのため恒久対応は「予算を増やす」ではなく
+# 「同じリクエストを複数回まで自動リトライする」とした。ネットワーク切断
+# (WinError 10054、同じ調査で複数回観測)も同様に一時的な要因のため、
+# API呼び出し自体の例外もリトライ対象に含める。output_config.effortで
+# 思考を抑制する対処も試したが、精度が明確に劣化した(下記MODEL付近の
+# コメント参照)ため不採用。信頼性はリトライ回数を増やす方向で確保する。
+# 実際に177市町村中1バッチ(10件)が3回連続で失敗する事例も観測されたため、
+# MAX_CALL_RETRIESは当初の3から6に引き上げた。
+#
+# さらに同じ北海道の抽出で、SDK/ネットワーク側が例外もstop_reasonも返さず
+# 応答自体が数時間単位でハングする事象も発生した(CPU使用率ほぼ0のまま
+# プロセスが停止し、標準出力もバッファリングされ何も見えない状態になった)。
+# Anthropic SDKのデフォルトタイムアウトはping等のストリームイベントで
+# リセットされている可能性があり、当てにできない。そのため、API呼び出しを
+# 常駐しないdaemonスレッドで実行し、CALL_TIMEOUT_SECONDS秒でqueue.get()自体
+# にタイムアウトをかける方式にした。daemonスレッドはメインスレッド終了時に
+# 強制終了されるため、ハングした呼び出しを「見捨てて」次のリトライに進んでも
+# プロセスの終了(atexitでの無限待ち)をブロックしない。
+
+
 def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug_path: Path) -> dict:
     """PDF(base64)とプロンプトを渡してClaude APIを呼び出し、JSONとして返す。
 
-    API呼び出し自体の例外・空応答・JSON解析エラーのいずれも、原因特定に必要な
-    情報(例外内容、stop_reason、content_block_types、生レスポンス)をログに
-    残してから送出する。
+    API呼び出し自体の例外・空応答は、原因が一時的なもの(ネットワーク瞬断、
+    thinkingが非決定的にmax_tokensを使い切る現象)である可能性があるため、
+    MAX_CALL_RETRIES回まで同一リクエストを再試行する。JSON解析エラーは
+    応答自体は得られている(=一時的な要因ではなく、応答内容そのものの問題)
+    ためリトライ対象にせず、これまで通り即座に例外を送出する。
+    いずれの失敗も、原因特定に必要な情報(例外内容、stop_reason、
+    content_block_types、生レスポンス)をログに残す。
+
+    呼び出し前に累積の概算コスト(_cumulative_cost_usd)がMAX_TOTAL_COST_USDを
+    超えていないか確認し、超えていれば新規のAPI呼び出しを一切行わずCostLimitExceeded
+    を送出する(2026-09-05追加。直前までの完了バッチはextract_source側で既に
+    中間保存済みのため、ここで打ち切っても結果は失われない)。
     """
+    global _cumulative_cost_usd
+    if _cumulative_cost_usd >= MAX_TOTAL_COST_USD:
+        raise CostLimitExceeded(
+            f"累積概算コストが${_cumulative_cost_usd:.4f}に達し、"
+            f"上限${MAX_TOTAL_COST_USD:.2f}を超えたため、{label}の呼び出しを行わずに中断します。"
+        )
+
     # 同一都道府県内で複数バッチ呼び出しを行う際、PDF部分をプロンプトキャッシュの
     # 対象にする(2026-07-25追加)。市町村名一覧取得(1回)+バッチ抽出(数回)は
     # すべて同じPDFをbase64で丸ごと送っており、プレフィックス(PDF文書ブロックが
@@ -224,49 +339,144 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
         "cache_control": {"type": "ephemeral"},
     }
 
-    try:
-        # MAX_TOKENSを大きくした際にAnthropic SDKから「10分を超えうる処理は
-        # streaming必須」という制約が返ってくることが判明した(2026-07-24、
-        # 東京都の抽出で発生)。messages.create()ではなくmessages.stream()を使う。
-        with client.messages.stream(
-            model=MODEL,
-            max_tokens=MAX_TOKENS,
-            messages=[
-                {
-                    "role": "user",
-                    "content": [content_block, {"type": "text", "text": prompt}],
-                }
-            ],
-        ) as stream:
-            message = stream.get_final_message()
-    except Exception as api_error:
-        print(f"[extract] {label}: Claude API呼び出し自体が例外を送出しました: {api_error!r}")
-        raise
+    def run_stream(result_queue: "queue.Queue"):
+        try:
+            # MAX_TOKENSを大きくした際にAnthropic SDKから「10分を超えうる処理は
+            # streaming必須」という制約が返ってくることが判明した(2026-07-24、
+            # 東京都の抽出で発生)。messages.create()ではなくmessages.stream()を使う。
+            with client.messages.stream(
+                model=MODEL,
+                max_tokens=MAX_TOKENS,
+                # 2026-09-05: thinkingを明示的に無効化する。claude-sonnet-5は
+                # thinkingが既定でadaptive(モデル任せ)であり、これが北海道の
+                # 紋別市バッチ等で非決定的にmax_tokens近くまで肥大化する原因と
+                # 特定された(1件あたり出力トークンが通常の10倍前後になる事象)。
+                # output_config.effortをmedium/high等に制限する対処は、既存の
+                # 調査(本ファイル冒頭コメント参照)で読み取り精度の明確な劣化が
+                # 確認済みで不採用としているため、そちらには触れずthinking自体を
+                # 無効化する経路を選んだ。
+                thinking={"type": "disabled"},
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [content_block, {"type": "text", "text": prompt}],
+                    }
+                ],
+            ) as stream:
+                message = stream.get_final_message()
+            result_queue.put(("ok", message))
+        except Exception as api_error:  # noqa: BLE001 - スレッド境界を越えて呼び出し元に伝える
+            result_queue.put(("error", api_error))
 
-    block_types = [block.type for block in message.content]
-    usage = message.usage
-    print(f"[extract] {label}: stop_reason={message.stop_reason} content_block_types={block_types}")
-    print(
-        f"[extract] {label}: usage input_tokens={usage.input_tokens} "
-        f"cache_creation_input_tokens={usage.cache_creation_input_tokens} "
-        f"cache_read_input_tokens={usage.cache_read_input_tokens} "
-        f"output_tokens={usage.output_tokens}"
-    )
+    last_error: Exception | None = None
+    for attempt in range(1, MAX_CALL_RETRIES + 1):
+        attempt_label = label if attempt == 1 else f"{label}(リトライ{attempt}/{MAX_CALL_RETRIES})"
 
-    text = "".join(block.text for block in message.content if block.type == "text").strip()
-    if not text:
-        raise ValueError(
-            f"{label}: Claude APIのレスポンスにtextブロックが含まれていませんでした"
+        result_queue: "queue.Queue" = queue.Queue()
+        thread = threading.Thread(target=run_stream, args=(result_queue,), daemon=True)
+        thread.start()
+        try:
+            status, payload = result_queue.get(timeout=CALL_TIMEOUT_SECONDS)
+        except queue.Empty:
+            log_line(
+                f"[extract] {attempt_label}: {CALL_TIMEOUT_SECONDS}秒以内に応答が完了しませんでした"
+                "(ハング/極端に長い思考の疑い)。この呼び出しは見捨ててリトライします。"
+            )
+            last_error = TimeoutError(f"{attempt_label}: {CALL_TIMEOUT_SECONDS}秒タイムアウト")
+            continue
+
+        if status == "error":
+            log_line(f"[extract] {attempt_label}: Claude API呼び出し自体が例外を送出しました: {payload!r}")
+            last_error = payload
+            continue
+
+        message = payload
+        block_types = [block.type for block in message.content]
+        usage = message.usage
+        # 2026-09-05追加: 呼び出しごとの概算コストを算出し、累積コストに加算・
+        # ログに残す(usageの実測値がどこにも保存されず原因究明できなかった
+        # 反省への対応。累積が上限を超えた場合、次のcall_claude呼び出し冒頭の
+        # チェックで中断される)。
+        call_cost_usd = estimate_cost_usd(usage)
+        _cumulative_cost_usd += call_cost_usd
+        log_line(f"[extract] {attempt_label}: stop_reason={message.stop_reason} content_block_types={block_types}")
+        log_line(
+            f"[extract] {attempt_label}: usage input_tokens={usage.input_tokens} "
+            f"cache_creation_input_tokens={usage.cache_creation_input_tokens} "
+            f"cache_read_input_tokens={usage.cache_read_input_tokens} "
+            f"output_tokens={usage.output_tokens} "
+            f"call_cost_usd=${call_cost_usd:.4f} cumulative_cost_usd=${_cumulative_cost_usd:.4f}"
+        )
+
+        text = "".join(block.text for block in message.content if block.type == "text").strip()
+        if text:
+            try:
+                return parse_json_response(text, debug_path)
+            except ValueError as parse_error:
+                # 2026-08-30、北海道対応で発見: stop_reason=max_tokensのまま
+                # textブロックが非空(=途中まで出力されている)ケースがある。
+                # この場合のJSON解析失敗は応答が途中で切れただけであり、一時的な
+                # 要因によるものなのでリトライ対象にする。それ以外(stop_reason
+                # =end_turnなのに解析できない等)は応答が完結していながら形式が
+                # 不正という genuine な問題のため、従来通り即座に例外を送出する。
+                if message.stop_reason != "max_tokens":
+                    raise
+                log_line(
+                    f"[extract] {attempt_label}: stop_reason=max_tokensで応答が途中で切れ、"
+                    "JSON解析に失敗しました。リトライします。"
+                )
+                last_error = parse_error
+                continue
+
+        last_error = ValueError(
+            f"{attempt_label}: Claude APIのレスポンスにtextブロックが含まれていませんでした"
             f"(stop_reason={message.stop_reason}, content_block_types={block_types})。"
             "APIエラーは発生していない(例外は送出されていない)ため、レート制限や認証エラー"
             "ではなく、応答の中身自体が空だった可能性が高い。"
         )
+        log_line(f"[extract] {attempt_label}: {last_error}")
 
-    return parse_json_response(text, debug_path)
+    raise last_error
 
 
 def chunk(items: list, size: int) -> list[list]:
     return [items[i : i + size] for i in range(0, len(items), size)]
+
+
+def expand_union_insurers(municipalities: list[dict], union_insurers: dict[str, list[str]]) -> list[dict]:
+    """複数市町村が共同で国保を運営する広域連合(例: 北海道の大雪地区広域連合)の
+    1レコードを、構成市町村の数だけ複製する。
+
+    都道府県公表の一覧表には、共同運営の実態を反映してこの種の広域連合が単独の
+    1行として掲載されることがある(例: 「177 大雪地区広域連合」)。しかし
+    municipality_codes.jsonには広域連合自体のコード対応が無く(国保法上は保険者
+    でも、tedori-simが扱う基礎自治体マスタの単位ではないため)、素通りさせると
+    build.py側の名前マッチングで書き出し先を持たずスキップされてしまう。
+    構成市町村は法律上まったく同一の保険料率を適用されるため、同じレート値を
+    そのまま複製することは推測による代替(CLAUDE.md 5章が禁じるもの)ではなく、
+    実態を正しく反映する処理である。
+
+    union_insurersはprefectures.jsonのその都道府県エントリ(または個別source)が
+    持つ、広域連合名 -> 構成市町村名リストのマッピング。ここに登録の無い
+    「〜広域連合」名が万一出現しても展開せず素通りさせる(構成市町村を推測で
+    当てずっぽうに決めない。build.py側の既存の「コード対応なしスキップ」に委ねる)。
+    """
+    if not union_insurers:
+        return municipalities
+
+    expanded = []
+    for muni in municipalities:
+        name = muni.get("municipalityName", "")
+        member_names = union_insurers.get(name)
+        if not member_names:
+            expanded.append(muni)
+            continue
+        print(f"[extract] {name}: 広域連合のため{len(member_names)}市町村へ複製します -> {member_names}")
+        for member_name in member_names:
+            member = copy.deepcopy(muni)
+            member["municipalityName"] = member_name
+            expanded.append(member)
+    return expanded
 
 
 def iter_sources(entry: dict):
@@ -320,8 +530,50 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
         raise ValueError(f"{label}: 市町村名の一覧が空でした(unifiedRate={unified_rate})")
     print(f"[extract] {label}: unifiedRate={unified_rate}, {len(names)}件の市町村名を取得")
 
+    out_path = extracted_path_for(pref_code, source_id)
+
+    # 2026-08-30、北海道対応で追加: 環境側の要因(バックグラウンドプロセスの
+    # 強制終了等)で177市町村・18バッチの抽出が完走前に中断される事象が実際に
+    # 発生した。中断前に完了していたバッチの結果は上のinProgress中間保存で
+    # ファイルには残っているため、それを読み込んで「全市町村名が既に揃っている
+    # バッチ」はAPI呼び出しをスキップし、そこから再開できるようにする。
+    # 市町村名一覧は都道府県公表資料をそのまま列挙するだけの単純な処理のため
+    # 実行のたびに順序が変わることはほぼ無いが、念のため位置(バッチ番号)では
+    # なく名前の集合の一致で判定する(順序が変わっても正しく再利用できるように)。
+    resumed_by_name: dict[str, dict] = {}
+    if out_path.exists():
+        try:
+            existing = json.loads(out_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError):
+            existing = {}
+        if existing.get("inProgress"):
+            for m in existing.get("municipalities", []):
+                if m.get("municipalityName"):
+                    resumed_by_name[m["municipalityName"]] = m
+            print(f"[extract] {label}: 中断済みの中間ファイルを検出、{len(resumed_by_name)}件を再利用します")
+
     municipalities = []
+    new_batches_run = 0
+    stopped_early = False
     for batch_index, batch_names in enumerate(chunk(names, BATCH_SIZE), start=1):
+        if all(n in resumed_by_name for n in batch_names):
+            print(f"[extract] {label} バッチ{batch_index}: 中間ファイルに全件揃っているためAPI呼び出しをスキップ")
+            municipalities.extend(resumed_by_name[n] for n in batch_names)
+            continue
+
+        # 2026-09-05追加: KOKUHO_MAX_NEW_BATCHES(段階投入・小規模検証用の環境変数)
+        # が設定されている場合、新規にAPI呼び出しを行うバッチ数がこの上限に達したら
+        # ここで打ち切る。resumed_by_nameで再利用できるバッチはカウントしない
+        # (「新規に課金が発生するバッチ数」を制御したいため)。
+        if MAX_NEW_BATCHES_PER_RUN is not None and new_batches_run >= MAX_NEW_BATCHES_PER_RUN:
+            print(
+                f"[extract] {label} バッチ{batch_index}: "
+                f"KOKUHO_MAX_NEW_BATCHES={MAX_NEW_BATCHES_PER_RUN}に達したため、"
+                "このバッチ以降は呼び出さずに打ち切ります(中間ファイルはinProgressのまま残ります)"
+            )
+            stopped_early = True
+            break
+
         batch_result = call_claude(
             client,
             data_b64,
@@ -329,16 +581,46 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
             label=f"{label}(バッチ{batch_index}: {len(batch_names)}件)",
             debug_path=RAW_DIR / f"{pref_code}_{source_id}.batch{batch_index}.raw.txt",
         )
+        new_batches_run += 1
         batch_municipalities = batch_result.get("municipalities", [])
         print(
             f"[extract] {label} バッチ{batch_index}: "
             f"要求{len(batch_names)}件中{len(batch_municipalities)}件を取得"
         )
         municipalities.extend(batch_municipalities)
+        # 2026-08-30、北海道対応で追加: 市町村数の多い都道府県は18バッチ超に
+        # なることがあり、途中のバッチでハング・クラッシュした場合にそれまで
+        # 完了したバッチの結果まで失われる事故が実際に発生した(標準出力の
+        # バッファリングと相まって、どこまで進んでいたかの確認すら困難だった)。
+        # そのため未展開(広域連合展開前)の中間状態を毎バッチ末尾に上書き保存する。
+        # 最終的な正式ファイルは全バッチ完了後・広域連合展開後に別途書き込む
+        # (このタイミングでの保存はあくまで途中経過のスナップショット)。
+        out_path.write_text(
+            json.dumps({"unifiedRate": unified_rate, "municipalities": municipalities, "inProgress": True}, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+    if stopped_early:
+        # KOKUHO_MAX_NEW_BATCHESによる意図的な打ち切り。まだ全バッチ完了して
+        # いないため、inProgress:falseの「完了扱い」ファイルには絶対に書き換えない
+        # (未完了データを完了扱いにするとbuild.py側で不完全なまま確定してしまう)。
+        # 直前のバッチ末尾で書き込み済みのinProgress:trueファイルをそのまま残し、
+        # 次回実行時の再開(resumed_by_name)に委ねる。
+        print(
+            f"[extract] {label}: KOKUHO_MAX_NEW_BATCHESにより打ち切りました"
+            f"(このソースの現時点の件数: {len(municipalities)}件、"
+            f"うち今回新規に呼び出したバッチ数: {new_batches_run})"
+        )
+        return {"unifiedRate": unified_rate, "municipalities": municipalities, "inProgress": True}
+
+    union_insurers = source.get("unionInsurers", {})
+    if union_insurers:
+        before_count = len(municipalities)
+        municipalities = expand_union_insurers(municipalities, union_insurers)
+        print(f"[extract] {label}: 広域連合展開により{before_count}件 -> {len(municipalities)}件")
 
     result = {"unifiedRate": unified_rate, "municipalities": municipalities}
 
-    out_path = extracted_path_for(pref_code, source_id)
     out_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"[extract] {label}: 合計{len(municipalities)} municipalities -> {out_path}")
     return result
@@ -352,11 +634,19 @@ def extract_prefecture(pref_code: str, entry: dict) -> None:
 def main():
     prefectures = json.loads(PREFECTURES_FILE.read_text(encoding="utf-8"))
     targets = sys.argv[1:] or list(prefectures.keys())
-    for pref_code in targets:
-        if pref_code not in prefectures:
-            print(f"[extract] skip: unknown prefecture code {pref_code}")
-            continue
-        extract_prefecture(pref_code, prefectures[pref_code])
+    try:
+        for pref_code in targets:
+            if pref_code not in prefectures:
+                print(f"[extract] skip: unknown prefecture code {pref_code}")
+                continue
+            extract_prefecture(pref_code, prefectures[pref_code])
+    except CostLimitExceeded as cost_error:
+        # 2026-09-05追加: 累積概算コストが上限に達した場合の安全装置。直前までの
+        # バッチはすでにinProgressの中間ファイルとして保存済みなので、ここでは
+        # 追加の保存処理をせず、ユーザーへの明示的な通知とログ記録だけを行う。
+        log_line(f"[extract] ★コスト上限による中断★: {cost_error}")
+        log_line(f"[extract] usageログ: {USAGE_LOG_PATH}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
