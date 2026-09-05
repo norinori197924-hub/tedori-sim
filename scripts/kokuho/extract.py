@@ -39,6 +39,7 @@ import copy
 import json
 import os
 import queue
+import re
 import sys
 import threading
 from datetime import datetime, timezone
@@ -122,6 +123,44 @@ def estimate_cost_usd(usage) -> float:
     ) / 1_000_000
 
 
+# 2026-09-05追加: 全国展開全体を通算した累積コストの監視。
+# MAX_TOTAL_COST_USD($2)は1回のプロセス実行(=1都道府県分の処理)ごとに
+# _cumulative_cost_usdがリセットされるため、都道府県をまたいだ通算コストは
+# 別途追跡する必要がある。NATIONAL_COST_LOG_PATHに都道府県ごとの実測コストを
+# 1行ずつ追記していき、その合計を「全国展開の通算コスト」とみなす。
+# この仕組みが導入される前(北海道のthinking肥大化修正前)の実コストは
+# ログに残っていないため、record_national_cost()呼び出し以外の手段
+# (Anthropicコンソールでのユーザー確認等)で判明した過去分を手動で
+# シードする運用を想定している(北海道分のシード経緯はCLAUDE.md 11.6章参照)。
+NATIONAL_COST_LOG_PATH = RAW_DIR / "national_rollout_cost.log"
+NATIONAL_COST_ALERT_USD = 8.0
+NATIONAL_COST_HARD_LIMIT_USD = 10.0
+
+_NATIONAL_COST_LINE_RE = re.compile(r"cost_usd=\$([0-9.]+)")
+
+
+def read_national_cumulative_cost() -> float:
+    """NATIONAL_COST_LOG_PATHに記録済みの全都道府県分のコストを合算する。"""
+    if not NATIONAL_COST_LOG_PATH.exists():
+        return 0.0
+    total = 0.0
+    for line in NATIONAL_COST_LOG_PATH.read_text(encoding="utf-8").splitlines():
+        m = _NATIONAL_COST_LINE_RE.search(line)
+        if m:
+            total += float(m.group(1))
+    return total
+
+
+def record_national_cost(pref_code: str, pref_name: str, cost_usd: float) -> float:
+    """1都道府県分の実測コストをNATIONAL_COST_LOG_PATHに追記し、
+    記録後の全国通算コストを返す。"""
+    timestamp = datetime.now(timezone.utc).isoformat()
+    NATIONAL_COST_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+    with NATIONAL_COST_LOG_PATH.open("a", encoding="utf-8") as f:
+        f.write(f"{timestamp} prefCode={pref_code} name={pref_name} cost_usd=${cost_usd:.4f}\n")
+    return read_national_cumulative_cost()
+
+
 OUTPUT_RULES = """\
 出力に関する厳格なルール:
 - 出力は指定したJSON構造そのものだけにしてください。前置き・説明文・補足コメントを
@@ -131,6 +170,10 @@ OUTPUT_RULES = """\
   書き方は不正なJSONになるため禁止)。読み取れない場合は理由を書かず、単にnullに
   してください。
 - JSON仕様にない記法(コメント、末尾カンマなど)は使わないでください。
+- 数値は必ず計算済みの1つの数値にしてください。「1845 + 149」のような未計算の
+  足し算式や、桁区切りのカンマ(1,845等)をそのまま値として書かないこと
+  (計算が必要な項目は、あなたが先に計算した結果の数値だけを書いてください。
+  1845+149のように書くのではなく、1994と書いてください)。
 """
 
 NAME_LIST_PROMPT_TEMPLATE = """\
@@ -172,9 +215,11 @@ perCapitaAmountOver18(18歳以上の被保険者1人あたりの合計負担額)
 「均等割」列(=18歳以上専用の基礎額)を読み取ってください。
 - 表が「均等割(基礎額)」と「18歳以上均等割(18歳以上のみに追加でかかる加算額)」
   という2つの列に分かれている場合(例: 均等割1,800円・18歳以上均等割73円という
-  表記)は、基礎額+加算額の合計(1,800+73=1,873)をperCapitaAmountOver18に
-  入れてください。18歳以上均等割の列の数値をそのままperCapitaAmountOver18に
-  入れてはいけません(それは加算額であって合計額ではないため)。
+  表記)は、基礎額と加算額を計算した合計の金額(この例なら1873)を
+  perCapitaAmountOver18に入れてください。「1800+73」のような式のまま出力せず、
+  必ず先に計算してから、計算済みの数値だけを書いてください。18歳以上均等割の
+  列の数値をそのままperCapitaAmountOver18に入れてはいけません(それは加算額で
+  あって合計額ではないため)。
 - 表に最初から「均等割合計」「18歳以上の合計負担額」のような合計値の列がある
   場合は、その合計値をそのままperCapitaAmountOver18に入れてください。
 - 「均等割」列が1つしかない(18歳以上均等割・加算額の列が無い)場合は、その値を
@@ -238,6 +283,30 @@ def batch_extraction_prompt(names: list[str], include_caps: bool = False, extra_
 {OUTPUT_RULES}"""
 
 
+_UNEVALUATED_SUM_RE = re.compile(r"(:\s*)(-?\d+(?:\.\d+)?)\s*\+\s*(-?\d+(?:\.\d+)?)(?=\s*[,}\]])")
+
+
+def _repair_unevaluated_arithmetic(text: str) -> str:
+    """「1845 + 149」のような未計算の足し算式がJSON値としてそのまま出力
+    される事象(2026-09-05、静岡県対応で発見)への対処。
+
+    thinkingを無効化した影響と考えられる: FIELD_INSTRUCTIONSが
+    「基礎額+加算額の合計(1,800+73=1,873)」という表記を例示しているため、
+    thinkingで暗算していた計算をthinking無効時は省略し、算術式の表記の方を
+    そのまま出力してしまうことがある(同一プロンプトでも発生するバッチと
+    しないバッチがあり非決定的)。JSON構文としては不正だが意味は一意に
+    確定できるため、パース前に計算済みの値へ機械的に置換する。
+    """
+
+    def _replace(m: "re.Match") -> str:
+        total = float(m.group(2)) + float(m.group(3))
+        if total.is_integer():
+            total = int(total)
+        return f"{m.group(1)}{total}"
+
+    return _UNEVALUATED_SUM_RE.sub(_replace, text)
+
+
 def parse_json_response(text: str, debug_path: Path) -> dict:
     """Claude APIの応答テキストをJSONとしてパースする。
 
@@ -257,13 +326,22 @@ def parse_json_response(text: str, debug_path: Path) -> dict:
     try:
         return json.loads(cleaned)
     except json.JSONDecodeError as first_error:
+        candidates = [cleaned]
         start = cleaned.find("{")
         end = cleaned.rfind("}")
         if start != -1 and end > start:
+            candidates.append(cleaned[start : end + 1])
+        # 2026-09-05追加(静岡県対応で発見): 未計算の算術式を機械的に計算した
+        # 修復版も候補に加える。candidates[0](=cleaned)は直前で失敗済みのため
+        # ループでは1番目以降のみ試す。
+        candidates += [_repair_unevaluated_arithmetic(c) for c in candidates]
+
+        for candidate in candidates[1:]:
             try:
-                return json.loads(cleaned[start : end + 1])
+                return json.loads(candidate)
             except json.JSONDecodeError:
-                pass
+                continue
+
         debug_path.write_text(text, encoding="utf-8")
         print("[extract] JSON解析失敗。Claude APIの生の応答テキスト(パース前):")
         print("----- raw response start -----")
@@ -632,21 +710,68 @@ def extract_prefecture(pref_code: str, entry: dict) -> None:
 
 
 def main():
+    global _cumulative_cost_usd
     prefectures = json.loads(PREFECTURES_FILE.read_text(encoding="utf-8"))
     targets = sys.argv[1:] or list(prefectures.keys())
-    try:
-        for pref_code in targets:
-            if pref_code not in prefectures:
-                print(f"[extract] skip: unknown prefecture code {pref_code}")
-                continue
-            extract_prefecture(pref_code, prefectures[pref_code])
-    except CostLimitExceeded as cost_error:
-        # 2026-09-05追加: 累積概算コストが上限に達した場合の安全装置。直前までの
-        # バッチはすでにinProgressの中間ファイルとして保存済みなので、ここでは
-        # 追加の保存処理をせず、ユーザーへの明示的な通知とログ記録だけを行う。
-        log_line(f"[extract] ★コスト上限による中断★: {cost_error}")
-        log_line(f"[extract] usageログ: {USAGE_LOG_PATH}")
-        sys.exit(1)
+
+    for pref_code in targets:
+        if pref_code not in prefectures:
+            print(f"[extract] skip: unknown prefecture code {pref_code}")
+            continue
+
+        # 2026-09-05追加: 全国展開の通算コスト(都道府県をまたいだ累積、
+        # NATIONAL_COST_LOG_PATH参照)が既に上限を超えている場合、この
+        # 都道府県の処理を一切開始しない(APIを一度も呼ばない)。
+        national_total_before = read_national_cumulative_cost()
+        if national_total_before > NATIONAL_COST_HARD_LIMIT_USD:
+            log_line(
+                f"[extract] ★★★全国展開の通算コストが${national_total_before:.4f}に達しており、"
+                f"上限${NATIONAL_COST_HARD_LIMIT_USD:.2f}を超えています。{pref_code}の処理を"
+                "開始せずに中断します。ユーザーの承認を得てから再実行してください。★★★"
+            )
+            sys.exit(1)
+
+        pref_entry = prefectures[pref_code]
+        cost_before = _cumulative_cost_usd
+        try:
+            extract_prefecture(pref_code, pref_entry)
+        except CostLimitExceeded as cost_error:
+            # 2026-09-05追加: 累積概算コストが上限に達した場合の安全装置。直前までの
+            # バッチはすでにinProgressの中間ファイルとして保存済みなので、ここでは
+            # 追加の保存処理をせず、ユーザーへの明示的な通知とログ記録だけを行う。
+            # 中断までに実際に発生した分のコストは、通算コストの記録から漏らさない
+            # よう、ここでも必ずrecord_national_costする。
+            log_line(f"[extract] ★コスト上限による中断★: {cost_error}")
+            log_line(f"[extract] usageログ: {USAGE_LOG_PATH}")
+            pref_cost = _cumulative_cost_usd - cost_before
+            record_national_cost(pref_code, pref_entry["name"], pref_cost)
+            sys.exit(1)
+
+        # 2026-09-05追加: この都道府県分の実測コストを全国展開の通算ログに記録し、
+        # 通算コストがアラート/上限のいずれかを超えていないか確認する。
+        pref_cost = _cumulative_cost_usd - cost_before
+        national_total = record_national_cost(pref_code, pref_entry["name"], pref_cost)
+        log_line(
+            f"[extract] {pref_entry['name']}: 今回の処理コスト=${pref_cost:.4f}、"
+            f"全国展開の通算コスト=${national_total:.4f}"
+        )
+        if national_total > NATIONAL_COST_HARD_LIMIT_USD:
+            log_line("=" * 70)
+            log_line(
+                f"[extract] ★★★全国展開の通算コストが上限${NATIONAL_COST_HARD_LIMIT_USD:.2f}を"
+                f"超えました(${national_total:.4f})。次の都道府県の処理はユーザーの承認を"
+                "得るまで開始しません。★★★"
+            )
+            log_line("=" * 70)
+            sys.exit(1)
+        elif national_total > NATIONAL_COST_ALERT_USD:
+            log_line("=" * 70)
+            log_line(
+                f"[extract] ⚠⚠⚠ 全国展開の通算コストが${national_total:.4f}に達しました"
+                f"(アラート閾値${NATIONAL_COST_ALERT_USD:.2f})。処理は継続しますが、次の"
+                "都道府県に進む前に必ずユーザーへ報告してください。 ⚠⚠⚠"
+            )
+            log_line("=" * 70)
 
 
 if __name__ == "__main__":

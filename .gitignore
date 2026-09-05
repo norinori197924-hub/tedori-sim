@@ -18,10 +18,14 @@ data/raw/kokuho/*.pdf
 data/raw/kokuho/*.xlsx
 
 # 国保パイプラインのデバッグ生成物(JSON解析失敗時の生レスポンス)・
-# usageログ(コスト監視用、2026-09-05追加)。再現に必要な本体は*.extracted.json
-# 側にあるため、これらは追跡しない。
+# usageログ(呼び出しごとの詳細、コスト監視用、2026-09-05追加)。再現に必要な
+# 本体は*.extracted.json側にあるため、これらは追跡しない。
 data/raw/kokuho/*.raw.txt
 data/raw/kokuho/*.log
+# ただしnational_rollout_cost.log(全国展開全体を通算した都道府県ごとの実測
+# コストの記録、2026-09-05追加)は、実費の恒久的な監査記録として例外的に
+# 追跡する(上記*.logの否定パターン)。
+!data/raw/kokuho/national_rollout_cost.log
 
 # 級地区分パイプラインの一時作業ディレクトリ(PDF本体・中間生成物。
 # 再現用スクリプトはscripts/grade-area/に整理済み、再取得可能なため追跡しない)

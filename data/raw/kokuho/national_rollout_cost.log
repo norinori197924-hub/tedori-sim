@@ -1,0 +1,3 @@
+2026-09-05T12:07:02.289007+00:00 prefCode=01 name=北海道 cost_usd=$6.7781 note=手動シード。pre-fix(usageログ導入前、150件処理時点でユーザーがAnthropicコンソールで確認)=$6.5600 + post-fix(extract_usage.log実測、名称一覧2回+バッチ16-18)=$0.2181
+2026-09-05T12:11:32.736253+00:00 prefCode=22 name=静岡県 cost_usd=$0.0465
+2026-09-05T12:33:52.601361+00:00 prefCode=22 name=静岡県 cost_usd=$0.0661
