@@ -100,6 +100,17 @@ class CostLimitExceeded(RuntimeError):
     """累積の概算コストがMAX_TOTAL_COST_USDを超えたため処理を中断する。"""
 
 
+class IntegrityCheckFailed(RuntimeError):
+    """抽出結果の自動整合性チェック(verify_extraction_integrity)に失敗した。
+
+    2026-09-05、広島県rank12対応で追加。「府中町」が全く別バッチの
+    「広島市」のレコード(医療・支援・介護・子育て支援の全フィールド)を
+    そのまま複製しているという重大な事故が、①②③【参考】のような多段構造
+    かつ高密度な表(判定基準はCLAUDE.md 11.6章)で発生したことを受けて、
+    build.pyでの確定前に機械的に検出する安全装置として導入した。
+    """
+
+
 def log_line(text: str) -> None:
     """標準出力に加えてUSAGE_LOG_PATHにも追記する。
 
@@ -224,6 +235,13 @@ perCapitaAmountOver18(18歳以上の被保険者1人あたりの合計負担額)
   場合は、その合計値をそのままperCapitaAmountOver18に入れてください。
 - 「均等割」列が1つしかない(18歳以上均等割・加算額の列が無い)場合は、その値を
   そのままperCapitaAmountOver18に入れてください。
+- 子ども・子育て支援納付金分に「均等割」「18歳以上均等割」に加えて「平等割」の
+  列も別途存在する場合(3列構成、都道府県によってはこの形式がある)、平等割は
+  均等割・18歳以上均等割とは完全に独立した世帯単位の負担であり、perHouseholdAmount
+  にそのまま入れてください。この場合でもperCapitaAmountOver18の計算方法は変わらず、
+  必ず「均等割」+「18歳以上均等割」の合計を入れてください(平等割の列に引きずられて
+  均等割の値だけをperCapitaAmountOver18に入れたり、18歳以上均等割の加算を
+  省略したりしないこと)。
 
 perHouseholdAmount(平等割額)とassetRate(資産割率)の扱いについて、次の2つのケースを
 明確に区別すること:
@@ -383,7 +401,14 @@ CALL_TIMEOUT_SECONDS = 480
 # プロセスの終了(atexitでの無限待ち)をブロックしない。
 
 
-def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug_path: Path) -> dict:
+def call_claude(
+    client: Anthropic,
+    data_b64: str,
+    prompt: str,
+    label: str,
+    debug_path: Path,
+    thinking_enabled: bool = False,
+) -> dict:
     """PDF(base64)とプロンプトを渡してClaude APIを呼び出し、JSONとして返す。
 
     API呼び出し自体の例外・空応答は、原因が一時的なもの(ネットワーク瞬断、
@@ -398,6 +423,14 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
     超えていないか確認し、超えていれば新規のAPI呼び出しを一切行わずCostLimitExceeded
     を送出する(2026-09-05追加。直前までの完了バッチはextract_source側で既に
     中間保存済みのため、ここで打ち切っても結果は失われない)。
+
+    thinking_enabled(2026-09-05、広島県rank12対応で追加): 既定はFalse
+    (thinking無効、北海道以降の標準挙動)。①②③【参考】のような多段構造かつ
+    列数が多い高密度な表(広島県で実例あり)では、thinking無効化により
+    モデルが表の行を読み違え、無関係な市町村のレコードをそのまま複製する
+    という重大な事故が発生した。prefectures.jsonの該当sourceに
+    "thinkingEnabled": trueを設定すると、extract_source側からTrueが渡され
+    thinkingが有効(adaptive)になる。判定基準はCLAUDE.md 11.6章参照。
     """
     global _cumulative_cost_usd
     if _cumulative_cost_usd >= MAX_TOTAL_COST_USD:
@@ -425,7 +458,7 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
             with client.messages.stream(
                 model=MODEL,
                 max_tokens=MAX_TOKENS,
-                # 2026-09-05: thinkingを明示的に無効化する。claude-sonnet-5は
+                # 2026-09-05: 既定はthinkingを明示的に無効化する。claude-sonnet-5は
                 # thinkingが既定でadaptive(モデル任せ)であり、これが北海道の
                 # 紋別市バッチ等で非決定的にmax_tokens近くまで肥大化する原因と
                 # 特定された(1件あたり出力トークンが通常の10倍前後になる事象)。
@@ -433,7 +466,13 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
                 # 調査(本ファイル冒頭コメント参照)で読み取り精度の明確な劣化が
                 # 確認済みで不採用としているため、そちらには触れずthinking自体を
                 # 無効化する経路を選んだ。
-                thinking={"type": "disabled"},
+                # ただし広島県rank12対応で追加した例外として、thinking_enabled=True
+                # (prefectures.jsonの該当sourceに"thinkingEnabled": trueを設定)の
+                # 場合はadaptiveのまま呼び出す。①②③【参考】のような多段構造かつ
+                # 高密度な表では、thinking無効化がむしろ行の読み違え(無関係な
+                # 市町村のレコードを複製する等)を誘発することが実例で確認された
+                # ため、判定基準(CLAUDE.md 11.6章)に該当する都道府県のみ有効化する。
+                thinking={"type": "adaptive"} if thinking_enabled else {"type": "disabled"},
                 messages=[
                     {
                         "role": "user",
@@ -477,7 +516,10 @@ def call_claude(client: Anthropic, data_b64: str, prompt: str, label: str, debug
         # チェックで中断される)。
         call_cost_usd = estimate_cost_usd(usage)
         _cumulative_cost_usd += call_cost_usd
-        log_line(f"[extract] {attempt_label}: stop_reason={message.stop_reason} content_block_types={block_types}")
+        log_line(
+            f"[extract] {attempt_label}: stop_reason={message.stop_reason} "
+            f"content_block_types={block_types} thinking_enabled={thinking_enabled}"
+        )
         log_line(
             f"[extract] {attempt_label}: usage input_tokens={usage.input_tokens} "
             f"cache_creation_input_tokens={usage.cache_creation_input_tokens} "
@@ -557,6 +599,58 @@ def expand_union_insurers(municipalities: list[dict], union_insurers: dict[str, 
     return expanded
 
 
+_INTEGRITY_CHECK_FIELDS = [
+    ("medical", "incomeRate"), ("medical", "perCapitaAmount"), ("medical", "perHouseholdAmount"), ("medical", "assetRate"),
+    ("support", "incomeRate"), ("support", "perCapitaAmount"), ("support", "perHouseholdAmount"), ("support", "assetRate"),
+    ("care", "incomeRate"), ("care", "perCapitaAmount"), ("care", "perHouseholdAmount"), ("care", "assetRate"),
+    ("childSupport", "incomeRate"), ("childSupport", "perCapitaAmountUnder18"),
+    ("childSupport", "perCapitaAmountOver18"), ("childSupport", "perHouseholdAmount"), ("childSupport", "assetRate"),
+]
+
+
+def verify_extraction_integrity(names: list[str], municipalities: list[dict], label: str) -> list[str]:
+    """抽出結果(広域連合展開前・build.py実行前)を機械的に検証し、
+    問題点のリストを返す(空リストなら異常なし)。
+
+    2026-09-05、広島県rank12対応で発見した2種類の事故の再発防止のために
+    追加した(CLAUDE.md 11.6章参照):
+    - 抽出件数が名称一覧の件数と一致しない(バッチの取りこぼし・重複)
+    - 異なる市町村なのに全フィールドが完全一致するレコードが存在する
+      (モデルが密な表の行を読み違え、無関係な市町村のレコードをそのまま
+      複製してしまう現象。府中町が広島市の全12フィールドを複製していた
+      実例が発見のきっかけ)。この検証はunionInsurers展開の"前"に行うこと
+      (展開後は同一料率の複数市町村が意図的に完全一致するため誤検知になる)。
+      ユーザーからは「前後の市町村」の比較を提案されたが、実際の事故は
+      隣接しない市町村間(バッチをまたいだ組み合わせ)で発生したため、
+      隣接ペアに限定せず全ペアを対象にする(件数が数百件規模でも
+      O(件数)のハッシュ突き合わせで済み、性能上の問題はない)。
+    """
+    issues = []
+    if len(municipalities) != len(names):
+        issues.append(
+            f"{label}: 抽出件数が名称一覧と一致しません"
+            f"(名称一覧{len(names)}件 vs 抽出結果{len(municipalities)}件)"
+        )
+
+    def _record_signature(m: dict) -> tuple:
+        return tuple(m.get(section, {}).get(key) for section, key in _INTEGRITY_CHECK_FIELDS)
+
+    seen: dict[tuple, str] = {}
+    for m in municipalities:
+        name = m.get("municipalityName", "?")
+        sig = _record_signature(m)
+        prior_name = seen.get(sig)
+        if prior_name is not None and prior_name != name:
+            issues.append(
+                f"{label}: 「{name}」のレコードが「{prior_name}」と全フィールド完全一致しています"
+                "(モデルが表の行を読み違えて別市町村のデータを複製した疑い)"
+            )
+        else:
+            seen[sig] = name
+
+    return issues
+
+
 def iter_sources(entry: dict):
     """都道府県エントリを (source_id, source辞書) のリストに正規化する。
 
@@ -591,6 +685,13 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
     label = source["name"] if source_id == "default" else f"{source['name']}({source_id})"
     include_caps = bool(source.get("hasCapsInSource"))
     extra_note = source.get("extractionNote", "")
+    # 2026-09-05、広島県rank12対応で追加: 多段構造・高密度な表(判定基準は
+    # CLAUDE.md 11.6章)ではthinking無効化がむしろ行の読み違えを誘発したため、
+    # prefectures.jsonの該当sourceに"thinkingEnabled": trueを設定した場合のみ
+    # thinkingを有効化する(既定はFalse=無効、北海道以降の標準挙動を維持)。
+    thinking_enabled = bool(source.get("thinkingEnabled"))
+    if thinking_enabled:
+        print(f"[extract] {label}: thinkingEnabled=true のためthinkingを有効化して呼び出します")
 
     client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     data_b64 = base64.standard_b64encode(raw_path.read_bytes()).decode("utf-8")
@@ -601,6 +702,7 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
         name_list_prompt(extra_note),
         label=f"{label}(市町村名一覧)",
         debug_path=RAW_DIR / f"{pref_code}_{source_id}.names.raw.txt",
+        thinking_enabled=thinking_enabled,
     )
     unified_rate = bool(name_list.get("unifiedRate"))
     names = name_list.get("municipalityNames") or []
@@ -658,6 +760,7 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
             batch_extraction_prompt(batch_names, include_caps=include_caps, extra_note=extra_note),
             label=f"{label}(バッチ{batch_index}: {len(batch_names)}件)",
             debug_path=RAW_DIR / f"{pref_code}_{source_id}.batch{batch_index}.raw.txt",
+            thinking_enabled=thinking_enabled,
         )
         new_batches_run += 1
         batch_municipalities = batch_result.get("municipalities", [])
@@ -690,6 +793,19 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
             f"うち今回新規に呼び出したバッチ数: {new_batches_run})"
         )
         return {"unifiedRate": unified_rate, "municipalities": municipalities, "inProgress": True}
+
+    # 2026-09-05追加(広島県rank12対応): build.pyに渡す前の最終防衛ライン。
+    # unionInsurers展開"前"のmunicipalitiesに対して行う(展開後は同一料率の
+    # 複数市町村が意図的に完全一致するため)。失敗した場合、out_pathは直前の
+    # バッチ末尾で書き込まれたinProgress:trueのままにし、完了扱いにしない。
+    integrity_issues = verify_extraction_integrity(names, municipalities, label)
+    if integrity_issues:
+        for issue in integrity_issues:
+            log_line(f"[extract] ★整合性チェック失敗★: {issue}")
+        raise IntegrityCheckFailed(
+            f"{label}: 抽出結果の自動整合性チェックに失敗しました({len(integrity_issues)}件)。"
+            f"{out_path}はinProgressのまま(前バッチ終了時点の状態)残しています。"
+        )
 
     union_insurers = source.get("unionInsurers", {})
     if union_insurers:
@@ -743,6 +859,14 @@ def main():
             # よう、ここでも必ずrecord_national_costする。
             log_line(f"[extract] ★コスト上限による中断★: {cost_error}")
             log_line(f"[extract] usageログ: {USAGE_LOG_PATH}")
+            pref_cost = _cumulative_cost_usd - cost_before
+            record_national_cost(pref_code, pref_entry["name"], pref_cost)
+            sys.exit(1)
+        except IntegrityCheckFailed as integrity_error:
+            # 2026-09-05追加(広島県rank12対応): 自動整合性チェック失敗時も、
+            # 実際に発生したコストは無駄にはならない情報として通算ログに記録する
+            # (out_path自体はinProgressのままのため、build.pyには渡らない)。
+            log_line(f"[extract] ★整合性チェック失敗による中断★: {integrity_error}")
             pref_cost = _cumulative_cost_usd - cost_before
             record_national_cost(pref_code, pref_entry["name"], pref_cost)
             sys.exit(1)
