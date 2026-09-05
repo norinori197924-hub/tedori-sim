@@ -20,8 +20,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0031,
-        "perCapitaAmountUnder18": 1356,
-        "perCapitaAmountOver18": 93,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1449,
         "perHouseholdAmount": 885
       }
     },
@@ -44,8 +44,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1335,
-        "perCapitaAmountOver18": 97,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -68,8 +68,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0031,
-        "perCapitaAmountUnder18": 1342,
-        "perCapitaAmountOver18": 106,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1448,
         "perHouseholdAmount": 885
       }
     },
@@ -92,8 +92,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0031,
-        "perCapitaAmountUnder18": 1346,
-        "perCapitaAmountOver18": 103,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1449,
         "perHouseholdAmount": 885
       }
     },
@@ -116,8 +116,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1341,
-        "perCapitaAmountOver18": 92,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -140,8 +140,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1341,
-        "perCapitaAmountOver18": 92,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -164,8 +164,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1338,
-        "perCapitaAmountOver18": 95,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -188,8 +188,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1325,
-        "perCapitaAmountOver18": 107,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -212,8 +212,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1357,
-        "perCapitaAmountOver18": 75,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -236,8 +236,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1349,
-        "perCapitaAmountOver18": 83,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -260,8 +260,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1341,
-        "perCapitaAmountOver18": 92,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -284,8 +284,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1346,
-        "perCapitaAmountOver18": 87,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -308,8 +308,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1337,
-        "perCapitaAmountOver18": 96,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -332,8 +332,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1333,
-        "perCapitaAmountOver18": 87,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -356,8 +356,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1351,
-        "perCapitaAmountOver18": 69,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -380,8 +380,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1360,
-        "perCapitaAmountOver18": 59,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -404,8 +404,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1351,
-        "perCapitaAmountOver18": 68,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -428,8 +428,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1325,
-        "perCapitaAmountOver18": 94,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -452,8 +452,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1351,
-        "perCapitaAmountOver18": 68,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -476,8 +476,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1357,
-        "perCapitaAmountOver18": 62,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -500,8 +500,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1252,
-        "perCapitaAmountOver18": 145,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -524,8 +524,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1324,
-        "perCapitaAmountOver18": 73,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -548,8 +548,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1329,
-        "perCapitaAmountOver18": 68,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -572,8 +572,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1359,
-        "perCapitaAmountOver18": 61,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -596,8 +596,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1284,
-        "perCapitaAmountOver18": 114,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1398,
         "perHouseholdAmount": 853
       }
     },
@@ -620,8 +620,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1326,
-        "perCapitaAmountOver18": 94,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -644,8 +644,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1353,
-        "perCapitaAmountOver18": 80,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -668,8 +668,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1293,
-        "perCapitaAmountOver18": 105,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1398,
         "perHouseholdAmount": 853
       }
     },
@@ -692,8 +692,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1293,
-        "perCapitaAmountOver18": 105,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1398,
         "perHouseholdAmount": 853
       }
     },
@@ -716,8 +716,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1309,
-        "perCapitaAmountOver18": 88,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -740,8 +740,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1325,
-        "perCapitaAmountOver18": 72,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -764,8 +764,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1328,
-        "perCapitaAmountOver18": 69,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -788,8 +788,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1329,
-        "perCapitaAmountOver18": 103,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -812,8 +812,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1350,
-        "perCapitaAmountOver18": 69,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -836,8 +836,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1327,
-        "perCapitaAmountOver18": 93,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -860,8 +860,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1336,
-        "perCapitaAmountOver18": 96,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -884,8 +884,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1338,
-        "perCapitaAmountOver18": 82,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -908,8 +908,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1326,
-        "perCapitaAmountOver18": 93,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -932,8 +932,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1352,
-        "perCapitaAmountOver18": 67,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -956,8 +956,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1346,
-        "perCapitaAmountOver18": 51,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -980,8 +980,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1364,
-        "perCapitaAmountOver18": 55,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -1004,8 +1004,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1333,
-        "perCapitaAmountOver18": 99,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -1028,8 +1028,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1321,
-        "perCapitaAmountOver18": 98,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -1052,8 +1052,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1316,
-        "perCapitaAmountOver18": 104,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -1076,8 +1076,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1366,
-        "perCapitaAmountOver18": 54,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -1100,8 +1100,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1347,
-        "perCapitaAmountOver18": 86,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -1124,8 +1124,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1302,
-        "perCapitaAmountOver18": 117,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -1148,8 +1148,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1350,
-        "perCapitaAmountOver18": 69,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -1172,8 +1172,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1348,
-        "perCapitaAmountOver18": 71,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
         "perHouseholdAmount": 867
       }
     },
@@ -1196,8 +1196,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1346,
-        "perCapitaAmountOver18": 87,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -1220,8 +1220,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1361,
-        "perCapitaAmountOver18": 36,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -1244,8 +1244,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1322,
-        "perCapitaAmountOver18": 111,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -1268,8 +1268,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1328,
-        "perCapitaAmountOver18": 92,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -1292,8 +1292,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1346,
-        "perCapitaAmountOver18": 87,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     },
@@ -1316,8 +1316,8 @@
       },
       "childSupport": {
         "incomeRate": 0.0029,
-        "perCapitaAmountUnder18": 1273,
-        "perCapitaAmountOver18": 124,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1397,
         "perHouseholdAmount": 853
       }
     },
@@ -1340,8 +1340,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1328,
-        "perCapitaAmountOver18": 92,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -1364,8 +1364,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1355,
-        "perCapitaAmountOver18": 65,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1420,
         "perHouseholdAmount": 867
       }
     },
@@ -1388,8 +1388,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1335,
-        "perCapitaAmountOver18": 97,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1432,
         "perHouseholdAmount": 875
       }
     },
@@ -1412,8 +1412,8 @@
       },
       "childSupport": {
         "incomeRate": 0.003,
-        "perCapitaAmountUnder18": 1355,
-        "perCapitaAmountOver18": 78,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1433,
         "perHouseholdAmount": 875
       }
     }
