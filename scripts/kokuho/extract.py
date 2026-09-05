@@ -768,6 +768,27 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
             f"[extract] {label} バッチ{batch_index}: "
             f"要求{len(batch_names)}件中{len(batch_municipalities)}件を取得"
         )
+        # 2026-09-05追加(広島県rank12の事故を受けた再発防止策の一環): 追加の
+        # API呼び出しを伴わないゼロコストの検証として、返ってきた市町村名の
+        # 集合が要求した名前の集合と完全に一致するか(欠落・重複・誤字が
+        # 無いか)を確認する。従来はlen()の一致しかチェックしておらず、
+        # 名前が入れ替わっていても素通りしていた。値の取り違え(府中町の事故)
+        # 自体はこの世代のチェックでは検出できない(名前自体は正しい位置に
+        # あったため)が、名前レベルの別種の事故を無償で検知できる。
+        returned_names = [m.get("municipalityName") for m in batch_municipalities]
+        if sorted(returned_names) != sorted(batch_names):
+            missing = set(batch_names) - set(returned_names)
+            extra = set(returned_names) - set(batch_names)
+            log_line(
+                f"[extract] ★整合性チェック失敗★: {label} バッチ{batch_index}: "
+                f"返ってきた市町村名が要求と一致しません(欠落: {sorted(missing)}, "
+                f"想定外: {sorted(extra)})"
+            )
+            raise IntegrityCheckFailed(
+                f"{label} バッチ{batch_index}: 返ってきた市町村名が要求と一致しません"
+                f"(欠落: {sorted(missing)}, 想定外: {sorted(extra)})。"
+                f"{out_path}は前バッチ終了時点のinProgress状態のまま残しています。"
+            )
         municipalities.extend(batch_municipalities)
         # 2026-08-30、北海道対応で追加: 市町村数の多い都道府県は18バッチ超に
         # なることがあり、途中のバッチでハング・クラッシュした場合にそれまで
