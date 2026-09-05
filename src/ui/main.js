@@ -68,7 +68,18 @@ async function initMunicipalities() {
   badgeCoverage.textContent = `${municipalities.length} / ${totalMunicipalityCount.toLocaleString('ja-JP')}`;
   renderCoverage();
 
-  const prefectures = [...new Set(municipalities.map((m) => m.prefecture))];
+  // prefectureCode(01〜47)は北海道→東北→関東→中部→近畿→中国→四国→
+  // 九州沖縄という地方区分・北から南への順に割り振られた総務省の公式コード
+  // なので、これでソートするだけで地理的に自然な並び順になる。
+  const prefectureCodeByName = new Map();
+  for (const m of municipalities) {
+    if (!prefectureCodeByName.has(m.prefecture)) {
+      prefectureCodeByName.set(m.prefecture, m.prefectureCode);
+    }
+  }
+  const prefectures = [...prefectureCodeByName.keys()].sort((a, b) =>
+    prefectureCodeByName.get(a).localeCompare(prefectureCodeByName.get(b))
+  );
   prefectureSelect.innerHTML =
     '<option value="" selected disabled hidden>選択してください</option>' +
     prefectures.map((p) => `<option value="${p}">${p}</option>`).join('');
