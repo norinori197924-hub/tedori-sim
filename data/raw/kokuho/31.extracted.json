@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "鳥取市",
+      "medical": {
+        "incomeRate": 0.0713,
+        "perCapitaAmount": 31101,
+        "perHouseholdAmount": 20032,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 12519,
+        "perHouseholdAmount": 8064,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0254,
+        "perCapitaAmount": 13248,
+        "perHouseholdAmount": 6409,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1303,
+        "perHouseholdAmount": 776,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "米子市",
+      "medical": {
+        "incomeRate": 0.0683,
+        "perCapitaAmount": 29786,
+        "perHouseholdAmount": 19185,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0296,
+        "perCapitaAmount": 12786,
+        "perHouseholdAmount": 8236,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0261,
+        "perCapitaAmount": 13577,
+        "perHouseholdAmount": 6568,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1330,
+        "perHouseholdAmount": 792,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "倉吉市",
+      "medical": {
+        "incomeRate": 0.0676,
+        "perCapitaAmount": 29476,
+        "perHouseholdAmount": 18986,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 12531,
+        "perHouseholdAmount": 8071,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0256,
+        "perCapitaAmount": 13313,
+        "perHouseholdAmount": 6440,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1304,
+        "perHouseholdAmount": 777,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "鳥取市",
+    "米子市",
+    "倉吉市"
+  ]
+}
