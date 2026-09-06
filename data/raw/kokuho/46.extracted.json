@@ -1,0 +1,96 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "鹿児島市",
+      "medical": {
+        "incomeRate": 0.0832,
+        "perCapitaAmount": 36333,
+        "perHouseholdAmount": 23232,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0296,
+        "perCapitaAmount": 12801,
+        "perHouseholdAmount": 8185,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0247,
+        "perCapitaAmount": 12446,
+        "perHouseholdAmount": 6169,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1373,
+        "perHouseholdAmount": 816,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "霧島市",
+      "medical": {
+        "incomeRate": 0.0687,
+        "perCapitaAmount": 30028,
+        "perHouseholdAmount": 19200,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0288,
+        "perCapitaAmount": 12473,
+        "perHouseholdAmount": 7975,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 12066,
+        "perHouseholdAmount": 5981,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1326,
+        "perHouseholdAmount": 789,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "鹿屋市",
+      "medical": {
+        "incomeRate": 0.0668,
+        "perCapitaAmount": 29195,
+        "perHouseholdAmount": 18667,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0289,
+        "perCapitaAmount": 12502,
+        "perHouseholdAmount": 7994,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0248,
+        "perCapitaAmount": 12498,
+        "perHouseholdAmount": 6195,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1352,
+        "perHouseholdAmount": 808,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "鹿児島市",
+    "霧島市",
+    "鹿屋市"
+  ],
+  "manuallyCorrected": true
+}
