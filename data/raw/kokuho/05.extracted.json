@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "秋田市",
+      "medical": {
+        "incomeRate": 0.0658,
+        "perCapitaAmount": 18026,
+        "perHouseholdAmount": 21776,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0321,
+        "perCapitaAmount": 9327,
+        "perHouseholdAmount": 10148,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 9188,
+        "perHouseholdAmount": 8784,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 968,
+        "perHouseholdAmount": 1112,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "横手市",
+      "medical": {
+        "incomeRate": 0.0575,
+        "perCapitaAmount": 15791,
+        "perHouseholdAmount": 13448,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0318,
+        "perCapitaAmount": 8751,
+        "perHouseholdAmount": 7306,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0273,
+        "perCapitaAmount": 9046,
+        "perHouseholdAmount": 5220,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0034,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 995,
+        "perHouseholdAmount": 807,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大仙市",
+      "medical": {
+        "incomeRate": 0.0637,
+        "perCapitaAmount": 14970,
+        "perHouseholdAmount": 22806,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0303,
+        "perCapitaAmount": 7564,
+        "perHouseholdAmount": 10733,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0242,
+        "perCapitaAmount": 7948,
+        "perHouseholdAmount": 8825,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0033,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 812,
+        "perHouseholdAmount": 1173,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "由利本荘市",
+      "medical": {
+        "incomeRate": 0.0562,
+        "perCapitaAmount": 16018,
+        "perHouseholdAmount": 18150,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0312,
+        "perCapitaAmount": 14821,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 15073,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1639,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "秋田市",
+    "横手市",
+    "大仙市",
+    "由利本荘市"
+  ]
+}

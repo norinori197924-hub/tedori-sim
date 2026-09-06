@@ -1,0 +1,45 @@
+{
+  "prefecture": "秋田県",
+  "municipality": "大仙市",
+  "municipalityCode": "05212",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.pref.akita.lg.jp/uploads/public/archive_0000094480_00/02_%E4%BB%A4%E5%92%8C%EF%BC%98%E5%B9%B4%E5%BA%A6%E7%A7%8B%E7%94%B0%E7%9C%8C%E5%9B%BD%E6%B0%91%E5%81%A5%E5%BA%B7%E4%BF%9D%E9%99%BA%E6%A8%99%E6%BA%96%E4%BF%9D%E9%99%BA%E7%A8%8E%E7%8E%87%E4%B8%80%E8%A6%A7%EF%BC%88HP%E6%8E%B2%E8%BC%89%E7%94%A8%EF%BC%89.pdf",
+  "sourceTitle": "秋田県 令和8年度秋田県国民健康保険標準保険税率一覧",
+  "fetchedAt": "2026-09-06",
+  "needsReview": true,
+  "dataSource": "prefecture_standard_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。都道府県公表の「標準保険料率」であり、市町村が実際に条例で定める料率と異なる場合がある(都道府県資料内に同旨の注記あり)。賦課限度額(cap)は一覧表に含まれないため全国標準値を暫定使用しており、自治体独自の限度額(例: 金沢市の医療分66万円)とは異なる可能性がある。",
+  "levyMethod": "自動収集のため賦課方式は未確認(平等割額・資産割率が0でない区分があるかで方式を推定可能だが、今回は判定していない)",
+  "medical": {
+    "incomeRate": 0.0637,
+    "perCapitaAmount": 14970,
+    "perHouseholdAmount": 22806,
+    "assetRate": 0,
+    "cap": 670000
+  },
+  "support": {
+    "incomeRate": 0.0303,
+    "perCapitaAmount": 7564,
+    "perHouseholdAmount": 10733,
+    "assetRate": 0,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.0242,
+    "perCapitaAmount": 7948,
+    "perHouseholdAmount": 8825,
+    "assetRate": 0,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0033,
+    "perCapitaAmountUnder18": 0,
+    "perCapitaAmountOver18": 812,
+    "perHouseholdAmount": 1173,
+    "assetRate": 0,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}

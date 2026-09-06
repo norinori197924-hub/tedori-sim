@@ -9040,6 +9040,50 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/03206.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "秋田県",
+      "prefectureCode": "05",
+      "municipality": "秋田市",
+      "municipalityCode": "05201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/akita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/05201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "秋田県",
+      "prefectureCode": "05",
+      "municipality": "横手市",
+      "municipalityCode": "05203",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/akita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/05203.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "秋田県",
+      "prefectureCode": "05",
+      "municipality": "大仙市",
+      "municipalityCode": "05212",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/akita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/05212.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "秋田県",
+      "prefectureCode": "05",
+      "municipality": "由利本荘市",
+      "municipalityCode": "05210",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/akita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/05210.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
