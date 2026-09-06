@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "長崎市",
+      "medical": {
+        "incomeRate": 0.0933,
+        "perCapitaAmount": 31528,
+        "perHouseholdAmount": 20793,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0348,
+        "perCapitaAmount": 11787,
+        "perHouseholdAmount": 7774,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0272,
+        "perCapitaAmount": 11273,
+        "perHouseholdAmount": 5872,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0033,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1208,
+        "perHouseholdAmount": 751,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "佐世保市",
+      "medical": {
+        "incomeRate": 0.0916,
+        "perCapitaAmount": 30946,
+        "perHouseholdAmount": 20409,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0358,
+        "perCapitaAmount": 12141,
+        "perHouseholdAmount": 8007,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0284,
+        "perCapitaAmount": 11770,
+        "perHouseholdAmount": 6132,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0033,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1207,
+        "perHouseholdAmount": 757,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "諫早市",
+      "medical": {
+        "incomeRate": 0.0805,
+        "perCapitaAmount": 27206,
+        "perHouseholdAmount": 17943,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0345,
+        "perCapitaAmount": 11697,
+        "perHouseholdAmount": 7714,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0272,
+        "perCapitaAmount": 11295,
+        "perHouseholdAmount": 5884,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0032,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1179,
+        "perHouseholdAmount": 737,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "長崎市",
+    "佐世保市",
+    "諫早市"
+  ]
+}
