@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "山口市",
+      "medical": {
+        "incomeRate": 0.0726,
+        "perCapitaAmount": 31904,
+        "perHouseholdAmount": 20234,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0294,
+        "perCapitaAmount": 12832,
+        "perHouseholdAmount": 8139,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0257,
+        "perCapitaAmount": 13122,
+        "perHouseholdAmount": 6378,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0032,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1522,
+        "perHouseholdAmount": 903,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "下関市",
+      "medical": {
+        "incomeRate": 0.0683,
+        "perCapitaAmount": 29996,
+        "perHouseholdAmount": 19024,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0293,
+        "perCapitaAmount": 12787,
+        "perHouseholdAmount": 8110,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0257,
+        "perCapitaAmount": 13084,
+        "perHouseholdAmount": 6360,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0033,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1540,
+        "perHouseholdAmount": 915,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "宇部市",
+      "medical": {
+        "incomeRate": 0.0711,
+        "perCapitaAmount": 31234,
+        "perHouseholdAmount": 19810,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0302,
+        "perCapitaAmount": 13182,
+        "perHouseholdAmount": 8361,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 14066,
+        "perHouseholdAmount": 6837,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0034,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1592,
+        "perHouseholdAmount": 945,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "周南市",
+      "medical": {
+        "incomeRate": 0.0649,
+        "perCapitaAmount": 28524,
+        "perHouseholdAmount": 18091,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0292,
+        "perCapitaAmount": 12738,
+        "perHouseholdAmount": 8079,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0258,
+        "perCapitaAmount": 13179,
+        "perHouseholdAmount": 6406,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0032,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1515,
+        "perHouseholdAmount": 900,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "山口市",
+    "下関市",
+    "宇部市",
+    "周南市"
+  ]
+}
