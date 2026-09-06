@@ -1,0 +1,182 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "長野市",
+      "medical": {
+        "incomeRate": 0.0708,
+        "perCapitaAmount": 25825,
+        "perHouseholdAmount": 26353,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0295,
+        "perCapitaAmount": 11025,
+        "perHouseholdAmount": 9912,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0241,
+        "perCapitaAmount": 10052,
+        "perHouseholdAmount": 8071,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1132,
+        "perHouseholdAmount": 1066,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "松本市",
+      "medical": {
+        "incomeRate": 0.0721,
+        "perCapitaAmount": 26316,
+        "perHouseholdAmount": 26854,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 10673,
+        "perHouseholdAmount": 9595,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 10029,
+        "perHouseholdAmount": 8052,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1131,
+        "perHouseholdAmount": 1086,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "上田市",
+      "medical": {
+        "incomeRate": 0.0686,
+        "perCapitaAmount": 25036,
+        "perHouseholdAmount": 25548,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0289,
+        "perCapitaAmount": 10798,
+        "perHouseholdAmount": 9707,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0242,
+        "perCapitaAmount": 10095,
+        "perHouseholdAmount": 8105,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1209,
+        "perHouseholdAmount": 1139,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "佐久市",
+      "medical": {
+        "incomeRate": 0.068,
+        "perCapitaAmount": 24818,
+        "perHouseholdAmount": 25326,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 10857,
+        "perHouseholdAmount": 9760,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 10008,
+        "perHouseholdAmount": 8036,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0023,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 877,
+        "perHouseholdAmount": 864,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "安曇野市",
+      "medical": {
+        "incomeRate": 0.0724,
+        "perCapitaAmount": 26437,
+        "perHouseholdAmount": 26978,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 10547,
+        "perHouseholdAmount": 9481,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0241,
+        "perCapitaAmount": 10061,
+        "perHouseholdAmount": 8078,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1095,
+        "perHouseholdAmount": 1052,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "飯田市",
+      "medical": {
+        "incomeRate": 0.0651,
+        "perCapitaAmount": 23762,
+        "perHouseholdAmount": 24248,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 10745,
+        "perHouseholdAmount": 9659,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 10030,
+        "perHouseholdAmount": 8054,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1179,
+        "perHouseholdAmount": 1110,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "長野市",
+    "松本市",
+    "上田市",
+    "佐久市",
+    "安曇野市",
+    "飯田市"
+  ]
+}
