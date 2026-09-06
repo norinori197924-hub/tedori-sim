@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "青森市",
+      "medical": {
+        "incomeRate": 0.0662,
+        "perCapitaAmount": 28895,
+        "perHouseholdAmount": 19026,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0302,
+        "perCapitaAmount": 13132,
+        "perHouseholdAmount": 8647,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0288,
+        "perCapitaAmount": 14752,
+        "perHouseholdAmount": 7395,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1381,
+        "perHouseholdAmount": 859,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "八戸市",
+      "medical": {
+        "incomeRate": 0.0668,
+        "perCapitaAmount": 29128,
+        "perHouseholdAmount": 19180,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0306,
+        "perCapitaAmount": 13302,
+        "perHouseholdAmount": 8759,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0294,
+        "perCapitaAmount": 15063,
+        "perHouseholdAmount": 7552,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1385,
+        "perHouseholdAmount": 864,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "弘前市",
+      "medical": {
+        "incomeRate": 0.071,
+        "perCapitaAmount": 30995,
+        "perHouseholdAmount": 20409,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0301,
+        "perCapitaAmount": 13074,
+        "perHouseholdAmount": 8609,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0291,
+        "perCapitaAmount": 14918,
+        "perHouseholdAmount": 7479,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1389,
+        "perHouseholdAmount": 867,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "青森市",
+    "八戸市",
+    "弘前市"
+  ]
+}

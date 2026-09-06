@@ -841,13 +841,154 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
     return result
 
 
+def extract_wide_coverage_source(pref_code: str, source_id: str, source: dict, target_names: list[str]) -> dict:
+    """全市町村ではなく、あらかじめ選定した一部の市町村(県庁所在地・政令市+
+    人口カバー率50〜60%までの上位市)だけを1回のAPI呼び出しで抽出する
+    (2026-09-06追加、「広域カバー」展開方式)。
+
+    従来のextract_source()は「①市町村名一覧を取得→②全市町村を10件ずつ
+    バッチ抽出」という2段階だったが、広域カバー方式では抽出対象の市町村名を
+    事前にmaster.json+人口データから機械的に確定済みのため、①の名称一覧
+    取得を省略し、②のバッチ抽出(batch_extraction_prompt)を対象件数分
+    (3〜8件、BATCH_SIZE=10未満のため常に1バッチで収まる)だけ1回呼び出す。
+    これにより都道府県ごとのAPI呼び出しが1回に減り、コストを大きく抑える。
+
+    抽出結果には"wideCoverage": trueと"targetNames"を記録し、フル展開との
+    区別をファイル上で明示する(build.pyは通常通りmunicipalitiesを処理する
+    だけなので、この2フィールドがあっても無くても動作に影響しない)。
+    """
+    ext = ".pdf" if source["sourceFormat"] == "pdf" else ".xlsx"
+    raw_path = raw_path_for(pref_code, source_id, ext)
+    if not raw_path.exists():
+        raise FileNotFoundError(f"raw file not found, run fetch.py first: {raw_path}")
+    if source["sourceFormat"] != "pdf":
+        raise NotImplementedError("Excel入力からの抽出は今回のパイロット範囲外(PDFのみ対応)")
+
+    label = source["name"] if source_id == "default" else f"{source['name']}({source_id})"
+    include_caps = bool(source.get("hasCapsInSource"))
+    extra_note = source.get("extractionNote", "")
+    thinking_enabled = bool(source.get("thinkingEnabled"))
+    if thinking_enabled:
+        print(f"[extract] {label}: thinkingEnabled=true のためthinkingを有効化して呼び出します")
+
+    client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    data_b64 = base64.standard_b64encode(raw_path.read_bytes()).decode("utf-8")
+    out_path = extracted_path_for(pref_code, source_id)
+
+    batch_result = call_claude(
+        client,
+        data_b64,
+        batch_extraction_prompt(target_names, include_caps=include_caps, extra_note=extra_note),
+        label=f"{label}(広域カバー: {len(target_names)}件)",
+        debug_path=RAW_DIR / f"{pref_code}_{source_id}.wide_coverage.raw.txt",
+        thinking_enabled=thinking_enabled,
+    )
+    municipalities = batch_result.get("municipalities", [])
+    print(f"[extract] {label}: 要求{len(target_names)}件中{len(municipalities)}件を取得")
+
+    # 2026-09-05追加の自動整合性チェック(広島県rank12対応、CLAUDE.md 11.6章)を
+    # ここでも適用する。件数不一致・全フィールド完全一致の複製を検出する。
+    integrity_issues = verify_extraction_integrity(target_names, municipalities, label)
+    if integrity_issues:
+        for issue in integrity_issues:
+            log_line(f"[extract] ★整合性チェック失敗★: {issue}")
+        raise IntegrityCheckFailed(
+            f"{label}: 広域カバー抽出結果の自動整合性チェックに失敗しました"
+            f"({len(integrity_issues)}件)。{out_path}は書き込んでいません。"
+        )
+
+    result = {
+        "unifiedRate": False,
+        "municipalities": municipalities,
+        "wideCoverage": True,
+        "targetNames": target_names,
+    }
+    out_path.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[extract] {label}: 広域カバー抽出完了 -> {out_path}")
+    return result
+
+
 def extract_prefecture(pref_code: str, entry: dict) -> None:
     for source_id, source in iter_sources(entry):
         extract_source(pref_code, source_id, source)
 
 
-def main():
+def extract_prefecture_wide_coverage(pref_code: str, entry: dict, target_names: list[str]) -> None:
+    for source_id, source in iter_sources(entry):
+        extract_wide_coverage_source(pref_code, source_id, source, target_names)
+
+
+def _run_one_prefecture(pref_code: str, pref_entry: dict, extract_fn) -> None:
+    """1都道府県分の抽出を実行し、全国展開の通算コスト追跡・アラート/上限
+    チェックを行う共通処理(通常のフル展開・広域カバー展開の両方から使う、
+    2026-09-06にmain()から切り出し)。extract_fnは引数無しの呼び出し可能
+    オブジェクト(実際の抽出処理)。
+    """
     global _cumulative_cost_usd
+
+    # 2026-09-05追加: 全国展開の通算コスト(都道府県をまたいだ累積、
+    # NATIONAL_COST_LOG_PATH参照)が既に上限を超えている場合、この
+    # 都道府県の処理を一切開始しない(APIを一度も呼ばない)。
+    national_total_before = read_national_cumulative_cost()
+    if national_total_before > NATIONAL_COST_HARD_LIMIT_USD:
+        log_line(
+            f"[extract] ★★★全国展開の通算コストが${national_total_before:.4f}に達しており、"
+            f"上限${NATIONAL_COST_HARD_LIMIT_USD:.2f}を超えています。{pref_code}の処理を"
+            "開始せずに中断します。ユーザーの承認を得てから再実行してください。★★★"
+        )
+        sys.exit(1)
+
+    cost_before = _cumulative_cost_usd
+    try:
+        extract_fn()
+    except CostLimitExceeded as cost_error:
+        # 2026-09-05追加: 累積概算コストが上限に達した場合の安全装置。直前までの
+        # バッチはすでにinProgressの中間ファイルとして保存済みなので、ここでは
+        # 追加の保存処理をせず、ユーザーへの明示的な通知とログ記録だけを行う。
+        # 中断までに実際に発生した分のコストは、通算コストの記録から漏らさない
+        # よう、ここでも必ずrecord_national_costする。
+        log_line(f"[extract] ★コスト上限による中断★: {cost_error}")
+        log_line(f"[extract] usageログ: {USAGE_LOG_PATH}")
+        pref_cost = _cumulative_cost_usd - cost_before
+        record_national_cost(pref_code, pref_entry["name"], pref_cost)
+        sys.exit(1)
+    except IntegrityCheckFailed as integrity_error:
+        # 2026-09-05追加(広島県rank12対応): 自動整合性チェック失敗時も、
+        # 実際に発生したコストは無駄にはならない情報として通算ログに記録する
+        # (out_path自体はinProgressのままのため、build.pyには渡らない)。
+        log_line(f"[extract] ★整合性チェック失敗による中断★: {integrity_error}")
+        pref_cost = _cumulative_cost_usd - cost_before
+        record_national_cost(pref_code, pref_entry["name"], pref_cost)
+        sys.exit(1)
+
+    # 2026-09-05追加: この都道府県分の実測コストを全国展開の通算ログに記録し、
+    # 通算コストがアラート/上限のいずれかを超えていないか確認する。
+    pref_cost = _cumulative_cost_usd - cost_before
+    national_total = record_national_cost(pref_code, pref_entry["name"], pref_cost)
+    log_line(
+        f"[extract] {pref_entry['name']}: 今回の処理コスト=${pref_cost:.4f}、"
+        f"全国展開の通算コスト=${national_total:.4f}"
+    )
+    if national_total > NATIONAL_COST_HARD_LIMIT_USD:
+        log_line("=" * 70)
+        log_line(
+            f"[extract] ★★★全国展開の通算コストが上限${NATIONAL_COST_HARD_LIMIT_USD:.2f}を"
+            f"超えました(${national_total:.4f})。次の都道府県の処理はユーザーの承認を"
+            "得るまで開始しません。★★★"
+        )
+        log_line("=" * 70)
+        sys.exit(1)
+    elif national_total > NATIONAL_COST_ALERT_USD:
+        log_line("=" * 70)
+        log_line(
+            f"[extract] ⚠⚠⚠ 全国展開の通算コストが${national_total:.4f}に達しました"
+            f"(アラート閾値${NATIONAL_COST_ALERT_USD:.2f})。処理は継続しますが、次の"
+            "都道府県に進む前に必ずユーザーへ報告してください。 ⚠⚠⚠"
+        )
+        log_line("=" * 70)
+
+
+def main():
     prefectures = json.loads(PREFECTURES_FILE.read_text(encoding="utf-8"))
     targets = sys.argv[1:] or list(prefectures.keys())
 
@@ -855,69 +996,39 @@ def main():
         if pref_code not in prefectures:
             print(f"[extract] skip: unknown prefecture code {pref_code}")
             continue
-
-        # 2026-09-05追加: 全国展開の通算コスト(都道府県をまたいだ累積、
-        # NATIONAL_COST_LOG_PATH参照)が既に上限を超えている場合、この
-        # 都道府県の処理を一切開始しない(APIを一度も呼ばない)。
-        national_total_before = read_national_cumulative_cost()
-        if national_total_before > NATIONAL_COST_HARD_LIMIT_USD:
-            log_line(
-                f"[extract] ★★★全国展開の通算コストが${national_total_before:.4f}に達しており、"
-                f"上限${NATIONAL_COST_HARD_LIMIT_USD:.2f}を超えています。{pref_code}の処理を"
-                "開始せずに中断します。ユーザーの承認を得てから再実行してください。★★★"
-            )
-            sys.exit(1)
-
         pref_entry = prefectures[pref_code]
-        cost_before = _cumulative_cost_usd
-        try:
-            extract_prefecture(pref_code, pref_entry)
-        except CostLimitExceeded as cost_error:
-            # 2026-09-05追加: 累積概算コストが上限に達した場合の安全装置。直前までの
-            # バッチはすでにinProgressの中間ファイルとして保存済みなので、ここでは
-            # 追加の保存処理をせず、ユーザーへの明示的な通知とログ記録だけを行う。
-            # 中断までに実際に発生した分のコストは、通算コストの記録から漏らさない
-            # よう、ここでも必ずrecord_national_costする。
-            log_line(f"[extract] ★コスト上限による中断★: {cost_error}")
-            log_line(f"[extract] usageログ: {USAGE_LOG_PATH}")
-            pref_cost = _cumulative_cost_usd - cost_before
-            record_national_cost(pref_code, pref_entry["name"], pref_cost)
-            sys.exit(1)
-        except IntegrityCheckFailed as integrity_error:
-            # 2026-09-05追加(広島県rank12対応): 自動整合性チェック失敗時も、
-            # 実際に発生したコストは無駄にはならない情報として通算ログに記録する
-            # (out_path自体はinProgressのままのため、build.pyには渡らない)。
-            log_line(f"[extract] ★整合性チェック失敗による中断★: {integrity_error}")
-            pref_cost = _cumulative_cost_usd - cost_before
-            record_national_cost(pref_code, pref_entry["name"], pref_cost)
-            sys.exit(1)
+        _run_one_prefecture(pref_code, pref_entry, lambda pc=pref_code, pe=pref_entry: extract_prefecture(pc, pe))
 
-        # 2026-09-05追加: この都道府県分の実測コストを全国展開の通算ログに記録し、
-        # 通算コストがアラート/上限のいずれかを超えていないか確認する。
-        pref_cost = _cumulative_cost_usd - cost_before
-        national_total = record_national_cost(pref_code, pref_entry["name"], pref_cost)
-        log_line(
-            f"[extract] {pref_entry['name']}: 今回の処理コスト=${pref_cost:.4f}、"
-            f"全国展開の通算コスト=${national_total:.4f}"
+
+# 2026-09-06追加: 広域カバー方式(県庁所在地+政令市+人口カバー率50~60%までの
+# 上位市のみを対象にした簡略展開)用のターゲット一覧ファイル。
+# {都道府県コード: [市町村名, ...]}の形式。
+WIDE_COVERAGE_TARGETS_FILE = Path(__file__).resolve().parent / "wide_coverage_targets.json"
+
+
+def main_wide_coverage(pref_codes: list[str]) -> None:
+    prefectures = json.loads(PREFECTURES_FILE.read_text(encoding="utf-8"))
+    targets_by_pref = json.loads(WIDE_COVERAGE_TARGETS_FILE.read_text(encoding="utf-8"))
+
+    for pref_code in pref_codes:
+        if pref_code not in prefectures:
+            print(f"[extract] skip: {pref_code}はprefectures.jsonに未登録です(先に一次資料を調査してください)")
+            continue
+        target_names = targets_by_pref.get(pref_code)
+        if not target_names:
+            print(f"[extract] skip: {pref_code}の広域カバー対象リストがwide_coverage_targets.jsonにありません")
+            continue
+        pref_entry = prefectures[pref_code]
+        _run_one_prefecture(
+            pref_code,
+            pref_entry,
+            lambda pc=pref_code, pe=pref_entry, tn=target_names: extract_prefecture_wide_coverage(pc, pe, tn),
         )
-        if national_total > NATIONAL_COST_HARD_LIMIT_USD:
-            log_line("=" * 70)
-            log_line(
-                f"[extract] ★★★全国展開の通算コストが上限${NATIONAL_COST_HARD_LIMIT_USD:.2f}を"
-                f"超えました(${national_total:.4f})。次の都道府県の処理はユーザーの承認を"
-                "得るまで開始しません。★★★"
-            )
-            log_line("=" * 70)
-            sys.exit(1)
-        elif national_total > NATIONAL_COST_ALERT_USD:
-            log_line("=" * 70)
-            log_line(
-                f"[extract] ⚠⚠⚠ 全国展開の通算コストが${national_total:.4f}に達しました"
-                f"(アラート閾値${NATIONAL_COST_ALERT_USD:.2f})。処理は継続しますが、次の"
-                "都道府県に進む前に必ずユーザーへ報告してください。 ⚠⚠⚠"
-            )
-            log_line("=" * 70)
 
 
 if __name__ == "__main__":
-    main()
+    if "--wide-coverage" in sys.argv:
+        _wide_coverage_args = [a for a in sys.argv[1:] if a != "--wide-coverage"]
+        main_wide_coverage(_wide_coverage_args)
+    else:
+        main()

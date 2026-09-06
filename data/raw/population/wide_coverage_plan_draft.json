@@ -1,0 +1,833 @@
+{
+  "02": {
+    "prefecture": "青森県",
+    "totalPopulation": 1166578,
+    "selected": [
+      {
+        "name": "青森市",
+        "code": "02201",
+        "population": 259352
+      },
+      {
+        "name": "八戸市",
+        "code": "02203",
+        "population": 212279
+      },
+      {
+        "name": "弘前市",
+        "code": "02202",
+        "population": 157375
+      }
+    ],
+    "coverage": 0.5392,
+    "count": 3
+  },
+  "03": {
+    "prefecture": "岩手県",
+    "totalPopulation": 1136186,
+    "selected": [
+      {
+        "name": "盛岡市",
+        "code": "03201",
+        "population": 274941
+      },
+      {
+        "name": "奥州市",
+        "code": "03215",
+        "population": 106116
+      },
+      {
+        "name": "一関市",
+        "code": "03209",
+        "population": 103421
+      },
+      {
+        "name": "北上市",
+        "code": "03206",
+        "population": 90504
+      }
+    ],
+    "coverage": 0.5061,
+    "count": 4
+  },
+  "05": {
+    "prefecture": "秋田県",
+    "totalPopulation": 890524,
+    "selected": [
+      {
+        "name": "秋田市",
+        "code": "05201",
+        "population": 289888
+      },
+      {
+        "name": "横手市",
+        "code": "05203",
+        "population": 78958
+      },
+      {
+        "name": "大仙市",
+        "code": "05212",
+        "population": 72318
+      },
+      {
+        "name": "由利本荘市",
+        "code": "05210",
+        "population": 69064
+      }
+    ],
+    "coverage": 0.573,
+    "count": 4
+  },
+  "06": {
+    "prefecture": "山形県",
+    "totalPopulation": 995995,
+    "selected": [
+      {
+        "name": "山形市",
+        "code": "06201",
+        "population": 233891
+      },
+      {
+        "name": "鶴岡市",
+        "code": "06203",
+        "population": 114745
+      },
+      {
+        "name": "酒田市",
+        "code": "06204",
+        "population": 92129
+      },
+      {
+        "name": "米沢市",
+        "code": "06202",
+        "population": 73351
+      }
+    ],
+    "coverage": 0.5162,
+    "count": 4
+  },
+  "09": {
+    "prefecture": "栃木県",
+    "totalPopulation": 1889901,
+    "selected": [
+      {
+        "name": "宇都宮市",
+        "code": "09201",
+        "population": 513378
+      },
+      {
+        "name": "小山市",
+        "code": "09208",
+        "population": 166856
+      },
+      {
+        "name": "栃木市",
+        "code": "09203",
+        "population": 151741
+      },
+      {
+        "name": "足利市",
+        "code": "09202",
+        "population": 138045
+      }
+    ],
+    "coverage": 0.5133,
+    "count": 4
+  },
+  "10": {
+    "prefecture": "群馬県",
+    "totalPopulation": 1893893,
+    "selected": [
+      {
+        "name": "前橋市",
+        "code": "10201",
+        "population": 327659
+      },
+      {
+        "name": "高崎市",
+        "code": "10202",
+        "population": 364131
+      },
+      {
+        "name": "太田市",
+        "code": "10205",
+        "population": 222402
+      },
+      {
+        "name": "伊勢崎市",
+        "code": "10204",
+        "population": 211537
+      }
+    ],
+    "coverage": 0.5944,
+    "count": 4
+  },
+  "15": {
+    "prefecture": "新潟県",
+    "totalPopulation": 2083103,
+    "selected": [
+      {
+        "name": "新潟市",
+        "code": "15100",
+        "population": 755462
+      },
+      {
+        "name": "長岡市",
+        "code": "15202",
+        "population": 252265
+      },
+      {
+        "name": "上越市",
+        "code": "15222",
+        "population": 177922
+      }
+    ],
+    "coverage": 0.5692,
+    "count": 3
+  },
+  "16": {
+    "prefecture": "富山県",
+    "totalPopulation": 998580,
+    "selected": [
+      {
+        "name": "富山市",
+        "code": "16201",
+        "population": 401436
+      },
+      {
+        "name": "高岡市",
+        "code": "16202",
+        "population": 161098
+      },
+      {
+        "name": "射水市",
+        "code": "16211",
+        "population": 89377
+      }
+    ],
+    "coverage": 0.6528,
+    "count": 3
+  },
+  "17": {
+    "prefecture": "石川県",
+    "totalPopulation": 1089861,
+    "selected": [
+      {
+        "name": "金沢市",
+        "code": "17201",
+        "population": 441947
+      },
+      {
+        "name": "白山市",
+        "code": "17210",
+        "population": 112125
+      },
+      {
+        "name": "小松市",
+        "code": "17203",
+        "population": 104772
+      }
+    ],
+    "coverage": 0.6045,
+    "count": 3
+  },
+  "18": {
+    "prefecture": "福井県",
+    "totalPopulation": 739412,
+    "selected": [
+      {
+        "name": "福井市",
+        "code": "18201",
+        "population": 252037
+      },
+      {
+        "name": "坂井市",
+        "code": "18210",
+        "population": 87812
+      },
+      {
+        "name": "越前市",
+        "code": "18209",
+        "population": 79895
+      }
+    ],
+    "coverage": 0.5677,
+    "count": 3
+  },
+  "19": {
+    "prefecture": "山梨県",
+    "totalPopulation": 794684,
+    "selected": [
+      {
+        "name": "甲府市",
+        "code": "19201",
+        "population": 182605
+      },
+      {
+        "name": "甲斐市",
+        "code": "19210",
+        "population": 76349
+      },
+      {
+        "name": "南アルプス市",
+        "code": "19208",
+        "population": 71812
+      },
+      {
+        "name": "笛吹市",
+        "code": "19211",
+        "population": 66312
+      },
+      {
+        "name": "富士吉田市",
+        "code": "19202",
+        "population": 45904
+      }
+    ],
+    "coverage": 0.5574,
+    "count": 5
+  },
+  "20": {
+    "prefecture": "長野県",
+    "totalPopulation": 1995882,
+    "selected": [
+      {
+        "name": "長野市",
+        "code": "20201",
+        "population": 359886
+      },
+      {
+        "name": "松本市",
+        "code": "20202",
+        "population": 232370
+      },
+      {
+        "name": "上田市",
+        "code": "20203",
+        "population": 150627
+      },
+      {
+        "name": "佐久市",
+        "code": "20217",
+        "population": 97047
+      },
+      {
+        "name": "安曇野市",
+        "code": "20220",
+        "population": 95453
+      },
+      {
+        "name": "飯田市",
+        "code": "20205",
+        "population": 93569
+      }
+    ],
+    "coverage": 0.5155,
+    "count": 6
+  },
+  "21": {
+    "prefecture": "岐阜県",
+    "totalPopulation": 1935253,
+    "selected": [
+      {
+        "name": "岐阜市",
+        "code": "21201",
+        "population": 397364
+      },
+      {
+        "name": "大垣市",
+        "code": "21202",
+        "population": 156158
+      },
+      {
+        "name": "各務原市",
+        "code": "21213",
+        "population": 143570
+      },
+      {
+        "name": "多治見市",
+        "code": "21204",
+        "population": 103924
+      },
+      {
+        "name": "可児市",
+        "code": "21214",
+        "population": 99275
+      },
+      {
+        "name": "関市",
+        "code": "21205",
+        "population": 83152
+      }
+    ],
+    "coverage": 0.5082,
+    "count": 6
+  },
+  "24": {
+    "prefecture": "三重県",
+    "totalPopulation": 1724891,
+    "selected": [
+      {
+        "name": "津市",
+        "code": "24201",
+        "population": 266012
+      },
+      {
+        "name": "四日市市",
+        "code": "24202",
+        "population": 305085
+      },
+      {
+        "name": "鈴鹿市",
+        "code": "24207",
+        "population": 192840
+      },
+      {
+        "name": "松阪市",
+        "code": "24204",
+        "population": 154518
+      }
+    ],
+    "coverage": 0.5325,
+    "count": 4
+  },
+  "25": {
+    "prefecture": "滋賀県",
+    "totalPopulation": 1400761,
+    "selected": [
+      {
+        "name": "大津市",
+        "code": "25201",
+        "population": 343316
+      },
+      {
+        "name": "草津市",
+        "code": "25206",
+        "population": 141304
+      },
+      {
+        "name": "長浜市",
+        "code": "25203",
+        "population": 111156
+      },
+      {
+        "name": "東近江市",
+        "code": "25213",
+        "population": 110677
+      }
+    ],
+    "coverage": 0.5043,
+    "count": 4
+  },
+  "29": {
+    "prefecture": "奈良県",
+    "totalPopulation": 1293345,
+    "selected": [
+      {
+        "name": "奈良市",
+        "code": "29201",
+        "population": 344742
+      },
+      {
+        "name": "橿原市",
+        "code": "29205",
+        "population": 117968
+      },
+      {
+        "name": "生駒市",
+        "code": "29209",
+        "population": 116171
+      },
+      {
+        "name": "大和郡山市",
+        "code": "29203",
+        "population": 81833
+      }
+    ],
+    "coverage": 0.5109,
+    "count": 4
+  },
+  "30": {
+    "prefecture": "和歌山県",
+    "totalPopulation": 889455,
+    "selected": [
+      {
+        "name": "和歌山市",
+        "code": "30201",
+        "population": 349646
+      },
+      {
+        "name": "田辺市",
+        "code": "30206",
+        "population": 66157
+      },
+      {
+        "name": "紀の川市",
+        "code": "30208",
+        "population": 58287
+      }
+    ],
+    "coverage": 0.533,
+    "count": 3
+  },
+  "31": {
+    "prefecture": "鳥取県",
+    "totalPopulation": 527236,
+    "selected": [
+      {
+        "name": "鳥取市",
+        "code": "31201",
+        "population": 177035
+      },
+      {
+        "name": "米子市",
+        "code": "31202",
+        "population": 143115
+      },
+      {
+        "name": "倉吉市",
+        "code": "31203",
+        "population": 42994
+      }
+    ],
+    "coverage": 0.6888,
+    "count": 3
+  },
+  "32": {
+    "prefecture": "島根県",
+    "totalPopulation": 634459,
+    "selected": [
+      {
+        "name": "松江市",
+        "code": "32201",
+        "population": 192512
+      },
+      {
+        "name": "出雲市",
+        "code": "32203",
+        "population": 171488
+      },
+      {
+        "name": "浜田市",
+        "code": "32202",
+        "population": 47498
+      }
+    ],
+    "coverage": 0.6486,
+    "count": 3
+  },
+  "33": {
+    "prefecture": "岡山県",
+    "totalPopulation": 1819524,
+    "selected": [
+      {
+        "name": "岡山市",
+        "code": "33100",
+        "population": 692769
+      },
+      {
+        "name": "倉敷市",
+        "code": "33202",
+        "population": 471025
+      },
+      {
+        "name": "津山市",
+        "code": "33203",
+        "population": 93627
+      }
+    ],
+    "coverage": 0.6911,
+    "count": 3
+  },
+  "35": {
+    "prefecture": "山口県",
+    "totalPopulation": 1274535,
+    "selected": [
+      {
+        "name": "山口市",
+        "code": "35203",
+        "population": 184285
+      },
+      {
+        "name": "下関市",
+        "code": "35201",
+        "population": 239655
+      },
+      {
+        "name": "宇部市",
+        "code": "35202",
+        "population": 154279
+      },
+      {
+        "name": "周南市",
+        "code": "35215",
+        "population": 133088
+      }
+    ],
+    "coverage": 0.5581,
+    "count": 4
+  },
+  "36": {
+    "prefecture": "徳島県",
+    "totalPopulation": 691229,
+    "selected": [
+      {
+        "name": "徳島市",
+        "code": "36201",
+        "population": 242618
+      },
+      {
+        "name": "阿南市",
+        "code": "36204",
+        "population": 66921
+      },
+      {
+        "name": "鳴門市",
+        "code": "36202",
+        "population": 52552
+      }
+    ],
+    "coverage": 0.5238,
+    "count": 3
+  },
+  "37": {
+    "prefecture": "香川県",
+    "totalPopulation": 931812,
+    "selected": [
+      {
+        "name": "高松市",
+        "code": "37201",
+        "population": 415718
+      },
+      {
+        "name": "丸亀市",
+        "code": "37202",
+        "population": 110484
+      },
+      {
+        "name": "三豊市",
+        "code": "37208",
+        "population": 59577
+      }
+    ],
+    "coverage": 0.6286,
+    "count": 3
+  },
+  "38": {
+    "prefecture": "愛媛県",
+    "totalPopulation": 1279431,
+    "selected": [
+      {
+        "name": "松山市",
+        "code": "38201",
+        "population": 492661
+      },
+      {
+        "name": "今治市",
+        "code": "38202",
+        "population": 145611
+      },
+      {
+        "name": "新居浜市",
+        "code": "38205",
+        "population": 111317
+      }
+    ],
+    "coverage": 0.5859,
+    "count": 3
+  },
+  "39": {
+    "prefecture": "高知県",
+    "totalPopulation": 654213,
+    "selected": [
+      {
+        "name": "高知市",
+        "code": "39201",
+        "population": 308542
+      },
+      {
+        "name": "南国市",
+        "code": "39204",
+        "population": 45512
+      },
+      {
+        "name": "香南市",
+        "code": "39211",
+        "population": 32292
+      }
+    ],
+    "coverage": 0.5906,
+    "count": 3
+  },
+  "41": {
+    "prefecture": "佐賀県",
+    "totalPopulation": 787887,
+    "selected": [
+      {
+        "name": "佐賀市",
+        "code": "41201",
+        "population": 225361
+      },
+      {
+        "name": "唐津市",
+        "code": "41202",
+        "population": 112472
+      },
+      {
+        "name": "鳥栖市",
+        "code": "41203",
+        "population": 74337
+      }
+    ],
+    "coverage": 0.5231,
+    "count": 3
+  },
+  "42": {
+    "prefecture": "長崎県",
+    "totalPopulation": 1257843,
+    "selected": [
+      {
+        "name": "長崎市",
+        "code": "42201",
+        "population": 385553
+      },
+      {
+        "name": "佐世保市",
+        "code": "42202",
+        "population": 229941
+      },
+      {
+        "name": "諫早市",
+        "code": "42204",
+        "population": 132760
+      }
+    ],
+    "coverage": 0.5949,
+    "count": 3
+  },
+  "43": {
+    "prefecture": "熊本県",
+    "totalPopulation": 1702998,
+    "selected": [
+      {
+        "name": "熊本市",
+        "code": "43100",
+        "population": 728700
+      },
+      {
+        "name": "八代市",
+        "code": "43202",
+        "population": 118746
+      },
+      {
+        "name": "天草市",
+        "code": "43215",
+        "population": 70451
+      }
+    ],
+    "coverage": 0.539,
+    "count": 3
+  },
+  "44": {
+    "prefecture": "大分県",
+    "totalPopulation": 1091304,
+    "selected": [
+      {
+        "name": "大分市",
+        "code": "44201",
+        "population": 470718
+      },
+      {
+        "name": "別府市",
+        "code": "44202",
+        "population": 111376
+      },
+      {
+        "name": "中津市",
+        "code": "44203",
+        "population": 81132
+      }
+    ],
+    "coverage": 0.6077,
+    "count": 3
+  },
+  "45": {
+    "prefecture": "宮崎県",
+    "totalPopulation": 1036017,
+    "selected": [
+      {
+        "name": "宮崎市",
+        "code": "45201",
+        "population": 391412
+      },
+      {
+        "name": "都城市",
+        "code": "45202",
+        "population": 162119
+      },
+      {
+        "name": "延岡市",
+        "code": "45203",
+        "population": 111831
+      }
+    ],
+    "coverage": 0.6422,
+    "count": 3
+  },
+  "46": {
+    "prefecture": "鹿児島県",
+    "totalPopulation": 1541314,
+    "selected": [
+      {
+        "name": "鹿児島市",
+        "code": "46201",
+        "population": 587255
+      },
+      {
+        "name": "霧島市",
+        "code": "46218",
+        "population": 122408
+      },
+      {
+        "name": "鹿屋市",
+        "code": "46203",
+        "population": 97576
+      }
+    ],
+    "coverage": 0.5237,
+    "count": 3
+  },
+  "47": {
+    "prefecture": "沖縄県",
+    "totalPopulation": 1484002,
+    "selected": [
+      {
+        "name": "那覇市",
+        "code": "47201",
+        "population": 312352
+      },
+      {
+        "name": "沖縄市",
+        "code": "47211",
+        "population": 141812
+      },
+      {
+        "name": "うるま市",
+        "code": "47213",
+        "population": 127393
+      },
+      {
+        "name": "浦添市",
+        "code": "47208",
+        "population": 115545
+      },
+      {
+        "name": "宜野湾市",
+        "code": "47205",
+        "population": 100253
+      }
+    ],
+    "coverage": 0.5373,
+    "count": 5
+  }
+}

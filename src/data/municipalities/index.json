@@ -8963,6 +8963,39 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/07368.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "青森県",
+      "prefectureCode": "02",
+      "municipality": "青森市",
+      "municipalityCode": "02201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/aomori.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/02201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "青森県",
+      "prefectureCode": "02",
+      "municipality": "八戸市",
+      "municipalityCode": "02203",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/aomori.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/02203.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "青森県",
+      "prefectureCode": "02",
+      "municipality": "弘前市",
+      "municipalityCode": "02202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/aomori.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/02202.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
