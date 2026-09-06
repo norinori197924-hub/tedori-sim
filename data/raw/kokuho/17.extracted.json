@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "金沢市",
+      "medical": {
+        "incomeRate": 0.0943,
+        "perCapitaAmount": 40819,
+        "perHouseholdAmount": 26185,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12235,
+        "perHouseholdAmount": 7848,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0252,
+        "perCapitaAmount": 12927,
+        "perHouseholdAmount": 6295,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1320,
+        "perHouseholdAmount": 811,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "白山市",
+      "medical": {
+        "incomeRate": 0.0856,
+        "perCapitaAmount": 37067,
+        "perHouseholdAmount": 23778,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.028,
+        "perCapitaAmount": 12024,
+        "perHouseholdAmount": 7713,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0243,
+        "perCapitaAmount": 12490,
+        "perHouseholdAmount": 6082,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1272,
+        "perHouseholdAmount": 782,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "小松市",
+      "medical": {
+        "incomeRate": 0.0879,
+        "perCapitaAmount": 38028,
+        "perHouseholdAmount": 24394,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0277,
+        "perCapitaAmount": 11925,
+        "perHouseholdAmount": 7649,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0243,
+        "perCapitaAmount": 12491,
+        "perHouseholdAmount": 6083,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1291,
+        "perHouseholdAmount": 794,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "金沢市",
+    "白山市",
+    "小松市"
+  ]
+}
