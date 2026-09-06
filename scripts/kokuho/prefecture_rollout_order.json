@@ -196,7 +196,8 @@
       "prefectureCode": "38",
       "prefecture": "愛媛県",
       "population": 1296359,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "on_hold_no_source",
+      "onHoldReason": "2026-09-06調査: 令和8年度の市町村標準保険料率が県公式サイト(pref.ehime.jp/page/4387.html)に未公表(令和7年度分が最新)。令和7年度分は標準保険料率PDF自体は存在するが、子ども・子育て支援納付金分(令和8年度に全国的に新設された区分)を含まないため、採用すると他都道府県のレコードと構造が食い違う(該当区分が欠落または0円という誤った値になる)。この理由により令和7年度データの暫定採用を見送り、一次資料の公表待ちとして保留した。"
     },
     {
       "rank": 29,
@@ -287,14 +288,16 @@
       "prefectureCode": "19",
       "prefecture": "山梨県",
       "population": 801056,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "on_hold_no_source",
+      "onHoldReason": "2026-09-06調査: 令和8年度の市町村標準保険料率が県公式サイト(pref.yamanashi.jp/kokuho/kokuhoseidokaikaku/201706.html)に未公表(令和7年度分〔r7_hokenryo_sei.pdf、実際の保険料(税)率〕が最新)。令和7年度分は子ども・子育て支援納付金分(令和8年度に全国的に新設された区分)を含まないため、採用すると他都道府県のレコードと構造が食い違う。この理由により令和7年度データの暫定採用を見送り、一次資料の公表待ちとして保留した。"
     },
     {
       "rank": 42,
       "prefectureCode": "41",
       "prefecture": "佐賀県",
       "population": 794252,
-      "pipelineStatus": "not_started"
+      "pipelineStatus": "on_hold_no_source",
+      "onHoldReason": "2026-09-06調査: 令和8年度・令和7年度とも市町ごとの標準保険料率一覧が県公式サイトで見つからなかった。国民健康保険運営協議会(令和7年度第1回、令和8年2月開催)の会議資料に『令和8年度国民健康保険事業費納付金について』という説明資料はあるが、市町別の税率一覧は別紙①として言及されるのみで、その別紙自体はウェブ上に公開されていない模様。一次資料の公表待ちとして保留した。"
     },
     {
       "rank": 43,
