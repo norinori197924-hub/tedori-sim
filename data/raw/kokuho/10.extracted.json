@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "前橋市",
+      "medical": {
+        "incomeRate": 0.0693,
+        "perCapitaAmount": 30171,
+        "perHouseholdAmount": 20120,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 12562,
+        "perHouseholdAmount": 8377,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.025,
+        "perCapitaAmount": 12836,
+        "perHouseholdAmount": 6343,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1300,
+        "perHouseholdAmount": 800,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "高崎市",
+      "medical": {
+        "incomeRate": 0.0706,
+        "perCapitaAmount": 30763,
+        "perHouseholdAmount": 20515,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0296,
+        "perCapitaAmount": 12812,
+        "perHouseholdAmount": 8544,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0257,
+        "perCapitaAmount": 13194,
+        "perHouseholdAmount": 6520,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1300,
+        "perHouseholdAmount": 800,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "太田市",
+      "medical": {
+        "incomeRate": 0.0744,
+        "perCapitaAmount": 32383,
+        "perHouseholdAmount": 21595,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0308,
+        "perCapitaAmount": 13328,
+        "perHouseholdAmount": 8889,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0264,
+        "perCapitaAmount": 13561,
+        "perHouseholdAmount": 6701,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1300,
+        "perHouseholdAmount": 800,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "伊勢崎市",
+      "medical": {
+        "incomeRate": 0.071,
+        "perCapitaAmount": 30936,
+        "perHouseholdAmount": 20630,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0299,
+        "perCapitaAmount": 12953,
+        "perHouseholdAmount": 8638,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0257,
+        "perCapitaAmount": 13233,
+        "perHouseholdAmount": 6539,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1300,
+        "perHouseholdAmount": 800,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "前橋市",
+    "高崎市",
+    "太田市",
+    "伊勢崎市"
+  ]
+}

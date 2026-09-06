@@ -9172,6 +9172,50 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/09202.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "群馬県",
+      "prefectureCode": "10",
+      "municipality": "前橋市",
+      "municipalityCode": "10201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gunma.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/10201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "群馬県",
+      "prefectureCode": "10",
+      "municipality": "高崎市",
+      "municipalityCode": "10202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gunma.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/10202.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "群馬県",
+      "prefectureCode": "10",
+      "municipality": "太田市",
+      "municipalityCode": "10205",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gunma.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/10205.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "群馬県",
+      "prefectureCode": "10",
+      "municipality": "伊勢崎市",
+      "municipalityCode": "10204",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gunma.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/10204.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
