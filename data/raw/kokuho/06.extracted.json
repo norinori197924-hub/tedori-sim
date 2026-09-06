@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "山形市",
+      "medical": {
+        "incomeRate": 0.0704,
+        "perCapitaAmount": 31104,
+        "perHouseholdAmount": 20563,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12526,
+        "perHouseholdAmount": 8281,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0236,
+        "perCapitaAmount": 11951,
+        "perHouseholdAmount": 5920,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1378,
+        "perHouseholdAmount": 857,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "鶴岡市",
+      "medical": {
+        "incomeRate": 0.0677,
+        "perCapitaAmount": 29916,
+        "perHouseholdAmount": 19777,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0282,
+        "perCapitaAmount": 12388,
+        "perHouseholdAmount": 8190,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0231,
+        "perCapitaAmount": 11742,
+        "perHouseholdAmount": 5816,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1380,
+        "perHouseholdAmount": 859,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "酒田市",
+      "medical": {
+        "incomeRate": 0.0618,
+        "perCapitaAmount": 27316,
+        "perHouseholdAmount": 18059,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0283,
+        "perCapitaAmount": 12408,
+        "perHouseholdAmount": 8203,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 11636,
+        "perHouseholdAmount": 5764,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1371,
+        "perHouseholdAmount": 853,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "米沢市",
+      "medical": {
+        "incomeRate": 0.0624,
+        "perCapitaAmount": 27562,
+        "perHouseholdAmount": 18221,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0275,
+        "perCapitaAmount": 12091,
+        "perHouseholdAmount": 7994,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0224,
+        "perCapitaAmount": 11375,
+        "perHouseholdAmount": 5635,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1371,
+        "perHouseholdAmount": 853,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "山形市",
+    "鶴岡市",
+    "酒田市",
+    "米沢市"
+  ]
+}
