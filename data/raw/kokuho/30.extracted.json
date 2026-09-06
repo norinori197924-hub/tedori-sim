@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "和歌山市",
+      "medical": {
+        "incomeRate": 0.0886,
+        "perCapitaAmount": 32830,
+        "perHouseholdAmount": 22401,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.03,
+        "perCapitaAmount": 11055,
+        "perHouseholdAmount": 7543,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0271,
+        "perCapitaAmount": 11745,
+        "perHouseholdAmount": 5982,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1190,
+        "perHouseholdAmount": 766,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "田辺市",
+      "medical": {
+        "incomeRate": 0.0875,
+        "perCapitaAmount": 32432,
+        "perHouseholdAmount": 22129,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.029,
+        "perCapitaAmount": 10710,
+        "perHouseholdAmount": 7308,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0259,
+        "perCapitaAmount": 11261,
+        "perHouseholdAmount": 5736,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1190,
+        "perHouseholdAmount": 766,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "紀の川市",
+      "medical": {
+        "incomeRate": 0.0931,
+        "perCapitaAmount": 34506,
+        "perHouseholdAmount": 23544,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0288,
+        "perCapitaAmount": 10638,
+        "perHouseholdAmount": 7259,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0257,
+        "perCapitaAmount": 11160,
+        "perHouseholdAmount": 5685,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1191,
+        "perHouseholdAmount": 766,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "和歌山市",
+    "田辺市",
+    "紀の川市"
+  ]
+}

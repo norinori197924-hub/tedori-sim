@@ -9601,6 +9601,39 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/29203.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "和歌山県",
+      "prefectureCode": "30",
+      "municipality": "和歌山市",
+      "municipalityCode": "30201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/wakayama.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/30201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "和歌山県",
+      "prefectureCode": "30",
+      "municipality": "田辺市",
+      "municipalityCode": "30206",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/wakayama.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/30206.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "和歌山県",
+      "prefectureCode": "30",
+      "municipality": "紀の川市",
+      "municipalityCode": "30208",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/wakayama.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/30208.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
