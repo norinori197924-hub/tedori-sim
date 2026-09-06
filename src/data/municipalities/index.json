@@ -9909,6 +9909,39 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/43215.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "大分県",
+      "prefectureCode": "44",
+      "municipality": "大分市",
+      "municipalityCode": "44201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/oita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/44201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "大分県",
+      "prefectureCode": "44",
+      "municipality": "別府市",
+      "municipalityCode": "44202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/oita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/44202.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "大分県",
+      "prefectureCode": "44",
+      "municipality": "中津市",
+      "municipalityCode": "44203",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/oita.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/44203.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }

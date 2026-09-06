@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "大分市",
+      "medical": {
+        "incomeRate": 0.0869,
+        "perCapitaAmount": 27109,
+        "perHouseholdAmount": 17199,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0336,
+        "perCapitaAmount": 10464,
+        "perHouseholdAmount": 6639,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0297,
+        "perCapitaAmount": 10528,
+        "perHouseholdAmount": 5258,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1030,
+        "perHouseholdAmount": 624,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "別府市",
+      "medical": {
+        "incomeRate": 0.0841,
+        "perCapitaAmount": 26240,
+        "perHouseholdAmount": 16647,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0353,
+        "perCapitaAmount": 11012,
+        "perHouseholdAmount": 6986,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0302,
+        "perCapitaAmount": 10732,
+        "perHouseholdAmount": 5360,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0033,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1086,
+        "perHouseholdAmount": 656,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "中津市",
+      "medical": {
+        "incomeRate": 0.0903,
+        "perCapitaAmount": 28180,
+        "perHouseholdAmount": 17878,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0315,
+        "perCapitaAmount": 9799,
+        "perHouseholdAmount": 6217,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0305,
+        "perCapitaAmount": 10830,
+        "perHouseholdAmount": 5409,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0033,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1062,
+        "perHouseholdAmount": 645,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "大分市",
+    "別府市",
+    "中津市"
+  ]
+}
