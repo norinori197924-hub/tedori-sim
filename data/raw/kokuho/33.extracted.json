@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "岡山市",
+      "medical": {
+        "incomeRate": 0.0779,
+        "perCapitaAmount": 33819,
+        "perHouseholdAmount": 21697,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12323,
+        "perHouseholdAmount": 7906,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0258,
+        "perCapitaAmount": 13268,
+        "perHouseholdAmount": 6504,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1312,
+        "perHouseholdAmount": 800,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "倉敷市",
+      "medical": {
+        "incomeRate": 0.0763,
+        "perCapitaAmount": 33154,
+        "perHouseholdAmount": 21270,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0284,
+        "perCapitaAmount": 12285,
+        "perHouseholdAmount": 7882,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0258,
+        "perCapitaAmount": 13246,
+        "perHouseholdAmount": 6494,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1299,
+        "perHouseholdAmount": 793,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "津山市",
+      "medical": {
+        "incomeRate": 0.0749,
+        "perCapitaAmount": 32534,
+        "perHouseholdAmount": 20872,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12339,
+        "perHouseholdAmount": 7916,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 12602,
+        "perHouseholdAmount": 6178,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1273,
+        "perHouseholdAmount": 778,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "岡山市",
+    "倉敷市",
+    "津山市"
+  ]
+}
