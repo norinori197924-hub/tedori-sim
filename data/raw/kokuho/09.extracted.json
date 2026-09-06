@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "宇都宮市",
+      "medical": {
+        "incomeRate": 0.0633,
+        "perCapitaAmount": 32889,
+        "perHouseholdAmount": 20872,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0266,
+        "perCapitaAmount": 13768,
+        "perHouseholdAmount": 8737,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0223,
+        "perCapitaAmount": 13397,
+        "perHouseholdAmount": 6637,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1395,
+        "perHouseholdAmount": 886,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "小山市",
+      "medical": {
+        "incomeRate": 0.0671,
+        "perCapitaAmount": 29702,
+        "perHouseholdAmount": 23130,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0289,
+        "perCapitaAmount": 11805,
+        "perHouseholdAmount": 8413,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0241,
+        "perCapitaAmount": 10054,
+        "perHouseholdAmount": 7898,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1400,
+        "perHouseholdAmount": 894,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "栃木市",
+      "medical": {
+        "incomeRate": 0.0723,
+        "perCapitaAmount": 33315,
+        "perHouseholdAmount": 22367,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.028,
+        "perCapitaAmount": 12596,
+        "perHouseholdAmount": 8457,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0229,
+        "perCapitaAmount": 12269,
+        "perHouseholdAmount": 6182,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1381,
+        "perHouseholdAmount": 928,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "足利市",
+      "medical": {
+        "incomeRate": 0.0703,
+        "perCapitaAmount": 28536,
+        "perHouseholdAmount": 19980,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0298,
+        "perCapitaAmount": 12340,
+        "perHouseholdAmount": 6604,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0243,
+        "perCapitaAmount": 11039,
+        "perHouseholdAmount": 6436,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1296,
+        "perHouseholdAmount": 836,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "宇都宮市",
+    "小山市",
+    "栃木市",
+    "足利市"
+  ]
+}

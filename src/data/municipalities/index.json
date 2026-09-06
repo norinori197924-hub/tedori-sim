@@ -9128,6 +9128,50 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/06202.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "栃木県",
+      "prefectureCode": "09",
+      "municipality": "宇都宮市",
+      "municipalityCode": "09201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tochigi.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/09201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "栃木県",
+      "prefectureCode": "09",
+      "municipality": "小山市",
+      "municipalityCode": "09208",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tochigi.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/09208.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "栃木県",
+      "prefectureCode": "09",
+      "municipality": "栃木市",
+      "municipalityCode": "09203",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tochigi.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/09203.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "栃木県",
+      "prefectureCode": "09",
+      "municipality": "足利市",
+      "municipalityCode": "09202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tochigi.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/09202.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
