@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "高知市",
+      "medical": {
+        "incomeRate": 0.0791,
+        "perCapitaAmount": 34579,
+        "perHouseholdAmount": 22176,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0279,
+        "perCapitaAmount": 12111,
+        "perHouseholdAmount": 7767,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0223,
+        "perCapitaAmount": 16331,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1754,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "南国市",
+      "medical": {
+        "incomeRate": 0.0783,
+        "perCapitaAmount": 34230,
+        "perHouseholdAmount": 21952,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 11989,
+        "perHouseholdAmount": 7689,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.022,
+        "perCapitaAmount": 16166,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1736,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "香南市",
+      "medical": {
+        "incomeRate": 0.0764,
+        "perCapitaAmount": 33413,
+        "perHouseholdAmount": 21427,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 11989,
+        "perHouseholdAmount": 7689,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.022,
+        "perCapitaAmount": 16166,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1730,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "高知市",
+    "南国市",
+    "香南市"
+  ]
+}
