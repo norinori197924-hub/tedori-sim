@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "宮崎市",
+      "medical": {
+        "incomeRate": 0.0777,
+        "perCapitaAmount": 34284,
+        "perHouseholdAmount": 22461,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0278,
+        "perCapitaAmount": 12259,
+        "perHouseholdAmount": 8032,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0242,
+        "perCapitaAmount": 12577,
+        "perHouseholdAmount": 6397,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0082,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1399,
+        "perHouseholdAmount": 842,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "都城市",
+      "medical": {
+        "incomeRate": 0.0791,
+        "perCapitaAmount": 34910,
+        "perHouseholdAmount": 22872,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0287,
+        "perCapitaAmount": 12631,
+        "perHouseholdAmount": 8275,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 12381,
+        "perHouseholdAmount": 6297,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.008,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1354,
+        "perHouseholdAmount": 817,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "延岡市",
+      "medical": {
+        "incomeRate": 0.0711,
+        "perCapitaAmount": 31397,
+        "perHouseholdAmount": 20570,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0274,
+        "perCapitaAmount": 12083,
+        "perHouseholdAmount": 7916,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0237,
+        "perCapitaAmount": 12322,
+        "perHouseholdAmount": 6267,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0079,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1343,
+        "perHouseholdAmount": 804,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "宮崎市",
+    "都城市",
+    "延岡市"
+  ]
+}
