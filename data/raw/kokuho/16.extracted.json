@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "富山市",
+      "medical": {
+        "incomeRate": 0.0759,
+        "perCapitaAmount": 32781,
+        "perHouseholdAmount": 20982,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0271,
+        "perCapitaAmount": 11642,
+        "perHouseholdAmount": 7452,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.025,
+        "perCapitaAmount": 12524,
+        "perHouseholdAmount": 6147,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1419,
+        "perHouseholdAmount": 857,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "高岡市",
+      "medical": {
+        "incomeRate": 0.073,
+        "perCapitaAmount": 31532,
+        "perHouseholdAmount": 20183,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0267,
+        "perCapitaAmount": 11463,
+        "perHouseholdAmount": 7337,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 12281,
+        "perHouseholdAmount": 6028,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1412,
+        "perHouseholdAmount": 853,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "射水市",
+      "medical": {
+        "incomeRate": 0.0738,
+        "perCapitaAmount": 31879,
+        "perHouseholdAmount": 20405,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0268,
+        "perCapitaAmount": 11500,
+        "perHouseholdAmount": 7361,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.025,
+        "perCapitaAmount": 12540,
+        "perHouseholdAmount": 6154,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1396,
+        "perHouseholdAmount": 843,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "富山市",
+    "高岡市",
+    "射水市"
+  ]
+}
