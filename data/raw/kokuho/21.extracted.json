@@ -1,0 +1,182 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "岐阜市",
+      "medical": {
+        "incomeRate": 0.0863,
+        "perCapitaAmount": 32138,
+        "perHouseholdAmount": 32578,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 10905,
+        "perHouseholdAmount": 11054,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0236,
+        "perCapitaAmount": 10814,
+        "perHouseholdAmount": 8303,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0032,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1288,
+        "perHouseholdAmount": 1196,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "大垣市",
+      "medical": {
+        "incomeRate": 0.0745,
+        "perCapitaAmount": 34137,
+        "perHouseholdAmount": 22466,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0264,
+        "perCapitaAmount": 12321,
+        "perHouseholdAmount": 8109,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0219,
+        "perCapitaAmount": 11996,
+        "perHouseholdAmount": 5878,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1452,
+        "perHouseholdAmount": 878,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "各務原市",
+      "medical": {
+        "incomeRate": 0.0817,
+        "perCapitaAmount": 34858,
+        "perHouseholdAmount": 22443,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0278,
+        "perCapitaAmount": 12152,
+        "perHouseholdAmount": 7824,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0233,
+        "perCapitaAmount": 11966,
+        "perHouseholdAmount": 5800,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1396,
+        "perHouseholdAmount": 834,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "多治見市",
+      "medical": {
+        "incomeRate": 0.0782,
+        "perCapitaAmount": 34737,
+        "perHouseholdAmount": 23121,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0269,
+        "perCapitaAmount": 12112,
+        "perHouseholdAmount": 8062,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0223,
+        "perCapitaAmount": 11931,
+        "perHouseholdAmount": 5982,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1388,
+        "perHouseholdAmount": 864,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "可児市",
+      "medical": {
+        "incomeRate": 0.0737,
+        "perCapitaAmount": 34023,
+        "perHouseholdAmount": 23048,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0269,
+        "perCapitaAmount": 12567,
+        "perHouseholdAmount": 8513,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0211,
+        "perCapitaAmount": 12279,
+        "perHouseholdAmount": 6125,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1485,
+        "perHouseholdAmount": 922,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "関市",
+      "medical": {
+        "incomeRate": 0.078,
+        "perCapitaAmount": 30199,
+        "perHouseholdAmount": 23183,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0257,
+        "perCapitaAmount": 10869,
+        "perHouseholdAmount": 10631,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0206,
+        "perCapitaAmount": 12166,
+        "perHouseholdAmount": 7165,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.003,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1259,
+        "perHouseholdAmount": 893,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "岐阜市",
+    "大垣市",
+    "各務原市",
+    "多治見市",
+    "可児市",
+    "関市"
+  ]
+}

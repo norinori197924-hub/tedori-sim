@@ -9403,6 +9403,72 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/20205.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "岐阜県",
+      "prefectureCode": "21",
+      "municipality": "岐阜市",
+      "municipalityCode": "21201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gifu.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/21201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "岐阜県",
+      "prefectureCode": "21",
+      "municipality": "大垣市",
+      "municipalityCode": "21202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gifu.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/21202.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "岐阜県",
+      "prefectureCode": "21",
+      "municipality": "各務原市",
+      "municipalityCode": "21213",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gifu.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/21213.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "岐阜県",
+      "prefectureCode": "21",
+      "municipality": "多治見市",
+      "municipalityCode": "21204",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gifu.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/21204.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "岐阜県",
+      "prefectureCode": "21",
+      "municipality": "可児市",
+      "municipalityCode": "21214",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gifu.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/21214.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "岐阜県",
+      "prefectureCode": "21",
+      "municipality": "関市",
+      "municipalityCode": "21205",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/gifu.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/21205.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
