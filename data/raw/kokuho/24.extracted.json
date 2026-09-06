@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "津市",
+      "medical": {
+        "incomeRate": 0.0703,
+        "perCapitaAmount": 30585,
+        "perHouseholdAmount": 20027,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 12363,
+        "perHouseholdAmount": 8096,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 13004,
+        "perHouseholdAmount": 6367,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1191,
+        "perHouseholdAmount": 727,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "四日市市",
+      "medical": {
+        "incomeRate": 0.0688,
+        "perCapitaAmount": 29913,
+        "perHouseholdAmount": 19587,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12337,
+        "perHouseholdAmount": 8079,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 12994,
+        "perHouseholdAmount": 6362,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0025,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1183,
+        "perHouseholdAmount": 722,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "鈴鹿市",
+      "medical": {
+        "incomeRate": 0.0707,
+        "perCapitaAmount": 30763,
+        "perHouseholdAmount": 20144,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12338,
+        "perHouseholdAmount": 8079,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 13000,
+        "perHouseholdAmount": 6365,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1204,
+        "perHouseholdAmount": 735,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "松阪市",
+      "medical": {
+        "incomeRate": 0.067,
+        "perCapitaAmount": 29131,
+        "perHouseholdAmount": 19076,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0285,
+        "perCapitaAmount": 12350,
+        "perHouseholdAmount": 8087,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0245,
+        "perCapitaAmount": 12997,
+        "perHouseholdAmount": 6363,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0026,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1193,
+        "perHouseholdAmount": 728,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "津市",
+    "四日市市",
+    "鈴鹿市",
+    "松阪市"
+  ]
+}
