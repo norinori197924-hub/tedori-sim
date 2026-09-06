@@ -608,7 +608,12 @@ _INTEGRITY_CHECK_FIELDS = [
 ]
 
 
-def verify_extraction_integrity(names: list[str], municipalities: list[dict], label: str) -> list[str]:
+def verify_extraction_integrity(
+    names: list[str],
+    municipalities: list[dict],
+    label: str,
+    allow_duplicate_records: bool = False,
+) -> list[str]:
     """抽出結果(広域連合展開前・build.py実行前)を機械的に検証し、
     問題点のリストを返す(空リストなら異常なし)。
 
@@ -624,6 +629,16 @@ def verify_extraction_integrity(names: list[str], municipalities: list[dict], la
       隣接しない市町村間(バッチをまたいだ組み合わせ)で発生したため、
       隣接ペアに限定せず全ペアを対象にする(件数が数百件規模でも
       O(件数)のハッシュ突き合わせで済み、性能上の問題はない)。
+
+    2026-09-06、滋賀県対応で追加: allow_duplicate_records=Trueの場合は
+    完全一致レコードの検知だけをスキップする(件数チェックは常に行う)。
+    滋賀県は「第3期滋賀県国民健康保険運営方針」に基づく県内保険料水準の
+    統一化により、市町村標準保険料率の医療分・支援分・介護分・子ども分
+    (均等割計・平等割)が19市町全てで文字通り同一の値になっている
+    (PDF原本の表自体でそう印字されている。府中町の事故のようなモデルの
+    読み違えではない)。この引数はprefectures.jsonの該当県エントリで
+    明示的に"allowDuplicateRecords": trueを設定した場合にのみTrueになり、
+    デフォルトはFalse(他の全都道府県は従来通り重複検知が働く)。
     """
     issues = []
     if len(municipalities) != len(names):
@@ -631,6 +646,9 @@ def verify_extraction_integrity(names: list[str], municipalities: list[dict], la
             f"{label}: 抽出件数が名称一覧と一致しません"
             f"(名称一覧{len(names)}件 vs 抽出結果{len(municipalities)}件)"
         )
+
+    if allow_duplicate_records:
+        return issues
 
     def _record_signature(m: dict) -> tuple:
         return tuple(m.get(section, {}).get(key) for section, key in _INTEGRITY_CHECK_FIELDS)
@@ -819,7 +837,10 @@ def extract_source(pref_code: str, source_id: str, source: dict) -> dict:
     # unionInsurers展開"前"のmunicipalitiesに対して行う(展開後は同一料率の
     # 複数市町村が意図的に完全一致するため)。失敗した場合、out_pathは直前の
     # バッチ末尾で書き込まれたinProgress:trueのままにし、完了扱いにしない。
-    integrity_issues = verify_extraction_integrity(names, municipalities, label)
+    allow_duplicate_records = bool(source.get("allowDuplicateRecords"))
+    integrity_issues = verify_extraction_integrity(
+        names, municipalities, label, allow_duplicate_records=allow_duplicate_records
+    )
     if integrity_issues:
         for issue in integrity_issues:
             log_line(f"[extract] ★整合性チェック失敗★: {issue}")
@@ -888,7 +909,10 @@ def extract_wide_coverage_source(pref_code: str, source_id: str, source: dict, t
 
     # 2026-09-05追加の自動整合性チェック(広島県rank12対応、CLAUDE.md 11.6章)を
     # ここでも適用する。件数不一致・全フィールド完全一致の複製を検出する。
-    integrity_issues = verify_extraction_integrity(target_names, municipalities, label)
+    allow_duplicate_records = bool(source.get("allowDuplicateRecords"))
+    integrity_issues = verify_extraction_integrity(
+        target_names, municipalities, label, allow_duplicate_records=allow_duplicate_records
+    )
     if integrity_issues:
         for issue in integrity_issues:
             log_line(f"[extract] ★整合性チェック失敗★: {issue}")

@@ -1,0 +1,124 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "大津市",
+      "medical": {
+        "incomeRate": 0.0755,
+        "perCapitaAmount": 33064,
+        "perHouseholdAmount": 20914,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 12027,
+        "perHouseholdAmount": 7608,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 12340,
+        "perHouseholdAmount": 6087,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1227,
+        "perHouseholdAmount": 744,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "草津市",
+      "medical": {
+        "incomeRate": 0.0755,
+        "perCapitaAmount": 33064,
+        "perHouseholdAmount": 20914,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 12027,
+        "perHouseholdAmount": 7608,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 12340,
+        "perHouseholdAmount": 6087,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1227,
+        "perHouseholdAmount": 744,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "長浜市",
+      "medical": {
+        "incomeRate": 0.0755,
+        "perCapitaAmount": 33064,
+        "perHouseholdAmount": 20914,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 12027,
+        "perHouseholdAmount": 7608,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 12340,
+        "perHouseholdAmount": 6087,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1227,
+        "perHouseholdAmount": 744,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "東近江市",
+      "medical": {
+        "incomeRate": 0.0755,
+        "perCapitaAmount": 33064,
+        "perHouseholdAmount": 20914,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 12027,
+        "perHouseholdAmount": 7608,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 12340,
+        "perHouseholdAmount": 6087,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1227,
+        "perHouseholdAmount": 744,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "大津市",
+    "草津市",
+    "長浜市",
+    "東近江市"
+  ]
+}
