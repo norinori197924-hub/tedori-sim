@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "熊本市",
+      "medical": {
+        "incomeRate": 0.0704,
+        "perCapitaAmount": 25512,
+        "perHouseholdAmount": 16879,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0329,
+        "perCapitaAmount": 11981,
+        "perHouseholdAmount": 7927,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0302,
+        "perCapitaAmount": 19808,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1549,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "八代市",
+      "medical": {
+        "incomeRate": 0.0705,
+        "perCapitaAmount": 25543,
+        "perHouseholdAmount": 16899,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.031,
+        "perCapitaAmount": 11277,
+        "perHouseholdAmount": 7461,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 18432,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1478,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "天草市",
+      "medical": {
+        "incomeRate": 0.061,
+        "perCapitaAmount": 22112,
+        "perHouseholdAmount": 14629,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0309,
+        "perCapitaAmount": 11240,
+        "perHouseholdAmount": 7436,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0286,
+        "perCapitaAmount": 18755,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1460,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "熊本市",
+    "八代市",
+    "天草市"
+  ]
+}

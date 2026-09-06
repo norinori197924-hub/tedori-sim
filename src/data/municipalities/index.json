@@ -9876,6 +9876,39 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/42204.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "熊本県",
+      "prefectureCode": "43",
+      "municipality": "熊本市",
+      "municipalityCode": "43100",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/kumamoto.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/43100.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "熊本県",
+      "prefectureCode": "43",
+      "municipality": "八代市",
+      "municipalityCode": "43202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/kumamoto.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/43202.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "熊本県",
+      "prefectureCode": "43",
+      "municipality": "天草市",
+      "municipalityCode": "43215",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/kumamoto.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/43215.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
