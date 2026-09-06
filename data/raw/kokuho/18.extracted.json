@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "福井市",
+      "medical": {
+        "incomeRate": 0.0615,
+        "perCapitaAmount": 27267,
+        "perHouseholdAmount": 17702,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0274,
+        "perCapitaAmount": 12128,
+        "perHouseholdAmount": 7874,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0237,
+        "perCapitaAmount": 12577,
+        "perHouseholdAmount": 6101,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0015,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 716,
+        "perHouseholdAmount": 435,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "坂井市",
+      "medical": {
+        "incomeRate": 0.0617,
+        "perCapitaAmount": 27381,
+        "perHouseholdAmount": 17777,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0277,
+        "perCapitaAmount": 12271,
+        "perHouseholdAmount": 7967,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 12697,
+        "perHouseholdAmount": 6159,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0015,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 716,
+        "perHouseholdAmount": 435,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "越前市",
+      "medical": {
+        "incomeRate": 0.0611,
+        "perCapitaAmount": 27101,
+        "perHouseholdAmount": 17595,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0273,
+        "perCapitaAmount": 12097,
+        "perHouseholdAmount": 7854,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0235,
+        "perCapitaAmount": 12468,
+        "perHouseholdAmount": 6049,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0015,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 723,
+        "perHouseholdAmount": 439,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "福井市",
+    "坂井市",
+    "越前市"
+  ]
+}
