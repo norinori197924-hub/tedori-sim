@@ -1,0 +1,96 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "松江市",
+      "medical": {
+        "incomeRate": 0.082,
+        "perCapitaAmount": 36019,
+        "perHouseholdAmount": 22715,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 12263,
+        "perHouseholdAmount": 7734,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0256,
+        "perCapitaAmount": 12904,
+        "perHouseholdAmount": 6369,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 2102,
+        "perHouseholdAmount": 1216,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "出雲市",
+      "medical": {
+        "incomeRate": 0.084,
+        "perCapitaAmount": 36927,
+        "perHouseholdAmount": 23287,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0284,
+        "perCapitaAmount": 12408,
+        "perHouseholdAmount": 7825,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0262,
+        "perCapitaAmount": 13181,
+        "perHouseholdAmount": 6505,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 2116,
+        "perHouseholdAmount": 1216,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "浜田市",
+      "medical": {
+        "incomeRate": 0.0786,
+        "perCapitaAmount": 34549,
+        "perHouseholdAmount": 21788,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0276,
+        "perCapitaAmount": 12067,
+        "perHouseholdAmount": 7610,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0253,
+        "perCapitaAmount": 12725,
+        "perHouseholdAmount": 6280,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 2059,
+        "perHouseholdAmount": 1213,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "松江市",
+    "出雲市",
+    "浜田市"
+  ],
+  "manuallyCorrected": true
+}
