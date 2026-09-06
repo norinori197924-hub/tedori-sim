@@ -1,0 +1,45 @@
+{
+  "prefecture": "奈良県",
+  "municipality": "奈良市",
+  "municipalityCode": "29201",
+  "municipalityType": null,
+  "year": "令和8年度",
+  "source": "https://www.city.nara.lg.jp/site/kokuminkenkouhoken/9305.html",
+  "sourceTitle": "奈良市 国民健康保険 保険料の算定(令和8年度、奈良県内統一保険料率)",
+  "fetchedAt": "2026-09-06",
+  "needsReview": false,
+  "dataSource": "nara_unified_actual_rate",
+  "reviewNote": "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。奈良県は令和7年度から県内保険料水準の統一(オール奈良)を達成しており、県内のどの市町村でも所得・世帯構成が同じであれば同一の実際の保険料(税)率になる。2026-09-06調査時点で県公表の統一後PDFが見当たらなかったため、対象4市(奈良市・橿原市・生駒市・大和郡山市)それぞれの公式サイトで公表されている令和8年度の実際の税率を個別に確認し、4市とも完全に一致することを検証した上でこの値を採用している(1件の値を他市にコピーしたのではなく、市ごとに一次資料を確認した結果が一致した)。賦課限度額も各市公式サイトの記載値を使用している(全国標準値による代替ではない)。",
+  "levyMethod": "医療分・支援分は3方式(所得割+均等割+平等割)、介護分・子ども分は2方式(所得割+均等割のみ、平等割なし)。資産割は無し。",
+  "medical": {
+    "incomeRate": 0.0764,
+    "perCapitaAmount": 27600,
+    "perHouseholdAmount": 20000,
+    "assetRate": 0,
+    "cap": 660000
+  },
+  "support": {
+    "incomeRate": 0.0327,
+    "perCapitaAmount": 11500,
+    "perHouseholdAmount": 8400,
+    "assetRate": 0,
+    "cap": 260000
+  },
+  "care": {
+    "incomeRate": 0.0303,
+    "perCapitaAmount": 16900,
+    "perHouseholdAmount": 0,
+    "assetRate": 0,
+    "cap": 170000,
+    "note": "40歳以上65歳未満が対象"
+  },
+  "childSupport": {
+    "incomeRate": 0.0031,
+    "perCapitaAmountUnder18": 0,
+    "perCapitaAmountOver18": 1900,
+    "perHouseholdAmount": 0,
+    "assetRate": 0,
+    "cap": 30000,
+    "note": "令和8年度新設"
+  }
+}

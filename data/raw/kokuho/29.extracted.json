@@ -1,0 +1,140 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "奈良市",
+      "medical": {
+        "incomeRate": 0.0764,
+        "perCapitaAmount": 27600,
+        "perHouseholdAmount": 20000,
+        "assetRate": 0,
+        "cap": 660000
+      },
+      "support": {
+        "incomeRate": 0.0327,
+        "perCapitaAmount": 11500,
+        "perHouseholdAmount": 8400,
+        "assetRate": 0,
+        "cap": 260000
+      },
+      "care": {
+        "incomeRate": 0.0303,
+        "perCapitaAmount": 16900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 170000
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 30000
+      }
+    },
+    {
+      "municipalityName": "橿原市",
+      "medical": {
+        "incomeRate": 0.0764,
+        "perCapitaAmount": 27600,
+        "perHouseholdAmount": 20000,
+        "assetRate": 0,
+        "cap": 660000
+      },
+      "support": {
+        "incomeRate": 0.0327,
+        "perCapitaAmount": 11500,
+        "perHouseholdAmount": 8400,
+        "assetRate": 0,
+        "cap": 260000
+      },
+      "care": {
+        "incomeRate": 0.0303,
+        "perCapitaAmount": 16900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 170000
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 30000
+      }
+    },
+    {
+      "municipalityName": "生駒市",
+      "medical": {
+        "incomeRate": 0.0764,
+        "perCapitaAmount": 27600,
+        "perHouseholdAmount": 20000,
+        "assetRate": 0,
+        "cap": 660000
+      },
+      "support": {
+        "incomeRate": 0.0327,
+        "perCapitaAmount": 11500,
+        "perHouseholdAmount": 8400,
+        "assetRate": 0,
+        "cap": 260000
+      },
+      "care": {
+        "incomeRate": 0.0303,
+        "perCapitaAmount": 16900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 170000
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 30000
+      }
+    },
+    {
+      "municipalityName": "大和郡山市",
+      "medical": {
+        "incomeRate": 0.0764,
+        "perCapitaAmount": 27600,
+        "perHouseholdAmount": 20000,
+        "assetRate": 0,
+        "cap": 660000
+      },
+      "support": {
+        "incomeRate": 0.0327,
+        "perCapitaAmount": 11500,
+        "perHouseholdAmount": 8400,
+        "assetRate": 0,
+        "cap": 260000
+      },
+      "care": {
+        "incomeRate": 0.0303,
+        "perCapitaAmount": 16900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 170000
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1900,
+        "perHouseholdAmount": 0,
+        "assetRate": 0,
+        "cap": 30000
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "奈良市",
+    "橿原市",
+    "生駒市",
+    "大和郡山市"
+  ]
+}

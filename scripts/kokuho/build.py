@@ -139,6 +139,21 @@ def build_record(pref_entry: dict, pref_code: str, muni_code: str, muni_name: st
             "から読み取っており、1件の値を全区にコピーする処理は行っていない。賦課限度額も一次資料"
             "に実際の記載があるためその値を使用している(全国標準値による代替ではない)。"
         )
+    elif data_source == "nara_unified_actual_rate":
+        levy_method = (
+            "医療分・支援分は3方式(所得割+均等割+平等割)、介護分・子ども分は"
+            "2方式(所得割+均等割のみ、平等割なし)。資産割は無し。"
+        )
+        review_note = (
+            "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。奈良県は令和7年度から"
+            "県内保険料水準の統一(オール奈良)を達成しており、県内のどの市町村でも所得・世帯構成が"
+            "同じであれば同一の実際の保険料(税)率になる。2026-09-06調査時点で県公表の統一後PDFが"
+            "見当たらなかったため、対象4市(奈良市・橿原市・生駒市・大和郡山市)それぞれの公式サイトで"
+            "公表されている令和8年度の実際の税率を個別に確認し、4市とも完全に一致することを検証した"
+            "上でこの値を採用している(1件の値を他市にコピーしたのではなく、市ごとに一次資料を確認した"
+            "結果が一致した)。賦課限度額も各市公式サイトの記載値を使用している(全国標準値による"
+            "代替ではない)。"
+        )
     else:
         review_note = (
             "段階3の自動収集パイプライン(scripts/kokuho/)による生成データ。"
@@ -187,6 +202,7 @@ def build_record(pref_entry: dict, pref_code: str, muni_code: str, muni_name: st
 DATA_SOURCE_PRIORITY = {
     "prefecture_standard_rate": 1,
     "tokyo_special_ward_actual_rate": 2,
+    "nara_unified_actual_rate": 2,
 }
 
 
