@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "新潟市",
+      "medical": {
+        "incomeRate": 0.0686,
+        "perCapitaAmount": 29658,
+        "perHouseholdAmount": 19462,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0295,
+        "perCapitaAmount": 18049,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.024,
+        "perCapitaAmount": 17106,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1817,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "長岡市",
+      "medical": {
+        "incomeRate": 0.0671,
+        "perCapitaAmount": 28986,
+        "perHouseholdAmount": 19021,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0291,
+        "perCapitaAmount": 17856,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 17051,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1795,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "上越市",
+      "medical": {
+        "incomeRate": 0.0687,
+        "perCapitaAmount": 29683,
+        "perHouseholdAmount": 19478,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0293,
+        "perCapitaAmount": 17928,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0234,
+        "perCapitaAmount": 16661,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1760,
+        "perHouseholdAmount": 0,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "新潟市",
+    "長岡市",
+    "上越市"
+  ]
+}
