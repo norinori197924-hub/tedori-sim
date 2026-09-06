@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "高松市",
+      "medical": {
+        "incomeRate": 0.0918,
+        "perCapitaAmount": 35144,
+        "perHouseholdAmount": 22696,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0298,
+        "perCapitaAmount": 11351,
+        "perHouseholdAmount": 7330,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0264,
+        "perCapitaAmount": 11600,
+        "perHouseholdAmount": 5688,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0031,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1249,
+        "perHouseholdAmount": 772,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "丸亀市",
+      "medical": {
+        "incomeRate": 0.096,
+        "perCapitaAmount": 36761,
+        "perHouseholdAmount": 23740,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0293,
+        "perCapitaAmount": 11149,
+        "perHouseholdAmount": 7200,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0258,
+        "perCapitaAmount": 11326,
+        "perHouseholdAmount": 5554,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1171,
+        "perHouseholdAmount": 726,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "三豊市",
+      "medical": {
+        "incomeRate": 0.0902,
+        "perCapitaAmount": 34565,
+        "perHouseholdAmount": 22322,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0291,
+        "perCapitaAmount": 11082,
+        "perHouseholdAmount": 7157,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0263,
+        "perCapitaAmount": 11566,
+        "perHouseholdAmount": 5672,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0029,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1164,
+        "perHouseholdAmount": 716,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "高松市",
+    "丸亀市",
+    "三豊市"
+  ]
+}
