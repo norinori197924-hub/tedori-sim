@@ -1,0 +1,95 @@
+{
+  "unifiedRate": false,
+  "municipalities": [
+    {
+      "municipalityName": "徳島市",
+      "medical": {
+        "incomeRate": 0.0871,
+        "perCapitaAmount": 38756,
+        "perHouseholdAmount": 25023,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0292,
+        "perCapitaAmount": 12929,
+        "perHouseholdAmount": 8348,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0247,
+        "perCapitaAmount": 12782,
+        "perHouseholdAmount": 6394,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0028,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1322,
+        "perHouseholdAmount": 818,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "鳴門市",
+      "medical": {
+        "incomeRate": 0.0832,
+        "perCapitaAmount": 37015,
+        "perHouseholdAmount": 23898,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.0281,
+        "perCapitaAmount": 12440,
+        "perHouseholdAmount": 8032,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0238,
+        "perCapitaAmount": 12346,
+        "perHouseholdAmount": 6176,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1254,
+        "perHouseholdAmount": 781,
+        "assetRate": 0
+      }
+    },
+    {
+      "municipalityName": "阿南市",
+      "medical": {
+        "incomeRate": 0.0824,
+        "perCapitaAmount": 36657,
+        "perHouseholdAmount": 23668,
+        "assetRate": 0
+      },
+      "support": {
+        "incomeRate": 0.028,
+        "perCapitaAmount": 12421,
+        "perHouseholdAmount": 8019,
+        "assetRate": 0
+      },
+      "care": {
+        "incomeRate": 0.0239,
+        "perCapitaAmount": 12387,
+        "perHouseholdAmount": 6196,
+        "assetRate": 0
+      },
+      "childSupport": {
+        "incomeRate": 0.0027,
+        "perCapitaAmountUnder18": 0,
+        "perCapitaAmountOver18": 1252,
+        "perHouseholdAmount": 774,
+        "assetRate": 0
+      }
+    }
+  ],
+  "wideCoverage": true,
+  "targetNames": [
+    "徳島市",
+    "阿南市",
+    "鳴門市"
+  ]
+}

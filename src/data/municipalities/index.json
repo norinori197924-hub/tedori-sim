@@ -9777,6 +9777,39 @@
       "nationalHealthInsuranceStatus": "confirmed",
       "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/35215.json",
       "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "徳島県",
+      "prefectureCode": "36",
+      "municipality": "徳島市",
+      "municipalityCode": "36201",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tokushima.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/36201.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "徳島県",
+      "prefectureCode": "36",
+      "municipality": "鳴門市",
+      "municipalityCode": "36202",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tokushima.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/36202.json",
+      "verificationStatus": "auto_unverified"
+    },
+    {
+      "prefecture": "徳島県",
+      "prefectureCode": "36",
+      "municipality": "阿南市",
+      "municipalityCode": "36204",
+      "kyokaiKenpoStatus": "confirmed",
+      "kyokaiKenpoRatesFile": "rates/2026/kyokai-kenpo/tokushima.json",
+      "nationalHealthInsuranceStatus": "confirmed",
+      "nationalHealthInsuranceFile": "rates/2026/national-health-insurance/36204.json",
+      "verificationStatus": "auto_unverified"
     }
   ]
 }
